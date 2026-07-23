@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/styles.css">
+  <script src="_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/_ds_bundle.js"></script>
+  <style>
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--color-cream);-webkit-font-smoothing:antialiased}
+    a{color:var(--color-ink)}
+    a:hover{color:var(--color-gray-700)}
+    ::selection{background:var(--color-lime);color:var(--color-ink)}
+    @keyframes ezFloat{0%,100%{transform:translateY(0) rotate(var(--rot,0deg))}50%{transform:translateY(-12px) rotate(var(--rot,0deg))}}
+    @keyframes ezMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @keyframes ezBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+    @keyframes ezGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+    @keyframes ezDot{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-4px);opacity:1}}
+    @keyframes ezSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @keyframes ezPulse{0%,100%{box-shadow:3px 3px 0px 0px var(--color-ink)}50%{box-shadow:5px 5px 0px 0px var(--color-ink)}}
+    @keyframes ezPop{0%{transform:scale(0) rotate(-20deg)}70%{transform:scale(1.15) rotate(14deg)}100%{transform:scale(1) rotate(10deg)}}
+  </style>
+</helmet>
+
+<div style="min-width:1380px;background:var(--color-cream);color:var(--color-ink)">
+
+  <!-- HEADER -->
+  <header data-screen-label="Header" style="position:sticky;top:0;z-index:50;background:var(--color-cream);box-shadow:inset 0 -1px 0 0 var(--color-ink);height:79px;display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:0 60px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between">
+      <a href="Homepage.dc.html" style="text-decoration:none;display:flex"><x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Logo" hint-size="160px,26px"></x-import></a>
+      <nav style="display:flex;gap:34px;align-items:center">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="Homepage.dc.html" active="{{ true }}" hint-size="auto,16px">Home</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="Product.dc.html" hint-size="auto,16px">Product</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="About.dc.html" hint-size="auto,16px">About</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="Contact.dc.html" hint-size="auto,16px">Contact</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="dark" size="sm" href="#waitlist" hint-size="140px,44px">Join Waitlist</x-import>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section data-screen-label="Hero" style="position:relative;overflow:hidden;background:var(--color-cream);display:flex;justify-content:center">
+    <div style="position:absolute;left:-40px;top:-60px;width:230px;height:230px;border-radius:50%;background:var(--color-lime)"></div>
+    <div style="position:absolute;right:120px;top:70px;font-size:34px;color:var(--color-ink);animation:ezSpin 14s linear infinite">✦</div>
+    <div style="display:flex;gap:48px;padding:90px 60px 110px;max-width:1440px;width:100%;box-sizing:border-box;align-items:center;position:relative">
+      <div style="display:flex;flex-direction:column;gap:26px;flex:1.05;min-width:600px">
+        <div data-reveal=""><x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Tag" hint-size="auto,12px">Employee appreciation, redesigned</x-import></div>
+        <h1 data-reveal="" data-reveal-delay="90" style="margin:0;font:400 82px/86px var(--font-display);letter-spacing:-2.3px;text-transform:uppercase">The operating system for employee appreciation.</h1>
+        <p data-reveal="" data-reveal-delay="200" style="margin:0;font:400 18px/28px var(--font-body);max-width:540px">EzRewards helps companies recognize great work, reward employees, manage voucher redemptions, and understand appreciation trends — all from one modern platform.</p>
+        <div data-reveal="" data-reveal-delay="320" style="display:flex;gap:28px;align-items:center;marginTop:6px">
+          <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="primary" href="#waitlist" style="animation:ezPulse 2.6s ease-in-out infinite" hint-size="170px,46px">Join the Waitlist</x-import>
+          <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="secondary" href="Product.dc.html" hint-size="170px,46px">Explore Product →</x-import>
+        </div>
+        <span data-reveal="" data-reveal-delay="420" style="font:400 14px/20px var(--font-body);color:var(--color-gray-500)">Built for growing teams that want appreciation to be visible, structured, and effortless.</span>
+      </div>
+
+      <!-- Floating mock cards collage -->
+      <div style="flex:1.15;position:relative;height:600px;min-width:620px">
+        <!-- Recognition card -->
+        <div style="--rot:-3deg;position:absolute;left:0;top:0;width:310px;background:var(--color-cream-paper);border-radius:var(--radius-xl);box-shadow:inset 0 0 0 1px var(--color-ink),5px 5px 0px 0px var(--color-ink);padding:20px;transform:rotate(-3deg);animation:ezFloat 6s ease-in-out infinite">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:40px;height:40px;border-radius:50%;background:var(--color-purple);box-shadow:inset 0 0 0 1px var(--color-ink);display:flex;align-items:center;justify-content:center;font:600 14px var(--font-heading)">RM</div>
+            <div style="display:flex;flex-direction:column;gap:3px">
+              <span style="font:600 15px var(--font-body)">Riya recognized Arjun</span>
+              <span style="font:400 12px var(--font-body);color:var(--color-gray-500)">Engineering · just now</span>
+            </div>
+          </div>
+          <p style="margin:12px 0;font:400 14px/21px var(--font-body)">"Stayed two nights straight to get the migration done. Absolute machine."</p>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span style="background:var(--color-lime);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink);padding:6px 12px;font:500 12px var(--font-heading)">✦ Ownership</span>
+            <span style="background:var(--color-white);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink);padding:6px 12px;font:500 12px var(--font-body)">👏 24</span>
+          </div>
+        </div>
+        <!-- Wallet card -->
+        <div style="--rot:2deg;position:absolute;right:0;top:236px;width:270px;background:linear-gradient(180deg,var(--color-navy-800) 0%,var(--color-navy-700) 100%);border-radius:var(--radius-2xl);box-shadow:var(--shadow-card-dark);padding:22px;transform:rotate(2deg);animation:ezFloat 7s ease-in-out .9s infinite">
+          <span style="font:400 12px var(--font-heading);letter-spacing:1.44px;text-transform:uppercase;color:var(--color-cream-text-dark-bg)">Company wallet</span>
+          <div style="font:500 40px/48px var(--font-mono);color:var(--color-lime);margin:10px 0 6px">{{ wallet }}</div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span style="background:var(--color-lime);border-radius:var(--radius-xs);padding:4px 8px;font:600 12px var(--font-mono);color:var(--color-ink)">+$2,000</span>
+            <span style="font:400 12px var(--font-body);color:var(--color-cream-text-dark-bg)">recharged this month</span>
+          </div>
+        </div>
+        <!-- AI ask chip -->
+        <div style="--rot:-2deg;position:absolute;left:0;top:280px;width:300px;background:var(--color-white);border-radius:var(--radius-xl);box-shadow:inset 0 0 0 1px var(--color-ink),4px 4px 0px 0px var(--color-gray-900);padding:16px 18px;transform:rotate(-2deg);animation:ezFloat 6.5s ease-in-out 1.6s infinite">
+          <span style="font:400 12px var(--font-heading);letter-spacing:1.44px;text-transform:uppercase;color:var(--color-gray-500)">Ask AI</span>
+          <div style="font:500 15px/22px var(--font-body);margin-top:6px">Which team recognized the most this month?<span style="display:inline-block;width:8px;height:16px;background:var(--color-ink);margin-left:3px;vertical-align:-2px;animation:ezBlink 1s step-end infinite"></span></div>
+        </div>
+        <!-- Report card -->
+        <div style="--rot:3deg;position:absolute;right:10px;top:428px;width:270px;background:var(--color-lime);border-radius:var(--radius-xl);box-shadow:inset 0 0 0 1px var(--color-ink),5px 5px 0px 0px var(--color-ink);padding:20px;transform:rotate(3deg);animation:ezFloat 7.5s ease-in-out 2.2s infinite">
+          <span style="font:600 15px var(--font-body)">Engineering leads with 326 recognitions</span>
+          <div style="display:flex;gap:10px;align-items:flex-end;height:70px;margin-top:14px">
+            <div style="flex:1;height:100%;background:var(--color-ink);border-radius:4px 4px 0 0;transform-origin:bottom;animation:ezGrow .9s cubic-bezier(.22,1,.36,1) .3s both"></div>
+            <div style="flex:1;height:66%;background:var(--color-navy-700);border-radius:4px 4px 0 0;transform-origin:bottom;animation:ezGrow .9s cubic-bezier(.22,1,.36,1) .45s both"></div>
+            <div style="flex:1;height:52%;background:var(--color-navy-700);border-radius:4px 4px 0 0;transform-origin:bottom;animation:ezGrow .9s cubic-bezier(.22,1,.36,1) .6s both"></div>
+            <div style="flex:1;height:34%;background:var(--color-navy-700);border-radius:4px 4px 0 0;transform-origin:bottom;animation:ezGrow .9s cubic-bezier(.22,1,.36,1) .75s both"></div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:6px">
+            <span style="flex:1;font:400 10px var(--font-mono);text-align:center">ENG</span>
+            <span style="flex:1;font:400 10px var(--font-mono);text-align:center">PRD</span>
+            <span style="flex:1;font:400 10px var(--font-mono);text-align:center">SLS</span>
+            <span style="flex:1;font:400 10px var(--font-mono);text-align:center">OPS</span>
+          </div>
+        </div>
+        <!-- Sticker -->
+        <div style="position:absolute;right:40px;top:160px;background:var(--color-coral-strong);border-radius:var(--radius-sm);box-shadow:0 0 0 2px var(--color-black),6px 6px 0 0 var(--color-black);padding:12px 20px;font:700 16px var(--font-body);transform:rotate(10deg);z-index:2;animation:ezPop .6s cubic-bezier(.34,1.56,.64,1) 1.1s both">✦ Reward Sent</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <sc-if value="{{ showMarquee }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Marquee" style="background:var(--color-ink);overflow:hidden;padding:16px 0;box-shadow:inset 0 1px 0 0 var(--color-black)">
+      <div style="display:flex;width:max-content;animation:ezMarquee 26s linear infinite" style-hover="animation-play-state:paused">
+        <div style="display:flex;gap:36px;padding-right:36px;white-space:nowrap;font:500 15px var(--font-heading);letter-spacing:2px;color:var(--color-lime)"><span>RECOGNIZE</span><span>✦</span><span>CELEBRATE</span><span>✦</span><span>REWARD</span><span>✦</span><span>REDEEM</span><span>✦</span><span>UNDERSTAND</span><span>✦</span><span>RECOGNIZE</span><span>✦</span><span>CELEBRATE</span><span>✦</span><span>REWARD</span><span>✦</span><span>REDEEM</span><span>✦</span><span>UNDERSTAND</span><span>✦</span></div>
+        <div style="display:flex;gap:36px;padding-right:36px;white-space:nowrap;font:500 15px var(--font-heading);letter-spacing:2px;color:var(--color-lime)"><span>RECOGNIZE</span><span>✦</span><span>CELEBRATE</span><span>✦</span><span>REWARD</span><span>✦</span><span>REDEEM</span><span>✦</span><span>UNDERSTAND</span><span>✦</span><span>RECOGNIZE</span><span>✦</span><span>CELEBRATE</span><span>✦</span><span>REWARD</span><span>✦</span><span>REDEEM</span><span>✦</span><span>UNDERSTAND</span><span>✦</span></div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- PROBLEM -->
+  <section data-screen-label="Problem" style="background:var(--color-navy-900);display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:110px 60px;box-sizing:border-box">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:20px;max-width:760px">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Tag" color="var(--color-lime)" hint-size="auto,12px">The problem</x-import>
+        <h2 style="margin:0;font:300 56px/62px var(--font-heading);letter-spacing:-1.4px;color:var(--color-white)">Appreciation is happening. But most companies cannot see it.</h2>
+        <p style="margin:0;font:400 17px/27px var(--font-body);color:var(--color-cream-text-dark-bg);max-width:640px">A teammate goes beyond their role. A manager solves a crisis. A team ships something difficult. Then the moment disappears into chats, calls, emails, and memory — while HR manages appreciation through spreadsheets and follow-ups.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px">
+        <div data-reveal="" style="background:linear-gradient(180deg,var(--color-navy-800) 0%,var(--color-navy-700) 100%);border-radius:var(--radius-2xl);box-shadow:var(--shadow-card-dark);padding:32px" style-hover="transform:translate(-3px,-3px)">
+          <span style="font:400 34px var(--font-mono);color:var(--color-yellow)">01</span>
+          <h3 style="margin:16px 0 10px;font:400 24px var(--font-heading);color:var(--color-white)">Recognition is scattered</h3>
+          <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-cream-text-dark-bg)">Great work gets acknowledged in chats, calls, and meetings — but rarely becomes part of company culture.</p>
+        </div>
+        <div data-reveal="" data-reveal-delay="120" style="background:linear-gradient(180deg,var(--color-navy-800) 0%,var(--color-navy-700) 100%);border-radius:var(--radius-2xl);box-shadow:var(--shadow-card-dark);padding:32px" style-hover="transform:translate(-3px,-3px)">
+          <span style="font:400 34px var(--font-mono);color:var(--color-coral)">02</span>
+          <h3 style="margin:16px 0 10px;font:400 24px var(--font-heading);color:var(--color-white)">Rewards are manual</h3>
+          <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-cream-text-dark-bg)">Vouchers, budgets, approvals, and redemptions depend on spreadsheets and back-and-forth coordination.</p>
+        </div>
+        <div data-reveal="" data-reveal-delay="240" style="background:linear-gradient(180deg,var(--color-navy-800) 0%,var(--color-navy-700) 100%);border-radius:var(--radius-2xl);box-shadow:var(--shadow-card-dark);padding:32px" style-hover="transform:translate(-3px,-3px)">
+          <span style="font:400 34px var(--font-mono);color:var(--color-purple)">03</span>
+          <h3 style="margin:16px 0 10px;font:400 24px var(--font-heading);color:var(--color-white)">Visibility is limited</h3>
+          <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-cream-text-dark-bg)">Leaders know rewards are being distributed, but cannot easily see participation, trends, or impact.</p>
+        </div>
+      </div>
+      <p data-reveal="" style="margin:56px 0 0;font:300 30px/38px var(--font-heading);color:var(--color-lime)">EzRewards brings it all together.</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section data-screen-label="How it works" style="background:var(--color-yellow);box-shadow:inset 0 1px 0 0 var(--color-ink),inset 0 -1px 0 0 var(--color-ink);display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:110px 60px;box-sizing:border-box">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Tag" hint-size="auto,12px">How EzRewards works</x-import>
+        <h2 style="margin:0;font:300 56px/62px var(--font-heading);letter-spacing:-1.4px">Recognition, rewards, and insights. In one flow.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:60px">
+        <div data-reveal="" style="background:var(--color-cream-paper);border-radius:var(--radius-xl);box-shadow:inset 0 0 0 1px var(--color-ink),5px 5px 0px 0px var(--color-ink);padding:26px 22px" style-hover="transform:translate(-3px,-3px)">
+          <span style="font:400 15px var(--font-mono);background:var(--color-lime);box-shadow:inset 0 0 0 1px var(--color-ink);border-radius:var(--radius-xs);padding:5px 9px">01</span>
+          <h3 style="margin:18px 0 8px;font:500 22px var(--font-heading)">Recognize</h3>
+          <p style="margin:0;font:400 14px/21px var(--font-body);color:var(--color-gray-600)">Badges, appreciation messages, reactions, and comments — from anyone, to anyone.</p>
+        </div>
+        <div data-reveal="" data-reveal-delay="100" style="background:var(--color-cream-paper);border-radius:var(--radius-xl);box-shadow:inset 0 0 0 1px var(--color-ink),5px 5px 0px 0px var(--color-ink);padding:26px 22px" style-hover="transform:translate(-3px,-3px)">
+          <span style="font:400 15px var(--font-mono);background:var(--color-lime);box-shadow:inset 0 0 0 1px var(--color-ink);border-radius:var(--radius-xs);padding:5px 9px">02</span>
+          <h3 style="margin:18px 0 8px;font:500 22px var(--font-heading)">Reward</h3>
+          <p style="margin:0;font:400 14px/21px var(--font-body);color:var(--color-gray-600)">Admins enable digital voucher rewards through a company-funded wallet.</p>
+        </div>
+        <div data-reveal="" data-reveal-delay="200" style="background:var(--color-cream-paper);border-radius:var(--radius-xl);box-shadow:inset 0 0 0 1px var(--color-ink),5px 5px 0px 0px var(--color-ink);padding:26px 22px" style-hover="transform:translate(-3px,-3px)">
+          <span style="font:400 15px var(--font-mono);background:var(--color-lime);box-shadow:inset 0 0 0 1px var(--color-ink);border-radius:var(--radius-xs);padding:5px 9px">03</span>
+          <h3 style="margin:18px 0 8px;font:500 22px var(--font-heading)">Redeem</h3>
+          <p style="margin:0;font:400 14px/21px var(--font-body);color:var(--color-gray-600)">Employees redeem vouchers from the available catalogue in a few clicks.</p>
+        </div>
+        <div data-reveal="" data-reveal-delay="300" style="background:var(--color-cream-paper);border-radius:var(--radius-xl);box-shadow:inset 0 0 0 1px var(--color-ink),5px 5px 0px 0px var(--color-ink);padding:26px 22px" style-hover="transform:translate(-3px,-3px)">
+          <span style="font:400 15px var(--font-mono);background:var(--color-lime);box-shadow:inset 0 0 0 1px var(--color-ink);border-radius:var(--rad-xs);padding:5px 9px">04</span>
+          <h3 style="margin:18px 0 8px;font:500 22px var(--font-heading)">Track</h3>
+          <p style="margin:0;font:400 14px/21px var(--font-body);color:var(--color-gray-600)">Recognition, wallet usage, redemptions, and participation in clear reports.</p>
+        </div>
+        <div data-reveal="" data-reveal-delay="400" style="background:var(--color-ink);border-radius:var(--radius-xl);box-shadow:5px 5px 0px 0px var(--color-lime);padding:26px 22px" style-hover="transform:translate(-3px,-3px)">
+          <span style="font:400 15px var(--font-mono);background:var(--color-lime);border-radius:var(--radius-xs);padding:5px 9px">05</span>
+          <h3 style="margin:18px 0 8px;font:500 22px var(--font-heading);color:var(--color-white)">Ask AI</h3>
+          <p style="margin:0;font:400 14px/21px var(--font-body);color:var(--color-cream-text-dark-bg)">Ask the AI Report Assistant questions and get clear answers instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section data-screen-label="Features" style="background:var(--color-lime);box-shadow:inset 0 -1px 0 0 var(--color-ink);display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:110px 60px;box-sizing:border-box">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:18px;max-width:720px">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Tag" hint-size="auto,12px">Feature highlights</x-import>
+        <h2 style="margin:0;font:300 56px/62px var(--font-heading);letter-spacing:-1.4px">Everything you need to run employee appreciation.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px">
+        <div data-reveal="" style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:30px" style-hover="transform:translate(-2px,-2px)">
+          <div style="width:44px;height:44px;border-radius:var(--radius-md);background:var(--color-yellow);box-shadow:inset 0 0 0 1px var(--color-ink);display:flex;align-items:center;justify-content:center;font-size:20px">✦</div>
+          <h3 style="margin:20px 0 10px;font:500 24px var(--font-heading)">Peer Recognition</h3>
+          <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-gray-600)">Make appreciation visible across the company with public recognition posts, badges, reactions, and comments.</p>
+        </div>
+        <div data-reveal="" data-reveal-delay="100" style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:30px" style-hover="transform:translate(-3px,-3px)">
+          <div style="width:44px;height:44px;border-radius:var(--radius-md);background:var(--color-coral);box-shadow:inset 0 0 0 1px var(--color-ink);display:flex;align-items:center;justify-content:center;font-size:20px">✦</div>
+          <h3 style="margin:20px 0 10px;font:500 24px var(--font-heading)">Digital Rewards</h3>
+          <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-gray-600)">Reward employees through digital vouchers and coupon-based redemption flows — no manual coordination.</p>
+        </div>
+        <div data-reveal="" data-reveal-delay="200" style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:30px" style-hover="transform:translate(-3px,-3px)">
+          <div style="width:44px;height:44px;border-radius:var(--radius-md);background:var(--color-purple);box-shadow:inset 0 0 0 1px var(--color-ink);display:flex;align-items:center;justify-content:center;font-size:20px">✦</div>
+          <h3 style="margin:20px 0 10px;font:500 24px var(--font-heading)">Company Wallet</h3>
+          <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-gray-600)">Fund rewards through a dedicated wallet and track balance, recharge history, and utilization.</p>
+        </div>
+        <div data-reveal="" style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:30px" style-hover="transform:translate(-3px,-3px)">
+          <div style="width:44px;height:44px;border-radius:var(--radius-md);background:var(--color-teal);box-shadow:inset 0 0 0 1px var(--color-ink);display:flex;align-items:center;justify-content:center;font-size:20px">✦</div>
+          <h3 style="margin:20px 0 10px;font:500 24px var(--font-heading)">Admin Controls</h3>
+          <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-gray-600)">Manage users, invites, roles, subscriptions, wallet, and employee access from one admin layer.</p>
+        </div>
+        <div data-reveal="" data-reveal-delay="100" style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:30px" style-hover="transform:translate(-3px,-3px)">
+          <div style="width:44px;height:44px;border-radius:var(--radius-md);background:var(--color-cyan);box-shadow:inset 0 0 0 1px var(--color-ink);display:flex;align-items:center;justify-content:center;font-size:20px">✦</div>
+          <h3 style="margin:20px 0 10px;font:500 24px var(--font-heading)">Reports</h3>
+          <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-gray-600)">Understand recognition activity, employee participation, wallet usage, and redemption trends.</p>
+        </div>
+        <div data-reveal="" data-reveal-delay="200" style="background:var(--color-ink);border-radius:var(--radius-2xl);box-shadow:8px 8px 0px 0px var(--color-cream-paper);padding:30px" style-hover="transform:translate(-3px,-3px)">
+          <div style="width:44px;height:44px;border-radius:var(--radius-md);background:var(--color-lime);display:flex;align-items:center;justify-content:center;font-size:20px">✦</div>
+          <h3 style="margin:20px 0 10px;font:500 24px var(--font-heading);color:var(--color-white)">AI Report Assistant</h3>
+          <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-cream-text-dark-bg)">Ask questions on top of report data and get clear answers — without manually reading every table.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI ASSISTANT -->
+  <section data-screen-label="AI Report Assistant" style="background:var(--color-purple);box-shadow:inset 0 -1px 0 0 var(--color-ink);display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:110px 60px;box-sizing:border-box;display:flex;gap:70px;align-items:center">
+      <div data-reveal="" style="flex:1;display:flex;flex-direction:column;gap:20px">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Tag" hint-size="auto,12px">Reports + AI</x-import>
+        <h2 style="margin:0;font:300 56px/62px var(--font-heading);letter-spacing:-1.4px">Ask your reports. Get answers.</h2>
+        <p style="margin:0;font:400 17px/27px var(--font-body);max-width:480px">Reports are useful. But reading them takes time. The AI Report Assistant helps admins ask natural-language questions on top of structured report data.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;max-width:520px">
+          <span style="background:var(--color-white);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink),2px 2px 0px 0px var(--color-ink);padding:9px 16px;font:500 13px var(--font-body)">"Who are the top recognized employees?"</span>
+          <span style="background:var(--color-white);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink),2px 2px 0px 0px var(--color-ink);padding:9px 16px;font:500 13px var(--font-body)">"Which department has the lowest participation?"</span>
+          <span style="background:var(--color-white);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink),2px 2px 0px 0px var(--color-ink);padding:9px 16px;font:500 13px var(--font-body)">"Are there any failed redemptions?"</span>
+        </div>
+        <div style="margin-top:8px"><x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="dark" href="#waitlist" hint-size="180px,46px">Join the Waitlist</x-import></div>
+      </div>
+      <div data-reveal="" data-reveal-delay="150" style="flex:1;max-width:560px">
+        <div style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 2px var(--color-ink),8px 8px 0px 0px var(--color-ink);overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:16px 22px;box-shadow:inset 0 -1px 0 0 var(--color-ink);background:var(--color-white)">
+            <span style="width:10px;height:10px;border-radius:50%;background:var(--color-lime);box-shadow:inset 0 0 0 1px var(--color-ink)"></span>
+            <span style="font:500 15px var(--font-heading)">AI Report Assistant</span>
+            <span style="margin-left:auto;font:400 11px var(--font-mono);color:var(--color-gray-500)">LIVE</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px;padding:24px 22px;height:270px;box-sizing:border-box">
+            <sc-if value="{{ showQ }}" hint-placeholder-val="{{ true }}">
+              <div style="align-self:flex-end;max-width:80%;background:var(--color-ink);color:var(--color-white);border-radius:14px 14px 2px 14px;padding:12px 16px;font:400 14px/21px var(--font-body)">{{ chatQ }}</div>
+            </sc-if>
+            <sc-if value="{{ dots }}" hint-placeholder-val="{{ false }}">
+              <div style="align-self:flex-start;background:var(--color-white);box-shadow:inset 0 0 0 1px var(--color-ink);border-radius:14px 14px 14px 2px;padding:14px 16px;display:flex;gap:5px">
+                <span style="width:7px;height:7px;border-radius:50%;background:var(--color-ink);animation:ezDot 1.2s ease-in-out infinite"></span>
+                <span style="width:7px;height:7px;border-radius:50%;background:var(--color-ink);animation:ezDot 1.2s ease-in-out .15s infinite"></span>
+                <span style="width:7px;height:7px;border-radius:50%;background:var(--color-ink);animation:ezDot 1.2s ease-in-out .3s infinite"></span>
+              </div>
+            </sc-if>
+            <sc-if value="{{ showA }}" hint-placeholder-val="{{ true }}">
+              <div style="align-self:flex-start;max-width:85%;background:var(--color-white);box-shadow:inset 0 0 0 1px var(--color-ink);border-radius:14px 14px 14px 2px;padding:12px 16px;font:400 14px/21px var(--font-body)">{{ chatA }}</div>
+            </sc-if>
+          </div>
+          <div style="display:flex;gap:10px;padding:14px 22px 20px">
+            <div style="flex:1;background:var(--color-white);box-shadow:inset 0 0 0 1px var(--color-ink);border-radius:var(--radius-md);padding:12px 16px;font:400 14px var(--font-body);color:var(--color-gray-400)">Ask a plain-language question…</div>
+            <div style="background:var(--color-lime);box-shadow:inset 0 0 0 1px var(--color-ink),2px 2px 0px 0px var(--color-ink);border-radius:var(--radius-md);padding:12px 16px;font:500 14px var(--font-body)">→</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY EZREWARDS -->
+  <section data-screen-label="Why EzRewards" style="background:var(--color-coral);box-shadow:inset 0 -1px 0 0 var(--color-ink);display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:110px 60px;box-sizing:border-box;display:flex;gap:70px">
+      <div data-reveal="" style="flex:1;display:flex;flex-direction:column;gap:20px">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Tag" hint-size="auto,12px">Why EzRewards</x-import>
+        <h2 style="margin:0;font:300 56px/62px var(--font-heading);letter-spacing:-1.4px">Not another gift-card tool. A system for appreciation.</h2>
+        <p style="margin:0;font:400 17px/27px var(--font-body);max-width:480px">EzRewards combines recognition, rewards, wallet, reports, and AI-assisted insights into one product — moving companies from occasional rewards to an always-on appreciation culture.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
+          <span style="font:400 12px var(--font-heading);letter-spacing:1.44px;text-transform:uppercase">Built for</span>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;max-width:500px">
+            <span style="background:var(--color-cream-paper);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink);padding:9px 16px;font:500 13px var(--font-body)">Startups building culture early</span>
+            <span style="background:var(--color-cream-paper);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink);padding:9px 16px;font:500 13px var(--font-body)">IT &amp; services teams</span>
+            <span style="background:var(--color-cream-paper);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink);padding:9px 16px;font:500 13px var(--font-body)">Scaling SaaS companies</span>
+            <span style="background:var(--color-cream-paper);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink);padding:9px 16px;font:500 13px var(--font-body)">Agencies &amp; consulting firms</span>
+            <span style="background:var(--color-cream-paper);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink);padding:9px 16px;font:500 13px var(--font-body)">Mid-sized companies</span>
+          </div>
+        </div>
+      </div>
+      <div data-reveal="" data-reveal-delay="150" style="flex:1;max-width:560px;background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:38px;display:flex;flex-direction:column;gap:26px">
+        <div style="display:flex;gap:16px"><span style="font-size:18px">✦</span><div><span style="font:500 18px var(--font-heading)">Recognition-first</span><p style="margin:4px 0 0;font:400 14px/22px var(--font-body);color:var(--color-gray-600)">Rewards are powerful, but recognition builds culture. EzRewards supports both.</p></div></div>
+        <div style="display:flex;gap:16px"><span style="font-size:18px">✦</span><div><span style="font:500 18px var(--font-heading)">Wallet-backed control</span><p style="margin:4px 0 0;font:400 14px/22px var(--font-body);color:var(--color-gray-600)">Fund rewards, track usage, and manage redemptions clearly.</p></div></div>
+        <div style="display:flex;gap:16px"><span style="font-size:18px">✦</span><div><span style="font:500 18px var(--font-heading)">Built-in visibility</span><p style="margin:4px 0 0;font:400 14px/22px var(--font-body);color:var(--color-gray-600)">Reports help teams understand participation, trends, and usage.</p></div></div>
+        <div style="display:flex;gap:16px"><span style="font-size:18px">✦</span><div><span style="font:500 18px var(--font-heading)">AI-assisted reporting</span><p style="margin:4px 0 0;font:400 14px/22px var(--font-body);color:var(--color-gray-600)">Ask questions instead of manually decoding every report.</p></div></div>
+        <div style="display:flex;gap:16px"><span style="font-size:18px">✦</span><div><span style="font:500 18px var(--font-heading)">Designed for modern teams</span><p style="margin:4px 0 0;font:400 14px/22px var(--font-body);color:var(--color-gray-600)">Premium experience, clean workflows, and scalable admin controls.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAITLIST -->
+  <section id="waitlist" data-screen-label="Waitlist" style="background:var(--color-cream);display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:110px 60px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center;max-width:680px">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Tag" hint-size="auto,12px">Early access</x-import>
+        <h2 style="margin:0;font:300 56px/62px var(--font-heading);letter-spacing:-1.4px">Be among the first companies to try EzRewards.</h2>
+        <p style="margin:0;font:400 17px/27px var(--font-body);color:var(--color-gray-600)">We are opening early access for selected teams that want to make employee appreciation more visible, structured, and rewarding.</p>
+      </div>
+      <div data-reveal="" data-reveal-delay="120" style="width:100%;max-width:760px;margin-top:48px">
+        <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+          <div style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-olive);padding:44px;display:flex;flex-direction:column;gap:22px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px">
+              <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Input" label="Full name" placeholder="Riya Mehta" hint-size="100%,85px"></x-import>
+              <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Input" label="Work email" type="email" placeholder="riya@company.com" hint-size="100%,85px"></x-import>
+              <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Input" label="Company name" placeholder="Acme Inc." hint-size="100%,85px"></x-import>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <label style="font:400 17px var(--font-heading)">Company size</label>
+                <select style="height:51px;border-radius:var(--radius-md);background:var(--color-white);box-shadow:inset 0 0 0 1px var(--color-ink);border:none;padding:0 12px;font:400 15px var(--font-body);color:var(--color-ink)">
+                  <option>10 – 30 employees</option><option>30 – 50 employees</option><option>50 – 200 employees</option><option>200+ employees</option>
+                </select>
+              </div>
+              <sc-if value="{{ fullForm }}" hint-placeholder-val="{{ true }}">
+                <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Input" label="Role" placeholder="Head of People" hint-size="100%,85px"></x-import>
+                <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Input" label="Phone (optional)" placeholder="+1 555 010 2233" hint-size="100%,85px"></x-import>
+              </sc-if>
+            </div>
+            <span style="font:400 14px var(--font-body);color:var(--color-gray-500)">Use your work email so we can verify your company details. We're currently onboarding selected early-access teams.</span>
+            <div><x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="primary" onClick="{{ submitWaitlist }}" hint-size="180px,46px">Join the Waitlist</x-import></div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+          <div style="background:var(--color-lime);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:56px;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center">
+            <span style="font-size:34px">✦</span>
+            <h3 style="margin:0;font:300 42px var(--font-heading)">You're on the list.</h3>
+            <p style="margin:0;font:400 16px/26px var(--font-body);max-width:440px">Thanks for joining the EzRewards waitlist. Our team will review your details and reach out when early access opens.</p>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer data-screen-label="Footer" style="background:var(--color-yellow);box-shadow:inset 0 1px 0 0 var(--color-ink);display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:70px 60px 40px;box-sizing:border-box">
+      <div style="display:flex;justify-content:space-between;gap:60px;align-items:flex-start">
+        <div style="display:flex;flex-direction:column;gap:18px;max-width:380px">
+          <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Logo" hint-size="160px,26px"></x-import>
+          <p style="margin:0;font:400 15px/24px var(--font-body)">EzRewards is an employee appreciation operating system for growing companies.</p>
+        </div>
+        <div style="display:flex;gap:80px">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <span style="font:400 12px var(--font-heading);letter-spacing:1.44px;text-transform:uppercase">Pages</span>
+            <a href="Product.dc.html" style="font:400 15px var(--font-body);text-decoration:none">Product</a>
+            <a href="About.dc.html" style="font:400 15px var(--font-body);text-decoration:none">About</a>
+            <a href="Contact.dc.html" style="font:400 15px var(--font-body);text-decoration:none">Contact</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <span style="font:400 12px var(--font-heading);letter-spacing:1.44px;text-transform:uppercase">Legal</span>
+            <a href="#" style="font:400 15px var(--font-body);text-decoration:none">Privacy Policy</a>
+            <a href="#" style="font:400 15px var(--font-body);text-decoration:none">Terms of Use</a>
+            <a href="#" style="font:400 15px var(--font-body);text-decoration:none">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:56px;padding-top:24px;box-shadow:inset 0 1px 0 0 var(--color-ink)">
+        <span style="font:400 13px var(--font-body)">© 2026 EzRewards. All rights reserved.</span>
+        <span style="background:var(--color-ink);color:var(--color-lime);border-radius:var(--radius-pill-sm);padding:8px 16px;font:500 13px var(--font-heading)">✦ An Evolutyz product</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behavior&quot;},&quot;showMarquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;fullForm&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  state = { walletN: 0, chatQ: "", chatA: "", dots: false, submitted: false };
+  pairs = [
+    { q: "Which department had the highest recognition this month?", a: "Engineering leads with 326 recognitions, followed by Product with 214 and Sales with 170." },
+    { q: "How much wallet balance is available?", a: "The company wallet holds $12,450 — recharged with $2,000 this month, 68% utilized." },
+    { q: "What vouchers were redeemed the most?", a: "Amazon vouchers top the list with 142 redemptions, then Starbucks (98) and Uber (61)." }
+  ];
+  componentDidMount() {
+    this.alive = true;
+    const motion = this.props.motion ?? true;
+    this.setupReveals(motion);
+    this.onScroll = () => {
+      const h = document.querySelector("header");
+      if (h) h.style.boxShadow = window.scrollY > 20 ? "inset 0 -1px 0 0 var(--color-ink), 0 4px 0px 0px var(--color-ink)" : "inset 0 -1px 0 0 var(--color-ink)";
+    };
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+    if (motion) { this.runWallet(); this.runChat(); }
+    else this.setState({ walletN: 12450, chatQ: this.pairs[0].q, chatA: this.pairs[0].a });
+  }
+  componentWillUnmount() { this.alive = false; if (this.obs) this.obs.disconnect(); if (this.onScroll) window.removeEventListener("scroll", this.onScroll); }
+  setupReveals(motion) {
+    const els = Array.from(document.querySelectorAll("[data-reveal]"));
+    if (!motion) return;
+    els.forEach(el => {
+      el.style.opacity = "0"; el.style.transform = "translateY(28px)";
+      el.style.transition = "opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1)";
+    });
+    this.obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target, d = parseInt(el.dataset.revealDelay || "0", 10);
+        setTimeout(() => {
+          el.style.opacity = "1"; el.style.transform = "none";
+          setTimeout(() => { el.style.transition = "transform .16s ease"; }, 750);
+        }, d);
+        this.obs.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    els.forEach(el => this.obs.observe(el));
+  }
+  runWallet() {
+    const start = performance.now(), dur = 1600, target = 12450;
+    const tick = t => {
+      if (!this.alive) return;
+      const p = Math.min(1, (t - start) / dur), e = 1 - Math.pow(1 - p, 3);
+      this.setState({ walletN: Math.round(target * e) });
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+  sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+  async runChat() {
+    await this.sleep(800);
+    let i = 0;
+    while (this.alive) {
+      const { q, a } = this.pairs[i % this.pairs.length];
+      this.setState({ chatQ: "", chatA: "", dots: false });
+      for (let c = 1; c <= q.length && this.alive; c++) { this.setState({ chatQ: q.slice(0, c) }); await this.sleep(28); }
+      this.setState({ dots: true }); await this.sleep(1100);
+      this.setState({ dots: false });
+      for (let c = 1; c <= a.length && this.alive; c++) { this.setState({ chatA: a.slice(0, c) }); await this.sleep(11); }
+      await this.sleep(3800);
+      i++;
+    }
+  }
+  renderVals() {
+    const s = this.state;
+    return {
+      wallet: "$" + s.walletN.toLocaleString("en-US"),
+      chatQ: s.chatQ, chatA: s.chatA, dots: s.dots,
+      showQ: s.chatQ.length > 0, showA: s.chatA.length > 0,
+      submitted: s.submitted, notSubmitted: !s.submitted,
+      submitWaitlist: () => this.setState({ submitted: true }),
+      showMarquee: this.props.showMarquee ?? true,
+      fullForm: this.props.fullForm ?? true,
+      true: true, false: false
+    };
+  }
+}
+</script>
+</body>
+</html>

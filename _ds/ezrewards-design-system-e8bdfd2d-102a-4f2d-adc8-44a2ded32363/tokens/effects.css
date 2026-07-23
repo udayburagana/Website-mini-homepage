@@ -1,0 +1,49 @@
+:root{
+/* radii */
+--radius-xs:4px;
+--radius-sm:8px;
+--radius-md:10px;
+--radius-lg:12px;
+--radius-xl:14px;
+--radius-2xl:16px;
+--radius-pill-sm:20px;
+--radius-full:999px;
+
+/* hard offset shadows — no blur, neo-brutalist */
+--shadow-xs:2px 2px 0px 0px var(--color-ink);
+--shadow-sm:3px 3px 0px 0px var(--color-ink);
+--shadow-md:4px 4px 0px 0px var(--color-gray-900);
+--shadow-lg:5px 5px 0px 0px var(--color-ink);
+--shadow-xl:6px 6px 0px 0px var(--color-yellow);
+--shadow-xxl:8px 8px 0px 0px var(--color-olive);
+--shadow-card-dark:inset 0 0 0 3px var(--color-navy-900),6px 6px 0px 0px var(--color-yellow);
+
+/* rings (hairline borders drawn as inset box-shadow) */
+--ring-hairline:inset 0 0 0 1px var(--color-ink);
+--ring-thick:inset 0 0 0 2px var(--color-ink);
+--ring-lime:0 0 0 2px var(--color-lime);
+--ring-black-hairline:inset 0 0 0 1px rgba(0,0,0,0.05); /* @kind shadow */
+
+/* spacing scale — literal values as used in source, not snapped to a grid */
+--space-1:6px;
+--space-2:8px;
+--space-3:10px;
+--space-4:12px;
+--space-5:14px;
+--space-6:16px;
+--space-7:20px;
+--space-8:24px;
+--space-9:26px;
+--space-10:32px;
+--space-11:34px;
+--space-12:40px;
+--space-13:48px;
+--space-14:56px;
+--space-15:60px;
+--space-16:70px;
+--space-17:80px;
+--space-18:90px;
+--space-19:100px;
+--space-20:120px;
+--space-21:150px;
+}

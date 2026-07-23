@@ -1,0 +1,22 @@
+:root{
+--text-mega:96px/98px var(--font-display);
+--text-mega-tracking:-2.36px;
+--text-h1:72px/74px var(--font-heading);
+--text-h1-tracking:-1.76px;
+--text-h1-light:300;
+--text-h2:64px/68px var(--font-heading);
+--text-h2-tracking:-1.56px;
+--text-h3:26px/100% var(--font-heading);
+--text-eyebrow:12px/100% var(--font-heading);
+--text-eyebrow-tracking:1.44px;
+--text-nav:16px/100% var(--font-heading);
+--text-body-lg:18px/28px var(--font-body);
+--text-body:16px/27.55px var(--font-body);
+--text-body-sm:14px/20px var(--font-body);
+--text-caption:14px/100% var(--font-body);
+--text-button:16px/100% var(--font-body);
+--text-button-alt:15px/100% var(--font-heading);
+--text-link-16:16px/24px var(--font-link);
+--font-weight-eyebrow:400;
+--letter-eyebrow:uppercase;
+}

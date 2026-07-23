@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/styles.css">
+  <script src="_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/_ds_bundle.js"></script>
+  <style>
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--color-cream);-webkit-font-smoothing:antialiased}
+    a{color:var(--color-ink)}
+    a:hover{color:var(--color-gray-700)}
+    ::selection{background:var(--color-lime);color:var(--color-ink)}
+    @keyframes ezSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @keyframes ezPulse{0%,100%{box-shadow:3px 3px 0px 0px var(--color-ink)}50%{box-shadow:5px 5px 0px 0px var(--color-ink)}}
+    @keyframes ezDash{to{stroke-dashoffset:0}}
+  </style>
+</helmet>
+
+<div style="min-width:1380px;background:var(--color-cream);color:var(--color-ink)">
+
+  <!-- HEADER -->
+  <header data-screen-label="Header" style="position:sticky;top:0;z-index:50;background:var(--color-cream);box-shadow:inset 0 -1px 0 0 var(--color-ink);height:79px;display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:0 60px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between">
+      <a href="Homepage.dc.html" style="text-decoration:none;display:flex"><x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Logo" hint-size="160px,26px"></x-import></a>
+      <nav style="display:flex;gap:34px;align-items:center">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="Homepage.dc.html" hint-size="auto,16px">Home</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="Product.dc.html" hint-size="auto,16px">Product</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="About.dc.html" active="{{ true }}" hint-size="auto,16px">About</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="Contact.dc.html" hint-size="auto,16px">Contact</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="dark" size="sm" href="Homepage.dc.html#waitlist" hint-size="140px,44px">Join Waitlist</x-import>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section data-screen-label="About hero" style="position:relative;overflow:hidden;background:var(--color-cream);display:flex;justify-content:center">
+    <div style="position:absolute;left:-40px;top:-60px;width:220px;height:220px;border-radius:50%;background:var(--color-lime)"></div>
+    <div style="position:absolute;right:120px;bottom:80px;font-size:30px;animation:ezSpin 14s linear infinite">✦</div>
+    <div style="max-width:1440px;width:100%;padding:100px 60px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px;position:relative">
+      <div data-reveal=""><x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Tag" hint-size="auto,12px">About EzRewards</x-import></div>
+      <h1 data-reveal="" data-reveal-delay="90" style="margin:0;font:400 68px/74px var(--font-display);letter-spacing:-2px;text-transform:uppercase;max-width:1000px">Great work should never go unseen.</h1>
+      <p data-reveal="" data-reveal-delay="200" style="margin:0;font:400 18px/28px var(--font-body);max-width:640px">EzRewards helps companies turn everyday appreciation into a visible, structured, and rewarding culture — instead of moments lost in chats, calls, and memory.</p>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section data-screen-label="Story" style="background:var(--color-navy-900);display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:110px 60px;box-sizing:border-box;display:flex;gap:70px;align-items:center">
+      <div data-reveal="" style="flex:1;display:flex;flex-direction:column;gap:20px">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Tag" color="var(--color-lime)" hint-size="auto,12px">Why we built it</x-import>
+        <h2 style="margin:0;font:300 52px/58px var(--font-heading);letter-spacing:-1.3px;color:var(--color-white)">A thank-you in one tool. A reward in another.</h2>
+        <p style="margin:0;font:400 17px/27px var(--font-body);color:var(--color-cream-text-dark-bg);max-width:520px">Appreciation was scattered across chat, email, and spreadsheets. Rewards meant manual coordination. Leaders couldn't see participation or impact. So we built one place that ties recognition, rewards, wallet, and reporting together — without feeling like corporate software.</p>
+        <p style="margin:0;font:300 26px/34px var(--font-heading);color:var(--color-lime)">EzRewards brings it all together.</p>
+      </div>
+      <div data-reveal="" data-reveal-delay="150" style="flex:1;max-width:520px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <div style="background:linear-gradient(180deg,var(--color-navy-800) 0%,var(--color-navy-700) 100%);border-radius:var(--radius-2xl);box-shadow:var(--shadow-card-dark);padding:26px"><div style="font:500 40px var(--font-mono);color:var(--color-lime)">5</div><div style="font:400 14px/21px var(--font-body);color:var(--color-cream-text-dark-bg);margin-top:6px">moments in one loop — recognize, celebrate, reward, redeem, understand</div></div>
+        <div style="background:linear-gradient(180deg,var(--color-navy-800) 0%,var(--color-navy-700) 100%);border-radius:var(--radius-2xl);box-shadow:var(--shadow-card-dark);padding:26px"><div style="font:500 40px var(--font-mono);color:var(--color-yellow)">1</div><div style="font:400 14px/21px var(--font-body);color:var(--color-cream-text-dark-bg);margin-top:6px">platform instead of four disconnected tools</div></div>
+        <div style="background:linear-gradient(180deg,var(--color-navy-800) 0%,var(--color-navy-700) 100%);border-radius:var(--radius-2xl);box-shadow:var(--shadow-card-dark);padding:26px"><div style="font:500 40px var(--font-mono);color:var(--color-coral)">AI</div><div style="font:400 14px/21px var(--font-body);color:var(--color-cream-text-dark-bg);margin-top:6px">assisted reporting to answer questions instantly</div></div>
+        <div style="background:var(--color-lime);border-radius:var(--radius-2xl);box-shadow:5px 5px 0px 0px var(--color-ink);padding:26px"><div style="font:500 40px var(--font-mono);color:var(--color-ink)">$1</div><div style="font:400 14px/21px var(--font-body);color:var(--color-ink);margin-top:6px">per user / month — one clear price, no theatre</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOOP -->
+  <section data-screen-label="The loop" style="background:var(--color-yellow);box-shadow:inset 0 -1px 0 0 var(--color-ink);display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:110px 60px;box-sizing:border-box">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Tag" hint-size="auto,12px">The appreciation loop</x-import>
+        <h2 style="margin:0;font:300 52px/58px var(--font-heading);letter-spacing:-1.3px">Five moments. One continuous loop.</h2>
+      </div>
+      <div style="display:flex;gap:0;align-items:stretch;margin-top:56px;justify-content:center">
+        <div data-reveal="" style="flex:1;max-width:200px;background:var(--color-cream-paper);border-radius:var(--radius-xl);box-shadow:inset 0 0 0 1px var(--color-ink),5px 5px 0px 0px var(--color-ink);padding:24px;text-align:center"><div style="font:400 14px var(--font-mono);background:var(--color-lime);box-shadow:inset 0 0 0 1px var(--color-ink);border-radius:var(--radius-xs);padding:4px 8px;display:inline-block">01</div><h3 style="margin:14px 0 8px;font:500 20px var(--font-heading)">Recognize</h3><p style="margin:0;font:400 13px/20px var(--font-body);color:var(--color-gray-600)">Appreciate great work publicly.</p></div>
+        <div data-reveal="" data-reveal-delay="80" style="display:flex;align-items:center;font:400 22px var(--font-mono);padding:0 8px">→</div>
+        <div data-reveal="" data-reveal-delay="80" style="flex:1;max-width:200px;background:var(--color-cream-paper);border-radius:var(--radius-xl);box-shadow:inset 0 0 0 1px var(--color-ink),5px 5px 0px 0px var(--color-ink);padding:24px;text-align:center"><div style="font:400 14px var(--font-mono);background:var(--color-lime);box-shadow:inset 0 0 0 1px var(--color-ink);border-radius:var(--radius-xs);padding:4px 8px;display:inline-block">02</div><h3 style="margin:14px 0 8px;font:500 20px var(--font-heading)">Celebrate</h3><p style="margin:0;font:400 13px/20px var(--font-body);color:var(--color-gray-600)">React, comment, make it visible.</p></div>
+        <div data-reveal="" data-reveal-delay="160" style="display:flex;align-items:center;font:400 22px var(--font-mono);padding:0 8px">→</div>
+        <div data-reveal="" data-reveal-delay="160" style="flex:1;max-width:200px;background:var(--color-cream-paper);border-radius:var(--radius-xl);box-shadow:inset 0 0 0 1px var(--color-ink),5px 5px 0px 0px var(--color-ink);padding:24px;text-align:center"><div style="font:400 14px var(--font-mono);background:var(--color-lime);box-shadow:inset 0 0 0 1px var(--color-ink);border-radius:var(--radius-xs);padding:4px 8px;display:inline-block">03</div><h3 style="margin:14px 0 8px;font:500 20px var(--font-heading)">Reward</h3><p style="margin:0;font:400 13px/20px var(--font-body);color:var(--color-gray-600)">Send wallet-backed vouchers.</p></div>
+        <div data-reveal="" data-reveal-delay="240" style="display:flex;align-items:center;font:400 22px var(--font-mono);padding:0 8px">→</div>
+        <div data-reveal="" data-reveal-delay="240" style="flex:1;max-width:200px;background:var(--color-cream-paper);border-radius:var(--radius-xl);box-shadow:inset 0 0 0 1px var(--color-ink),5px 5px 0px 0px var(--color-ink);padding:24px;text-align:center"><div style="font:400 14px var(--font-mono);background:var(--color-lime);box-shadow:inset 0 0 0 1px var(--color-ink);border-radius:var(--radius-xs);padding:4px 8px;display:inline-block">04</div><h3 style="margin:14px 0 8px;font:500 20px var(--font-heading)">Redeem</h3><p style="margin:0;font:400 13px/20px var(--font-body);color:var(--color-gray-600)">Employees redeem in a few clicks.</p></div>
+        <div data-reveal="" data-reveal-delay="320" style="display:flex;align-items:center;font:400 22px var(--font-mono);padding:0 8px">→</div>
+        <div data-reveal="" data-reveal-delay="320" style="flex:1;max-width:200px;background:var(--color-ink);border-radius:var(--radius-xl);box-shadow:5px 5px 0px 0px var(--color-lime);padding:24px;text-align:center"><div style="font:400 14px var(--font-mono);background:var(--color-lime);border-radius:var(--radius-xs);padding:4px 8px;display:inline-block">05</div><h3 style="margin:14px 0 8px;font:500 20px var(--font-heading);color:var(--color-white)">Understand</h3><p style="margin:0;font:400 13px/20px var(--font-body);color:var(--color-cream-text-dark-bg)">Reports + AI reveal the trends.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section data-screen-label="Principles" style="background:var(--color-lime);box-shadow:inset 0 -1px 0 0 var(--color-ink);display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:110px 60px;box-sizing:border-box">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:16px;max-width:680px">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Tag" hint-size="auto,12px">What we believe</x-import>
+        <h2 style="margin:0;font:300 52px/58px var(--font-heading);letter-spacing:-1.3px">Principles that shape the product.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:52px">
+        <div data-reveal="" style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:30px" style-hover="transform:translate(-3px,-3px)"><span style="font-size:20px">✦</span><h3 style="margin:14px 0 10px;font:500 22px var(--font-heading)">Recognition builds culture</h3><p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-gray-600)">Rewards are powerful, but appreciation made visible is what changes how teams work.</p></div>
+        <div data-reveal="" data-reveal-delay="100" style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:30px" style-hover="transform:translate(-3px,-3px)"><span style="font-size:20px">✦</span><h3 style="margin:14px 0 10px;font:500 22px var(--font-heading)">Clarity over theatre</h3><p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-gray-600)">One clear price, plain-language reports, no hype. Software that respects your time.</p></div>
+        <div data-reveal="" data-reveal-delay="200" style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:30px" style-hover="transform:translate(-3px,-3px)"><span style="font-size:20px">✦</span><h3 style="margin:14px 0 10px;font:500 22px var(--font-heading)">Control without friction</h3><p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-gray-600)">Wallet-backed rewards give admins real control while staying effortless for employees.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILT BY -->
+  <section data-screen-label="Built by" style="background:var(--color-purple);box-shadow:inset 0 -1px 0 0 var(--color-ink);display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:110px 60px;box-sizing:border-box;display:flex;gap:70px;align-items:center">
+      <div data-reveal="" style="flex:1;display:flex;flex-direction:column;gap:20px">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Tag" hint-size="auto,12px">Built by</x-import>
+        <h2 style="margin:0;font:300 52px/58px var(--font-heading);letter-spacing:-1.3px">An Evolutyz product.</h2>
+        <p style="margin:0;font:400 17px/27px var(--font-body);max-width:480px">EzRewards is built by Evolutyz — a team that designs modern, premium software for growing companies. We're building EzRewards for teams that want appreciation to be visible, structured, and effortless.</p>
+        <div style="margin-top:8px"><x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="dark" href="Contact.dc.html" hint-size="150px,46px">Get in touch →</x-import></div>
+      </div>
+      <div data-reveal="" data-reveal-delay="150" style="flex:1;max-width:520px;background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:38px;display:flex;flex-direction:column;gap:20px">
+        <span style="font:400 12px var(--font-heading);letter-spacing:1.44px;text-transform:uppercase;color:var(--color-gray-500)">Built for</span>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <span style="background:var(--color-white);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink);padding:9px 16px;font:500 13px var(--font-body)">Startups building culture early</span>
+          <span style="background:var(--color-white);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink);padding:9px 16px;font:500 13px var(--font-body)">IT &amp; services teams</span>
+          <span style="background:var(--color-white);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink);padding:9px 16px;font:500 13px var(--font-body)">Scaling SaaS companies</span>
+          <span style="background:var(--color-white);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink);padding:9px 16px;font:500 13px var(--font-body)">Agencies &amp; consulting firms</span>
+          <span style="background:var(--color-white);border-radius:var(--radius-pill-sm);box-shadow:inset 0 0 0 1px var(--color-ink);padding:9px 16px;font:500 13px var(--font-body)">Mid-sized companies</span>
+        </div>
+        <div style="box-shadow:inset 0 1px 0 0 var(--color-ink);padding-top:20px;font:400 15px/24px var(--font-body);color:var(--color-gray-600)">Recognize → Celebrate → Reward → Redeem → Understand. That's the loop we're building EzRewards around.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section data-screen-label="CTA" style="background:var(--color-cream);display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:100px 60px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px">
+      <h2 data-reveal="" style="margin:0;font:300 52px/58px var(--font-heading);letter-spacing:-1.3px;max-width:760px">Ready to make appreciation visible?</h2>
+      <p data-reveal="" data-reveal-delay="100" style="margin:0;font:400 17px/27px var(--font-body);color:var(--color-gray-600);max-width:560px">Join the early-access waitlist and be among the first companies to try EzRewards.</p>
+      <div data-reveal="" data-reveal-delay="200" style="display:flex;gap:28px;align-items:center">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="primary" href="Homepage.dc.html#waitlist" style="animation:ezPulse 2.6s ease-in-out infinite" hint-size="170px,46px">Join the Waitlist</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="secondary" href="Product.dc.html" hint-size="150px,46px">Explore Product →</x-import>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer data-screen-label="Footer" style="background:var(--color-yellow);box-shadow:inset 0 1px 0 0 var(--color-ink);display:flex;justify-content:center">
+    <div style="max-width:1440px;width:100%;padding:70px 60px 40px;box-sizing:border-box">
+      <div style="display:flex;justify-content:space-between;gap:60px;align-items:flex-start">
+        <div style="display:flex;flex-direction:column;gap:18px;max-width:380px">
+          <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Logo" hint-size="160px,26px"></x-import>
+          <p style="margin:0;font:400 15px/24px var(--font-body)">EzRewards is an employee appreciation operating system for growing companies.</p>
+        </div>
+        <div style="display:flex;gap:80px">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <span style="font:400 12px var(--font-heading);letter-spacing:1.44px;text-transform:uppercase">Pages</span>
+            <a href="Product.dc.html" style="font:400 15px var(--font-body);text-decoration:none">Product</a>
+            <a href="About.dc.html" style="font:400 15px var(--font-body);text-decoration:none">About</a>
+            <a href="Contact.dc.html" style="font:400 15px var(--font-body);text-decoration:none">Contact</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <span style="font:400 12px var(--font-heading);letter-spacing:1.44px;text-transform:uppercase">Legal</span>
+            <a href="#" style="font:400 15px var(--font-body);text-decoration:none">Privacy Policy</a>
+            <a href="#" style="font:400 15px var(--font-body);text-decoration:none">Terms of Use</a>
+            <a href="#" style="font:400 15px var(--font-body);text-decoration:none">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:56px;padding-top:24px;box-shadow:inset 0 1px 0 0 var(--color-ink)">
+        <span style="font:400 13px var(--font-body)">© 2026 EzRewards. All rights reserved.</span>
+        <span style="background:var(--color-ink);color:var(--color-lime);border-radius:var(--radius-pill-sm);padding:8px 16px;font:500 13px var(--font-heading)">✦ An Evolutyz product</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    const motion = this.props.motion ?? true;
+    this.onScroll = () => {
+      const h = document.querySelector("header");
+      if (h) h.style.boxShadow = window.scrollY > 20 ? "inset 0 -1px 0 0 var(--color-ink), 0 4px 0px 0px var(--color-ink)" : "inset 0 -1px 0 0 var(--color-ink)";
+    };
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+    if (!motion) return;
+    const els = Array.from(document.querySelectorAll("[data-reveal]"));
+    els.forEach(el => {
+      el.style.opacity = "0"; el.style.transform = "translateY(28px)";
+      el.style.transition = "opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1)";
+    });
+    this.obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target, d = parseInt(el.dataset.revealDelay || "0", 10);
+        setTimeout(() => {
+          el.style.opacity = "1"; el.style.transform = "none";
+          setTimeout(() => { el.style.transition = "transform .16s ease"; }, 750);
+        }, d);
+        this.obs.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    els.forEach(el => this.obs.observe(el));
+  }
+  componentWillUnmount() { if (this.obs) this.obs.disconnect(); window.removeEventListener("scroll", this.onScroll); }
+  renderVals() { return { true: true }; }
+}
+</script>
+</body>
+</html>
