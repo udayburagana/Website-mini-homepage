@@ -28,6 +28,8 @@ const routes = [
   }
 ];
 
+const productionOrigin = "https://website-mini-homepage.vercel.app";
+
 const viewports = [
   { width: 1440, height: 900 },
   { width: 1024, height: 768 },
@@ -49,6 +51,14 @@ for (const route of routes) {
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.locator("main#main-content")).toHaveCount(1);
     await expect(page.locator('a[href="#main-content"]')).toHaveCount(1);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      `${productionOrigin}${route.path}`
+    );
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+      "content",
+      `${productionOrigin}${route.path}`
+    );
   });
 
   for (const viewport of viewports) {
@@ -71,6 +81,19 @@ test("button links are not underlined and active navigation remains distinct", a
     .toHaveCSS("text-decoration-line", "none");
   await expect(page.getByRole("navigation").getByRole("link", { name: "Home" }))
     .toHaveCSS("text-decoration-line", "underline");
+});
+
+test("robots and sitemap expose all production routes", async ({ request }) => {
+  const robots = await request.get("/robots.txt");
+  expect(robots.ok()).toBeTruthy();
+  expect(await robots.text()).toContain(`${productionOrigin}/sitemap.xml`);
+
+  const sitemap = await request.get("/sitemap.xml");
+  expect(sitemap.ok()).toBeTruthy();
+  const sitemapText = await sitemap.text();
+  for (const route of routes) {
+    expect(sitemapText).toContain(`<loc>${productionOrigin}${route.path}</loc>`);
+  }
 });
 
 test("mobile navigation exposes and updates its expanded state", async ({ page }) => {
