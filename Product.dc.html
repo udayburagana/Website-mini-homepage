@@ -1,9 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product | EzRewards Employee Recognition Platform</title>
+<meta name="description" content="Explore EzRewards recognition, digital rewards, company wallet controls, participation reporting, and AI-assisted employee appreciation insights.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#F2ECDD">
+<meta property="og:title" content="Product | EzRewards Employee Recognition Platform">
+<meta property="og:description" content="Recognition, rewards, wallet controls, reports, and AI-assisted insights in one employee appreciation platform.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EzRewards">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/site.css">
 <script src="./support.js"></script>
+<script src="/site-ui.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -29,22 +40,25 @@
   </style>
 </helmet>
 
-<div style="min-width:1380px;background:var(--color-cream);color:var(--color-ink)">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div class="site-shell" style="min-width:1380px;background:var(--color-cream);color:var(--color-ink)">
 
   <!-- HEADER -->
   <header data-screen-label="Header" style="position:sticky;top:0;z-index:50;background:var(--color-cream);box-shadow:inset 0 -1px 0 0 var(--color-ink);height:79px;display:flex;justify-content:center">
     <div style="max-width:1440px;width:100%;padding:0 60px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between">
-      <a href="Homepage.dc.html" style="text-decoration:none;display:flex"><x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Logo" hint-size="160px,26px"></x-import></a>
-      <nav style="display:flex;gap:34px;align-items:center">
-        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="Homepage.dc.html" hint-size="auto,16px">Home</x-import>
-        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="Product.dc.html" active="{{ true }}" hint-size="auto,16px">Product</x-import>
-        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="About.dc.html" hint-size="auto,16px">About</x-import>
-        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="Contact.dc.html" hint-size="auto,16px">Contact</x-import>
-        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="dark" size="sm" href="Homepage.dc.html#waitlist" hint-size="140px,44px">Join Waitlist</x-import>
+      <a href="/" aria-label="EzRewards home" style="text-decoration:none;display:flex"><x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Logo" hint-size="160px,26px"></x-import></a>
+      <button class="mobile-menu-toggle" type="button" data-menu-toggle="" aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation">Menu</button>
+      <nav id="primary-navigation" class="primary-navigation" aria-label="Primary" style="display:flex;gap:34px;align-items:center">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="/" hint-size="auto,16px">Home</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="/product" active="{{ true }}" hint-size="auto,16px">Product</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="/about" hint-size="auto,16px">About</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="/contact" hint-size="auto,16px">Contact</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="dark" size="sm" href="/#waitlist" hint-size="140px,44px">Join Waitlist</x-import>
       </nav>
     </div>
   </header>
 
+  <main id="main-content">
   <!-- HERO -->
   <section data-screen-label="Product hero" style="position:relative;overflow:hidden;background:var(--color-cream);display:flex;justify-content:center">
     <div style="position:absolute;right:-50px;top:-70px;width:240px;height:240px;border-radius:50%;background:var(--color-lime)"></div>
@@ -54,7 +68,7 @@
       <h1 data-reveal="" data-reveal-delay="90" style="margin:0;font:400 68px/74px var(--font-display);letter-spacing:-2px;text-transform:uppercase;max-width:1060px">One platform to recognize, reward, and understand your people.</h1>
       <p data-reveal="" data-reveal-delay="200" style="margin:0;font:400 18px/28px var(--font-body);max-width:640px">EzRewards brings employee recognition, rewards, wallet management, reports, and AI-assisted insights into one modern product.</p>
       <div data-reveal="" data-reveal-delay="300" style="display:flex;gap:28px;align-items:center">
-        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="primary" href="Homepage.dc.html#waitlist" style="animation:ezPulse 2.6s ease-in-out infinite" hint-size="170px,46px">Join the Waitlist</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="primary" href="/#waitlist" style="animation:ezPulse 2.6s ease-in-out infinite" hint-size="170px,46px">Join the Waitlist</x-import>
         <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="secondary" href="#recognition" hint-size="170px,46px">See how it works →</x-import>
       </div>
       <div data-reveal="" data-reveal-delay="380" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:12px">
@@ -280,11 +294,12 @@
       <h2 data-reveal="" style="margin:0;font:300 52px/58px var(--font-heading);letter-spacing:-1.3px;max-width:760px">Be among the first companies to try EzRewards.</h2>
       <p data-reveal="" data-reveal-delay="100" style="margin:0;font:400 17px/27px var(--font-body);color:var(--color-gray-600);max-width:560px">We're opening early access for selected teams. Join the waitlist and we'll reach out when it opens.</p>
       <div data-reveal="" data-reveal-delay="200" style="display:flex;gap:28px;align-items:center">
-        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="primary" href="Homepage.dc.html#waitlist" style="animation:ezPulse 2.6s ease-in-out infinite" hint-size="170px,46px">Join the Waitlist</x-import>
-        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="secondary" href="Contact.dc.html" hint-size="140px,46px">Talk to Us →</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="primary" href="/#waitlist" style="animation:ezPulse 2.6s ease-in-out infinite" hint-size="170px,46px">Join the Waitlist</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="secondary" href="/contact" hint-size="140px,46px">Talk to Us →</x-import>
       </div>
     </div>
   </section>
+  </main>
 
   <!-- FOOTER -->
   <footer data-screen-label="Footer" style="background:var(--color-yellow);box-shadow:inset 0 1px 0 0 var(--color-ink);display:flex;justify-content:center">
@@ -297,15 +312,15 @@
         <div style="display:flex;gap:80px">
           <div style="display:flex;flex-direction:column;gap:12px">
             <span style="font:400 12px var(--font-heading);letter-spacing:1.44px;text-transform:uppercase">Pages</span>
-            <a href="Product.dc.html" style="font:400 15px var(--font-body);text-decoration:none">Product</a>
-            <a href="About.dc.html" style="font:400 15px var(--font-body);text-decoration:none">About</a>
-            <a href="Contact.dc.html" style="font:400 15px var(--font-body);text-decoration:none">Contact</a>
+            <a href="/product" style="font:400 15px var(--font-body);text-decoration:none">Product</a>
+            <a href="/about" style="font:400 15px var(--font-body);text-decoration:none">About</a>
+            <a href="/contact" style="font:400 15px var(--font-body);text-decoration:none">Contact</a>
           </div>
           <div style="display:flex;flex-direction:column;gap:12px">
             <span style="font:400 12px var(--font-heading);letter-spacing:1.44px;text-transform:uppercase">Legal</span>
-            <a href="#" style="font:400 15px var(--font-body);text-decoration:none">Privacy Policy</a>
-            <a href="#" style="font:400 15px var(--font-body);text-decoration:none">Terms of Use</a>
-            <a href="#" style="font:400 15px var(--font-body);text-decoration:none">LinkedIn</a>
+            <span class="placeholder-link">Privacy Policy</span>
+            <span class="placeholder-link">Terms of Use</span>
+            <span class="placeholder-link">LinkedIn</span>
           </div>
         </div>
       </div>

@@ -265,6 +265,7 @@ function Button({
   href,
   onClick,
   disabled,
+  type,
   style,
   className
 }) {
@@ -283,6 +284,7 @@ function Button({
     cursor: disabled ? "not-allowed" : "pointer",
     opacity: disabled ? 0.5 : 1,
     border: "none",
+    textDecoration: "none",
     transition: "transform .12s ease, box-shadow .12s ease",
     whiteSpace: "nowrap"
   };
@@ -321,6 +323,7 @@ function Button({
     href: href,
     onClick: onClick,
     disabled: disabled,
+    type: href ? void 0 : type || "button",
     className: className,
     onMouseEnter: () => setHover(true),
     onMouseLeave: () => setHover(false),
@@ -403,6 +406,10 @@ function Input({
   type = "text",
   value,
   onChange,
+  id,
+  name,
+  required,
+  autoComplete,
   style
 }) {
   return /*#__PURE__*/React.createElement("div", {
@@ -415,6 +422,7 @@ function Input({
       ...style
     }
   }, label && /*#__PURE__*/React.createElement("label", {
+    htmlFor: id,
     style: {
       fontFamily: "var(--font-heading)",
       fontSize: 17,
@@ -422,6 +430,10 @@ function Input({
     }
   }, label), /*#__PURE__*/React.createElement("input", {
     type: type,
+    id: id,
+    name: name,
+    required: required,
+    autoComplete: autoComplete,
     placeholder: placeholder,
     value: value,
     onChange: onChange,

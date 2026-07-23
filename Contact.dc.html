@@ -1,9 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact EzRewards | Early Access</title>
+<meta name="description" content="Contact the EzRewards team about early access, product walkthroughs, pricing, partnerships, and a better employee appreciation program for your company.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#F2ECDD">
+<meta property="og:title" content="Contact EzRewards | Early Access">
+<meta property="og:description" content="Talk with EzRewards about early access, product walkthroughs, pricing, partnerships, and employee appreciation.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EzRewards">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/site.css">
 <script src="./support.js"></script>
+<script src="/site-ui.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -25,22 +36,25 @@
   </style>
 </helmet>
 
-<div style="min-width:1380px;background:var(--color-cream);color:var(--color-ink)">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div class="site-shell" style="min-width:1380px;background:var(--color-cream);color:var(--color-ink)">
 
   <!-- HEADER -->
   <header data-screen-label="Header" style="position:sticky;top:0;z-index:50;background:var(--color-cream);box-shadow:inset 0 -1px 0 0 var(--color-ink);height:79px;display:flex;justify-content:center">
     <div style="max-width:1440px;width:100%;padding:0 60px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between">
-      <a href="Homepage.dc.html" style="text-decoration:none;display:flex"><x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Logo" hint-size="160px,26px"></x-import></a>
-      <nav style="display:flex;gap:34px;align-items:center">
-        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="Homepage.dc.html" hint-size="auto,16px">Home</x-import>
-        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="Product.dc.html" hint-size="auto,16px">Product</x-import>
-        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="About.dc.html" hint-size="auto,16px">About</x-import>
-        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="Contact.dc.html" active="{{ true }}" hint-size="auto,16px">Contact</x-import>
-        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="dark" size="sm" href="Homepage.dc.html#waitlist" hint-size="140px,44px">Join Waitlist</x-import>
+      <a href="/" aria-label="EzRewards home" style="text-decoration:none;display:flex"><x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Logo" hint-size="160px,26px"></x-import></a>
+      <button class="mobile-menu-toggle" type="button" data-menu-toggle="" aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation">Menu</button>
+      <nav id="primary-navigation" class="primary-navigation" aria-label="Primary" style="display:flex;gap:34px;align-items:center">
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="/" hint-size="auto,16px">Home</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="/product" hint-size="auto,16px">Product</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="/about" hint-size="auto,16px">About</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.NavLink" href="/contact" active="{{ true }}" hint-size="auto,16px">Contact</x-import>
+        <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="dark" size="sm" href="/#waitlist" hint-size="140px,44px">Join Waitlist</x-import>
       </nav>
     </div>
   </header>
 
+  <main id="main-content">
   <!-- CONTACT -->
   <section data-screen-label="Contact" style="position:relative;overflow:hidden;background:var(--color-cream);display:flex;justify-content:center">
     <div style="position:absolute;left:-50px;top:-70px;width:230px;height:230px;border-radius:50%;background:var(--color-lime)"></div>
@@ -58,11 +72,11 @@
           </div>
           <div style="display:flex;align-items:center;gap:14px;background:var(--color-cream-paper);border-radius:var(--radius-md);box-shadow:inset 0 0 0 1px var(--color-ink),3px 3px 0px 0px var(--color-ink);padding:16px 18px">
             <span style="width:40px;height:40px;border-radius:var(--radius-sm);background:var(--color-yellow);box-shadow:inset 0 0 0 1px var(--color-ink);display:flex;align-items:center;justify-content:center;font-size:18px">✦</span>
-            <div style="display:flex;flex-direction:column"><span style="font:400 12px var(--font-heading);letter-spacing:1.2px;text-transform:uppercase;color:var(--color-gray-500)">Early access</span><a href="Homepage.dc.html#waitlist" style="font:500 16px var(--font-body);text-decoration:none">Join the waitlist →</a></div>
+            <div style="display:flex;flex-direction:column"><span style="font:400 12px var(--font-heading);letter-spacing:1.2px;text-transform:uppercase;color:var(--color-gray-500)">Early access</span><a href="/#waitlist" style="font:500 16px var(--font-body);text-decoration:none">Join the waitlist →</a></div>
           </div>
           <div style="display:flex;align-items:center;gap:14px;background:var(--color-cream-paper);border-radius:var(--radius-md);box-shadow:inset 0 0 0 1px var(--color-ink),3px 3px 0px 0px var(--color-ink);padding:16px 18px">
             <span style="width:40px;height:40px;border-radius:var(--radius-sm);background:var(--color-purple);box-shadow:inset 0 0 0 1px var(--color-ink);display:flex;align-items:center;justify-content:center;font-size:18px">✦</span>
-            <div style="display:flex;flex-direction:column"><span style="font:400 12px var(--font-heading);letter-spacing:1.2px;text-transform:uppercase;color:var(--color-gray-500)">Follow</span><a href="#" style="font:500 16px var(--font-body);text-decoration:none">LinkedIn</a></div>
+            <div style="display:flex;flex-direction:column"><span style="font:400 12px var(--font-heading);letter-spacing:1.2px;text-transform:uppercase;color:var(--color-gray-500)">Follow</span><span class="placeholder-link" style="font-weight:500">LinkedIn</span></div>
           </div>
         </div>
         <span style="background:var(--color-ink);color:var(--color-lime);border-radius:var(--radius-pill-sm);padding:8px 16px;font:500 13px var(--font-heading);align-self:flex-start">✦ An Evolutyz product</span>
@@ -71,38 +85,39 @@
       <!-- Right: form -->
       <div data-reveal="" data-reveal-delay="150" style="flex:1;max-width:600px">
         <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
-          <div style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-olive);padding:40px;display:flex;flex-direction:column;gap:22px">
+            <form data-demo-form="" novalidate="" style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-olive);padding:40px;display:flex;flex-direction:column;gap:22px">
             <div style="display:flex;flex-direction:column;gap:6px">
               <h2 style="margin:0;font:500 26px var(--font-heading)">Send us a message</h2>
               <span style="font:400 14px var(--font-body);color:var(--color-gray-500)">We usually reply within one business day.</span>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-              <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Input" label="Full name" placeholder="Riya Mehta" hint-size="100%,85px"></x-import>
-              <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Input" label="Work email" type="email" placeholder="riya@company.com" hint-size="100%,85px"></x-import>
-              <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Input" label="Company" placeholder="Acme Inc." hint-size="100%,85px"></x-import>
+              <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Input" id="contact-name" name="name" required="{{ true }}" autoComplete="name" label="Full name" placeholder="Riya Mehta" hint-size="100%,85px"></x-import>
+              <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Input" id="contact-email" name="email" required="{{ true }}" autoComplete="email" label="Work email" type="email" placeholder="riya@company.com" hint-size="100%,85px"></x-import>
+              <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Input" id="contact-company" name="company" required="{{ true }}" autoComplete="organization" label="Company" placeholder="Acme Inc." hint-size="100%,85px"></x-import>
               <div style="display:flex;flex-direction:column;gap:8px">
-                <label style="font:400 17px var(--font-heading)">Reason</label>
-                <select style="height:51px;border-radius:var(--radius-md);background:var(--color-white);box-shadow:inset 0 0 0 1px var(--color-ink);border:none;padding:0 12px;font:400 15px var(--font-body);color:var(--color-ink)">
+                <label for="contact-reason" style="font:400 17px var(--font-heading)">Reason</label>
+                <select id="contact-reason" name="reason" required style="height:51px;border-radius:var(--radius-md);background:var(--color-white);box-shadow:inset 0 0 0 1px var(--color-ink);border:none;padding:0 12px;font:400 15px var(--font-body);color:var(--color-ink)">
                   <option>Early access</option><option>Product walkthrough</option><option>Pricing</option><option>Partnership</option><option>Something else</option>
                 </select>
               </div>
             </div>
             <div style="display:flex;flex-direction:column;gap:8px">
-              <label style="font:400 17px var(--font-heading)">Message</label>
-              <textarea placeholder="Tell us a little about your team and what you're looking for…" style="min-height:120px;resize:vertical;border-radius:var(--radius-md);background:var(--color-white);box-shadow:inset 0 0 0 1px var(--color-ink);border:none;padding:14px 16px;font:400 15px/23px var(--font-body);color:var(--color-ink)"></textarea>
+              <label for="contact-message" style="font:400 17px var(--font-heading)">Message</label>
+              <textarea id="contact-message" name="message" required placeholder="Tell us a little about your team and what you're looking for…" style="min-height:120px;resize:vertical;border-radius:var(--radius-md);background:var(--color-white);box-shadow:inset 0 0 0 1px var(--color-ink);border:none;padding:14px 16px;font:400 15px/23px var(--font-body);color:var(--color-ink)"></textarea>
             </div>
             <div style="display:flex;align-items:center;justify-content:space-between;gap:16px">
               <span style="font:400 13px var(--font-body);color:var(--color-gray-500);max-width:300px">By sending this you agree to be contacted about EzRewards.</span>
-              <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="primary" onClick="{{ submit }}" hint-size="150px,46px">Send message</x-import>
+              <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="primary" type="button" onClick="{{ submit }}" hint-size="150px,46px">Send message</x-import>
             </div>
-          </div>
+            <div class="demo-form-status" role="status" aria-live="polite"></div>
+          </form>
         </sc-if>
         <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
-          <div style="background:var(--color-lime);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:60px 44px;text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center">
+          <div role="status" aria-live="polite" style="background:var(--color-lime);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:60px 44px;text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center">
             <span style="font-size:38px;animation:ezPop .6s cubic-bezier(.34,1.56,.64,1) both">✦</span>
             <h2 style="margin:0;font:300 40px var(--font-heading)">Message sent.</h2>
             <p style="margin:0;font:400 16px/26px var(--font-body);max-width:400px">Thanks for reaching out. Our team will get back to you within one business day.</p>
-            <div style="margin-top:6px"><x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="dark" href="Homepage.dc.html" hint-size="150px,46px">Back to home</x-import></div>
+            <div style="margin-top:6px"><x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="dark" href="/" hint-size="150px,46px">Back to home</x-import></div>
           </div>
         </sc-if>
       </div>
@@ -124,6 +139,7 @@
       </div>
     </div>
   </section>
+  </main>
 
   <!-- FOOTER -->
   <footer data-screen-label="Footer" style="background:var(--color-yellow);box-shadow:inset 0 1px 0 0 var(--color-ink);display:flex;justify-content:center">
@@ -136,15 +152,15 @@
         <div style="display:flex;gap:80px">
           <div style="display:flex;flex-direction:column;gap:12px">
             <span style="font:400 12px var(--font-heading);letter-spacing:1.44px;text-transform:uppercase">Pages</span>
-            <a href="Product.dc.html" style="font:400 15px var(--font-body);text-decoration:none">Product</a>
-            <a href="About.dc.html" style="font:400 15px var(--font-body);text-decoration:none">About</a>
-            <a href="Contact.dc.html" style="font:400 15px var(--font-body);text-decoration:none">Contact</a>
+            <a href="/product" style="font:400 15px var(--font-body);text-decoration:none">Product</a>
+            <a href="/about" style="font:400 15px var(--font-body);text-decoration:none">About</a>
+            <a href="/contact" style="font:400 15px var(--font-body);text-decoration:none">Contact</a>
           </div>
           <div style="display:flex;flex-direction:column;gap:12px">
             <span style="font:400 12px var(--font-heading);letter-spacing:1.44px;text-transform:uppercase">Legal</span>
-            <a href="#" style="font:400 15px var(--font-body);text-decoration:none">Privacy Policy</a>
-            <a href="#" style="font:400 15px var(--font-body);text-decoration:none">Terms of Use</a>
-            <a href="#" style="font:400 15px var(--font-body);text-decoration:none">LinkedIn</a>
+            <span class="placeholder-link">Privacy Policy</span>
+            <span class="placeholder-link">Terms of Use</span>
+            <span class="placeholder-link">LinkedIn</span>
           </div>
         </div>
       </div>
