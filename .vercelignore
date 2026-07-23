@@ -1,0 +1,12 @@
+uploads/
+tests/
+node_modules/
+test-results/
+playwright-report/
+package.json
+package-lock.json
+playwright.config.mjs
+.thumbnail
+_ds/**/readme.md
+_ds/**/_adherence.oxlintrc.json
+_ds/**/_ds_manifest.json
