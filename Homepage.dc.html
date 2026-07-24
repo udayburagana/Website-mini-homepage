@@ -65,7 +65,7 @@
   <main id="main-content">
   <!-- HERO -->
   <section data-screen-label="Hero" style="position:relative;overflow:hidden;background:var(--color-cream);display:flex;justify-content:center">
-    <div style="position:absolute;left:-40px;top:-60px;width:230px;height:230px;border-radius:50%;background:var(--color-lime)"></div>
+    <img class="home-hero-artwork" src="/assets/home/hero-corner.svg" alt="">
     <div style="position:absolute;right:120px;top:70px;font-size:34px;color:var(--color-ink);animation:ezSpin 14s linear infinite">✦</div>
     <div style="display:flex;gap:48px;padding:90px 60px 110px;max-width:1440px;width:100%;box-sizing:border-box;align-items:center;position:relative">
       <div style="display:flex;flex-direction:column;gap:26px;flex:1.05;min-width:600px">
@@ -134,7 +134,7 @@
 
   <!-- MARQUEE -->
   <sc-if value="{{ showMarquee }}" hint-placeholder-val="{{ true }}">
-    <div data-screen-label="Marquee" style="background:var(--color-ink);overflow:hidden;padding:16px 0;box-shadow:inset 0 1px 0 0 var(--color-black)">
+    <div class="home-marquee" data-screen-label="Marquee" style="background:var(--color-ink);overflow:hidden;padding:16px 0;box-shadow:inset 0 1px 0 0 var(--color-black)">
       <div style="display:flex;width:max-content;animation:ezMarquee 26s linear infinite" style-hover="animation-play-state:paused">
         <div style="display:flex;gap:36px;padding-right:36px;white-space:nowrap;font:500 15px var(--font-heading);letter-spacing:2px;color:var(--color-lime)"><span>RECOGNIZE</span><span>✦</span><span>CELEBRATE</span><span>✦</span><span>REWARD</span><span>✦</span><span>REDEEM</span><span>✦</span><span>UNDERSTAND</span><span>✦</span><span>RECOGNIZE</span><span>✦</span><span>CELEBRATE</span><span>✦</span><span>REWARD</span><span>✦</span><span>REDEEM</span><span>✦</span><span>UNDERSTAND</span><span>✦</span></div>
         <div style="display:flex;gap:36px;padding-right:36px;white-space:nowrap;font:500 15px var(--font-heading);letter-spacing:2px;color:var(--color-lime)"><span>RECOGNIZE</span><span>✦</span><span>CELEBRATE</span><span>✦</span><span>REWARD</span><span>✦</span><span>REDEEM</span><span>✦</span><span>UNDERSTAND</span><span>✦</span><span>RECOGNIZE</span><span>✦</span><span>CELEBRATE</span><span>✦</span><span>REWARD</span><span>✦</span><span>REDEEM</span><span>✦</span><span>UNDERSTAND</span><span>✦</span></div>
@@ -172,7 +172,7 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section data-screen-label="How it works" style="background:var(--color-yellow);box-shadow:inset 0 1px 0 0 var(--color-ink),inset 0 -1px 0 0 var(--color-ink);display:flex;justify-content:center">
+  <section class="home-flow" data-screen-label="How it works" style="background:var(--color-yellow);box-shadow:inset 0 1px 0 0 var(--color-ink),inset 0 -1px 0 0 var(--color-ink);display:flex;justify-content:center">
     <div style="max-width:1440px;width:100%;padding:110px 60px;box-sizing:border-box">
       <div data-reveal="" style="display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center">
         <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Tag" hint-size="auto,12px">How EzRewards works</x-import>
@@ -209,7 +209,7 @@
   </section>
 
   <!-- FEATURES -->
-  <section data-screen-label="Features" style="background:var(--color-lime);box-shadow:inset 0 -1px 0 0 var(--color-ink);display:flex;justify-content:center">
+  <section class="home-features" data-screen-label="Features" style="background:var(--color-lime);box-shadow:inset 0 -1px 0 0 var(--color-ink);display:flex;justify-content:center">
     <div style="max-width:1440px;width:100%;padding:110px 60px;box-sizing:border-box">
       <div data-reveal="" style="display:flex;flex-direction:column;gap:18px;max-width:720px">
         <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Tag" hint-size="auto,12px">Feature highlights</x-import>
@@ -217,32 +217,32 @@
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px">
         <div data-reveal="" style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:30px" style-hover="transform:translate(-2px,-2px)">
-          <div style="width:44px;height:44px;border-radius:var(--radius-md);background:var(--color-yellow);box-shadow:inset 0 0 0 1px var(--color-ink);display:flex;align-items:center;justify-content:center;font-size:20px">✦</div>
+          <div class="home-feature-icon" style="background:var(--color-yellow)"><img src="/assets/home/peer-recognition.svg" alt=""></div>
           <h3 style="margin:20px 0 10px;font:500 24px var(--font-heading)">Peer Recognition</h3>
           <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-gray-600)">Make appreciation visible across the company with public recognition posts, badges, reactions, and comments.</p>
         </div>
         <div data-reveal="" data-reveal-delay="100" style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:30px" style-hover="transform:translate(-3px,-3px)">
-          <div style="width:44px;height:44px;border-radius:var(--radius-md);background:var(--color-coral);box-shadow:inset 0 0 0 1px var(--color-ink);display:flex;align-items:center;justify-content:center;font-size:20px">✦</div>
+          <div class="home-feature-icon" style="background:var(--color-coral)"><img src="/assets/home/digital-rewards.svg" alt=""></div>
           <h3 style="margin:20px 0 10px;font:500 24px var(--font-heading)">Digital Rewards</h3>
           <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-gray-600)">Reward employees through digital vouchers and coupon-based redemption flows — no manual coordination.</p>
         </div>
         <div data-reveal="" data-reveal-delay="200" style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:30px" style-hover="transform:translate(-3px,-3px)">
-          <div style="width:44px;height:44px;border-radius:var(--radius-md);background:var(--color-purple);box-shadow:inset 0 0 0 1px var(--color-ink);display:flex;align-items:center;justify-content:center;font-size:20px">✦</div>
+          <div class="home-feature-icon" style="background:var(--color-purple)"><img src="/assets/home/company-wallet.svg" alt=""></div>
           <h3 style="margin:20px 0 10px;font:500 24px var(--font-heading)">Company Wallet</h3>
           <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-gray-600)">Fund rewards through a dedicated wallet and track balance, recharge history, and utilization.</p>
         </div>
         <div data-reveal="" style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:30px" style-hover="transform:translate(-3px,-3px)">
-          <div style="width:44px;height:44px;border-radius:var(--radius-md);background:var(--color-teal);box-shadow:inset 0 0 0 1px var(--color-ink);display:flex;align-items:center;justify-content:center;font-size:20px">✦</div>
+          <div class="home-feature-icon" style="background:var(--color-teal)"><img src="/assets/home/admin-controls.svg" alt=""></div>
           <h3 style="margin:20px 0 10px;font:500 24px var(--font-heading)">Admin Controls</h3>
           <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-gray-600)">Manage users, invites, roles, subscriptions, wallet, and employee access from one admin layer.</p>
         </div>
         <div data-reveal="" data-reveal-delay="100" style="background:var(--color-cream-paper);border-radius:var(--radius-2xl);box-shadow:inset 0 0 0 1px var(--color-ink),8px 8px 0px 0px var(--color-ink);padding:30px" style-hover="transform:translate(-3px,-3px)">
-          <div style="width:44px;height:44px;border-radius:var(--radius-md);background:var(--color-cyan);box-shadow:inset 0 0 0 1px var(--color-ink);display:flex;align-items:center;justify-content:center;font-size:20px">✦</div>
+          <div class="home-feature-icon" style="background:var(--color-cyan)"><img src="/assets/home/reports.svg" alt=""></div>
           <h3 style="margin:20px 0 10px;font:500 24px var(--font-heading)">Reports</h3>
           <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-gray-600)">Understand recognition activity, employee participation, wallet usage, and redemption trends.</p>
         </div>
         <div data-reveal="" data-reveal-delay="200" style="background:var(--color-ink);border-radius:var(--radius-2xl);box-shadow:8px 8px 0px 0px var(--color-cream-paper);padding:30px" style-hover="transform:translate(-3px,-3px)">
-          <div style="width:44px;height:44px;border-radius:var(--radius-md);background:var(--color-lime);display:flex;align-items:center;justify-content:center;font-size:20px">✦</div>
+          <div class="home-feature-icon home-feature-icon--dark" style="background:var(--color-lime)"><img src="/assets/home/ai-report-assistant.svg" alt=""></div>
           <h3 style="margin:20px 0 10px;font:500 24px var(--font-heading);color:var(--color-white)">AI Report Assistant</h3>
           <p style="margin:0;font:400 15px/24px var(--font-body);color:var(--color-cream-text-dark-bg)">Ask questions on top of report data and get clear answers — without manually reading every table.</p>
         </div>
@@ -367,7 +367,7 @@
   </main>
 
   <!-- FOOTER -->
-  <footer data-screen-label="Footer" style="background:var(--color-yellow);box-shadow:inset 0 1px 0 0 var(--color-ink);display:flex;justify-content:center">
+  <footer class="home-footer" data-screen-label="Footer" style="background:var(--color-yellow);box-shadow:inset 0 1px 0 0 var(--color-ink);display:flex;justify-content:center">
     <div style="max-width:1440px;width:100%;padding:70px 60px 40px;box-sizing:border-box">
       <div style="display:flex;justify-content:space-between;gap:60px;align-items:flex-start">
         <div style="display:flex;flex-direction:column;gap:18px;max-width:380px">
