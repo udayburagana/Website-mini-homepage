@@ -1,8 +1,38 @@
 import { expect, test } from "@playwright/test";
+import { readFile } from "node:fs/promises";
 
 test.beforeEach(async ({ page }) => {
   await page.route("https://fonts.googleapis.com/**", (route) => route.abort());
   await page.route("https://fonts.gstatic.com/**", (route) => route.abort());
+});
+
+test.describe("homepage Figma sync", () => {
+  test.use({ viewport: { width: 1440, height: 900 } });
+
+  test("uses the updated Figma artwork", async ({ page }) => {
+    await page.goto("/");
+
+    const heroArtwork = page.locator(".home-hero-artwork");
+    await expect(heroArtwork).toHaveAttribute("src", "/assets/home/hero-corner.svg");
+    await expect(heroArtwork).toHaveAttribute("alt", "");
+    await expect(heroArtwork).toHaveCSS("width", "160px");
+    await expect(heroArtwork).toHaveCSS("height", "160px");
+
+    const icons = page.locator(".home-feature-icon img");
+    await expect(icons).toHaveCount(6);
+    for (const icon of await icons.all()) {
+      await expect(icon).toHaveAttribute("alt", "");
+      await expect(icon).toHaveAttribute("src", /\/assets\/home\/.+\.svg/);
+    }
+  });
+
+  test("defines the updated desktop section geometry", async () => {
+    const css = await readFile(new URL("../site.css", import.meta.url), "utf8");
+    expect(css).toMatch(/\.home-marquee\s*\{[^}]*height:\s*51px/s);
+    expect(css).toMatch(/\.home-flow\s*\{[^}]*height:\s*622px/s);
+    expect(css).toMatch(/\.home-features\s*\{[^}]*height:\s*964px/s);
+    expect(css).toMatch(/\.home-footer\s*\{[^}]*height:\s*328px/s);
+  });
 });
 
 const routes = [
