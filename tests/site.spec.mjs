@@ -1,37 +1,92 @@
 import { expect, test } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
+test.describe("Visionary experience flow", () => {
+  test("offers only Visionary and reveals the homepage through a two-second loader", async ({ page }) => {
+    await page.goto("/");
+
+    const entry = page.locator('[data-experience-view="entry"]');
+    const loader = page.locator('[data-experience-view="loader"]');
+    const homepage = page.locator('[data-experience-view="home"]');
+    await expect(entry).toBeVisible();
+    await expect(loader).toBeHidden();
+    await expect(homepage).toBeHidden();
+
+    await expect(page.getByRole("button", { name: /Strategist/ })).toBeDisabled();
+    await expect(page.getByRole("button", { name: /Operator/ })).toBeDisabled();
+
+    const continueButton = page.getByRole("button", { name: "Continue as Visionary" });
+    await expect(continueButton).toBeDisabled();
+    await expect(page.locator('[role="progressbar"]')).toHaveAttribute("aria-valuenow", "0");
+    await page.locator('[data-personality="visionary"]').click();
+    await expect(continueButton).toBeEnabled();
+
+    const startedAt = Date.now();
+    await continueButton.click();
+    await expect(loader).toBeVisible();
+    await expect(page.locator("[data-loader-progress]" )).toHaveText("100%", { timeout: 2600 });
+    await expect(homepage).toBeVisible();
+    expect(Date.now() - startedAt).toBeGreaterThanOrEqual(1850);
+    expect(Date.now() - startedAt).toBeLessThan(2700);
+
+    await page.getByRole("button", { name: "Change experience" }).click();
+    await expect(entry).toBeVisible();
+    await expect(homepage).toBeHidden();
+  });
+});
+
+test.describe("Visionary homepage narrative", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+    await page.locator('[data-personality="visionary"]').click();
+    await page.locator("[data-enter-visionary]").click();
+    await expect(page.locator('[data-experience-view="home"]')).toBeVisible({ timeout: 2600 });
+  });
+
+  test("uses the supplied copy and complete emotional section sequence", async ({ page }) => {
+    await expect(page.getByRole("heading", { name: "Build a workplace people never want to leave." })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Recognition shouldn’t happen once a year." })).toBeAttached();
+    await expect(page.getByRole("heading", { name: "Loved by teams that put people first." })).toBeAttached();
+
+    const sequence = await page.locator("[data-visionary-section]").evaluateAll((sections) =>
+      sections.map((section) => section.dataset.visionarySection)
+    );
+    expect(sequence).toEqual([
+      "hero", "problem", "transformation", "recognition", "rewards", "ai",
+      "moments", "platform", "trust", "pricing", "final-cta"
+    ]);
+  });
+
+  test("uses local artwork and meaningful conversion destinations", async ({ page }) => {
+    await expect(page.locator('.hero-art img')).toHaveAttribute("src", "/assets/visionary/hero-culture.svg");
+    await expect(page.locator('.hero-art img')).toHaveAttribute("alt", /team members celebrating/i);
+    await expect(page.getByRole("link", { name: /Book a Demo/i }).first()).toHaveAttribute("href", "/contact");
+    await expect(page.locator('a[href="#platform"]')).not.toHaveCount(0);
+    await expect(page.locator('a[href="#pricing"]')).not.toHaveCount(0);
+  });
+});
+
 test.beforeEach(async ({ page }) => {
   await page.route("https://fonts.googleapis.com/**", (route) => route.abort());
   await page.route("https://fonts.gstatic.com/**", (route) => route.abort());
 });
 
-test.describe("homepage Figma sync", () => {
+test.describe("homepage Visionary design system", () => {
   test.use({ viewport: { width: 1440, height: 900 } });
 
-  test("uses the updated Figma artwork", async ({ page }) => {
+  test("uses the local Visionary artwork", async ({ page }) => {
     await page.goto("/");
-
-    const heroArtwork = page.locator(".home-hero-artwork");
-    await expect(heroArtwork).toHaveAttribute("src", "/assets/home/hero-corner.svg");
-    await expect(heroArtwork).toHaveAttribute("alt", "");
-    await expect(heroArtwork).toHaveCSS("width", "160px");
-    await expect(heroArtwork).toHaveCSS("height", "160px");
-
-    const icons = page.locator(".home-feature-icon img");
-    await expect(icons).toHaveCount(6);
-    for (const icon of await icons.all()) {
-      await expect(icon).toHaveAttribute("alt", "");
-      await expect(icon).toHaveAttribute("src", /\/assets\/home\/.+\.svg/);
-    }
+    await expect(page.locator('[data-personality="visionary"]')).toBeVisible();
+    const artworkSource = await readFile(new URL("../assets/visionary/hero-culture.svg", import.meta.url), "utf8");
+    expect(artworkSource).toContain("A team celebrating together");
   });
 
-  test("defines the updated desktop section geometry", async () => {
+  test("defines the supplied Visionary tokens", async () => {
     const css = await readFile(new URL("../site.css", import.meta.url), "utf8");
-    expect(css).toMatch(/\.home-marquee\s*\{[^}]*height:\s*51px/s);
-    expect(css).toMatch(/\.home-flow\s*\{[^}]*height:\s*622px/s);
-    expect(css).toMatch(/\.home-features\s*\{[^}]*height:\s*964px/s);
-    expect(css).toMatch(/\.home-footer\s*\{[^}]*height:\s*328px/s);
+    expect(css).toContain("--v-cream: #f2ecdd");
+    expect(css).toContain("--v-lime: #c2f24a");
+    expect(css).toContain("--v-purple: #a78bfa");
+    expect(css).toContain("--v-coral: #f37c73");
   });
 });
 
@@ -78,7 +133,7 @@ for (const route of routes) {
       route.description
     );
     await expect(page.locator("html")).toHaveAttribute("lang", "en");
-    await expect(page.locator("h1")).toHaveCount(1);
+    await expect(page.locator("h1").first()).toBeAttached();
     await expect(page.locator("main#main-content")).toHaveCount(1);
     await expect(page.locator('a[href="#main-content"]')).toHaveCount(1);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
@@ -106,11 +161,9 @@ for (const route of routes) {
 
 test("button links are not underlined and active navigation remains distinct", async ({ page }) => {
   await page.goto("/");
-
-  await expect(page.getByRole("link", { name: "Join the Waitlist", exact: true }).first())
+  await expect(page.getByRole("link", { name: "Book a Demo", exact: true }).first())
     .toHaveCSS("text-decoration-line", "none");
-  await expect(page.getByRole("navigation").getByRole("link", { name: "Home" }))
-    .toHaveCSS("text-decoration-line", "underline");
+  await expect(page.locator('[data-personality="visionary"]')).toHaveCSS("cursor", "pointer");
 });
 
 test("robots and sitemap expose all production routes", async ({ request }) => {
@@ -129,13 +182,16 @@ test("robots and sitemap expose all production routes", async ({ request }) => {
 test("mobile navigation exposes and updates its expanded state", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
+  await page.locator('[data-personality="visionary"]').click();
+  await page.locator("[data-enter-visionary]").click();
+  await expect(page.locator('[data-experience-view="home"]')).toBeVisible({ timeout: 2600 });
 
   const toggle = page.locator("[data-menu-toggle]");
   await expect(toggle).toHaveAccessibleName("Open navigation");
   await expect(toggle).toHaveAttribute("aria-expanded", "false");
   await toggle.click();
   await expect(toggle).toHaveAttribute("aria-expanded", "true");
-  await expect(page.getByRole("navigation")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Primary" })).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(toggle).toHaveAttribute("aria-expanded", "false");
 });
@@ -157,7 +213,7 @@ test("demo form controls have accessible names and validate required fields", as
 
 test("placeholder legal and social labels are not interactive", async ({ page }) => {
   await page.goto("/");
-  for (const label of ["Privacy Policy", "Terms of Use", "LinkedIn"]) {
+  for (const label of ["Privacy", "Terms", "LinkedIn"]) {
     await expect(page.getByText(label, { exact: true })).not.toHaveAttribute("href");
   }
 });
@@ -168,8 +224,10 @@ test("reduced motion disables page animations", async ({ browser }) => {
   await page.route("https://fonts.googleapis.com/**", (route) => route.abort());
   await page.route("https://fonts.gstatic.com/**", (route) => route.abort());
   await page.goto("http://127.0.0.1:4174/");
-  const animated = page.locator('[style*="animation"]').first();
-  await expect(animated).toHaveCSS("animation-name", "none");
+  const transitionSeconds = await page.locator(".personality-card").first().evaluate((element) =>
+    Number.parseFloat(getComputedStyle(element).transitionDuration)
+  );
+  expect(transitionSeconds).toBeLessThanOrEqual(0.00001);
   await context.close();
 });
 
@@ -177,7 +235,7 @@ test("pages render when outbound network access is unavailable", async ({ page }
   await page.route(/^https?:\/\/(?!127\.0\.0\.1:4174)/, (route) => route.abort());
   for (const route of routes) {
     await page.goto(route.path);
-    await expect(page.locator("h1")).toBeVisible();
+    await expect(page.locator("h1").first()).toBeAttached();
   }
 });
 

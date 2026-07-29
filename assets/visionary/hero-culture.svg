@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 650" role="img" aria-labelledby="title desc">
+  <title id="title">A team celebrating together</title><desc id="desc">Four expressive team members surrounded by recognition stars, hearts, and confetti.</desc>
+  <rect x="22" y="30" width="716" height="570" rx="52" fill="#A78BFA" stroke="#111" stroke-width="4"/>
+  <path d="M22 406c129-79 245-83 359-12 119 75 237 75 357-7v213H22z" fill="#C2F24A" stroke="#111" stroke-width="4"/>
+  <circle cx="130" cy="126" r="38" fill="#F7CF52" stroke="#111" stroke-width="4"/><path d="m130 95 9 20 22 2-17 14 5 22-19-12-19 12 5-22-17-14 22-2z" fill="#111"/>
+  <g stroke="#111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(116 190)"><circle cx="80" cy="76" r="52" fill="#F2B19A"/><path d="M31 72c3-59 95-73 103-4-31-20-70-19-103 4z" fill="#111"/><path d="M39 135c35-29 87-23 116 13l22 132H0l14-111z" fill="#F37C73"/><path d="M49 93c19 18 40 18 62 0" fill="none"/><path d="m27 179-54-66M146 174l62-80" fill="none"/><circle cx="-30" cy="106" r="14" fill="#F2B19A"/><circle cx="212" cy="88" r="14" fill="#F2B19A"/></g>
+    <g transform="translate(315 150)"><circle cx="75" cy="80" r="54" fill="#9A634B"/><path d="M23 70c17-63 102-61 108 5-38-17-70-18-108-5z" fill="#111"/><path d="M18 143c39-25 85-22 117 12l23 165H-7z" fill="#7188FE"/><path d="M48 98c18 15 37 15 55 0" fill="none"/><path d="M8 183-36 95M141 178l48-105" fill="none"/><circle cx="-39" cy="89" r="14" fill="#9A634B"/><circle cx="193" cy="67" r="14" fill="#9A634B"/></g>
+    <g transform="translate(500 222)"><circle cx="70" cy="68" r="49" fill="#E7A57C"/><path d="M20 63c5-55 88-70 101-3-32-18-68-17-101 3z" fill="#F7CF52"/><path d="M18 126c34-24 78-19 109 13l31 128H-3z" fill="#FDFCF6"/><path d="M44 86c18 13 35 13 52 0" fill="none"/><path d="m19 155-65-38M127 159l60 27" fill="none"/><circle cx="-50" cy="114" r="13" fill="#E7A57C"/><circle cx="191" cy="188" r="13" fill="#E7A57C"/></g>
+    <path d="m619 96 7 18 19 1-15 12 5 19-16-10-16 10 5-19-15-12 19-1z" fill="#F37C73"/><path d="m91 430 7 18 19 1-15 12 5 19-16-10-16 10 5-19-15-12 19-1z" fill="#7188FE"/>
+    <path d="M675 220c-18-29-57 2-20 33 37-31-2-62-20-33" fill="#F37C73"/><path d="M267 75l-15-28M286 72l7-33M303 85l28-21M58 260l-29-8M64 283l-32 9" fill="none"/>
+  </g>
+  <rect x="220" y="520" width="320" height="82" rx="41" fill="#FDFCF6" stroke="#111" stroke-width="4"/><text x="380" y="571" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="26" fill="#111">EVERY WIN MATTERS</text>
+</svg>
