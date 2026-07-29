@@ -1071,9 +1071,9 @@
 
   // src/cdn.ts
   var REACT_URL = "/vendor/react-18.3.1.production.min.js";
-  var REACT_SRI = "sha384-t63xaoqI4/tnZOZs58Xd/POzyY+r0ZlL3MZJsg5uEpKiDX6mJDAaS/KuesDjH55i";
+  var REACT_SRI = "sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z";
   var REACT_DOM_URL = "/vendor/react-dom-18.3.1.production.min.js";
-  var REACT_DOM_SRI = "sha384-8Y1L+f1y2tWRffeBSFDSl0M0VN4EevwrTLXRQyhfXCTukfuKEvApVoVps3phj/Vp";
+  var REACT_DOM_SRI = "sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1";
   var BABEL_URL = "/vendor/babel-7.29.0.min.js";
   var BABEL_SRI = "sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y";
   function cdnScriptFor(url, sri) {
@@ -1755,7 +1755,8 @@
       //! nosemgrep: create-script-element
       const s = document.createElement("script");
       s.src = src;
-      if (integrity) {
+      const scriptUrl = new URL(src, window.location.href);
+      if (integrity && scriptUrl.origin !== window.location.origin) {
         s.integrity = integrity;
         s.crossOrigin = "anonymous";
       }
