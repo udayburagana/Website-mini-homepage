@@ -50,7 +50,7 @@ Source: EzRewards website design, node `2108:118`; hero node `2101:62`.
 
 The implementation follows the Figma hero:
 
-- 1440px reference canvas
+- 1440px maximum content canvas, centered on wider devices and fluid below that width
 - 79px white navigation
 - 60px horizontal hero padding
 - 120px vertical hero padding
@@ -186,7 +186,8 @@ Purpose: support the internal business case and conversion.
 
 ## Responsive behavior
 
-- Desktop: Figma-aligned two-column hero and medium-density analytical layouts.
+- Desktop: Figma-aligned two-column hero and medium-density analytical layouts within a fluid container capped at 1440px.
+- Wide desktop: backgrounds remain full-bleed while navigation and section content stay centered at a 1440px maximum width.
 - Tablet: stacked hero copy/dashboard with two-column cards where space permits.
 - Mobile: single-column hierarchy, scrollable data tables where necessary, compact charts with visible labels, and full-width CTAs.
 - No horizontal page overflow at 320px or wider.
