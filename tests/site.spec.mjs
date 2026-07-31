@@ -2,17 +2,17 @@ import { expect, test } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
 test.describe("Visionary experience flow", () => {
-  test("offers only Visionary and reveals the homepage through a two-second loader", async ({ page }) => {
+  test("reveals the Visionary homepage through its two-second loader", async ({ page }) => {
     await page.goto("/");
 
     const entry = page.locator('[data-experience-view="entry"]');
     const loader = page.locator('[data-experience-view="loader"]');
-    const homepage = page.locator('[data-experience-view="home"]');
+    const homepage = page.locator('[data-experience-view="visionary-home"]');
     await expect(entry).toBeVisible();
     await expect(loader).toBeHidden();
     await expect(homepage).toBeHidden();
 
-    await expect(page.getByRole("button", { name: /Strategist/ })).toBeDisabled();
+    await expect(page.getByRole("button", { name: /Strategist/ })).toBeEnabled();
     await expect(page.getByRole("button", { name: /Operator/ })).toBeDisabled();
 
     const continueButton = page.getByRole("button", { name: "Continue as Visionary" });
@@ -33,6 +33,25 @@ test.describe("Visionary experience flow", () => {
     await expect(entry).toBeVisible();
     await expect(homepage).toBeHidden();
   });
+
+  test("reveals the Strategist homepage through its tailored loader", async ({ page }) => {
+    await page.goto("/");
+    const strategist = page.locator('[data-personality="strategist"]');
+    const visionaryHome = page.locator('[data-experience-view="visionary-home"]');
+    const strategistHome = page.locator('[data-experience-view="strategist-home"]');
+
+    await expect(strategist).toBeEnabled();
+    await expect(page.locator('[data-personality="operator"]')).toBeDisabled();
+    await strategist.click();
+    await expect(strategist).toHaveAttribute("aria-pressed", "true");
+    await expect(page.locator('[data-personality="visionary"]')).toHaveAttribute("aria-pressed", "false");
+    await page.locator("[data-enter-visionary]").click();
+    await expect(page.locator("[data-loader-personality]")).toHaveText("Strategist.");
+    await expect(page.locator("[data-loader-message]")).toContainText("business case");
+    await expect(page.locator("[data-loader-progress]")).toHaveText("100%", { timeout: 2600 });
+    await expect(strategistHome).toBeVisible();
+    await expect(visionaryHome).toBeHidden();
+  });
 });
 
 test.describe("Visionary homepage narrative", () => {
@@ -40,7 +59,7 @@ test.describe("Visionary homepage narrative", () => {
     await page.goto("/");
     await page.locator('[data-personality="visionary"]').click();
     await page.locator("[data-enter-visionary]").click();
-    await expect(page.locator('[data-experience-view="home"]')).toBeVisible({ timeout: 2600 });
+    await expect(page.locator('[data-experience-view="visionary-home"]')).toBeVisible({ timeout: 2600 });
   });
 
   test("uses the supplied copy and complete cinematic section sequence", async ({ page }) => {
@@ -61,6 +80,36 @@ test.describe("Visionary homepage narrative", () => {
     await expect(page.getByRole("link", { name: "Join Waitlist", exact: true }).first()).toHaveAttribute("href", "/contact");
     await expect(page.getByRole("link", { name: "Book a Demo", exact: true }).first()).toHaveAttribute("href", "/contact");
     await expect(page.locator('a[href="#culture-flow"]')).not.toHaveCount(0);
+  });
+});
+
+test.describe("Strategist homepage", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+    await page.locator('[data-personality="strategist"]').click();
+    await page.locator("[data-enter-visionary]").click();
+    await expect(page.locator('[data-experience-view="strategist-home"]')).toBeVisible({ timeout: 2600 });
+  });
+
+  test("uses the approved proof-first section sequence", async ({ page }) => {
+    await expect(page.getByRole("heading", { name: "Recognition leadership can measure. Culture your people can feel." })).toBeVisible();
+    const sequence = await page.locator("[data-strategist-section]").evaluateAll((sections) =>
+      sections.map((section) => section.dataset.strategistSection)
+    );
+    expect(sequence).toEqual([
+      "hero", "business-challenge", "solution-framework", "analytics", "implementation", "proof"
+    ]);
+    for (const label of ["Recognition", "Rewards", "Reports", "AI insights"]) {
+      await expect(page.getByRole("heading", { name: label, exact: true })).toBeAttached();
+    }
+  });
+
+  test("provides labelled analytics, summaries, and valid conversion paths", async ({ page }) => {
+    await expect(page.getByRole("img", { name: "Recognition participation trend" })).toBeAttached();
+    await expect(page.getByText("Recognition participation rose from 61% to 78% over six months.")).toBeAttached();
+    await expect(page.getByRole("table", { name: "Culture report summary" })).toBeAttached();
+    await expect(page.getByRole("link", { name: "Book a demo", exact: true }).first()).toHaveAttribute("href", "/contact");
+    await expect(page.getByRole("link", { name: "View reporting framework", exact: true })).toHaveAttribute("href", "#reporting-framework");
   });
 });
 
@@ -95,6 +144,38 @@ test.describe("homepage Visionary design system", () => {
     ]) {
       expect(css).toContain(token);
     }
+  });
+});
+
+test.describe("homepage Strategist design system", () => {
+  test("defines the supplied enterprise tokens", async () => {
+    const css = await readFile(new URL("../site.css", import.meta.url), "utf8");
+    for (const token of [
+      "--st-surface-primary: #f8fafc",
+      "--st-surface-secondary: #ffffff",
+      "--st-surface-tertiary: #eef2f7",
+      "--st-surface-dark: #0f172a",
+      "--st-text-primary: #111827",
+      "--st-text-secondary: #475569",
+      "--st-brand-primary: #4f46e5",
+      "--st-brand-secondary: #2563eb",
+      "--st-brand-accent: #06b6d4",
+      "--st-success: #10b981",
+      "--st-warning: #f59e0b"
+    ]) {
+      expect(css).toContain(token);
+    }
+  });
+
+  test("uses a fluid container capped at 1440px on wide displays", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.goto("/");
+    await page.locator('[data-personality="strategist"]').click();
+    await page.locator("[data-enter-visionary]").click();
+    await expect(page.locator('[data-experience-view="strategist-home"]')).toBeVisible({ timeout: 2600 });
+    const box = await page.locator(".strategist-container").first().boundingBox();
+    expect(box.width).toBeLessThanOrEqual(1440);
+    expect(Math.abs(box.x - (1920 - box.width) / 2)).toBeLessThan(2);
   });
 });
 
@@ -192,9 +273,10 @@ test("mobile navigation exposes and updates its expanded state", async ({ page }
   await page.goto("/");
   await page.locator('[data-personality="visionary"]').click();
   await page.locator("[data-enter-visionary]").click();
-  await expect(page.locator('[data-experience-view="home"]')).toBeVisible({ timeout: 2600 });
+  const visionaryHome = page.locator('[data-experience-view="visionary-home"]');
+  await expect(visionaryHome).toBeVisible({ timeout: 2600 });
 
-  const toggle = page.locator("[data-menu-toggle]");
+  const toggle = visionaryHome.locator("[data-menu-toggle]");
   await expect(toggle).toHaveAccessibleName("Open navigation");
   await expect(toggle).toHaveAttribute("aria-expanded", "false");
   await toggle.click();

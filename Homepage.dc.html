@@ -44,12 +44,12 @@
           <span>Build cultures people never forget.</span>
           <span class="personality-status">Available now <b>→</b></span>
         </button>
-        <button class="personality-card" type="button" data-personality="strategist" disabled>
+        <button class="personality-card personality-card--strategist" type="button" data-personality="strategist" aria-pressed="false">
           <span class="personality-portrait portrait--strategist" aria-hidden="true"><span>↗</span></span>
           <span class="personality-number">02 / 03</span>
           <strong>Strategist</strong>
-          <span>Measure culture with confidence.</span>
-          <span class="personality-status">Coming soon</span>
+          <span>I want to prove culture impact with clarity.</span>
+          <span class="personality-status">Available now <b>→</b></span>
         </button>
         <button class="personality-card" type="button" data-personality="operator" disabled>
           <span class="personality-portrait portrait--operator" aria-hidden="true"><span>✓</span></span>
@@ -64,18 +64,18 @@
     <p class="entry-footnote">One platform. Three ways to see what’s possible.</p>
   </section>
 
-  <section class="experience-loader" data-experience-view="loader" hidden aria-labelledby="loader-title">
+  <section class="experience-loader" data-experience-view="loader" data-loader-theme="visionary" hidden aria-labelledby="loader-title">
     <div class="loader-orbit" aria-hidden="true"><span>✦</span><span>●</span><span>◆</span></div>
-    <p class="eyebrow">Shaping your experience</p>
-    <h2 id="loader-title" tabindex="-1">Thinking like a<br><em>Visionary.</em></h2>
-    <div class="loader-meter" role="progressbar" aria-label="Loading Visionary experience" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <p class="eyebrow" data-loader-kicker>Shaping your experience</p>
+    <h2 id="loader-title" tabindex="-1">Thinking like a<br><em data-loader-personality>Visionary.</em></h2>
+    <div class="loader-meter" role="progressbar" aria-label="Loading selected experience" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
       <span class="loader-track"><span data-loader-bar></span></span>
       <output data-loader-progress>0%</output>
     </div>
-    <p>Preparing a more human way to see recognition.</p>
+    <p data-loader-message>Preparing a more human way to see recognition.</p>
   </section>
 
-  <div class="experience-home dark-visionary" data-experience-view="home" hidden>
+  <div class="experience-home dark-visionary" data-experience-view="visionary-home" hidden>
     <header class="site-header dark-header">
       <a class="dark-brand" href="/" aria-label="EzRewards home"><span class="dark-brand__mark" aria-hidden="true">✦</span><span>EzRewards</span></a>
       <button class="mobile-menu-toggle" type="button" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation">Menu</button>
@@ -208,6 +208,112 @@
       <nav aria-label="Footer"><a href="/product">Product</a><a href="#culture-flow">How It Works</a><a href="#product-story">Platform</a><a href="/about">About</a><a href="/contact">Contact</a></nav>
       <div class="footer-legal"><span>Privacy</span><span>Terms</span><span>LinkedIn</span><span>X</span><span>YouTube</span></div>
       <small>© 2026 EzRewards. Company memory, made visible.</small>
+    </footer>
+  </div>
+
+  <div class="experience-home strategist-home" data-experience-view="strategist-home" hidden>
+    <header class="strategist-header">
+      <div class="strategist-container strategist-header__inner">
+        <a class="strategist-brand" href="/" aria-label="EzRewards home"><span aria-hidden="true">↗</span>EzRewards</a>
+        <button class="mobile-menu-toggle strategist-menu-toggle" type="button" data-menu-toggle aria-controls="strategist-navigation" aria-expanded="false" aria-label="Open navigation">Menu</button>
+        <nav id="strategist-navigation" class="primary-navigation strategist-navigation" aria-label="Strategist primary">
+          <a href="/product">Product</a><a href="#strategist-framework">How It Works</a><a href="#measurable-outcomes">Analytics</a><a href="#implementation-confidence">Implementation</a><a href="/about">About</a>
+          <button class="change-experience" type="button" data-change-experience>Change experience</button>
+          <a class="strategist-button strategist-button--primary strategist-button--small" href="/contact">Book a demo</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="strategist-main">
+      <section class="strategist-hero" data-strategist-section="hero">
+        <div class="strategist-container strategist-hero__grid">
+          <div class="strategist-hero__copy" data-strategist-reveal>
+            <p class="strategist-eyebrow"><span></span> Culture intelligence platform</p>
+            <h1 tabindex="-1">Recognition leadership can measure. <em>Culture your people can feel.</em></h1>
+            <p>Measure recognition, understand engagement, reward performance, and give leadership complete visibility into workplace culture—all from one intelligent platform.</p>
+            <div class="strategist-actions"><a class="strategist-button strategist-button--primary" href="/contact">Book a demo</a><a class="strategist-button strategist-button--secondary" href="#measurable-outcomes">See measurable outcomes</a></div>
+          </div>
+          <div class="executive-dashboard" data-strategist-reveal aria-label="Executive culture intelligence dashboard">
+            <div class="dashboard-top"><div><small>Culture intelligence</small><strong>Leadership overview</strong></div><span>Updated today</span></div>
+            <div class="dashboard-kpis">
+              <article><span>Recognition participation</span><strong data-kpi-target="78" data-kpi-suffix="%">78%</strong><small class="metric-positive">↑ 12% vs last quarter</small></article>
+              <article><span>Engagement index</span><strong data-kpi-target="8.4">8.4</strong><small class="metric-positive">↑ 0.8 points</small></article>
+              <article><span>Reward utilization</span><strong data-kpi-target="86" data-kpi-suffix="%">86%</strong><small>Within policy target</small></article>
+            </div>
+            <div class="dashboard-grid">
+              <article class="mini-trend"><div class="panel-heading"><strong>Recognition trend</strong><span>6 months</span></div><div class="mini-bars" aria-hidden="true"><i style="--bar:48%"></i><i style="--bar:57%"></i><i style="--bar:63%"></i><i style="--bar:68%"></i><i style="--bar:72%"></i><i style="--bar:78%"></i></div><div class="axis-labels"><span>Feb</span><span>Jul</span></div></article>
+              <article class="ai-brief"><span class="insight-marker">AI insight</span><strong>Manager adoption is accelerating.</strong><p>Participation increased across 7 of 8 departments. Operations is the next enablement opportunity.</p><a href="#measurable-outcomes">View insight →</a></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="strategist-challenge" data-strategist-section="business-challenge">
+        <div class="strategist-container">
+          <div class="strategist-section-heading" data-strategist-reveal><p class="strategist-eyebrow"><span></span> The business challenge</p><h2>Culture decisions need more than <em>intuition.</em></h2><p>Without consistent signals, leaders see the consequences of culture gaps long after they can act.</p></div>
+          <div class="challenge-grid">
+            <article data-strategist-reveal><span class="strategy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19V9m5 10V5m5 14v-7m5 7V3"/></svg></span><small>Engagement</small><strong>Signals are fragmented</strong><p>Survey results, recognition, and participation live in disconnected reports.</p><b>4 systems to reconcile</b></article>
+            <article data-strategist-reveal><span class="strategy-icon strategy-icon--warning" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5m0 3h.01"/></svg></span><small>Retention</small><strong>Risk appears too late</strong><p>Leadership often sees turnover before it sees the cultural warning signs.</p><b>Lagging indicator</b></article>
+            <article data-strategist-reveal><span class="strategy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/><path d="m17 15 3 3-3 3"/></svg></span><small>Consistency</small><strong>Experience varies by team</strong><p>Recognition quality depends on individual managers rather than a shared system.</p><b>32-point team gap</b></article>
+            <article data-strategist-reveal><span class="strategy-icon strategy-icon--success" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-4 2-7 6-7s6 3 6 7m2-10 2 2 3-4"/></svg></span><small>Adoption</small><strong>Habits are hard to sustain</strong><p>Managers need clear prompts and low-friction workflows, not more administration.</p><b>2.1× impact when active</b></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="strategist-framework" id="strategist-framework" data-strategist-section="solution-framework">
+        <div class="strategist-container">
+          <div class="strategist-section-heading strategist-section-heading--center" data-strategist-reveal><p class="strategist-eyebrow"><span></span> One measurable system</p><h2>Turn appreciation into <em>culture signals.</em></h2><p>Connect everyday recognition to the decisions leadership already needs to make.</p></div>
+          <div class="framework-flow">
+            <article data-strategist-reveal><span class="framework-index">01</span><span class="strategy-icon"><svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.5L21 10l-4.5 4.4 1 6.2L12 17.8l-5.5 2.8 1-6.2L3 10l6.3-1.5L12 3Z"/></svg></span><h3>Recognition</h3><p>Capture meaningful moments and reinforce the behaviors your strategy depends on.</p></article>
+            <article data-strategist-reveal><span class="framework-index">02</span><span class="strategy-icon"><svg viewBox="0 0 24 24"><path d="M3 9h18v12H3zM12 9v12M2 5h20v4H2z"/><path d="M12 5C9 1 5 3 7 7m5-2c3-4 7-2 5 2"/></svg></span><h3>Rewards</h3><p>Control budgets and deliver choice while keeping every program policy-aligned.</p></article>
+            <article data-strategist-reveal><span class="framework-index">03</span><span class="strategy-icon"><svg viewBox="0 0 24 24"><path d="M4 3h16v18H4zM8 8h8m-8 4h8m-8 4h5"/></svg></span><h3>Reports</h3><p>Give leaders consistent, exportable views of participation, equity, and outcomes.</p></article>
+            <article data-strategist-reveal><span class="framework-index">04</span><span class="strategy-icon strategy-icon--accent"><svg viewBox="0 0 24 24"><path d="M12 3a7 7 0 0 0-4 12.7V21l4-2 4 2v-5.3A7 7 0 0 0 12 3Z"/><path d="m9 11 2 2 4-4"/></svg></span><h3>AI insights</h3><p>Surface patterns, adoption opportunities, and leadership-ready recommendations.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="strategist-analytics" id="measurable-outcomes" data-strategist-section="analytics">
+        <div class="strategist-container">
+          <div class="analytics-intro" data-strategist-reveal><div><p class="strategist-eyebrow"><span></span> Culture analytics</p><h2>See what is changing—and <em>why.</em></h2></div><p>Give leaders visibility without adding HR overhead. Track participation, equity, adoption, and reward efficiency in one reporting rhythm.</p></div>
+          <div class="analytics-kpis">
+            <article data-strategist-reveal><span>Active participation</span><strong>78%</strong><small class="metric-positive">+12% quarter over quarter</small></article>
+            <article data-strategist-reveal><span>Manager adoption</span><strong>84%</strong><small class="metric-positive">7 of 8 teams improving</small></article>
+            <article data-strategist-reveal><span>Cross-team recognition</span><strong>31%</strong><small class="metric-positive">+9% network strength</small></article>
+            <article data-strategist-reveal><span>Budget utilization</span><strong>86%</strong><small>Inside governance range</small></article>
+          </div>
+          <div class="analytics-grid">
+            <article class="analytics-card analytics-card--trend" data-strategist-reveal>
+              <div class="panel-heading"><div><span>Recognition participation trend</span><strong>Monthly active employees</strong></div><span class="metric-positive">+17 pts</span></div>
+              <div class="accessible-chart" role="img" aria-label="Recognition participation trend"><div class="chart-grid" aria-hidden="true"><i style="--value:61%"><b>61%</b><span>Feb</span></i><i style="--value:64%"><b>64%</b><span>Mar</span></i><i style="--value:67%"><b>67%</b><span>Apr</span></i><i style="--value:71%"><b>71%</b><span>May</span></i><i style="--value:74%"><b>74%</b><span>Jun</span></i><i style="--value:78%"><b>78%</b><span>Jul</span></i></div></div>
+              <p class="chart-summary">Recognition participation rose from 61% to 78% over six months.</p>
+            </article>
+            <article class="analytics-card analytics-card--departments" data-strategist-reveal><div class="panel-heading"><strong>Participation by department</strong><span>Current month</span></div><div class="department-bars"><div><span>Product</span><i><b style="--width:91%"></b></i><strong>91%</strong></div><div><span>Sales</span><i><b style="--width:86%"></b></i><strong>86%</strong></div><div><span>Customer Success</span><i><b style="--width:82%"></b></i><strong>82%</strong></div><div><span>Operations</span><i><b style="--width:63%"></b></i><strong>63%</strong></div></div><p class="chart-summary">Product leads participation at 91%; Operations is the primary enablement opportunity at 63%.</p></article>
+            <article class="analytics-card analytics-card--donut" data-strategist-reveal><div class="panel-heading"><strong>Reward utilization</strong><span>Policy target 75–90%</span></div><div class="donut-chart" role="img" aria-label="86 percent of the available rewards budget has been utilized"><div><strong>86%</strong><span>utilized</span></div></div><div class="donut-legend"><span><i></i>Redeemed $42.7k</span><span><i></i>Available $7.0k</span></div></article>
+            <article class="analytics-card analytics-card--report" id="reporting-framework" data-strategist-reveal><div class="panel-heading"><strong>Culture report summary</strong><a href="/contact">Export report</a></div><div class="report-table-wrap" role="region" aria-label="Scrollable culture report"><table aria-label="Culture report summary"><thead><tr><th>Signal</th><th>Current</th><th>Change</th><th>Status</th></tr></thead><tbody><tr><td>Participation</td><td>78%</td><td>+12%</td><td><span class="status-good">On track</span></td></tr><tr><td>Manager adoption</td><td>84%</td><td>+8%</td><td><span class="status-good">On track</span></td></tr><tr><td>Recognition equity</td><td>92%</td><td>+3%</td><td><span class="status-good">Strong</span></td></tr><tr><td>Operations coverage</td><td>63%</td><td>-2%</td><td><span class="status-watch">Review</span></td></tr></tbody></table></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="strategist-implementation" id="implementation-confidence" data-strategist-section="implementation">
+        <div class="strategist-container">
+          <div class="implementation-grid">
+            <div class="strategist-section-heading" data-strategist-reveal><p class="strategist-eyebrow"><span></span> Implementation confidence</p><h2>Enterprise-ready without the <em>enterprise drag.</em></h2><p>Launch with clear ownership, controls, and adoption support. Your teams get a simple experience; leadership gets confidence.</p><ul class="confidence-list"><li><span>✓</span>Role-based access and approval controls</li><li><span>✓</span>Configurable budgets and reward policies</li><li><span>✓</span>SSO, HRIS, and collaboration integrations</li><li><span>✓</span>Leadership reporting from day one</li></ul></div>
+            <div class="rollout-card" data-strategist-reveal><div class="panel-heading"><strong>Guided rollout</strong><span>Typical launch: 4 weeks</span></div><ol><li><span>01</span><div><strong>Align</strong><p>Success measures, values, governance</p></div><small>Week 1</small></li><li><span>02</span><div><strong>Configure</strong><p>Programs, budgets, roles, integrations</p></div><small>Week 2</small></li><li><span>03</span><div><strong>Enable</strong><p>Manager launch and team communication</p></div><small>Week 3</small></li><li><span>04</span><div><strong>Measure</strong><p>Adoption dashboard and executive review</p></div><small>Week 4</small></li></ol></div>
+          </div>
+          <div class="assurance-grid"><article data-strategist-reveal><span class="strategy-icon"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3 8 8 9 5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-5"/></svg></span><strong>Governed by design</strong><p>Budgets, permissions, and audit trails stay visible and controlled.</p></article><article data-strategist-reveal><span class="strategy-icon"><svg viewBox="0 0 24 24"><path d="M8 12h8M12 8v8"/><circle cx="12" cy="12" r="9"/></svg></span><strong>Connected to your stack</strong><p>Fit recognition into the tools and employee data flows teams already use.</p></article><article data-strategist-reveal><span class="strategy-icon strategy-icon--success"><svg viewBox="0 0 24 24"><path d="M4 18V6m0 12h16"/><path d="m7 15 4-4 3 2 5-6"/></svg></span><strong>Measured from launch</strong><p>Track activation, adoption, participation, and opportunity from the first month.</p></article></div>
+        </div>
+      </section>
+
+      <section class="strategist-proof" data-strategist-section="proof">
+        <div class="strategist-container strategist-proof__grid">
+          <div data-strategist-reveal><p class="strategist-eyebrow"><span></span> Build the business case</p><h2>Make culture investment easier to <em>prove.</em></h2><p>Bring leadership a clear framework for participation, adoption, equity, and reward efficiency—and a practical path to improve each one.</p><div class="strategist-actions"><a class="strategist-button strategist-button--light" href="/contact">Book a demo</a><a class="strategist-button strategist-button--dark-outline" href="#reporting-framework">View reporting framework</a></div></div>
+          <div class="proof-metrics" data-strategist-reveal><article><strong>4 weeks</strong><span>Typical guided launch</span></article><article><strong>1 view</strong><span>Leadership-ready culture reporting</span></article><article><strong>0 guesswork</strong><span>Clear adoption and outcome signals</span></article></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="strategist-footer">
+      <div class="strategist-container strategist-footer__grid"><div><a class="strategist-brand" href="/" aria-label="EzRewards home"><span aria-hidden="true">↗</span>EzRewards</a><p>Recognition intelligence for confident culture decisions.</p></div><nav aria-label="Strategist footer"><a href="/product">Product</a><a href="#measurable-outcomes">Analytics</a><a href="#implementation-confidence">Implementation</a><a href="/about">About</a><a href="/contact">Contact</a></nav><small>© 2026 EzRewards. Culture impact, made clear.</small></div>
     </footer>
   </div>
 </body>

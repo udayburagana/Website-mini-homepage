@@ -1,10 +1,28 @@
 (() => {
   const views = [...document.querySelectorAll("[data-experience-view]")];
-  const personalityButton = document.querySelector('[data-personality="visionary"]');
+  const personalityButtons = [...document.querySelectorAll("[data-personality]")];
   const enterButton = document.querySelector("[data-enter-visionary]");
+  const loaderView = document.querySelector('[data-experience-view="loader"]');
+  const loaderKicker = document.querySelector("[data-loader-kicker]");
+  const loaderPersonality = document.querySelector("[data-loader-personality]");
+  const loaderMessage = document.querySelector("[data-loader-message]");
   const loaderProgress = document.querySelector("[data-loader-progress]");
   const loaderBar = document.querySelector("[data-loader-bar]");
   const loaderMeter = loaderProgress?.closest('[role="progressbar"]');
+  let selectedPersonality = null;
+
+  const loaderContent = {
+    visionary: {
+      kicker: "Shaping your experience",
+      personality: "Visionary.",
+      message: "Preparing a more human way to see recognition."
+    },
+    strategist: {
+      kicker: "Preparing your evidence",
+      personality: "Strategist.",
+      message: "Building your business case with clear culture signals."
+    }
+  };
 
   function showView(name) {
     views.forEach((view) => {
@@ -13,9 +31,13 @@
   }
 
   function selectPersonality(name) {
-    if (name !== "visionary" || !personalityButton || !enterButton) return;
-    personalityButton.setAttribute("aria-pressed", "true");
+    if (!loaderContent[name] || !enterButton) return;
+    selectedPersonality = name;
+    personalityButtons.forEach((button) => {
+      if (!button.disabled) button.setAttribute("aria-pressed", String(button.dataset.personality === name));
+    });
     enterButton.disabled = false;
+    enterButton.firstChild.textContent = `Continue as ${name[0].toUpperCase()}${name.slice(1)} `;
   }
 
   function updateProgress(value) {
@@ -26,8 +48,13 @@
     loaderMeter.setAttribute("aria-valuenow", String(value));
   }
 
-  function startVisionaryExperience() {
-    if (!enterButton || enterButton.disabled) return;
+  function startSelectedExperience() {
+    if (!enterButton || enterButton.disabled || !selectedPersonality) return;
+    const content = loaderContent[selectedPersonality];
+    if (loaderView) loaderView.dataset.loaderTheme = selectedPersonality;
+    if (loaderKicker) loaderKicker.textContent = content.kicker;
+    if (loaderPersonality) loaderPersonality.textContent = content.personality;
+    if (loaderMessage) loaderMessage.textContent = content.message;
     showView("loader");
     updateProgress(0);
     document.querySelector("#loader-title")?.focus();
@@ -40,11 +67,53 @@
         requestAnimationFrame(tick);
         return;
       }
-      showView("home");
-      initDarkExperience();
-      document.querySelector(".dark-hero h1")?.focus();
+      showView(`${selectedPersonality}-home`);
+      if (selectedPersonality === "visionary") initDarkExperience();
+      if (selectedPersonality === "strategist") initStrategistExperience();
+      document.querySelector(`[data-experience-view="${selectedPersonality}-home"] h1`)?.focus();
     }
     requestAnimationFrame(tick);
+  }
+
+  function initStrategistExperience() {
+    const home = document.querySelector(".strategist-home");
+    if (!home || home.dataset.motionReady === "true") return;
+    home.dataset.motionReady = "true";
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reveals = [...home.querySelectorAll("[data-strategist-reveal]")];
+
+    function animateKpi(element) {
+      if (element.dataset.counted === "true") return;
+      element.dataset.counted = "true";
+      const target = Number(element.dataset.kpiTarget);
+      const suffix = element.dataset.kpiSuffix || "";
+      if (!Number.isFinite(target) || reducedMotion) return;
+      const decimals = String(target).includes(".") ? 1 : 0;
+      const startedAt = performance.now();
+      const duration = 650;
+      function count(now) {
+        const progress = Math.min((now - startedAt) / duration, 1);
+        const value = target * (1 - Math.pow(1 - progress, 3));
+        element.textContent = `${value.toFixed(decimals)}${suffix}`;
+        if (progress < 1) requestAnimationFrame(count);
+      }
+      requestAnimationFrame(count);
+    }
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      reveals.forEach((item) => item.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, revealObserver) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        entry.target.querySelectorAll("[data-kpi-target]").forEach(animateKpi);
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -5% 0px" });
+    reveals.forEach((item) => observer.observe(item));
   }
 
   function initDarkExperience() {
@@ -99,13 +168,13 @@
     }
 
     if (event.target.closest("[data-enter-visionary]")) {
-      startVisionaryExperience();
+      startSelectedExperience();
       return;
     }
 
     if (event.target.closest("[data-change-experience]")) {
       showView("entry");
-      personalityButton?.focus();
+      personalityButtons.find((button) => button.dataset.personality === selectedPersonality)?.focus();
       return;
     }
 
