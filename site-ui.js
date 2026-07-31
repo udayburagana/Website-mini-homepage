@@ -9,7 +9,16 @@
   const loaderProgress = document.querySelector("[data-loader-progress]");
   const loaderBar = document.querySelector("[data-loader-bar]");
   const loaderMeter = loaderProgress?.closest('[role="progressbar"]');
+  const skipLink = document.querySelector(".skip-link");
   let selectedPersonality = null;
+
+  const mainTargets = {
+    entry: "entry-main",
+    loader: "loader-title",
+    "visionary-home": "visionary-main",
+    "strategist-home": "strategist-main",
+    "operator-home": "operator-main"
+  };
 
   const loaderContent = {
     visionary: {
@@ -32,6 +41,10 @@
   function showView(name) {
     views.forEach((view) => {
       view.hidden = view.dataset.experienceView !== name;
+    });
+    if (skipLink && mainTargets[name]) skipLink.href = `#${mainTargets[name]}`;
+    document.querySelectorAll('[data-menu-toggle][aria-expanded="true"]').forEach((toggle) => {
+      setMenu(toggle, false);
     });
   }
 
@@ -184,6 +197,7 @@
     toggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
     toggle.textContent = open ? "Close" : "Menu";
     menu.classList.toggle("is-open", open);
+    if (open) menu.querySelector("a, button")?.focus();
   }
 
   document.addEventListener("click", (event) => {

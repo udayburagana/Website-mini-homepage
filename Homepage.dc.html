@@ -20,7 +20,7 @@
   <script src="/site-ui.js" defer></script>
 </head>
 <body class="visionary-site">
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a class="skip-link" href="#entry-main">Skip to main content</a>
 
   <section class="experience-entry" data-experience-view="entry" aria-labelledby="entry-title">
     <header class="entry-nav">
@@ -32,7 +32,7 @@
     </header>
     <div class="entry-decor entry-decor--star" aria-hidden="true">✦</div>
     <div class="entry-decor entry-decor--loop" aria-hidden="true"></div>
-    <div class="entry-content">
+    <main class="entry-content" id="entry-main" tabindex="-1">
       <p class="eyebrow">Personalized experience</p>
       <h1 id="entry-title">Choose your<br><em>experience.</em></h1>
       <p class="entry-intro">Every workplace builds culture differently. Let’s show you EzRewards in the way that matches how you think.</p>
@@ -60,7 +60,7 @@
         </button>
       </div>
       <button class="button button--lime entry-continue" type="button" data-enter-visionary disabled>Continue as Visionary <span>→</span></button>
-    </div>
+    </main>
     <p class="entry-footnote">One platform. Three ways to see what’s possible.</p>
   </section>
 
@@ -82,11 +82,11 @@
       <nav id="primary-navigation" class="primary-navigation" aria-label="Primary">
         <a href="/product">Product</a><a href="#culture-flow">How It Works</a><a href="#product-story">Platform</a><a href="/about">About</a>
         <button class="change-experience" type="button" data-change-experience>Change experience</button>
-        <a class="dark-button dark-button--primary dark-button--small" href="/contact">Join Waitlist</a>
+        <a class="dark-button dark-button--primary dark-button--small" data-primary-cta href="/contact">Join Waitlist</a>
       </nav>
     </header>
 
-    <main id="main-content">
+    <main id="visionary-main">
       <section class="dark-hero" data-visionary-section="hero">
         <div class="dark-hero__aurora" aria-hidden="true"></div>
         <div class="dark-hero__copy" data-dark-reveal>
@@ -94,11 +94,11 @@
           <h1 tabindex="-1">Build a workplace people <em>never want to leave.</em></h1>
           <p>Recognize great work, celebrate every milestone, and create a culture where appreciation becomes part of everyday work.</p>
           <div class="dark-actions">
-            <a class="dark-button dark-button--primary" href="/contact">Join Waitlist <span>↗</span></a>
+            <a class="dark-button dark-button--primary" data-primary-cta href="/contact">Join Waitlist <span>↗</span></a>
             <a class="dark-button dark-button--secondary" href="/contact">Book a Demo</a>
           </div>
         </div>
-        <div class="culture-orbit" data-dark-parallax aria-label="A cinematic map of recognition moments orbiting the EzRewards culture core">
+        <div class="culture-orbit" data-dark-parallax role="img" aria-label="A cinematic map of recognition moments orbiting the EzRewards culture core">
           <img src="/assets/visionary/culture-orbit.svg" alt="Recognition stories, rewards, and culture signals orbiting a connected EzRewards culture core">
           <article class="orbit-card orbit-card--one"><span class="orbit-icon" aria-hidden="true">✧</span><div><strong>Amara made the impossible launch.</strong><small>Recognized across 3 teams</small></div></article>
           <article class="orbit-card orbit-card--two"><span class="orbit-icon orbit-icon--coral" aria-hidden="true">◇</span><div><strong>Customer love, made visible.</strong><small>Culture signal · Live</small></div></article>
@@ -175,7 +175,7 @@
           <p>Every meaningful moment creates the next one. Recognition becomes reward. Reward becomes insight. Insight shapes a stronger culture.</p>
           <a class="dark-text-link" href="/product">See the platform <span>↗</span></a>
         </div>
-        <div class="flywheel-map" aria-label="Recognize, reward, measure, and improve culture flywheel" data-dark-reveal>
+        <div class="flywheel-map" role="img" aria-label="Recognize, reward, measure, and improve culture flywheel" data-dark-reveal>
           <div class="flywheel-rings" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="flywheel-core"><small>EzRewards</small><strong>Culture<br>momentum</strong></div>
           <article class="flywheel-node flywheel-node--one"><span class="outlined-icon"><svg viewBox="0 0 32 32"><path d="m16 4 3.5 7.5L28 13l-6 6 1.5 9L16 24l-7.5 4L10 19l-6-6 8.5-1.5L16 4Z"/></svg></span><b>Recognize</b><small>Make effort visible</small></article>
@@ -191,7 +191,7 @@
             <p class="dark-kicker"><span></span> Early access · Visionary teams</p>
             <h2>Build a culture people <em>remember.</em></h2>
             <p>Join the teams rethinking how modern companies make great work visible, meaningful, and impossible to forget.</p>
-            <div class="dark-actions"><a class="dark-button dark-button--primary" href="/contact">Join Waitlist <span>↗</span></a><a class="dark-button dark-button--secondary" href="/contact">Book a Demo</a></div>
+            <div class="dark-actions"><a class="dark-button dark-button--primary" data-primary-cta href="/contact">Join Waitlist <span>↗</span></a><a class="dark-button dark-button--secondary" href="/contact">Book a Demo</a></div>
           </div>
           <div class="proof-signals" data-dark-reveal>
             <article><span>01</span><strong>Human-first</strong><p>Recognition starts with a real story, not a transaction.</p></article>
@@ -219,7 +219,7 @@
         <nav id="strategist-navigation" class="primary-navigation strategist-navigation" aria-label="Strategist primary">
           <a href="/product">Product</a><a href="#strategist-framework">How It Works</a><a href="#measurable-outcomes">Analytics</a><a href="#implementation-confidence">Implementation</a><a href="/about">About</a>
           <button class="change-experience" type="button" data-change-experience>Change experience</button>
-          <a class="strategist-button strategist-button--primary strategist-button--small" href="/contact">Book a demo</a>
+          <a class="strategist-button strategist-button--primary strategist-button--small" data-primary-cta href="/contact">Book a demo</a>
         </nav>
       </div>
     </header>
@@ -231,9 +231,9 @@
             <p class="strategist-eyebrow"><span></span> Culture intelligence platform</p>
             <h1 tabindex="-1">Recognition leadership can measure. <em>Culture your people can feel.</em></h1>
             <p>Measure recognition, understand engagement, reward performance, and give leadership complete visibility into workplace culture—all from one intelligent platform.</p>
-            <div class="strategist-actions"><a class="strategist-button strategist-button--primary" href="/contact">Book a demo</a><a class="strategist-button strategist-button--secondary" href="#measurable-outcomes">See measurable outcomes</a></div>
+            <div class="strategist-actions"><a class="strategist-button strategist-button--primary" data-primary-cta href="/contact">Book a demo</a><a class="strategist-button strategist-button--secondary" href="#measurable-outcomes">See measurable outcomes</a></div>
           </div>
-          <div class="executive-dashboard" data-strategist-reveal aria-label="Executive culture intelligence dashboard">
+          <div class="executive-dashboard" data-strategist-reveal role="region" aria-label="Executive culture intelligence dashboard">
             <div class="dashboard-top"><div><small>Culture intelligence</small><strong>Leadership overview</strong></div><span>Updated today</span></div>
             <div class="dashboard-kpis">
               <article><span>Recognition participation</span><strong data-kpi-target="78" data-kpi-suffix="%">78%</strong><small class="metric-positive">↑ 12% vs last quarter</small></article>
@@ -325,7 +325,7 @@
         <nav id="operator-navigation" class="primary-navigation operator-navigation" aria-label="Operator primary">
           <a href="/product">Product</a><a href="#operator-setup">Setup</a><a href="#operator-workflows">Workflows</a><a href="#operator-controls">Controls</a><a href="/about">About</a>
           <button class="change-experience" type="button" data-change-experience>Change experience</button>
-          <a class="operator-button operator-button--primary operator-button--small" href="/contact">Join waitlist</a>
+          <a class="operator-button operator-button--primary operator-button--small" data-primary-cta href="/contact">Join waitlist</a>
         </nav>
       </div>
     </header>
@@ -337,7 +337,7 @@
             <p class="operator-label"><span></span> Workflow optimizer</p>
             <h1 tabindex="-1">Launch recognition, rewards, and reports without <em>operational chaos.</em></h1>
             <p>Set up once. Assign rewards, manage wallets, and track everything from one clean admin view.</p>
-            <div class="operator-actions"><a class="operator-button operator-button--primary" href="/contact">Join waitlist</a><a class="operator-button operator-button--secondary" href="#operator-setup">See setup flow</a></div>
+            <div class="operator-actions"><a class="operator-button operator-button--primary" data-primary-cta href="/contact">Join waitlist</a><a class="operator-button operator-button--secondary" href="#operator-setup">See setup flow</a></div>
             <div class="operator-status"><span><i></i>Setup in days</span><span><i></i>Daily admin in minutes</span><span><i></i>Every action logged</span></div>
           </div>
           <div class="operator-hero__screen" data-operator-reveal><div class="operator-window-bar"><span><i></i><i></i><i></i></span><b>EZREWARDS / ADMIN</b><small>LIVE WORKSPACE</small></div><img class="operator-dashboard-shot" src="/assets/operator/recognition-dashboard.png" alt="EzRewards recognition feed admin dashboard showing navigation and a recognition activity card"></div>
@@ -349,7 +349,7 @@
           <div class="operator-heading" data-operator-reveal><p class="operator-label"><span></span> 01 / Setup flow</p><h2>Go from empty workspace to <em>ready to reward.</em></h2><p>A guided launch sequence keeps ownership, data, funding, and policies visible from the first step.</p></div>
           <div class="setup-console" data-operator-reveal>
             <aside><span>Workspace setup</span><strong>Launch checklist</strong><nav aria-label="Setup progress"><a class="is-active" href="#setup-workspace">01 Workspace</a><a href="#setup-people">02 People</a><a href="#setup-groups">03 Groups</a><a href="#setup-rewards">04 Rewards</a><a href="#setup-wallet">05 Wallet</a></nav><small>4 of 5 complete</small><progress value="80" max="100">80%</progress></aside>
-            <div class="setup-panel"><div class="module-top"><div><span>Workspace launch</span><strong>Complete your setup</strong></div><b>80% complete</b></div><div class="setup-steps"><article id="setup-workspace" class="is-complete"><span>✓</span><div><strong>Workspace details</strong><small>Identity, values, locale</small></div><b>Complete</b></article><article id="setup-people" class="is-complete"><span>✓</span><div><strong>Departments & users</strong><small>624 people synced</small></div><b>Complete</b></article><article id="setup-groups" class="is-complete"><span>✓</span><div><strong>Groups & permissions</strong><small>8 groups · 14 admins</small></div><b>Complete</b></article><article id="setup-rewards" class="is-complete"><span>✓</span><div><strong>Reward catalog</strong><small>42 rewards enabled</small></div><b>Complete</b></article><article id="setup-wallet" class="is-next"><span>5</span><div><strong>Fund company wallet</strong><small>Set balance and alerts</small></div><button type="button">Configure →</button></article></div></div>
+            <div class="setup-panel"><div class="module-top"><div><span>Workspace launch</span><strong>Complete your setup</strong></div><b>80% complete</b></div><div class="setup-steps"><article id="setup-workspace" class="is-complete"><span>✓</span><div><strong>Workspace details</strong><small>Identity, values, locale</small></div><b>Complete</b></article><article id="setup-people" class="is-complete"><span>✓</span><div><strong>Departments & users</strong><small>624 people synced</small></div><b>Complete</b></article><article id="setup-groups" class="is-complete"><span>✓</span><div><strong>Groups & permissions</strong><small>8 groups · 14 admins</small></div><b>Complete</b></article><article id="setup-rewards" class="is-complete"><span>✓</span><div><strong>Reward catalog</strong><small>42 rewards enabled</small></div><b>Complete</b></article><article id="setup-wallet" class="is-next"><span>5</span><div><strong>Fund company wallet</strong><small>Set balance and alerts</small></div><span class="preview-control" data-product-preview-control>Configure →</span></article></div></div>
           </div>
           <div class="setup-metrics"><article data-operator-reveal><strong>5 steps</strong><span>Guided workspace launch</span></article><article data-operator-reveal><strong>624</strong><span>Users synced in one import</span></article><article data-operator-reveal><strong>14</strong><span>Role-based admins configured</span></article><article data-operator-reveal><strong>1 view</strong><span>Launch readiness status</span></article></div>
         </div>
@@ -359,9 +359,9 @@
         <div class="operator-container">
           <div class="operator-heading operator-heading--split" data-operator-reveal><div><p class="operator-label"><span></span> 02 / Daily operation</p><h2>Set up once. Run rewards <em>every day.</em></h2></div><p>Less manual work. More visible appreciation. Each common task stays short, explicit, and traceable.</p></div>
           <div class="workflow-board">
-            <article data-operator-reveal><div class="module-top"><span>Recognize</span><b>01</b></div><div class="recognize-form"><label>Recipient<span>Maya Chen · Product</span></label><label>Message<span>For turning a difficult launch into a team win.</span></label><label>Company value<span class="value-chip">Ownership</span></label><button type="button">Send recognition</button></div><small>Average completion: 48 sec</small></article>
-            <article data-operator-reveal><div class="module-top"><span>Assign reward</span><b>02</b></div><div class="reward-task"><span>MC</span><strong>Maya Chen</strong><small>Recognition linked</small><label>Reward amount<strong>$100</strong></label><label>Approval route<strong>Auto-approved</strong></label><button type="button">Assign reward</button></div><small>Policy checked automatically</small></article>
-            <article data-operator-reveal><div class="module-top"><span>Redeem voucher</span><b>03</b></div><div class="voucher-card"><span>AVAILABLE BALANCE</span><strong>$180.00</strong><div><b>Amazon</b><small>$50 voucher</small></div><button type="button">Redeem now</button></div><small>Delivered instantly by email</small></article>
+            <article data-operator-reveal><div class="module-top"><span>Recognize</span><b>01</b></div><div class="recognize-form"><label>Recipient<span>Maya Chen · Product</span></label><label>Message<span>For turning a difficult launch into a team win.</span></label><label>Company value<span class="value-chip">Ownership</span></label><span class="preview-control" data-product-preview-control>Send recognition</span></div><small>Average completion: 48 sec</small></article>
+            <article data-operator-reveal><div class="module-top"><span>Assign reward</span><b>02</b></div><div class="reward-task"><span>MC</span><strong>Maya Chen</strong><small>Recognition linked</small><label>Reward amount<strong>$100</strong></label><label>Approval route<strong>Auto-approved</strong></label><span class="preview-control" data-product-preview-control>Assign reward</span></div><small>Policy checked automatically</small></article>
+            <article data-operator-reveal><div class="module-top"><span>Redeem voucher</span><b>03</b></div><div class="voucher-card"><span>AVAILABLE BALANCE</span><strong>$180.00</strong><div><b>Amazon</b><small>$50 voucher</small></div><span class="preview-control" data-product-preview-control>Redeem now</span></div><small>Delivered instantly by email</small></article>
             <article data-operator-reveal><div class="module-top"><span>Manage wallet</span><b>04</b></div><div class="wallet-balance"><span>COMPANY WALLET</span><strong>$42,680</strong><small class="status-teal">Healthy · 86% utilized</small><div role="img" aria-label="Wallet activity trend" class="wallet-chart"><i style="--h:38%"></i><i style="--h:54%"></i><i style="--h:46%"></i><i style="--h:74%"></i></div><p>Wallet activity increased across four completed reward cycles.</p></div></article>
           </div>
         </div>
@@ -371,9 +371,9 @@
         <div class="operator-container">
           <div class="operator-heading" data-operator-reveal><p class="operator-label"><span></span> 03 / Control center</p><h2>Everything controlled. <em>Nothing hidden.</em></h2><p>Permissions, billing, reporting, and audit history stay in one operational command center.</p></div>
           <div class="controls-grid">
-            <div class="permissions-panel" data-operator-reveal><div class="module-top"><div><span>Admin permissions</span><strong>Roles & access</strong></div><button type="button">+ Add role</button></div><div class="permission-row"><span class="avatar-square">SA</span><div><strong>Super admin</strong><small>4 users</small></div><b>Full access</b></div><div class="permission-row"><span class="avatar-square">RA</span><div><strong>Rewards admin</strong><small>6 users</small></div><b>Rewards + wallet</b></div><div class="permission-row"><span class="avatar-square">RV</span><div><strong>Report viewer</strong><small>12 users</small></div><b>Read only</b></div></div>
-            <div class="reports-panel" data-operator-reveal><div class="module-top"><div><span>Reports</span><strong>Operational overview</strong></div><button type="button">Export CSV</button></div><div class="report-filters"><span>Last 30 days</span><span>All departments</span><span>All activity</span></div><div class="report-bars" role="img" aria-label="Reward processing volume by week"><i style="--h:45%"><span>W1</span></i><i style="--h:62%"><span>W2</span></i><i style="--h:56%"><span>W3</span></i><i style="--h:82%"><span>W4</span></i></div><p>Reward processing volume increased from 112 to 206 actions over four weeks.</p></div>
-            <div class="audit-panel" data-operator-reveal><div class="module-top"><div><span>Audit log</span><strong>Recent admin activity</strong></div><span class="status-live">Live</span></div><div class="table-scroll" role="region" aria-label="Scrollable admin audit log"><table aria-label="Admin audit log"><thead><tr><th>Action</th><th>Admin</th><th>Time</th><th>Status</th></tr></thead><tbody><tr><td>Wallet funded</td><td>Priya S.</td><td>09:42</td><td><span class="status-teal">Complete</span></td></tr><tr><td>Reward assigned</td><td>Jordan M.</td><td>09:18</td><td><span class="status-teal">Complete</span></td></tr><tr><td>Role updated</td><td>Alex R.</td><td>08:56</td><td>Logged</td></tr><tr><td>Report exported</td><td>Sam K.</td><td>08:21</td><td>Logged</td></tr></tbody></table></div></div>
+            <div class="permissions-panel" data-operator-reveal><div class="module-top"><div><span>Admin permissions</span><strong>Roles & access</strong></div><span class="preview-control preview-control--quiet" data-product-preview-control>+ Add role</span></div><div class="permission-row"><span class="avatar-square">SA</span><div><strong>Super admin</strong><small>4 users</small></div><b>Full access</b></div><div class="permission-row"><span class="avatar-square">RA</span><div><strong>Rewards admin</strong><small>6 users</small></div><b>Rewards + wallet</b></div><div class="permission-row"><span class="avatar-square">RV</span><div><strong>Report viewer</strong><small>12 users</small></div><b>Read only</b></div></div>
+            <div class="reports-panel" data-operator-reveal><div class="module-top"><div><span>Reports</span><strong>Operational overview</strong></div><span class="preview-control preview-control--quiet" data-product-preview-control>Export CSV</span></div><div class="report-filters"><span>Last 30 days</span><span>All departments</span><span>All activity</span></div><div class="report-bars" role="img" aria-label="Reward processing volume by week"><i style="--h:45%"><span>W1</span></i><i style="--h:62%"><span>W2</span></i><i style="--h:56%"><span>W3</span></i><i style="--h:82%"><span>W4</span></i></div><p>Reward processing volume increased from 112 to 206 actions over four weeks.</p></div>
+            <div class="audit-panel" data-operator-reveal><div class="module-top"><div><span>Audit log</span><strong>Recent admin activity</strong></div><span class="status-live">Live</span></div><div class="table-scroll" role="region" aria-label="Scrollable admin audit log" tabindex="0"><table aria-label="Admin audit log"><thead><tr><th>Action</th><th>Admin</th><th>Time</th><th>Status</th></tr></thead><tbody><tr><td>Wallet funded</td><td>Priya S.</td><td>09:42</td><td><span class="status-teal">Complete</span></td></tr><tr><td>Reward assigned</td><td>Jordan M.</td><td>09:18</td><td><span class="status-teal">Complete</span></td></tr><tr><td>Role updated</td><td>Alex R.</td><td>08:56</td><td>Logged</td></tr><tr><td>Report exported</td><td>Sam K.</td><td>08:21</td><td>Logged</td></tr></tbody></table></div></div>
           </div>
         </div>
       </section>
@@ -381,13 +381,13 @@
       <section class="operator-automation" id="operator-automation" data-operator-section="automation">
         <div class="operator-container automation-grid">
           <div class="operator-heading" data-operator-reveal><p class="operator-label"><span></span> 04 / Automation</p><h2>Let the system handle the <em>follow-through.</em></h2><p>Keep workflows moving with precise alerts, scheduled reports, low-wallet reminders, and AI-assisted answers.</p><div class="automation-list"><article><span class="op-icon op-icon--teal">✓</span><div><strong>Reward delivered</strong><small>Notify employee and manager instantly</small></div><b>Active</b></article><article><span class="op-icon op-icon--amber">!</span><div><strong>Low wallet reminder</strong><small>Alert finance below $10,000</small></div><b>Active</b></article><article><span class="op-icon">↻</span><div><strong>Weekly admin summary</strong><small>Every Monday at 09:00</small></div><b>Active</b></article></div></div>
-          <div class="ai-console" data-operator-reveal><div class="module-top"><div><span>AI report assistant</span><strong>Ask your operational data</strong></div><span class="ai-badge">EzRA · Online</span></div><div class="ai-query">Which departments need a wallet top-up this week?<button type="button" aria-label="Submit report question">→</button></div><div class="ai-answer"><span class="op-icon op-icon--violet">✦</span><div><strong>Operations and Customer Success need attention.</strong><p>At current redemption velocity, Operations reaches its threshold in 4 days and Customer Success in 6 days.</p><ul><li>Operations · Add $4,500</li><li>Customer Success · Add $2,800</li></ul><a href="/product">Open wallet report →</a></div></div></div>
+          <div class="ai-console" data-operator-reveal><div class="module-top"><div><span>AI report assistant</span><strong>Ask your operational data</strong></div><span class="ai-badge">EzRA · Online</span></div><div class="ai-query">Which departments need a wallet top-up this week?<span class="preview-control preview-control--icon" data-product-preview-control aria-hidden="true">→</span></div><div class="ai-answer"><span class="op-icon op-icon--violet">✦</span><div><strong>Operations and Customer Success need attention.</strong><p>At current redemption velocity, Operations reaches its threshold in 4 days and Customer Success in 6 days.</p><ul><li>Operations · Add $4,500</li><li>Customer Success · Add $2,800</li></ul><a href="/product">Open wallet report →</a></div></div></div>
         </div>
       </section>
 
       <section class="operator-conversion" data-operator-section="conversion">
         <div class="operator-container operator-conversion__grid">
-          <div data-operator-reveal><p class="operator-label"><span></span> Ready when you are</p><h2>Launch faster. Run cleaner. <em>Stay in control.</em></h2><p>Join early access and see how EzRewards removes the operational drag from recognition and rewards.</p><div class="operator-actions"><a class="operator-button operator-button--primary" href="/contact">Join waitlist</a><a class="operator-button operator-button--secondary" href="/product">Explore platform</a></div></div>
+          <div data-operator-reveal><p class="operator-label"><span></span> Ready when you are</p><h2>Launch faster. Run cleaner. <em>Stay in control.</em></h2><p>Join early access and see how EzRewards removes the operational drag from recognition and rewards.</p><div class="operator-actions"><a class="operator-button operator-button--primary" data-primary-cta href="/contact">Join waitlist</a><a class="operator-button operator-button--secondary" href="/product">Explore platform</a></div></div>
           <div class="conversion-steps" data-operator-reveal><article><span>01</span><strong>Configure</strong><small>People, policies, wallet</small></article><i></i><article><span>02</span><strong>Launch</strong><small>Enable teams and admins</small></article><i></i><article><span>03</span><strong>Operate</strong><small>Automate, report, improve</small></article></div>
         </div>
       </section>

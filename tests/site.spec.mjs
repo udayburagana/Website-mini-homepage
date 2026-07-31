@@ -1,5 +1,29 @@
 import { expect, test } from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
 import { readFile } from "node:fs/promises";
+
+async function openPersonality(page, personality) {
+  await page.goto("/");
+  await page.locator(`[data-personality="${personality}"]`).click();
+  await page.locator("[data-enter-visionary]").click();
+  await expect(page.locator(`[data-experience-view="${personality}-home"]`))
+    .toBeVisible({ timeout: 4000 });
+}
+
+function contrastRatio(first, second) {
+  const luminance = (value) => {
+    const channels = value.match(/[\d.]+/g).slice(0, 3).map((channel) => {
+      const normalized = Number(channel) / 255;
+      return normalized <= 0.04045
+        ? normalized / 12.92
+        : ((normalized + 0.055) / 1.055) ** 2.4;
+    });
+    return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+  };
+  const a = luminance(first);
+  const b = luminance(second);
+  return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+}
 
 test.describe("Visionary experience flow", () => {
   test("reveals the Visionary homepage through its two-second loader", async ({ page }) => {
@@ -154,6 +178,198 @@ test.describe("Operator homepage", () => {
     await expect(page.getByRole("link", { name: "Join waitlist", exact: true }).first()).toHaveAttribute("href", "/contact");
     await expect(page.getByRole("link", { name: "See setup flow", exact: true })).toHaveAttribute("href", "#operator-setup");
   });
+});
+
+test.describe("homepage CTA and accessibility remediation", () => {
+  const personalities = [
+    {
+      name: "visionary",
+      home: "visionary-home",
+      button: ".dark-button--primary",
+      expectedBackground: "rgb(130, 71, 245)",
+      expectedColor: "rgb(248, 250, 252)"
+    },
+    {
+      name: "strategist",
+      home: "strategist-home",
+      button: ".strategist-button--primary",
+      expectedBackground: "rgb(79, 70, 229)",
+      expectedColor: "rgb(248, 250, 252)"
+    },
+    {
+      name: "operator",
+      home: "operator-home",
+      button: ".operator-button--primary",
+      expectedBackground: "rgb(56, 189, 248)",
+      expectedColor: "rgb(6, 16, 25)"
+    }
+  ];
+
+  for (const personality of personalities) {
+    test(`${personality.name} primary CTAs retain their fill, contrast, and solid shadow`, async ({ page }) => {
+      await openPersonality(page, personality.name);
+      const home = page.locator(`[data-experience-view="${personality.home}"]`);
+      const buttons = home.locator(personality.button);
+      const count = await buttons.count();
+      expect(count).toBeGreaterThan(1);
+
+      for (let index = 0; index < count; index += 1) {
+        const button = buttons.nth(index);
+        const styles = await button.evaluate((element) => {
+          const computed = getComputedStyle(element);
+          return {
+            background: computed.backgroundColor,
+            color: computed.color,
+            fontSize: computed.fontSize,
+            shadow: computed.boxShadow
+          };
+        });
+        expect(styles.background).toBe(personality.expectedBackground);
+        expect(styles.color).toBe(personality.expectedColor);
+        expect(Number.parseFloat(styles.fontSize)).toBeGreaterThanOrEqual(16);
+        expect(styles.shadow).not.toContain("rgba(");
+        expect(styles.shadow).not.toBe("none");
+        expect(contrastRatio(styles.color, styles.background)).toBeGreaterThanOrEqual(4.5);
+      }
+    });
+  }
+
+  test("skip link tracks the active experience main landmark", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator(".skip-link")).toHaveAttribute("href", "#entry-main");
+
+    for (const personality of personalities) {
+      await page.locator(`[data-personality="${personality.name}"]`).click();
+      await page.locator("[data-enter-visionary]").click();
+      await expect(page.locator(`[data-experience-view="${personality.home}"]`))
+        .toBeVisible({ timeout: 4000 });
+      await expect(page.locator(".skip-link"))
+        .toHaveAttribute("href", `#${personality.name}-main`);
+      await expect(page.locator(`main#${personality.name}-main`)).toBeVisible();
+      await page.locator(`[data-experience-view="${personality.home}"] [data-change-experience]`).click();
+      await expect(page.locator(".skip-link")).toHaveAttribute("href", "#entry-main");
+    }
+  });
+
+  test("programmatically focused headings do not render a decorative outline", async ({ page }) => {
+    await openPersonality(page, "visionary");
+    const heading = page.locator('[data-experience-view="visionary-home"] h1');
+    await page.keyboard.press("Tab");
+    await heading.evaluate((element) => element.focus());
+    await expect(heading).toBeFocused();
+    await expect(heading).toHaveCSS("outline-style", "none");
+  });
+
+  test("illustrative product controls are not keyboard buttons", async ({ page }) => {
+    await openPersonality(page, "operator");
+    const previews = page.locator(".setup-console, .workflow-board, .controls-grid, .ai-console");
+    await expect(previews.locator("button")).toHaveCount(0);
+    await expect(previews.locator("[data-product-preview-control]")).not.toHaveCount(0);
+    await expect(page.locator(".table-scroll")).toHaveAttribute("tabindex", "0");
+  });
+
+  test("all personality navigation collapses at the tablet breakpoint", async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 768 });
+    for (const personality of personalities) {
+      await openPersonality(page, personality.name);
+      const home = page.locator(`[data-experience-view="${personality.home}"]`);
+      await expect(home.locator("[data-menu-toggle]")).toBeVisible();
+      await expect(home.locator(".primary-navigation")).toBeHidden();
+      await home.locator("[data-menu-toggle]").click();
+      await expect(home.locator(".primary-navigation")).toBeVisible();
+      await expect(home.locator(personality.button).first()).toBeVisible();
+      await home.locator("[data-change-experience]").click();
+    }
+  });
+
+  for (const viewport of [
+    { width: 390, height: 844 },
+    { width: 320, height: 568 }
+  ]) {
+    test(`Visionary content remains inside the viewport at ${viewport.width}px`, async ({ page }) => {
+      await page.setViewportSize(viewport);
+      await openPersonality(page, "visionary");
+      const bounds = await page.locator('[data-experience-view="visionary-home"] main')
+        .evaluate((main) => [...main.querySelectorAll("h1, h2, p, a, article, [class$='actions']")]
+          .filter((element) => {
+            const style = getComputedStyle(element);
+            const rect = element.getBoundingClientRect();
+            return style.position !== "absolute" && rect.width > 0 && rect.height > 0;
+          })
+          .map((element) => {
+            const rect = element.getBoundingClientRect();
+            return { left: rect.left, right: rect.right, text: element.textContent.trim().slice(0, 40) };
+          }));
+      for (const item of bounds) {
+        expect(item.left, item.text).toBeGreaterThanOrEqual(-0.5);
+        expect(item.right, item.text).toBeLessThanOrEqual(viewport.width + 0.5);
+      }
+    });
+  }
+
+  for (const personality of personalities) {
+    test(`${personality.name} mobile menu has usable targets and keyboard focus`, async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await openPersonality(page, personality.name);
+      const home = page.locator(`[data-experience-view="${personality.home}"]`);
+      const toggle = home.locator("[data-menu-toggle]");
+      await toggle.click();
+      await expect(home.locator(".primary-navigation a").first()).toBeFocused();
+
+      const targetSizes = await home.locator("[data-menu-toggle], .primary-navigation > *")
+        .evaluateAll((elements) => elements.map((element) => {
+          const rect = element.getBoundingClientRect();
+          return { width: rect.width, height: rect.height, text: element.textContent.trim() };
+        }));
+      for (const target of targetSizes) {
+        expect(target.height, target.text).toBeGreaterThanOrEqual(44);
+        expect(target.width, target.text).toBeGreaterThanOrEqual(44);
+      }
+    });
+
+    test(`${personality.name} remains readable with WCAG text spacing`, async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await openPersonality(page, personality.name);
+      await page.addStyleTag({ content: `
+        * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; }
+        p { margin-bottom: 2em !important; }
+      ` });
+      const home = page.locator(`[data-experience-view="${personality.home}"]`);
+      const dimensions = await home.evaluate((element) => ({
+        left: element.getBoundingClientRect().left,
+        right: element.getBoundingClientRect().right,
+        scrollWidth: document.documentElement.scrollWidth,
+        clientWidth: document.documentElement.clientWidth
+      }));
+      expect(dimensions.left).toBeGreaterThanOrEqual(0);
+      expect(dimensions.right).toBeLessThanOrEqual(390);
+      expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth);
+    });
+  }
+});
+
+test.describe("WCAG 2.2 AA automated audit", () => {
+  const axeTags = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
+
+  test("entry and loader have no detectable WCAG violations", async ({ page }) => {
+    await page.goto("/");
+    const entryResults = await new AxeBuilder({ page }).withTags(axeTags).analyze();
+    expect(entryResults.violations).toEqual([]);
+
+    await page.locator('[data-personality="visionary"]').click();
+    await page.locator("[data-enter-visionary]").click();
+    await expect(page.locator('[data-experience-view="loader"]')).toBeVisible();
+    const loaderResults = await new AxeBuilder({ page }).withTags(axeTags).analyze();
+    expect(loaderResults.violations).toEqual([]);
+  });
+
+  for (const personality of ["visionary", "strategist", "operator"]) {
+    test(`${personality} homepage has no detectable WCAG violations`, async ({ page }) => {
+      await openPersonality(page, personality);
+      const results = await new AxeBuilder({ page }).withTags(axeTags).analyze();
+      expect(results.violations).toEqual([]);
+    });
+  }
 });
 
 test.beforeEach(async ({ page }) => {
@@ -317,8 +533,9 @@ for (const route of routes) {
     );
     await expect(page.locator("html")).toHaveAttribute("lang", "en");
     await expect(page.locator("h1").first()).toBeAttached();
-    await expect(page.locator("main#main-content")).toHaveCount(1);
-    await expect(page.locator('a[href="#main-content"]')).toHaveCount(1);
+    const expectedMain = route.path === "/" ? "entry-main" : "main-content";
+    await expect(page.locator(`main#${expectedMain}`)).toHaveCount(1);
+    await expect(page.locator(`a[href="#${expectedMain}"]`)).toHaveCount(1);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
       `${productionOrigin}${route.path}`
