@@ -43,26 +43,24 @@ test.describe("Visionary homepage narrative", () => {
     await expect(page.locator('[data-experience-view="home"]')).toBeVisible({ timeout: 2600 });
   });
 
-  test("uses the supplied copy and complete emotional section sequence", async ({ page }) => {
+  test("uses the supplied copy and complete cinematic section sequence", async ({ page }) => {
     await expect(page.getByRole("heading", { name: "Build a workplace people never want to leave." })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Recognition shouldn’t happen once a year." })).toBeAttached();
-    await expect(page.getByRole("heading", { name: "Loved by teams that put people first." })).toBeAttached();
+    await expect(page.getByRole("heading", { name: "Great work should not disappear." })).toBeAttached();
+    await expect(page.getByRole("heading", { name: "Recognition is company memory." })).toBeAttached();
 
     const sequence = await page.locator("[data-visionary-section]").evaluateAll((sections) =>
       sections.map((section) => section.dataset.visionarySection)
     );
     expect(sequence).toEqual([
-      "hero", "problem", "transformation", "recognition", "rewards", "ai",
-      "moments", "platform", "trust", "pricing", "final-cta"
+      "hero", "culture-gap", "transformation", "product-story", "flywheel", "proof"
     ]);
   });
 
   test("uses local artwork and meaningful conversion destinations", async ({ page }) => {
-    await expect(page.locator('.hero-art img')).toHaveAttribute("src", "/assets/visionary/hero-culture.svg");
-    await expect(page.locator('.hero-art img')).toHaveAttribute("alt", /team members celebrating/i);
-    await expect(page.getByRole("link", { name: /Book a Demo/i }).first()).toHaveAttribute("href", "/contact");
-    await expect(page.locator('a[href="#platform"]')).not.toHaveCount(0);
-    await expect(page.locator('a[href="#pricing"]')).not.toHaveCount(0);
+    await expect(page.locator(".culture-orbit img")).toHaveAttribute("src", "/assets/visionary/culture-orbit.svg");
+    await expect(page.getByRole("link", { name: "Join Waitlist", exact: true }).first()).toHaveAttribute("href", "/contact");
+    await expect(page.getByRole("link", { name: "Book a Demo", exact: true }).first()).toHaveAttribute("href", "/contact");
+    await expect(page.locator('a[href="#culture-flow"]')).not.toHaveCount(0);
   });
 });
 
@@ -74,19 +72,29 @@ test.beforeEach(async ({ page }) => {
 test.describe("homepage Visionary design system", () => {
   test.use({ viewport: { width: 1440, height: 900 } });
 
-  test("uses the local Visionary artwork", async ({ page }) => {
+  test("uses the local cinematic artwork", async ({ page }) => {
     await page.goto("/");
     await expect(page.locator('[data-personality="visionary"]')).toBeVisible();
-    const artworkSource = await readFile(new URL("../assets/visionary/hero-culture.svg", import.meta.url), "utf8");
-    expect(artworkSource).toContain("A team celebrating together");
+    const artworkSource = await readFile(new URL("../assets/visionary/culture-orbit.svg", import.meta.url), "utf8");
+    expect(artworkSource).toContain("Culture orbit");
   });
 
-  test("defines the supplied Visionary tokens", async () => {
+  test("defines the supplied dark Visionary tokens", async () => {
     const css = await readFile(new URL("../site.css", import.meta.url), "utf8");
-    expect(css).toContain("--v-cream: #f2ecdd");
-    expect(css).toContain("--v-lime: #c2f24a");
-    expect(css).toContain("--v-purple: #a78bfa");
-    expect(css).toContain("--v-coral: #f37c73");
+    for (const token of [
+      "--dv-surface: #090a16",
+      "--dv-section: #111328",
+      "--dv-elevated: #171a34",
+      "--dv-text: #f8fafc",
+      "--dv-muted: #b8c0d9",
+      "--dv-violet: #8b5cf6",
+      "--dv-orchid: #d946ef",
+      "--dv-coral: #ff6b5f",
+      "--dv-gold: #f5c542",
+      "--dv-cyan: #22d3ee"
+    ]) {
+      expect(css).toContain(token);
+    }
   });
 });
 

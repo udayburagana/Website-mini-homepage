@@ -41,9 +41,45 @@
         return;
       }
       showView("home");
-      document.querySelector(".visionary-hero h1")?.focus();
+      initDarkExperience();
+      document.querySelector(".dark-hero h1")?.focus();
     }
     requestAnimationFrame(tick);
+  }
+
+  function initDarkExperience() {
+    const home = document.querySelector(".dark-visionary");
+    if (!home || home.dataset.motionReady === "true") return;
+    home.dataset.motionReady = "true";
+
+    const reveals = [...home.querySelectorAll("[data-dark-reveal]")];
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      reveals.forEach((item) => item.classList.add("is-visible"));
+    } else {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -7% 0px" });
+      reveals.forEach((item) => revealObserver.observe(item));
+    }
+
+    const orbit = home.querySelector("[data-dark-parallax]");
+    if (!orbit || reducedMotion) return;
+    orbit.addEventListener("pointermove", (event) => {
+      const bounds = orbit.getBoundingClientRect();
+      const x = ((event.clientX - bounds.left) / bounds.width - .5) * 14;
+      const y = ((event.clientY - bounds.top) / bounds.height - .5) * 10;
+      orbit.style.setProperty("--orbit-x", `${x.toFixed(2)}px`);
+      orbit.style.setProperty("--orbit-y", `${y.toFixed(2)}px`);
+    });
+    orbit.addEventListener("pointerleave", () => {
+      orbit.style.setProperty("--orbit-x", "0px");
+      orbit.style.setProperty("--orbit-y", "0px");
+    });
   }
 
   function setMenu(toggle, open) {
