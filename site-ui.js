@@ -21,6 +21,11 @@
       kicker: "Preparing your evidence",
       personality: "Strategist.",
       message: "Building your business case with clear culture signals."
+    },
+    operator: {
+      kicker: "Optimizing your workflow",
+      personality: "Operator.",
+      message: "Mapping a faster workflow for setup, rewards, wallet, and reports."
     }
   };
 
@@ -70,6 +75,7 @@
       showView(`${selectedPersonality}-home`);
       if (selectedPersonality === "visionary") initDarkExperience();
       if (selectedPersonality === "strategist") initStrategistExperience();
+      if (selectedPersonality === "operator") initOperatorExperience();
       document.querySelector(`[data-experience-view="${selectedPersonality}-home"] h1`)?.focus();
     }
     requestAnimationFrame(tick);
@@ -113,6 +119,26 @@
         revealObserver.unobserve(entry.target);
       });
     }, { threshold: 0.1, rootMargin: "0px 0px -5% 0px" });
+    reveals.forEach((item) => observer.observe(item));
+  }
+
+  function initOperatorExperience() {
+    const home = document.querySelector(".operator-home");
+    if (!home || home.dataset.motionReady === "true") return;
+    home.dataset.motionReady = "true";
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reveals = [...home.querySelectorAll("[data-operator-reveal]")];
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      reveals.forEach((item) => item.classList.add("is-visible"));
+      return;
+    }
+    const observer = new IntersectionObserver((entries, revealObserver) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -4% 0px" });
     reveals.forEach((item) => observer.observe(item));
   }
 

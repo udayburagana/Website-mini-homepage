@@ -13,7 +13,7 @@ test.describe("Visionary experience flow", () => {
     await expect(homepage).toBeHidden();
 
     await expect(page.getByRole("button", { name: /Strategist/ })).toBeEnabled();
-    await expect(page.getByRole("button", { name: /Operator/ })).toBeDisabled();
+    await expect(page.getByRole("button", { name: /Operator/ })).toBeEnabled();
 
     const continueButton = page.getByRole("button", { name: "Continue as Visionary" });
     await expect(continueButton).toBeDisabled();
@@ -41,7 +41,7 @@ test.describe("Visionary experience flow", () => {
     const strategistHome = page.locator('[data-experience-view="strategist-home"]');
 
     await expect(strategist).toBeEnabled();
-    await expect(page.locator('[data-personality="operator"]')).toBeDisabled();
+    await expect(page.locator('[data-personality="operator"]')).toBeEnabled();
     await strategist.click();
     await expect(strategist).toHaveAttribute("aria-pressed", "true");
     await expect(page.locator('[data-personality="visionary"]')).toHaveAttribute("aria-pressed", "false");
@@ -51,6 +51,23 @@ test.describe("Visionary experience flow", () => {
     await expect(page.locator("[data-loader-progress]")).toHaveText("100%", { timeout: 2600 });
     await expect(strategistHome).toBeVisible();
     await expect(visionaryHome).toBeHidden();
+  });
+
+  test("reveals the Operator homepage through its workflow loader", async ({ page }) => {
+    await page.goto("/");
+    const operator = page.locator('[data-personality="operator"]');
+    await expect(operator).toBeEnabled();
+    await operator.click();
+    await expect(operator).toHaveAttribute("aria-pressed", "true");
+    await expect(page.locator('[data-personality="visionary"]')).toHaveAttribute("aria-pressed", "false");
+    await expect(page.locator('[data-personality="strategist"]')).toHaveAttribute("aria-pressed", "false");
+    await page.locator("[data-enter-visionary]").click();
+    await expect(page.locator("[data-loader-personality]")).toHaveText("Operator.");
+    await expect(page.locator("[data-loader-message]")).toContainText("workflow");
+    await expect(page.locator("[data-loader-progress]")).toHaveText("100%", { timeout: 2600 });
+    await expect(page.locator('[data-experience-view="operator-home"]')).toBeVisible();
+    await expect(page.locator('[data-experience-view="visionary-home"]')).toBeHidden();
+    await expect(page.locator('[data-experience-view="strategist-home"]')).toBeHidden();
   });
 });
 
@@ -110,6 +127,32 @@ test.describe("Strategist homepage", () => {
     await expect(page.getByRole("table", { name: "Culture report summary" })).toBeAttached();
     await expect(page.getByRole("link", { name: "Book a demo", exact: true }).first()).toHaveAttribute("href", "/contact");
     await expect(page.getByRole("link", { name: "View reporting framework", exact: true })).toHaveAttribute("href", "#reporting-framework");
+  });
+});
+
+test.describe("Operator homepage", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+    await page.locator('[data-personality="operator"]').click();
+    await page.locator("[data-enter-visionary]").click();
+    await expect(page.locator('[data-experience-view="operator-home"]')).toBeVisible({ timeout: 2600 });
+  });
+
+  test("uses the approved workflow-first section sequence", async ({ page }) => {
+    await expect(page.getByRole("heading", { name: "Launch recognition, rewards, and reports without operational chaos." })).toBeVisible();
+    const sequence = await page.locator("[data-operator-section]").evaluateAll((sections) =>
+      sections.map((section) => section.dataset.operatorSection)
+    );
+    expect(sequence).toEqual(["hero", "setup", "daily-workflows", "controls", "automation", "conversion"]);
+  });
+
+  test("uses local product artwork and accessible operational reporting", async ({ page }) => {
+    await expect(page.locator(".operator-dashboard-shot")).toHaveAttribute("src", "/assets/operator/recognition-dashboard.png");
+    await expect(page.getByRole("img", { name: "Wallet activity trend" })).toBeAttached();
+    await expect(page.getByText("Wallet activity increased across four completed reward cycles.")).toBeAttached();
+    await expect(page.getByRole("table", { name: "Admin audit log" })).toBeAttached();
+    await expect(page.getByRole("link", { name: "Join waitlist", exact: true }).first()).toHaveAttribute("href", "/contact");
+    await expect(page.getByRole("link", { name: "See setup flow", exact: true })).toHaveAttribute("href", "#operator-setup");
   });
 });
 
@@ -177,6 +220,57 @@ test.describe("homepage Strategist design system", () => {
     expect(box.width).toBeLessThanOrEqual(1440);
     expect(Math.abs(box.x - (1920 - box.width) / 2)).toBeLessThan(2);
   });
+});
+
+test.describe("homepage Operator design system", () => {
+  test("defines the supplied operational tokens", async () => {
+    const css = await readFile(new URL("../site.css", import.meta.url), "utf8");
+    for (const token of [
+      "--op-surface-primary: #080a0f",
+      "--op-surface-secondary: #10131b",
+      "--op-surface-tertiary: #171b26",
+      "--op-surface-elevated: #202636",
+      "--op-text-primary: #f8fafc",
+      "--op-text-secondary: #cbd5e1",
+      "--op-text-muted: #94a3b8",
+      "--op-accent-primary: #38bdf8",
+      "--op-accent-teal: #2dd4bf",
+      "--op-accent-violet: #a78bfa",
+      "--op-accent-amber: #fbbf24"
+    ]) expect(css).toContain(token);
+  });
+
+  test("uses a fluid container capped at 1440px on wide displays", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.goto("/");
+    await page.locator('[data-personality="operator"]').click();
+    await page.locator("[data-enter-visionary]").click();
+    await expect(page.locator('[data-experience-view="operator-home"]')).toBeVisible({ timeout: 2600 });
+    const box = await page.locator(".operator-container").first().boundingBox();
+    expect(box.width).toBeLessThanOrEqual(1440);
+    expect(Math.abs(box.x - (1920 - box.width) / 2)).toBeLessThan(2);
+  });
+
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 1024, height: 768 },
+    { width: 768, height: 1024 },
+    { width: 390, height: 844 },
+    { width: 320, height: 568 }
+  ]) {
+    test(`fits the Operator journey at ${viewport.width}x${viewport.height}`, async ({ page }) => {
+      await page.setViewportSize(viewport);
+      await page.goto("/");
+      await page.locator('[data-personality="operator"]').click();
+      await page.locator("[data-enter-visionary]").click();
+      await expect(page.locator('[data-experience-view="operator-home"]')).toBeVisible({ timeout: 2600 });
+      const dimensions = await page.evaluate(() => ({
+        scrollWidth: document.documentElement.scrollWidth,
+        clientWidth: document.documentElement.clientWidth
+      }));
+      expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth);
+    });
+  }
 });
 
 const routes = [
