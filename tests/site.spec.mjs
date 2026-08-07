@@ -15,7 +15,7 @@ test.describe("Visionary experience flow", () => {
     await expect(page.getByRole("button", { name: /Strategist/ })).toBeDisabled();
     await expect(page.getByRole("button", { name: /Operator/ })).toBeDisabled();
 
-    const continueButton = page.getByRole("button", { name: "Continue as Visionary" });
+    const continueButton = page.getByRole("button", { name: /Explore the Visionary experience/ });
     await expect(continueButton).toBeDisabled();
     await expect(page.locator('[role="progressbar"]')).toHaveAttribute("aria-valuenow", "0");
     await page.locator('[data-personality="visionary"]').click();
@@ -44,8 +44,8 @@ test.describe("Visionary homepage narrative", () => {
   });
 
   test("uses the supplied copy and complete cinematic section sequence", async ({ page }) => {
-    await expect(page.getByRole("heading", { name: "Build a workplace people never want to leave." })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Great work should not disappear." })).toBeAttached();
+    await expect(page.getByRole("heading", { name: /Build the workplace people.*never want to leave/ })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "The work that moves companies forward rarely fits inside a performance review." })).toBeAttached();
     await expect(page.getByRole("heading", { name: "Recognition is company memory." })).toBeAttached();
 
     const sequence = await page.locator("[data-visionary-section]").evaluateAll((sections) =>
@@ -58,8 +58,8 @@ test.describe("Visionary homepage narrative", () => {
 
   test("uses local artwork and meaningful conversion destinations", async ({ page }) => {
     await expect(page.locator(".culture-orbit img")).toHaveAttribute("src", "/assets/visionary/culture-orbit.svg");
-    await expect(page.getByRole("link", { name: "Join Waitlist", exact: true }).first()).toHaveAttribute("href", "/contact");
-    await expect(page.getByRole("link", { name: "Book a Demo", exact: true }).first()).toHaveAttribute("href", "/contact");
+    await expect(page.getByRole("link", { name: /Join the Waitlist/ }).first()).toHaveAttribute("href", "/contact");
+    await expect(page.getByRole("link", { name: "Explore the Product", exact: true }).first()).toHaveAttribute("href", "/contact");
     await expect(page.locator('a[href="#culture-flow"]')).not.toHaveCount(0);
   });
 });
