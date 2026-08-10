@@ -15,12 +15,39 @@ test.describe("personality-led homepage", () => {
     await page.goto("/");
     await page.getByRole("tab", { name: "Strategist" }).click();
     await expect(page).toHaveURL(/persona=strategist/);
-    await expect(page.getByRole("heading", { name: "Turn culture into a signal leaders can act on." })).toBeVisible();
+    await expect(page.locator('[data-persona-page="strategist"]')).toBeVisible();
+    await expect(page.locator('[data-persona-page="visionary"]')).toBeHidden();
+    await expect(page.getByRole("heading", { name: "Make appreciation a visible, structured part of how your company operates." })).toBeVisible();
     await expect(page.evaluate(() => localStorage.getItem("ezrewards-persona"))).resolves.toBe("strategist");
 
     await page.getByRole("tab", { name: "Operator" }).click();
     await expect(page).toHaveURL(/persona=operator/);
     await expect(page.getByRole("heading", { name: "Run recognition without operational friction." })).toBeVisible();
+  });
+
+  test("renders the complete Strategist narrative and functional destinations", async ({ page }) => {
+    await page.goto("/?persona=strategist");
+    const sequence = await page.locator("[data-strategist-section]").evaluateAll((sections) =>
+      sections.map((section) => section.dataset.strategistSection)
+    );
+    expect(sequence).toEqual([
+      "hero", "problem", "vision", "category", "loop", "capabilities", "outcomes",
+      "early-access", "pricing", "faq", "final-cta"
+    ]);
+    await expect(page.getByRole("heading", { name: "Companies invest in appreciation without a clear view of how it is working." })).toBeAttached();
+    await expect(page.getByRole("heading", { name: "What if recognition became a system—not a collection of initiatives?" })).toBeAttached();
+    await expect(page.getByRole("heading", { name: "A complete recognition platform for $1 per employee/month." })).toBeAttached();
+    await expect(page.getByRole("link", { name: "Explore the Product", exact: true })).toHaveAttribute("href", "/product");
+    await expect(page.getByRole("link", { name: "See measurable outcomes", exact: true })).toHaveAttribute("href", "#strategist-outcomes");
+    await page.getByText("What is EzRewards?", { exact: true }).click();
+    await expect(page.getByText(/connects peer recognition, company-wide appreciation/)).toBeVisible();
+  });
+
+  test("uses the light analytical Strategist visual system", async ({ page }) => {
+    await page.goto("/?persona=strategist");
+    await expect(page.locator('[data-persona-page="strategist"]')).toHaveCSS("background-color", "rgb(246, 248, 252)");
+    await expect(page.locator(".strategist-card").first()).toHaveCSS("background-color", "rgb(255, 255, 255)");
+    await expect(page.locator(".strategist-button--primary").first()).toHaveCSS("background-color", "rgb(79, 70, 229)");
   });
 });
 
