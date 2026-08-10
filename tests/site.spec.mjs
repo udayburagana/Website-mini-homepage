@@ -22,7 +22,7 @@ test.describe("personality-led homepage", () => {
 
     await page.getByRole("tab", { name: "Operator" }).click();
     await expect(page).toHaveURL(/persona=operator/);
-    await expect(page.getByRole("heading", { name: "Run recognition without operational friction." })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Run recognition and rewards without creating more work for your team." })).toBeVisible();
   });
 
   test("renders the complete Strategist narrative and functional destinations", async ({ page }) => {
@@ -39,8 +39,9 @@ test.describe("personality-led homepage", () => {
     await expect(page.getByRole("heading", { name: "A complete recognition platform for $1 per employee/month." })).toBeAttached();
     await expect(page.getByRole("link", { name: "Explore the Product", exact: true })).toHaveAttribute("href", "/product");
     await expect(page.getByRole("link", { name: "See measurable outcomes", exact: true })).toHaveAttribute("href", "#strategist-outcomes");
-    await page.getByText("What is EzRewards?", { exact: true }).click();
-    await expect(page.getByText(/connects peer recognition, company-wide appreciation/)).toBeVisible();
+    const strategistPage = page.locator('[data-persona-page="strategist"]');
+    await strategistPage.getByText("What is EzRewards?", { exact: true }).click();
+    await expect(strategistPage.getByText(/connects peer recognition, company-wide appreciation/)).toBeVisible();
   });
 
   test("uses the light analytical Strategist visual system", async ({ page }) => {
@@ -49,6 +50,45 @@ test.describe("personality-led homepage", () => {
     await expect(page.locator(".strategist-card").first()).toHaveCSS("background-color", "rgb(255, 255, 255)");
     await expect(page.locator(".strategist-button--primary").first()).toHaveCSS("background-color", "rgb(79, 70, 229)");
   });
+
+  test("renders the complete Operator narrative and functional destinations", async ({ page }) => {
+    await page.goto("/?persona=operator");
+    await expect(page.locator('[data-persona-page="operator"]')).toBeVisible();
+    await expect(page.locator('[data-persona-page="visionary"]')).toBeHidden();
+    await expect(page.locator('[data-persona-page="strategist"]')).toBeHidden();
+    const sequence = await page.locator("[data-operator-section]").evaluateAll((sections) =>
+      sections.map((section) => section.dataset.operatorSection)
+    );
+    expect(sequence).toEqual([
+      "hero", "problem", "vision", "category", "loop", "capabilities", "outcomes",
+      "early-access", "pricing", "faq", "final-cta"
+    ]);
+    await expect(page.getByRole("heading", { name: "Run recognition and rewards without creating more work for your team." })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Recognition should not require spreadsheets, reminders and disconnected tools." })).toBeAttached();
+    await expect(page.getByRole("heading", { name: "Run the complete platform for $1 per employee/month." })).toBeAttached();
+    await expect(page.getByRole("link", { name: "See How It Works", exact: true })).toHaveAttribute("href", "#operator-workflow");
+    await page.getByText("What can administrators manage?", { exact: true }).click();
+    await expect(page.getByText(/manage employee access, roles, active seats/)).toBeVisible();
+  });
+
+  test("uses the dark cyan Operator visual system", async ({ page }) => {
+    await page.goto("/?persona=operator");
+    await expect(page.locator('[data-persona-page="operator"]')).toHaveCSS("background-color", "rgb(6, 9, 15)");
+    await expect(page.locator(".operator-card").first()).toHaveCSS("background-color", "rgb(23, 29, 42)");
+    await expect(page.locator(".operator-button--primary").first()).toHaveCSS("background-color", "rgb(56, 189, 248)");
+  });
+
+  for (const width of [320, 390, 768, 1024, 1440]) {
+    test(`Operator fits ${width}px without horizontal overflow`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto("/?persona=operator");
+      const widths = await page.evaluate(() => ({
+        client: document.documentElement.clientWidth,
+        scroll: document.documentElement.scrollWidth
+      }));
+      expect(widths.scroll).toBeLessThanOrEqual(widths.client);
+    });
+  }
 });
 
 test.describe("Visionary homepage narrative", () => {

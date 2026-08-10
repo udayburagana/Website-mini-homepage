@@ -36,7 +36,7 @@
     const persona = personas[name] || personas.visionary;
     const resolvedName = personas[name] ? name : "visionary";
     document.documentElement.dataset.persona = resolvedName;
-    const visiblePage = resolvedName === "strategist" ? "strategist" : "visionary";
+    const visiblePage = ["visionary", "strategist", "operator"].includes(resolvedName) ? resolvedName : "visionary";
     document.querySelectorAll("[data-persona-page]").forEach((page) => {
       const active = page.dataset.personaPage === visiblePage;
       page.hidden = !active;
@@ -44,7 +44,8 @@
       page.id = active ? "main-content" : "";
     });
     document.body.classList.toggle("strategist-active", visiblePage === "strategist");
-    document.body.classList.toggle("dark-visionary", visiblePage !== "strategist");
+    document.body.classList.toggle("operator-active", visiblePage === "operator");
+    document.body.classList.toggle("dark-visionary", visiblePage === "visionary");
     document.querySelectorAll("[data-personality]").forEach((tab) => {
       tab.setAttribute("aria-selected", String(tab.dataset.personality === resolvedName));
       tab.tabIndex = tab.dataset.personality === resolvedName ? 0 : -1;
@@ -63,6 +64,27 @@
       history.replaceState({ persona: resolvedName }, "", url);
     }
     if (visiblePage === "strategist") initStrategistReveals();
+    if (visiblePage === "operator") initOperatorReveals();
+  }
+
+  function initOperatorReveals() {
+    const home = document.querySelector('[data-persona-page="operator"]');
+    if (!home || home.dataset.revealsReady === "true") return;
+    home.dataset.revealsReady = "true";
+    const reveals = [...home.querySelectorAll("[data-operator-reveal]")];
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      reveals.forEach((item) => item.classList.add("is-visible"));
+      return;
+    }
+    const observer = new IntersectionObserver((entries, revealObserver) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -6% 0px" });
+    reveals.forEach((item) => observer.observe(item));
   }
 
   function initStrategistReveals() {
