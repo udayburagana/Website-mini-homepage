@@ -1,66 +1,53 @@
 import { expect, test } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
-test.describe("Visionary experience flow", () => {
-  test("offers only Visionary and reveals the homepage through a two-second loader", async ({ page }) => {
+test.describe("personality-led homepage", () => {
+  test("opens directly on the Visionary homepage with all personalities available", async ({ page }) => {
     await page.goto("/");
+    await expect(page.getByRole("heading", { name: "Build the kind of workplace people remember." })).toBeVisible();
+    await expect(page.getByRole("tab", { name: "Visionary" })).toHaveAttribute("aria-selected", "true");
+    await expect(page.getByRole("tab", { name: "Strategist" })).toBeEnabled();
+    await expect(page.getByRole("tab", { name: "Operator" })).toBeEnabled();
+    await expect(page.locator(".experience-entry, .experience-loader")).toHaveCount(0);
+  });
 
-    const entry = page.locator('[data-experience-view="entry"]');
-    const loader = page.locator('[data-experience-view="loader"]');
-    const homepage = page.locator('[data-experience-view="home"]');
-    await expect(entry).toBeVisible();
-    await expect(loader).toBeHidden();
-    await expect(homepage).toBeHidden();
+  test("switches personality without reloading and creates shareable remembered state", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("tab", { name: "Strategist" }).click();
+    await expect(page).toHaveURL(/persona=strategist/);
+    await expect(page.getByRole("heading", { name: "Turn culture into a signal leaders can act on." })).toBeVisible();
+    await expect(page.evaluate(() => localStorage.getItem("ezrewards-persona"))).resolves.toBe("strategist");
 
-    await expect(page.getByRole("button", { name: /Strategist/ })).toBeDisabled();
-    await expect(page.getByRole("button", { name: /Operator/ })).toBeDisabled();
-
-    const continueButton = page.getByRole("button", { name: /Explore the Visionary experience/ });
-    await expect(continueButton).toBeDisabled();
-    await expect(page.locator('[role="progressbar"]')).toHaveAttribute("aria-valuenow", "0");
-    await page.locator('[data-personality="visionary"]').click();
-    await expect(continueButton).toBeEnabled();
-
-    const startedAt = Date.now();
-    await continueButton.click();
-    await expect(loader).toBeVisible();
-    await expect(page.locator("[data-loader-progress]" )).toHaveText("100%", { timeout: 2600 });
-    await expect(homepage).toBeVisible();
-    expect(Date.now() - startedAt).toBeGreaterThanOrEqual(1850);
-    expect(Date.now() - startedAt).toBeLessThan(2700);
-
-    await page.getByRole("button", { name: "Change experience" }).click();
-    await expect(entry).toBeVisible();
-    await expect(homepage).toBeHidden();
+    await page.getByRole("tab", { name: "Operator" }).click();
+    await expect(page).toHaveURL(/persona=operator/);
+    await expect(page.getByRole("heading", { name: "Run recognition without operational friction." })).toBeVisible();
   });
 });
 
 test.describe("Visionary homepage narrative", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
-    await page.locator('[data-personality="visionary"]').click();
-    await page.locator("[data-enter-visionary]").click();
-    await expect(page.locator('[data-experience-view="home"]')).toBeVisible({ timeout: 2600 });
   });
 
-  test("uses the supplied copy and complete cinematic section sequence", async ({ page }) => {
-    await expect(page.getByRole("heading", { name: /Build the workplace people.*never want to leave/ })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "The work that moves companies forward rarely fits inside a performance review." })).toBeAttached();
-    await expect(page.getByRole("heading", { name: "Recognition is company memory." })).toBeAttached();
+  test("uses the approved value-led copy and complete section sequence", async ({ page }) => {
+    await expect(page.getByRole("heading", { name: "Culture grows from the moments people choose to notice." })).toBeAttached();
+    await expect(page.getByRole("heading", { name: "Great work happens every day. Too much of it disappears unnoticed." })).toBeAttached();
+    await expect(page.getByRole("heading", { name: "One connected place for appreciation to become action." })).toBeAttached();
 
-    const sequence = await page.locator("[data-visionary-section]").evaluateAll((sections) =>
-      sections.map((section) => section.dataset.visionarySection)
+    const sequence = await page.locator("[data-home-section]").evaluateAll((sections) =>
+      sections.map((section) => section.dataset.homeSection)
     );
     expect(sequence).toEqual([
-      "hero", "culture-gap", "transformation", "product-story", "flywheel", "proof"
+      "hero", "belief", "culture-gap", "values", "transformation", "appreciation-loop",
+      "impact", "product-bridge", "audience", "emotional-proof", "early-access"
     ]);
   });
 
   test("uses local artwork and meaningful conversion destinations", async ({ page }) => {
     await expect(page.locator(".culture-orbit img")).toHaveAttribute("src", "/assets/visionary/culture-orbit.svg");
-    await expect(page.getByRole("link", { name: /Join the Waitlist/ }).first()).toHaveAttribute("href", "/contact");
-    await expect(page.getByRole("link", { name: "Explore the Product", exact: true }).first()).toHaveAttribute("href", "/contact");
-    await expect(page.locator('a[href="#culture-flow"]')).not.toHaveCount(0);
+    await expect(page.getByRole("link", { name: /Join Waitlist/ }).first()).toHaveAttribute("href", "/contact");
+    await expect(page.getByRole("link", { name: "Explore the Product", exact: true })).toHaveAttribute("href", "/product");
+    await expect(page.locator('a[href="#appreciation-loop"]')).not.toHaveCount(0);
   });
 });
 
@@ -74,7 +61,7 @@ test.describe("homepage Visionary design system", () => {
 
   test("uses the local cinematic artwork", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator('[data-personality="visionary"]')).toBeVisible();
+    await expect(page.getByRole("tab", { name: "Visionary" })).toBeVisible();
     const artworkSource = await readFile(new URL("../assets/visionary/culture-orbit.svg", import.meta.url), "utf8");
     expect(artworkSource).toContain("Culture orbit");
   });
@@ -113,6 +100,11 @@ const routes = [
     path: "/about",
     title: "About EzRewards | Better Employee Appreciation",
     description: /appreciation/i
+  },
+  {
+    path: "/pricing",
+    title: "Pricing | EzRewards Employee Recognition Platform",
+    description: /pricing/i
   },
   {
     path: "/contact",
@@ -169,9 +161,9 @@ for (const route of routes) {
 
 test("button links are not underlined and active navigation remains distinct", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("link", { name: "Book a Demo", exact: true }).first())
+  await expect(page.getByRole("link", { name: "Join Waitlist", exact: true }).first())
     .toHaveCSS("text-decoration-line", "none");
-  await expect(page.locator('[data-personality="visionary"]')).toHaveCSS("cursor", "pointer");
+  await expect(page.getByRole("tab", { name: "Visionary" })).toHaveCSS("cursor", "pointer");
 });
 
 test("robots and sitemap expose all production routes", async ({ request }) => {
@@ -190,9 +182,6 @@ test("robots and sitemap expose all production routes", async ({ request }) => {
 test("mobile navigation exposes and updates its expanded state", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
-  await page.locator('[data-personality="visionary"]').click();
-  await page.locator("[data-enter-visionary]").click();
-  await expect(page.locator('[data-experience-view="home"]')).toBeVisible({ timeout: 2600 });
 
   const toggle = page.locator("[data-menu-toggle]");
   await expect(toggle).toHaveAccessibleName("Open navigation");
@@ -232,7 +221,7 @@ test("reduced motion disables page animations", async ({ browser }) => {
   await page.route("https://fonts.googleapis.com/**", (route) => route.abort());
   await page.route("https://fonts.gstatic.com/**", (route) => route.abort());
   await page.goto("http://127.0.0.1:4174/");
-  const transitionSeconds = await page.locator(".personality-card").first().evaluate((element) =>
+  const transitionSeconds = await page.locator(".persona-tab").first().evaluate((element) =>
     Number.parseFloat(getComputedStyle(element).transitionDuration)
   );
   expect(transitionSeconds).toBeLessThanOrEqual(0.00001);

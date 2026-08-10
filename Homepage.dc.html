@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-persona="visionary">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EzRewards | Employee Recognition and Rewards</title>
   <meta name="description" content="EzRewards makes employee appreciation part of everyday work through meaningful recognition, rewards, and culture insights.">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#F2ECDD">
+  <meta name="theme-color" content="#090a16">
   <meta property="og:title" content="EzRewards | Employee Recognition and Rewards">
-  <meta property="og:description" content="Build a workplace people never want to leave with recognition, rewards, and culture insights from EzRewards.">
+  <meta property="og:description" content="Build the kind of workplace people remember with meaningful recognition, rewards, and culture insights.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="EzRewards">
   <meta property="og:url" content="https://website-mini-homepage.vercel.app/">
@@ -19,202 +19,154 @@
   <link rel="stylesheet" href="/site.css">
   <script src="/site-ui.js" defer></script>
 </head>
-<body class="visionary-site">
+<body class="visionary-site persona-home dark-visionary">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <section class="experience-entry" data-experience-view="entry" aria-labelledby="entry-title">
-    <header class="entry-nav">
-      <a class="brand" href="/" aria-label="EzRewards home"><span>Ez</span>Rewards<span class="brand-dot">.</span></a>
-      <nav aria-label="Entry navigation">
-        <a href="#culture-gap">Why EzRewards</a>
-        <a class="button button--dark button--small" href="/contact">Book a Demo</a>
-      </nav>
-    </header>
-    <div class="entry-decor entry-decor--star" aria-hidden="true">✦</div>
-    <div class="entry-decor entry-decor--loop" aria-hidden="true"></div>
-    <div class="entry-content">
-      <p class="eyebrow">One platform. Different ways to experience it.</p>
-      <h1 id="entry-title">How do you imagine a better workplace?</h1>
-      <p class="entry-intro">Explore EzRewards through the perspective that feels most like you. The product stays the same. The story, experience and possibilities change.</p>
-      <div class="personality-grid" aria-label="Choose a personality">
-        <button class="personality-card personality-card--visionary" type="button" data-personality="visionary" aria-pressed="false">
-          <span class="personality-portrait portrait--visionary" aria-hidden="true"><span>✦</span></span>
-          <span class="personality-number">01 / 03</span>
-          <strong>Visionary</strong>
-          <span>You believe workplace culture can be intentionally designed—not left to chance.</span>
-          <span class="personality-status">Available now <b>→</b></span>
-        </button>
-        <button class="personality-card" type="button" data-personality="strategist" disabled>
-          <span class="personality-portrait portrait--strategist" aria-hidden="true"><span>↗</span></span>
-          <span class="personality-number">02 / 03</span>
-          <strong>Strategist</strong>
-          <span>Measure culture with confidence.</span>
-          <span class="personality-status">Available Now</span>
-        </button>
-        <button class="personality-card" type="button" data-personality="operator" disabled>
-          <span class="personality-portrait portrait--operator" aria-hidden="true"><span>✓</span></span>
-          <span class="personality-number">03 / 03</span>
-          <strong>Operator</strong>
-          <span>Run recognition effortlessly.</span>
-          <span class="personality-status">Available Now</span>
-        </button>
-      </div>
-      <button class="button button--lime entry-continue" type="button" data-enter-visionary disabled>Explore the Visionary experience <span>→</span></button>
+  <header class="site-header dark-header persona-header">
+    <a class="dark-brand" href="/" aria-label="EzRewards home"><span class="dark-brand__mark" aria-hidden="true">✦</span><span>EzRewards</span></a>
+    <button class="mobile-menu-toggle" type="button" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation">Menu</button>
+    <nav id="primary-navigation" class="primary-navigation" aria-label="Primary">
+      <a href="/product">Product</a><a href="#appreciation-loop">How It Works</a><a href="/pricing">Pricing</a><a href="/about">About</a>
+      <a class="dark-button dark-button--primary dark-button--small" href="/contact">Join Waitlist</a>
+    </nav>
+  </header>
+
+  <div class="persona-switcher-shell">
+    <div class="persona-switcher" role="tablist" aria-label="See EzRewards through your priorities">
+      <span class="persona-switcher__label">See EzRewards through your priorities</span>
+      <button class="persona-tab" id="persona-visionary" type="button" role="tab" aria-selected="true" data-personality="visionary">Visionary</button>
+      <button class="persona-tab" id="persona-strategist" type="button" role="tab" aria-selected="false" data-personality="strategist">Strategist</button>
+      <button class="persona-tab" id="persona-operator" type="button" role="tab" aria-selected="false" data-personality="operator">Operator</button>
     </div>
-    <p class="entry-footnote">One platform. Three ways to see what’s possible.</p>
-  </section>
-
-  <section class="experience-loader" data-experience-view="loader" hidden aria-labelledby="loader-title">
-    <div class="loader-orbit" aria-hidden="true"><span>✦</span><span>●</span><span>◆</span></div>
-    <p class="eyebrow">Shaping your experience</p>
-    <h2 id="loader-title" tabindex="-1">Thinking like a<br><em>Visionary.</em></h2>
-    <div class="loader-meter" role="progressbar" aria-label="Loading Visionary experience" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-      <span class="loader-track"><span data-loader-bar></span></span>
-      <output data-loader-progress>0%</output>
-    </div>
-    <p>Preparing a more human way to see recognition.</p>
-  </section>
-
-  <div class="experience-home dark-visionary" data-experience-view="home" hidden>
-    <header class="site-header dark-header">
-      <a class="dark-brand" href="/" aria-label="EzRewards home"><span class="dark-brand__mark" aria-hidden="true">✦</span><span>EzRewards</span></a>
-      <button class="mobile-menu-toggle" type="button" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation">Menu</button>
-      <nav id="primary-navigation" class="primary-navigation" aria-label="Primary">
-        <a href="/product">Product</a><a href="#culture-flow">How It Works</a><a href="#product-story">Platform</a><a href="/about">About</a>
-        <button class="change-experience" type="button" data-change-experience>Change experience</button>
-        <a class="dark-button dark-button--primary dark-button--small" href="/contact">Join Waitlist</a>
-      </nav>
-    </header>
-
-    <main id="main-content">
-      <section class="dark-hero" data-visionary-section="hero">
-        <div class="dark-hero__aurora" aria-hidden="true"></div>
-        <div class="dark-hero__copy" data-dark-reveal>
-          <p class="dark-kicker"><span></span> The culture operating system for modern teams</p>
-          <h1 tabindex="-1">Build the workplace people <em>never want to leave.</em></h1>
-          <p>Explore EzRewards through the perspective that feels most like you. The product stays the same. The story, experience and possibilities change.</p>
-          <div class="dark-actions">
-            <a class="dark-button dark-button--primary" href="/contact">Join the Waitlist <span>↗</span></a>
-            <a class="dark-button dark-button--secondary" href="/contact">Explore the Product</a>
-          </div>
-          <p>Built for growing teams. Starting at $1 per employee/month</p>
-        </div>
-        <div class="culture-orbit" data-dark-parallax aria-label="A cinematic map of recognition moments orbiting the EzRewards culture core">
-          <img src="/assets/visionary/culture-orbit.svg" alt="Recognition stories, rewards, and culture signals orbiting a connected EzRewards culture core">
-          <article class="orbit-card orbit-card--one"><span class="orbit-icon" aria-hidden="true">✧</span><div><strong>Amara made the impossible launch.</strong><small>Recognized across 3 teams</small></div></article>
-          <article class="orbit-card orbit-card--two"><span class="orbit-icon orbit-icon--coral" aria-hidden="true">◇</span><div><strong>Customer love, made visible.</strong><small>Culture signal · Live</small></div></article>
-          <article class="orbit-card orbit-card--three"><small>Culture momentum</small><strong>+38%</strong><span>this quarter</span></article>
-        </div>
-        <a class="dark-scroll-cue" href="#culture-gap"><span>Explore the future</span><i aria-hidden="true">↓</i></a>
-      </section>
-
-      <section class="culture-gap" id="culture-gap" data-visionary-section="culture-gap">
-        <div class="dark-section-label" data-dark-reveal><span>01</span> The Problem</div>
-        <div class="culture-gap__statement" data-dark-reveal>
-          <p class="dark-kicker"><span></span> Important work is becoming invisible</p>
-          <h2>The work that moves companies forward rarely fits inside a <em>performance review.</em></h2>
-          <p>It happens when someone stays back to help a teammate.
-When an employee solves a customer problem before it escalates.
-When a new hire asks the question everyone else was avoiding.
-When a manager quietly keeps the team moving through a difficult week.
-These contributions shape culture—but most disappear inside meetings, messages and memory.</p>
-        </div>
-        <div class="signal-loss" aria-label="Examples of appreciation getting lost">
-          <article data-dark-reveal><span class="outlined-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 9h20v14H12l-6 4V9Z"/><path d="M11 14h10M11 18h6"/></svg></span><strong>Recognition arrives too late</strong><p>Meaningful contributions are remembered during annual reviews, if they are remembered at all.</p><small>Signal lost</small></article>
-          <article data-dark-reveal><span class="outlined-icon outlined-icon--coral" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 4v24M9 9h11a5 5 0 0 1 0 10H8"/><path d="m11 25 5 3 5-3"/></svg></span><strong>Appreciation stays private</strong><p>A “thank you” inside a chat feels good for a moment, but it does not become part of the company’s shared culture.</p><small>Momentum stalled</small></article>
-          <article data-dark-reveal><span class="outlined-icon outlined-icon--gold" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="M16 16 23 9M16 16l-5 7"/><circle cx="16" cy="16" r="2"/></svg></span><strong>Rewards feel disconnected</strong><p>Gift cards and incentives are distributed, but the contribution behind them is often forgotten.</p><small>Future unclear</small></article>
-          <article data-dark-reveal><span class="outlined-icon outlined-icon--gold" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="M16 16 23 9M16 16l-5 7"/><circle cx="16" cy="16" r="2"/></svg></span><strong>Culture remains difficult to see</strong><p>Leaders know culture matters, but have little visibility into how appreciation actually moves through the company.</p><small>Future unclear</small></article>
-        </div>
-      </section>
-
-      <section class="dark-transformation" id="culture-flow" data-visionary-section="transformation">
-        <div class="dark-section-label" data-dark-reveal><span>02</span> Transformation</div>
-        <div class="transformation-manifesto" data-dark-reveal>
-          <p class="dark-kicker"><span></span> From hidden effort to visible energy</p>
-          <h2>Recognition is company <em>memory.</em></h2>
-          <p>EzRewards turns appreciation from a fleeting message into a visible force—something people can feel, leaders can understand, and companies can build upon.</p>
-        </div>
-        <div class="memory-stage">
-          <div class="memory-stage__beam" aria-hidden="true"></div>
-          <article class="memory-card memory-card--quiet" data-dark-reveal><span>Before</span><strong>“Nice work on the launch.”</strong><small>Buried in #general · 94 days ago</small></article>
-          <article class="memory-core" data-dark-reveal><span class="memory-core__orbit" aria-hidden="true"></span><small>Culture memory created</small><strong>One moment.<br>Visible momentum.</strong><div><span>12 teams reached</span><span>84 reactions</span><span>3 values reinforced</span></div></article>
-          <article class="memory-card memory-card--alive" data-dark-reveal><span>After</span><strong>“This is how we show up.”</strong><small>Part of your company story · Always visible</small></article>
-        </div>
-      </section>
-
-      <section class="product-story" id="product-story" data-visionary-section="product-story">
-        <div class="product-story__intro" data-dark-reveal>
-          <div class="dark-section-label"><span>03</span> The culture system</div>
-          <p class="dark-kicker"><span></span> Product, told through moments</p>
-          <h2>One connected system for the culture you are <em>becoming.</em></h2>
-          <p>Recognition, rewards, intelligence, and control work as one quiet layer beneath the moments people remember.</p>
-        </div>
-        <div class="product-mosaic">
-          <article class="product-panel product-panel--feed" data-dark-reveal>
-            <div class="panel-topline"><span>Recognition feed</span><i>Live</i></div>
-            <blockquote>“You changed the outcome by asking the braver question.”</blockquote>
-            <div class="recognition-meta"><span class="mini-avatar">NZ</span><div><strong>Nia recognized Zoya</strong><small>Future thinking · Product</small></div><b>✧ 48</b></div>
-          </article>
-          <article class="product-panel product-panel--reward" data-dark-reveal>
-            <div class="panel-topline"><span>Meaningful rewards</span><i>Unlocked</i></div>
-            <div class="reward-sphere" aria-hidden="true"><span>◇</span></div>
-            <strong>Choice without friction.</strong><p>One wallet. Local rewards. A moment that still feels personal.</p>
-          </article>
-          <article class="product-panel product-panel--intelligence" data-dark-reveal>
-            <div class="panel-topline"><span>Culture intelligence</span><i>EzRA</i></div>
-            <p>“Where is recognition creating momentum?”</p>
-            <div class="culture-chart" aria-hidden="true"><span style="--h:42%"></span><span style="--h:58%"></span><span style="--h:73%"></span><span style="--h:64%"></span><span style="--h:90%"></span></div>
-            <small>Cross-team appreciation is accelerating.</small>
-          </article>
-          <article class="product-panel product-panel--control" data-dark-reveal>
-            <div class="panel-topline"><span>Quiet control</span><i>Connected</i></div>
-            <div class="control-row"><span>Company wallet</span><strong>$42,680</strong></div><div class="control-row"><span>Participation</span><strong>86%</strong></div><div class="control-row"><span>Global delivery</span><strong>150+ countries</strong></div>
-          </article>
-        </div>
-      </section>
-
-      <section class="culture-flywheel" data-visionary-section="flywheel">
-        <div class="flywheel-copy" data-dark-reveal>
-          <div class="dark-section-label"><span>04</span> Compounding culture</div>
-          <p class="dark-kicker"><span></span> Momentum, not administration</p>
-          <h2>Build the culture <em>flywheel.</em></h2>
-          <p>Every meaningful moment creates the next one. Recognition becomes reward. Reward becomes insight. Insight shapes a stronger culture.</p>
-          <a class="dark-text-link" href="/product">See the platform <span>↗</span></a>
-        </div>
-        <div class="flywheel-map" aria-label="Recognize, reward, measure, and improve culture flywheel" data-dark-reveal>
-          <div class="flywheel-rings" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="flywheel-core"><small>EzRewards</small><strong>Culture<br>momentum</strong></div>
-          <article class="flywheel-node flywheel-node--one"><span class="outlined-icon"><svg viewBox="0 0 32 32"><path d="m16 4 3.5 7.5L28 13l-6 6 1.5 9L16 24l-7.5 4L10 19l-6-6 8.5-1.5L16 4Z"/></svg></span><b>Recognize</b><small>Make effort visible</small></article>
-          <article class="flywheel-node flywheel-node--two"><span class="outlined-icon outlined-icon--coral"><svg viewBox="0 0 32 32"><path d="M5 12h22v15H5zM16 12v15M4 8h24v4H4z"/><path d="M16 8c-4-6-10-2-5 4M16 8c4-6 10-2 5 4"/></svg></span><b>Reward</b><small>Reinforce the moment</small></article>
-          <article class="flywheel-node flywheel-node--three"><span class="outlined-icon outlined-icon--cyan"><svg viewBox="0 0 32 32"><path d="M5 26V16M12 26V10M19 26V14M26 26V5"/></svg></span><b>Measure</b><small>See culture signals</small></article>
-          <article class="flywheel-node flywheel-node--four"><span class="outlined-icon outlined-icon--gold"><svg viewBox="0 0 32 32"><path d="M6 22C9 10 16 5 27 5c0 11-5 19-17 21"/><path d="M5 27c5-8 10-12 18-16"/></svg></span><b>Improve</b><small>Shape what comes next</small></article>
-        </div>
-      </section>
-
-      <section class="dark-proof" data-visionary-section="proof">
-        <div class="proof-grid">
-          <div class="proof-copy" data-dark-reveal>
-            <p class="dark-kicker"><span></span> Early access · Visionary teams</p>
-            <h2>Build a culture people <em>remember.</em></h2>
-            <p>Join the teams rethinking how modern companies make great work visible, meaningful, and impossible to forget.</p>
-            <div class="dark-actions"><a class="dark-button dark-button--primary" href="/contact">Join Waitlist <span>↗</span></a><a class="dark-button dark-button--secondary" href="/contact">Book a Demo</a></div>
-          </div>
-          <div class="proof-signals" data-dark-reveal>
-            <article><span>01</span><strong>Human-first</strong><p>Recognition starts with a real story, not a transaction.</p></article>
-            <article><span>02</span><strong>Designed for momentum</strong><p>Every moment strengthens what your company stands for.</p></article>
-            <article><span>03</span><strong>Built for the future</strong><p>Culture intelligence without turning people into numbers.</p></article>
-          </div>
-        </div>
-        <div class="proof-line" aria-hidden="true"><span>Company memory</span><i></i><span>Culture momentum</span><i></i><span>Future of work</span></div>
-      </section>
-    </main>
-
-    <footer class="site-footer dark-footer">
-      <div><a class="dark-brand" href="/" aria-label="EzRewards home"><span class="dark-brand__mark" aria-hidden="true">✦</span><span>EzRewards</span></a><p>Building the future of company culture, one visible moment at a time.</p></div>
-      <nav aria-label="Footer"><a href="/product">Product</a><a href="#culture-flow">How It Works</a><a href="#product-story">Platform</a><a href="/about">About</a><a href="/contact">Contact</a></nav>
-      <div class="footer-legal"><span>Privacy</span><span>Terms</span><span>LinkedIn</span><span>X</span><span>YouTube</span></div>
-      <small>© 2026 EzRewards. Company memory, made visible.</small>
-    </footer>
   </div>
+
+  <main id="main-content" class="persona-main">
+    <section class="dark-hero value-hero" data-home-section="hero">
+      <div class="dark-hero__aurora" aria-hidden="true"></div>
+      <div class="dark-hero__copy is-visible" data-dark-reveal>
+        <p class="dark-kicker"><span></span> <span data-persona-copy="eyebrow">For companies people want to belong to</span></p>
+        <h1 data-persona-copy="headline">Build the kind of workplace people remember.</h1>
+        <p data-persona-copy="support">Make meaningful work visible, turn appreciation into a shared habit, and create a culture where people know their contribution matters.</p>
+        <div class="dark-actions">
+          <a class="dark-button dark-button--primary" href="/contact">Join Waitlist <span>↗</span></a>
+          <a class="dark-button dark-button--secondary" href="#belief">See the Vision</a>
+        </div>
+        <p>● Early access for selected growing teams.</p>
+      </div>
+      <div class="culture-orbit" data-dark-parallax aria-label="Recognition moments orbiting a connected EzRewards culture core">
+        <img src="/assets/visionary/culture-orbit.svg" alt="Recognition stories, rewards, and culture signals orbiting a connected EzRewards culture core">
+        <article class="orbit-card orbit-card--one"><span class="orbit-icon" aria-hidden="true">✦</span><div><strong>Amara made the impossible launch.</strong><small>Recognized across 3 teams</small></div></article>
+        <article class="orbit-card orbit-card--two"><span class="orbit-icon orbit-icon--coral" aria-hidden="true">◇</span><div><strong>Customer care, made visible.</strong><small>Culture signal · Live</small></div></article>
+        <article class="orbit-card orbit-card--three"><small>Shared momentum</small><strong>Every moment</strong><span>builds the next</span></article>
+      </div>
+      <a class="dark-scroll-cue" href="#belief"><span>Explore the vision</span><i aria-hidden="true">↓</i></a>
+    </section>
+
+    <section class="belief-section persona-section" id="belief" data-home-section="belief">
+      <div class="dark-section-label" data-dark-reveal><span>01</span> A better way to build culture</div>
+      <div class="belief-grid">
+        <div data-dark-reveal><p class="dark-kicker"><span></span> Culture begins in small moments</p><h2>Culture grows from the moments people choose to notice.</h2></div>
+        <div class="belief-copy" data-dark-reveal><p>Every team has meaningful contributions that deserve to be seen—a colleague stepping in, an idea moving the company forward, or someone quietly making work better for everyone.</p><p>When those moments are recognized, people feel connected to something larger. Appreciation becomes more than praise. It becomes evidence of what the company values.</p></div>
+      </div>
+      <blockquote class="vision-quote" data-dark-reveal>What a company celebrates today becomes the culture it carries forward tomorrow.</blockquote>
+    </section>
+
+    <section class="culture-gap persona-section" id="culture-gap" data-home-section="culture-gap">
+      <div class="dark-section-label" data-dark-reveal><span>02</span> The culture gap</div>
+      <div class="section-intro" data-dark-reveal><p class="dark-kicker"><span></span> Important work is becoming invisible</p><h2>Great work happens every day. Too much of it disappears unnoticed.</h2><p>Appreciation is often trapped in private messages, remembered too late, or reduced to a generic “good job.” Over time, meaningful contributions become invisible—and people begin to wonder whether their effort matters.</p></div>
+      <div class="four-card-grid problem-grid">
+        <article data-dark-reveal><span>01</span><h3>Contributions disappear</h3><p>Important work is completed, but the people behind it are not always recognized.</p></article>
+        <article data-dark-reveal><span>02</span><h3>Appreciation becomes inconsistent</h3><p>Recognition depends on individual managers instead of becoming a shared company habit.</p></article>
+        <article data-dark-reveal><span>03</span><h3>Rewards feel disconnected</h3><p>Rewards are given occasionally, without a clear connection to the contribution that earned them.</p></article>
+        <article data-dark-reveal><span>04</span><h3>Culture becomes difficult to see</h3><p>Leaders want to build belonging, but lack a clear picture of how appreciation is experienced.</p></article>
+      </div>
+      <p class="section-closing" data-dark-reveal>Culture cannot be strengthened by values written on a wall. It grows through the behaviors people experience repeatedly.</p>
+    </section>
+
+    <section class="values-section persona-section" id="values" data-home-section="values">
+      <div class="dark-section-label" data-dark-reveal><span>03</span> What EzRewards makes possible</div>
+      <div class="section-intro" data-dark-reveal><h2>Turn appreciation into something people can see, feel, and carry forward.</h2></div>
+      <div class="value-grid">
+        <article data-dark-reveal><i>✦</i><h3>Make contribution visible</h3><p>Give meaningful work the attention it deserves, wherever it happens.</p><small>People understand that their effort matters—and others see the behaviors worth repeating.</small></article>
+        <article data-dark-reveal><i>◎</i><h3>Make recognition collective</h3><p>Invite the whole company to participate in appreciation.</p><small>Recognition becomes part of how people work together, not something reserved for special occasions.</small></article>
+        <article data-dark-reveal><i>◇</i><h3>Make rewards meaningful</h3><p>Connect rewards to genuine contributions so they feel earned and memorable.</p><small>Every reward carries the story of why the person received it.</small></article>
+        <article data-dark-reveal><i>↗</i><h3>Make culture understandable</h3><p>See how appreciation moves across teams and where participation needs encouragement.</p><small>Leaders gain a clearer view of the culture people actually experience.</small></article>
+      </div>
+    </section>
+
+    <section class="transformation-section persona-section" data-home-section="transformation">
+      <div class="dark-section-label" data-dark-reveal><span>04</span> When appreciation becomes visible</div>
+      <div class="section-intro" data-dark-reveal><h2>Small moments begin to change the way the whole company feels.</h2><p>EzRewards turns scattered acts of appreciation into a shared cultural rhythm—helping people feel seen while giving leaders a clearer understanding of what brings the organization together.</p></div>
+      <div class="before-after" data-dark-reveal>
+        <div><span>Before EzRewards</span><p>Good work is acknowledged privately or forgotten.</p><p>Recognition depends heavily on individual managers.</p><p>Rewards feel occasional and disconnected.</p><p>Company values remain abstract statements.</p><p>Leaders rely on assumptions about culture.</p></div>
+        <div><span>With EzRewards</span><p>Contributions become visible across the organization.</p><p>Everyone can participate in appreciation.</p><p>Rewards carry a clear story and purpose.</p><p>Values become visible through real behavior.</p><p>Recognition patterns reveal how culture is experienced.</p></div>
+      </div>
+      <p class="section-closing" data-dark-reveal>The result is not simply more recognition. It is a stronger sense of identity, belonging, and shared momentum.</p>
+    </section>
+
+    <section class="loop-section persona-section" id="appreciation-loop" data-home-section="appreciation-loop">
+      <div class="dark-section-label" data-dark-reveal><span>05</span> One connected appreciation loop</div>
+      <div class="section-intro" data-dark-reveal><h2>Recognition creates momentum when every moment leads somewhere meaningful.</h2><p>EzRewards connects appreciation, rewards, and cultural understanding in one continuous experience.</p></div>
+      <div class="loop-grid" aria-label="The EzRewards appreciation loop">
+        <article data-dark-reveal><span>01</span><h3>Notice</h3><p>A meaningful contribution helps the team move forward.</p></article>
+        <article data-dark-reveal><span>02</span><h3>Recognize</h3><p>A colleague makes the contribution visible and explains why it mattered.</p></article>
+        <article data-dark-reveal><span>03</span><h3>Reward</h3><p>A meaningful reward reinforces the contribution.</p></article>
+        <article data-dark-reveal><span>04</span><h3>Grow</h3><p>Positive behaviors spread and leaders see the culture taking shape.</p></article>
+      </div>
+      <a class="dark-button dark-button--primary section-cta" href="/contact">Join Waitlist <span>↗</span></a>
+    </section>
+
+    <section class="impact-section persona-section" data-home-section="impact">
+      <div class="dark-section-label" data-dark-reveal><span>06</span> From a moment to a movement</div>
+      <div class="section-intro" data-dark-reveal><h2>What begins with one person can reshape an entire workplace.</h2></div>
+      <div class="impact-grid">
+        <article data-dark-reveal><small>Employees</small><h3>“My work is seen.”</h3><p>People see the difference their contribution makes and how it connects to the company.</p></article>
+        <article data-dark-reveal><small>Teams</small><h3>“This is how we support each other.”</h3><p>Teams develop a shared language for celebrating effort, collaboration, and progress.</p></article>
+        <article data-dark-reveal><small>Leaders</small><h3>“This is the culture we are building.”</h3><p>Leaders see which values are being lived and where teams may need more support.</p></article>
+        <article data-dark-reveal><small>The company</small><h3>“People want to be part of this.”</h3><p>Recognition strengthens belonging and makes the organization a place people are proud to contribute to.</p></article>
+      </div>
+    </section>
+
+    <section class="product-bridge persona-section" id="product-bridge" data-home-section="product-bridge">
+      <div class="dark-section-label" data-dark-reveal><span>07</span> The platform behind the culture</div>
+      <div class="section-intro" data-dark-reveal><h2>One connected place for appreciation to become action.</h2><p>EzRewards brings recognition, digital rewards, wallet controls, reporting, and AI-powered insights into one system—so the culture you imagine can become something people experience every day.</p></div>
+      <div class="product-touchpoints">
+        <article data-dark-reveal><span>Recognition</span><p>Celebrate meaningful contributions and make their impact visible.</p></article>
+        <article data-dark-reveal><span>Digital Rewards</span><p>Add a tangible expression of appreciation to the moments that matter.</p></article>
+        <article data-dark-reveal><span>Wallet & Controls</span><p>Give employees flexibility while keeping programs simple and manageable.</p></article>
+        <article data-dark-reveal><span>Culture Reports</span><p>Understand participation and how appreciation moves across the company.</p></article>
+        <article class="product-touchpoint--ai" data-dark-reveal><span>AI Report Assistant</span><p>Ask straightforward questions about your recognition data and receive clear, text-based answers.</p></article>
+      </div>
+      <div class="dark-actions section-actions"><a class="dark-button dark-button--primary" href="/product">Explore the Product</a><a class="dark-button dark-button--secondary" href="/contact">Join Waitlist</a></div>
+    </section>
+
+    <section class="audience-section persona-section" data-home-section="audience">
+      <div class="dark-section-label" data-dark-reveal><span>08</span> Built for people who see what work can become</div>
+      <div class="section-intro" data-dark-reveal><h2>EzRewards is for leaders building more than a company.</h2><p>It is for people building a place where contribution carries meaning, values are visible in everyday behavior, and employees feel connected to the future they are helping create.</p></div>
+      <div class="audience-grid">
+        <article data-dark-reveal><h3>Founders</h3><p>Turn your founding beliefs into behaviors that can grow with the company.</p></article>
+        <article data-dark-reveal><h3>People & Culture Leaders</h3><p>Create consistent moments of appreciation that strengthen belonging across teams.</p></article>
+        <article data-dark-reveal><h3>Purpose-led Executives</h3><p>Help employees see how their contributions move the organization forward.</p></article>
+        <article data-dark-reveal><h3>Team Leaders</h3><p>Make progress, collaboration, and quiet acts of leadership easier to recognize.</p></article>
+      </div>
+    </section>
+
+    <section class="emotional-proof persona-section" data-home-section="emotional-proof">
+      <div class="dark-section-label" data-dark-reveal><span>09</span> Culture becomes real through experience</div>
+      <div class="proof-statement" data-dark-reveal><h2>People remember how their work made them feel.</h2><p>They remember the moment someone noticed. They remember when their contribution became part of a larger story. They remember when appreciation felt specific, sincere, and deserved.</p><blockquote>EzRewards helps companies create more of those moments—and learn from the culture those moments create.</blockquote></div>
+    </section>
+
+    <section class="early-access persona-section" data-home-section="early-access">
+      <div class="early-access__copy" data-dark-reveal><p class="dark-kicker"><span></span> Help shape the future of appreciation</p><h2>Build a culture people will be proud to remember.</h2><p>Join the EzRewards waitlist and be among the first growing teams to turn everyday appreciation into a more visible, meaningful company culture.</p><a class="dark-button dark-button--primary" href="/contact">Join Waitlist <span>↗</span></a><small>Early access will be offered to a limited number of growing teams.</small></div>
+      <ul data-dark-reveal><li>Early access to EzRewards</li><li>Founding-member benefits</li><li>An opportunity to influence the product</li><li>Priority onboarding for selected teams</li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer dark-footer persona-footer">
+    <div><a class="dark-brand" href="/" aria-label="EzRewards home"><span class="dark-brand__mark" aria-hidden="true">✦</span><span>EzRewards</span></a><p>Making meaningful work visible.</p></div>
+    <nav aria-label="Footer"><a href="/">Home</a><a href="/product">Product</a><a href="/pricing">Pricing</a><a href="/about">About</a><a href="/contact">Join Waitlist</a></nav>
+    <div class="footer-legal"><span>Privacy</span><span>Terms</span><a href="/contact">Contact</a><span>LinkedIn</span></div>
+    <small>© 2026 EzRewards. All rights reserved.</small>
+  </footer>
 </body>
 </html>

@@ -1,74 +1,80 @@
 (() => {
-  const views = [...document.querySelectorAll("[data-experience-view]")];
-  const personalityButton = document.querySelector('[data-personality="visionary"]');
-  const enterButton = document.querySelector("[data-enter-visionary]");
-  const loaderProgress = document.querySelector("[data-loader-progress]");
-  const loaderBar = document.querySelector("[data-loader-bar]");
-  const loaderMeter = loaderProgress?.closest('[role="progressbar"]');
-
-  function showView(name) {
-    views.forEach((view) => {
-      view.hidden = view.dataset.experienceView !== name;
-    });
-  }
-
-  function selectPersonality(name) {
-    if (name !== "visionary" || !personalityButton || !enterButton) return;
-    personalityButton.setAttribute("aria-pressed", "true");
-    enterButton.disabled = false;
-  }
-
-  function updateProgress(value) {
-    if (!loaderProgress || !loaderBar || !loaderMeter) return;
-    loaderProgress.value = `${value}%`;
-    loaderProgress.textContent = `${value}%`;
-    loaderBar.style.width = `${value}%`;
-    loaderMeter.setAttribute("aria-valuenow", String(value));
-  }
-
-  function startVisionaryExperience() {
-    if (!enterButton || enterButton.disabled) return;
-    showView("loader");
-    updateProgress(0);
-    document.querySelector("#loader-title")?.focus();
-    const startedAt = performance.now();
-    const duration = 2000;
-    function tick(now) {
-      const elapsed = Math.min(now - startedAt, duration);
-      updateProgress(Math.round((elapsed / duration) * 100));
-      if (elapsed < duration) {
-        requestAnimationFrame(tick);
-        return;
-      }
-      showView("home");
-      initDarkExperience();
-      document.querySelector(".dark-hero h1")?.focus();
+  const PERSONA_KEY = "ezrewards-persona";
+  const hasPersonaSwitcher = Boolean(document.querySelector('[role="tab"][data-personality]'));
+  const personas = {
+    visionary: {
+      eyebrow: "For companies people want to belong to",
+      headline: "Build the kind of workplace people remember.",
+      support: "Make meaningful work visible, turn appreciation into a shared habit, and create a culture where people know their contribution matters.",
+      description: "Build the kind of workplace people remember with meaningful employee appreciation, rewards, and culture insights."
+    },
+    strategist: {
+      eyebrow: "For leaders who turn culture into clarity",
+      headline: "Turn culture into a signal leaders can act on.",
+      support: "Connect recognition, participation, and reward patterns so leaders can understand what is working and make confident culture decisions.",
+      description: "Make workplace culture measurable with connected recognition, participation, and reward insights from EzRewards."
+    },
+    operator: {
+      eyebrow: "For teams who make great programs work",
+      headline: "Run recognition without operational friction.",
+      support: "Bring recognition, rewards, budgets, and program controls together so appreciation stays consistent as your company grows.",
+      description: "Run reliable recognition programs with connected rewards, budgets, controls, and reporting from EzRewards."
     }
-    requestAnimationFrame(tick);
+  };
+
+  function requestedPersona() {
+    const value = new URLSearchParams(location.search).get("persona");
+    if (value && personas[value]) return value;
+    try {
+      const saved = localStorage.getItem(PERSONA_KEY);
+      if (saved && personas[saved]) return saved;
+    } catch {}
+    return "visionary";
   }
 
-  function initDarkExperience() {
-    const home = document.querySelector(".dark-visionary");
-    if (!home || home.dataset.motionReady === "true") return;
-    home.dataset.motionReady = "true";
+  function setPersona(name, { updateUrl = true } = {}) {
+    const persona = personas[name] || personas.visionary;
+    const resolvedName = personas[name] ? name : "visionary";
+    document.documentElement.dataset.persona = resolvedName;
+    document.querySelectorAll("[data-personality]").forEach((tab) => {
+      tab.setAttribute("aria-selected", String(tab.dataset.personality === resolvedName));
+      tab.tabIndex = tab.dataset.personality === resolvedName ? 0 : -1;
+    });
+    document.querySelectorAll("[data-persona-copy]").forEach((node) => {
+      node.textContent = persona[node.dataset.personaCopy];
+    });
+    const description = document.querySelector('meta[name="description"]');
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (description) description.content = persona.description;
+    if (ogDescription) ogDescription.content = persona.description;
+    try { localStorage.setItem(PERSONA_KEY, resolvedName); } catch {}
+    if (updateUrl) {
+      const url = new URL(location.href);
+      url.searchParams.set("persona", resolvedName);
+      history.replaceState({ persona: resolvedName }, "", url);
+    }
+  }
 
-    const reveals = [...home.querySelectorAll("[data-dark-reveal]")];
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function initReveals() {
+    const reveals = [...document.querySelectorAll("[data-dark-reveal]")];
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reducedMotion || !("IntersectionObserver" in window)) {
       reveals.forEach((item) => item.classList.add("is-visible"));
-    } else {
-      const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        });
-      }, { threshold: 0.12, rootMargin: "0px 0px -7% 0px" });
-      reveals.forEach((item) => revealObserver.observe(item));
+      return;
     }
+    const observer = new IntersectionObserver((entries, revealObserver) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -7% 0px" });
+    reveals.forEach((item) => observer.observe(item));
+  }
 
-    const orbit = home.querySelector("[data-dark-parallax]");
-    if (!orbit || reducedMotion) return;
+  function initOrbit() {
+    const orbit = document.querySelector("[data-dark-parallax]");
+    if (!orbit || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     orbit.addEventListener("pointermove", (event) => {
       const bounds = orbit.getBoundingClientRect();
       const x = ((event.clientX - bounds.left) / bounds.width - .5) * 14;
@@ -92,35 +98,21 @@
   }
 
   document.addEventListener("click", (event) => {
-    const personality = event.target.closest("[data-personality]");
-    if (personality && !personality.disabled) {
-      selectPersonality(personality.dataset.personality);
+    const personaTab = event.target.closest('[role="tab"][data-personality]');
+    if (personaTab) {
+      setPersona(personaTab.dataset.personality);
+      personaTab.focus();
       return;
     }
-
-    if (event.target.closest("[data-enter-visionary]")) {
-      startVisionaryExperience();
-      return;
-    }
-
-    if (event.target.closest("[data-change-experience]")) {
-      showView("entry");
-      personalityButton?.focus();
-      return;
-    }
-
     const toggle = event.target.closest("[data-menu-toggle]");
     if (toggle) {
       setMenu(toggle, toggle.getAttribute("aria-expanded") !== "true");
       return;
     }
-
-    const menuLink = event.target.closest(".primary-navigation a");
-    if (menuLink) {
+    if (event.target.closest(".primary-navigation a")) {
       const openToggle = document.querySelector('[data-menu-toggle][aria-expanded="true"]');
       if (openToggle) setMenu(openToggle, false);
     }
-
     const submitButton = event.target.closest("form[data-demo-form] button");
     if (submitButton) {
       const form = submitButton.closest("form");
@@ -130,25 +122,36 @@
         event.stopImmediatePropagation();
         form.reportValidity();
         if (status) status.textContent = "Please complete the required fields.";
-      } else if (status) {
-        status.textContent = "";
-      }
+      } else if (status) status.textContent = "";
     }
   }, true);
 
   document.addEventListener("keydown", (event) => {
+    const currentTab = event.target.closest?.('[role="tab"][data-personality]');
+    if (currentTab && ["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
+      event.preventDefault();
+      const tabs = [...document.querySelectorAll('[role="tab"][data-personality]')];
+      let index = tabs.indexOf(currentTab);
+      if (event.key === "Home") index = 0;
+      else if (event.key === "End") index = tabs.length - 1;
+      else index = (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+      tabs[index].click();
+      return;
+    }
     if (event.key !== "Escape") return;
     const toggle = document.querySelector('[data-menu-toggle][aria-expanded="true"]');
-    if (toggle) {
-      setMenu(toggle, false);
-      toggle.focus();
-    }
+    if (toggle) { setMenu(toggle, false); toggle.focus(); }
   });
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 767) {
+  if (hasPersonaSwitcher) addEventListener("popstate", () => setPersona(requestedPersona(), { updateUrl: false }));
+  addEventListener("resize", () => {
+    if (innerWidth > 767) {
       const toggle = document.querySelector('[data-menu-toggle][aria-expanded="true"]');
       if (toggle) setMenu(toggle, false);
     }
   });
+
+  if (hasPersonaSwitcher) setPersona(requestedPersona(), { updateUrl: false });
+  initReveals();
+  initOrbit();
 })();

@@ -6,6 +6,7 @@ const root = process.cwd();
 const routes = new Map([
   ["/", "/Homepage.dc.html"],
   ["/product", "/Product.dc.html"],
+  ["/pricing", "/Pricing.dc.html"],
   ["/about", "/About.dc.html"],
   ["/contact", "/Contact.dc.html"]
 ]);
