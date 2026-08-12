@@ -5,7 +5,7 @@
     visionary: {
       eyebrow: "For companies people want to belong to",
       headline: "Build the kind of workplace people remember.",
-      support: "Make meaningful work visible, turn appreciation into a shared habit, and create a culture where people know their contribution matters.",
+      support: "Recognize great work, celebrate every milestone, and create a culture where appreciation becomes part of everyday work.",
       description: "Build the kind of workplace people remember with meaningful employee appreciation, rewards, and culture insights."
     },
     strategist: {

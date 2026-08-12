@@ -177,8 +177,11 @@ test.describe("Visionary homepage narrative", () => {
     ]);
   });
 
-  test("uses local artwork and meaningful conversion destinations", async ({ page }) => {
-    await expect(page.locator(".culture-orbit img")).toHaveAttribute("src", "/assets/visionary/culture-orbit.svg");
+  test("uses the Figma hero hierarchy and meaningful conversion destinations", async ({ page }) => {
+    const hero = page.locator('[data-persona-page="visionary"] [data-home-section="hero"]');
+    await expect(hero.locator(".culture-orbit")).toHaveCount(0);
+    await expect(hero.locator(".dark-scroll-cue")).toHaveCount(0);
+    await expect(hero.getByText("Recognize great work, celebrate every milestone, and create a culture where appreciation becomes part of everyday work.")).toBeVisible();
     await expect(page.getByRole("link", { name: /Join Waitlist/ }).first()).toHaveAttribute("href", "/contact");
     await expect(page.getByRole("link", { name: "Explore the Product", exact: true })).toHaveAttribute("href", "/product");
     await expect(page.locator('a[href="#appreciation-loop"]')).not.toHaveCount(0);
@@ -193,11 +196,15 @@ test.beforeEach(async ({ page }) => {
 test.describe("homepage Visionary design system", () => {
   test.use({ viewport: { width: 1440, height: 900 } });
 
-  test("uses the local cinematic artwork", async ({ page }) => {
+  test("matches the Figma hero typography and color hierarchy", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("tab", { name: "Visionary" })).toBeVisible();
-    const artworkSource = await readFile(new URL("../assets/visionary/culture-orbit.svg", import.meta.url), "utf8");
-    expect(artworkSource).toContain("Culture orbit");
+    const styles = await page.locator('[data-persona-page="visionary"] .dark-hero h1').evaluate((node) => {
+      const computed = getComputedStyle(node);
+      return { fontSize: computed.fontSize, lineHeight: computed.lineHeight, color: computed.color, textAlign: computed.textAlign };
+    });
+    expect(styles).toEqual({ fontSize: "102px", lineHeight: "100px", color: "rgb(248, 250, 252)", textAlign: "center" });
+    await expect(page.locator('[data-persona-page="visionary"] .dark-hero')).toHaveCSS("background-color", "rgb(9, 10, 22)");
   });
 
   test("defines the supplied dark Visionary tokens", async () => {

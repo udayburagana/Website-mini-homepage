@@ -1339,6 +1339,155 @@ header {
   }
 }
 
+/* Visionary hero — Figma node 2167:4. */
+.dark-visionary .persona-switcher-shell {
+  padding-top: 28px;
+  padding-bottom: 0;
+  background: transparent;
+}
+.dark-visionary .persona-switcher {
+  gap: 24px;
+  padding: 12px;
+  border-color: #6d6d6d;
+  border-radius: 8px;
+  background: #15023f;
+  box-shadow: none;
+}
+.dark-visionary .persona-switcher__label {
+  padding: 0;
+  color: #fff;
+  font-size: 16px;
+  line-height: 24px;
+}
+.dark-visionary .persona-tab {
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+}
+.dark-visionary .persona-tab:hover { background: rgba(255, 255, 255, .08); }
+.dark-visionary .persona-tab[aria-selected="true"] {
+  color: #f8fafc;
+  background: #7c3aed;
+  box-shadow: none;
+}
+
+.dark-visionary [data-persona-page="visionary"] .dark-hero {
+  min-height: 528px;
+  padding: 82px var(--site-gutter) 60px;
+  align-content: start;
+  background-color: #090a16;
+  background-image: none;
+}
+.dark-visionary [data-persona-page="visionary"] .dark-hero::before { display: none; }
+.dark-visionary [data-persona-page="visionary"] .dark-hero__aurora {
+  width: min(1393px, 97vw);
+  height: 301px;
+  top: -214px;
+  left: 50%;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: #6200df;
+  filter: blur(105px);
+  opacity: .5;
+}
+.dark-visionary [data-persona-page="visionary"] .dark-hero__copy {
+  width: min(100%, 1062px);
+}
+.dark-visionary [data-persona-page="visionary"] .dark-hero .dark-kicker {
+  display: block;
+  color: #fff;
+  font: 400 16px/normal var(--v-body);
+  letter-spacing: 0;
+  text-align: center;
+}
+.dark-visionary [data-persona-page="visionary"] .dark-hero h1 {
+  margin: 16px auto 40px;
+  color: #f8fafc;
+  font: 700 102px/100px var(--v-display) !important;
+  letter-spacing: 0 !important;
+  text-wrap: wrap;
+}
+.dark-visionary [data-persona-page="visionary"] .dark-hero__copy > p[data-persona-copy="support"] {
+  width: min(100%, 779px);
+  color: #fff;
+  font: 400 18px/24px var(--v-body);
+}
+.dark-visionary [data-persona-page="visionary"] .dark-actions {
+  margin-top: 24px;
+  gap: 24px;
+}
+.dark-visionary [data-persona-page="visionary"] .dark-actions .dark-button {
+  min-height: 56px;
+  padding-inline: 40px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.dark-visionary [data-persona-page="visionary"] .dark-actions .dark-button--primary {
+  background: #7c3aed;
+  box-shadow: 4px 4px 0 #f8fafc;
+}
+.dark-visionary [data-persona-page="visionary"] .dark-actions .dark-button--secondary {
+  color: #090a16;
+  border: 2px solid #a67eff;
+  background: #f8fafc;
+}
+.dark-visionary [data-persona-page="visionary"] .dark-hero__copy > .dark-hero__note {
+  width: auto;
+  margin-top: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font: 400 16px/24px var(--v-body);
+}
+.dark-visionary [data-persona-page="visionary"] .dark-hero__note span {
+  width: 20px;
+  height: 20px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+@media (max-width: 1100px) {
+  .dark-visionary [data-persona-page="visionary"] .dark-hero h1 {
+    font-size: clamp(64px, 8.2vw, 90px) !important;
+    line-height: .98 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .dark-visionary .persona-switcher-shell { padding-top: 14px; padding-inline: 16px; }
+  .dark-visionary .persona-switcher { width: auto; max-width: 100%; gap: 4px; padding: 7px; }
+  .dark-visionary .persona-tab { padding-inline: 12px; }
+  .dark-visionary [data-persona-page="visionary"] .dark-hero {
+    min-height: auto;
+    padding: 70px 20px 64px;
+  }
+  .dark-visionary [data-persona-page="visionary"] .dark-hero h1 {
+    margin-bottom: 28px;
+    font-size: clamp(48px, 14vw, 68px) !important;
+    line-height: .98 !important;
+  }
+  .dark-visionary [data-persona-page="visionary"] .dark-hero__copy > p[data-persona-copy="support"] {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .dark-visionary [data-persona-page="visionary"] .dark-actions {
+    flex-direction: column;
+    width: min(100%, 320px);
+    margin-inline: auto;
+  }
+  .dark-visionary [data-persona-page="visionary"] .dark-actions .dark-button { width: 100%; }
+  .dark-visionary [data-persona-page="visionary"] .dark-hero__copy > .dark-hero__note {
+    font-size: 14px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html,
   html:focus-within { scroll-behavior: auto !important; }

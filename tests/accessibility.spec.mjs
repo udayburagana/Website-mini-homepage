@@ -40,7 +40,7 @@ test("personality tabs implement roving keyboard navigation", async ({ page }) =
 
 test("visual data and workspace containers use supported semantics", async ({ page }) => {
   await page.goto("/?persona=visionary");
-  await expect(page.locator(".culture-orbit")).not.toHaveAttribute("aria-label");
+  await expect(page.locator(".culture-orbit")).toHaveCount(0);
   await expect(page.locator(".loop-grid")).toHaveAttribute("role", "list");
 
   await page.getByRole("tab", { name: "Strategist" }).click();
