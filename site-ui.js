@@ -149,6 +149,29 @@
     menu.classList.toggle("is-open", open);
   }
 
+  function validateDemoForm(form) {
+    const status = form.querySelector(".demo-form-status");
+    const controls = [...form.querySelectorAll("input, select, textarea")];
+    const firstInvalid = controls.find((control) => !control.validity.valid);
+    controls.forEach((control) => {
+      if (control.validity.valid) {
+        control.removeAttribute("aria-invalid");
+        if (control.getAttribute("aria-describedby") === status?.id) control.removeAttribute("aria-describedby");
+      } else {
+        control.setAttribute("aria-invalid", "true");
+        if (status?.id) control.setAttribute("aria-describedby", status.id);
+      }
+    });
+    if (!firstInvalid) {
+      if (status) status.textContent = "";
+      return true;
+    }
+    if (status) status.textContent = "Please complete the required fields.";
+    firstInvalid.focus();
+    form.reportValidity();
+    return false;
+  }
+
   document.addEventListener("click", (event) => {
     const personaTab = event.target.closest('[role="tab"][data-personality]');
     if (personaTab) {
@@ -168,17 +191,27 @@
     const submitButton = event.target.closest("form[data-demo-form] button");
     if (submitButton) {
       const form = submitButton.closest("form");
-      const status = form.querySelector(".demo-form-status");
-      if (!form.checkValidity()) {
+      if (!validateDemoForm(form)) {
         event.preventDefault();
         event.stopImmediatePropagation();
-        form.reportValidity();
-        if (status) status.textContent = "Please complete the required fields.";
-      } else if (status) status.textContent = "";
+      }
     }
   }, true);
 
+  document.addEventListener("submit", (event) => {
+    const form = event.target.closest?.("form[data-demo-form]");
+    if (!form || validateDemoForm(form)) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }, true);
+
   document.addEventListener("keydown", (event) => {
+    const demoForm = event.target.closest?.("form[data-demo-form]");
+    if (demoForm && event.key === "Enter" && event.target.tagName !== "TEXTAREA") {
+      event.preventDefault();
+      demoForm.querySelector("button")?.click();
+      return;
+    }
     const currentTab = event.target.closest?.('[role="tab"][data-personality]');
     if (currentTab && ["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
       event.preventDefault();

@@ -51,6 +51,20 @@ test.describe("personality-led homepage", () => {
     await expect(page.locator(".strategist-button--primary").first()).toHaveCSS("background-color", "rgb(79, 70, 229)");
   });
 
+  test("keeps Strategist workflow cards clean, consistently spaced, and its early-access CTA readable", async ({ page }) => {
+    await page.goto("/?persona=strategist");
+
+    const workflowCard = page.locator(".strategist-steps li").first();
+    await expect(workflowCard).toHaveCSS("row-gap", "8px");
+    expect(await workflowCard.evaluate((card) => getComputedStyle(card, "::after").content)).toBe("none");
+
+    await expect(page.locator(".strategist-capabilities article").first()).toHaveCSS("row-gap", "8px");
+
+    const earlyAccessCta = page.locator(".strategist-section--indigo .strategist-button--light");
+    await expect(earlyAccessCta).toHaveCSS("background-color", "rgb(255, 255, 255)");
+    await expect(earlyAccessCta).toHaveCSS("color", "rgb(79, 70, 229)");
+  });
+
   test("renders the complete Operator narrative and functional destinations", async ({ page }) => {
     await page.goto("/?persona=operator");
     await expect(page.locator('[data-persona-page="operator"]')).toBeVisible();
@@ -76,6 +90,59 @@ test.describe("personality-led homepage", () => {
     await expect(page.locator('[data-persona-page="operator"]')).toHaveCSS("background-color", "rgb(6, 9, 15)");
     await expect(page.locator(".operator-card").first()).toHaveCSS("background-color", "rgb(23, 29, 42)");
     await expect(page.locator(".operator-button--primary").first()).toHaveCSS("background-color", "rgb(56, 189, 248)");
+  });
+
+  test("bottom-aligns the Operator problem copy and keeps its early-access CTA readable", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/?persona=operator");
+
+    const problemRow = page.locator('[data-operator-section="problem"] .operator-heading-row');
+    const [headingBox, copyBox] = await Promise.all([
+      problemRow.locator("h2").boundingBox(),
+      problemRow.locator(":scope > div").boundingBox()
+    ]);
+    expect(Math.abs((headingBox.y + headingBox.height) - (copyBox.y + copyBox.height))).toBeLessThanOrEqual(2);
+
+    const earlyAccessCta = page.locator(".operator-section--cyan .operator-button--dark");
+    await expect(earlyAccessCta).toHaveCSS("background-color", "rgb(6, 16, 25)");
+    await expect(earlyAccessCta).toHaveCSS("color", "rgb(255, 255, 255)");
+  });
+
+  test("Operator capability cards use the technical vector grid without changing copy", async ({ page }) => {
+    const expectedTitles = [
+      "Let employees recognize great work in a few steps",
+      "Help employees move past the blank message box",
+      "Keep appreciation visible in one shared place",
+      "Configure rewards once and manage them centrally",
+      "Handle one-off and bulk reward actions efficiently",
+      "Add employees through the method that fits your setup",
+      "Open a report instead of building one",
+      "Ask the report instead of searching through it"
+    ];
+
+    const gridShape = async () => page.locator(".operator-capabilities article").evaluateAll((cards) => {
+      const positions = cards.map((card) => card.getBoundingClientRect());
+      const unique = (values) => new Set(values.map((value) => Math.round(value)));
+      return {
+        columns: unique(positions.map(({ x }) => x)).size,
+        rows: unique(positions.map(({ y }) => y)).size
+      };
+    });
+
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/?persona=operator");
+    const cards = page.locator(".operator-capabilities article");
+    await expect(cards).toHaveCount(8);
+    expect(await cards.locator("h3").allTextContents()).toEqual(expectedTitles);
+    await expect(page.locator('.operator-capability-visual[aria-hidden="true"]')).toHaveCount(8);
+    expect(await gridShape()).toEqual({ columns: 4, rows: 2 });
+
+    await page.setViewportSize({ width: 900, height: 900 });
+    expect(await gridShape()).toEqual({ columns: 2, rows: 4 });
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    expect(await gridShape()).toEqual({ columns: 1, rows: 8 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
   });
 
   for (const width of [320, 390, 768, 1024, 1440]) {
@@ -150,6 +217,39 @@ test.describe("homepage Visionary design system", () => {
       expect(css).toContain(token);
     }
   });
+});
+
+test("Visionary sections use the refined heading, layout, and loop-card treatment", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/?persona=visionary");
+
+  const sectionHeadingSizes = await page.locator('[data-persona-page="visionary"] .persona-section h2').evaluateAll((headings) =>
+    headings.filter((heading) => heading.getClientRects().length).map((heading) => Number.parseFloat(getComputedStyle(heading).fontSize))
+  );
+  expect(Math.max(...sectionHeadingSizes)).toBeLessThanOrEqual(80);
+
+  const cultureGap = page.locator("#culture-gap");
+  const cultureHeading = cultureGap.getByRole("heading", { level: 2 });
+  const [sectionBox, headingBox] = await Promise.all([cultureGap.boundingBox(), cultureHeading.boundingBox()]);
+  expect(headingBox.x - sectionBox.x).toBeLessThanOrEqual(100);
+
+  const transformationBackground = await page.locator('[data-home-section="transformation"]').evaluate((section) => getComputedStyle(section).backgroundColor);
+  expect(transformationBackground).not.toBe("rgb(242, 236, 221)");
+
+  const loop = page.locator("#appreciation-loop");
+  const cardGeometry = await loop.locator(".loop-grid article").evaluateAll((cards) => cards.map((card) => {
+    const cardBox = card.getBoundingClientRect();
+    const numberBox = card.querySelector("span").getBoundingClientRect();
+    return {
+      radius: getComputedStyle(card).borderRadius,
+      numberContained: numberBox.left >= cardBox.left && numberBox.right <= cardBox.right && numberBox.top >= cardBox.top && numberBox.bottom <= cardBox.bottom
+    };
+  }));
+  expect(new Set(cardGeometry.map(({ radius }) => radius))).toEqual(new Set(["24px"]));
+  expect(cardGeometry.every(({ numberContained }) => numberContained)).toBeTruthy();
+
+  const [loopBox, ctaBox] = await Promise.all([loop.boundingBox(), loop.getByRole("link", { name: /Join Waitlist/ }).boundingBox()]);
+  expect(Math.abs((ctaBox.x + ctaBox.width / 2) - (loopBox.x + loopBox.width / 2))).toBeLessThanOrEqual(2);
 });
 
 const routes = [

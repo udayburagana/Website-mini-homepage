@@ -1,50 +1,48 @@
-# Operator Homepage Design QA
+# Operator Capability Grid Design QA
 
-- Source visual truth: `C:\Users\Uday\AppData\Local\Temp\codex-clipboard-28fd3f4a-c77b-4d97-b3ff-fc61bf0897b7.png` and `C:\Users\Uday\AppData\Local\Temp\codex-clipboard-76dd6cba-1ee9-4559-8a23-142e1c4db1b8.png`
-- Implementation evidence: `C:\Users\Uday\Downloads\Website-mini-homepage-main\test-results\operator-hero-1440-v2.png` and `C:\Users\Uday\Downloads\Website-mini-homepage-main\test-results\operator-390-v2.png`
-- Source pixels: 1874 × 956 for each reference image
-- Implementation pixels: 1440 × 950 desktop and 390 × 844 mobile at device scale factor 1
-- State: `/?persona=operator`, Operator selected, hero default state, mobile full page
+## Evidence
 
-## Full-view comparison evidence
+- Source visual truth: `C:\Users\Uday\AppData\Local\Temp\codex-clipboard-d3077983-f625-4313-9309-dfdd38e49ab6.png`
+- Desktop implementation: `C:\Users\Uday\Downloads\Website-mini-homepage-main\docs\qa\operator-capability-grid\operator-capabilities-implementation.png`
+- Mobile implementation: `C:\Users\Uday\Downloads\Website-mini-homepage-main\docs\qa\operator-capability-grid\operator-capabilities-mobile.png`
+- Side-by-side comparison: `C:\Users\Uday\Downloads\Website-mini-homepage-main\docs\qa\operator-capability-grid\operator-capabilities-comparison.png`
+- Desktop comparison viewport: 1880 × 956 CSS px, device scale factor 1
+- Source pixels: 1880 × 956
+- Desktop implementation pixels: 1880 × 956
+- Mobile implementation viewport and pixels: 390 × 844, device scale factor 1
+- State: Operator personality selected; “Built for day-to-day use” capability section
 
-The implementation matches the reference direction with a near-black canvas, cyan interaction color, compact uppercase eyebrows, large white display typography, and dark operational interface panels. The hero preserves the reference split between conversion copy and an angled admin workspace, while using the approved longer Operator copy.
+The source and desktop implementation were normalized to identical pixel dimensions and placed side by side in one comparison image. A focused card-grid region was used because typography, icon treatment, and internal spacing are legible there; a separate mobile capture validates the responsive card stack.
 
-## Focused-region comparison evidence
+## Findings
 
-The operational workflow reproduces the four-task card rhythm shown in the second reference: recognition, reward assignment, voucher redemption, and wallet management. Each card uses explicit labels, compact operational metadata, cyan progress signals, and a consistent dark raised surface.
+No actionable P0, P1, or P2 differences remain.
 
-## Required fidelity surfaces
+- **Fonts and typography:** The implementation preserves the existing EzRewards Space Grotesk/Inter hierarchy rather than copying the reference brand typeface. Card eyebrows, headings, and supporting copy remain clear at the denser four-column width with no clipping or truncation.
+- **Spacing and layout rhythm:** Desktop uses four equal columns and a consistent visual-stage height, producing the requested four-card row. Equal card padding and aligned illustration stages give the grid the technical rhythm of the reference. Tablet and mobile reflow to two and one columns.
+- **Colors and visual tokens:** The reference’s neon green technical emphasis is intentionally translated to EzRewards cyan and teal. Dark navy surfaces, cool borders, and the cyan highlighted AI card remain consistent with the Operator personality and maintain contrast.
+- **Image quality and asset fidelity:** All eight illustrations use crisp local Phosphor SVG assets with no external runtime dependency. They are semantically matched to the card subject and remain sharp at desktop and mobile sizes.
+- **Copy and content:** The eight existing card titles and paragraphs are unchanged. The section introduction is also unchanged.
+- **Accessibility and interaction:** Illustrations are decorative and hidden from assistive technology. The card content does not depend on hover. Reduced-motion mode disables card movement.
 
-- Typography: Space Grotesk headings and Inter body/UI copy retain the geometric, precise character of the references.
-- Layout rhythm: broad desktop spacing, strong copy/interface split, dense task cards, and single-column mobile stacking.
-- Colors: `#06090F` canvas, `#171D2A` cards, `#F8FAFC` text, and `#38BDF8` primary cyan.
-- Product visuals: semantic HTML/CSS admin views replace static screenshots while preserving the reference composition and operational meaning.
-- Content: all 11 supplied Operator sections are present, including the complete FAQ, pricing, early access, and final CTA.
+## Comparison History
 
-## Comparison history
+### Initial pass
 
-### Pass 1 — blocked
+- Source evidence: supplied Oxide technical card reference.
+- Implementation evidence: `operator-capabilities-implementation.png` and the normalized side-by-side comparison.
+- Findings: no P0/P1/P2 issues. The implementation intentionally retains the EzRewards section-scale heading and simplified product iconography rather than copying Oxide-specific interface data.
+- Fixes required: none.
 
-- P1: the mobile hero headline and admin panel were visually clipped by grid min-content sizing. Fixed with zero-minimum grid tracks, break-safe display type, and a narrower mobile admin rail.
-- P2: the shared navigation CTA retained its dark inherited background. Fixed with an Operator-specific cyan action state.
-- P2: the workflow anchor could land beneath sticky controls. Fixed by giving the Operator destination a stable section ID and tested internal-link target.
+## Primary Interactions and Console
 
-### Pass 2 — passed
+- Personality selector retained and Operator remains selected.
+- Existing navigation and Join Waitlist controls remain visible.
+- Responsive card layout checked at desktop, tablet, and mobile widths.
+- Browser console warnings/errors: none.
 
-The revised desktop and mobile captures show the correct cyan navigation state, complete readable hero copy, a balanced operational admin panel, and no horizontal clipping. No actionable P0/P1/P2 fidelity issue remains.
+## Follow-up Polish
 
-## Interaction and accessibility verification
-
-- Personality switching, shareable query state, local preference, mobile navigation, FAQ disclosure, internal anchors, and conversion destinations were tested.
-- Full Playwright suite: 53 passed.
-- JavaScript syntax and diff checks: passed.
-- Operator responsive overflow: passed at 320, 390, 768, 1024, and 1440 widths.
-- Reduced-motion visibility remains covered by the site suite.
-
-## Follow-up polish
-
-- P3: replace illustrative operational metrics with verified customer data when available.
-- P3: swap semantic interface illustrations for final production product captures when the application UI is finalized.
+- P3: Future product screenshots could replace the icon panels when production UI is finalized, adding more data density without changing the grid.
 
 final result: passed

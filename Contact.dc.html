@@ -111,7 +111,7 @@
               <span style="font:400 13px var(--font-body);color:var(--color-gray-500);max-width:300px">By sending this you agree to be contacted about EzRewards.</span>
               <x-import component-from-global-scope="EzRewardsDesignSystem_e8bdfd.Button" variant="primary" type="button" onClick="{{ submit }}" hint-size="150px,46px">Send message</x-import>
             </div>
-            <div class="demo-form-status" role="status" aria-live="polite"></div>
+            <div id="contact-form-status" class="demo-form-status" role="status" aria-live="polite"></div>
           </form>
         </sc-if>
         <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
