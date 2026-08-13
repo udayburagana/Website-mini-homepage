@@ -3,9 +3,9 @@
   const hasPersonaSwitcher = Boolean(document.querySelector('[role="tab"][data-personality]'));
   const personas = {
     visionary: {
-      eyebrow: "For companies people want to belong to",
-      headline: "Build the kind of workplace people remember.",
-      support: "Recognize great work, celebrate every milestone, and create a culture where appreciation becomes part of everyday work.",
+      eyebrow: "The culture operating system for modern teams",
+      headline: "Build the workplace people want to belong to.",
+      support: "EzRewards turns everyday contribution into visible recognition, meaningful rewards and a culture everyone can experience.",
       description: "Build the kind of workplace people remember with meaningful employee appreciation, rewards, and culture insights."
     },
     strategist: {

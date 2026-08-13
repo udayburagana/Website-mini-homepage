@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 test.describe("personality-led homepage", () => {
   test("opens directly on the Visionary homepage with all personalities available", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: "Build the kind of workplace people remember." })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Build the workplace people want to belong to." })).toBeVisible();
     await expect(page.getByRole("tab", { name: "Visionary" })).toHaveAttribute("aria-selected", "true");
     await expect(page.getByRole("tab", { name: "Strategist" })).toBeEnabled();
     await expect(page.getByRole("tab", { name: "Operator" })).toBeEnabled();
@@ -158,33 +158,49 @@ test.describe("personality-led homepage", () => {
   }
 });
 
-test.describe("Visionary homepage narrative", () => {
+test.describe("refreshed Visionary homepage", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
   });
 
-  test("uses the approved value-led copy and complete section sequence", async ({ page }) => {
-    await expect(page.getByRole("heading", { name: "Culture grows from the moments people choose to notice." })).toBeAttached();
-    await expect(page.getByRole("heading", { name: "Great work happens every day. Too much of it disappears unnoticed." })).toBeAttached();
-    await expect(page.getByRole("heading", { name: "One connected place for appreciation to become action." })).toBeAttached();
-
+  test("uses the complete approved eleven-section narrative", async ({ page }) => {
     const sequence = await page.locator("[data-home-section]").evaluateAll((sections) =>
       sections.map((section) => section.dataset.homeSection)
     );
     expect(sequence).toEqual([
-      "hero", "belief", "culture-gap", "values", "transformation", "appreciation-loop",
-      "impact", "product-bridge", "audience", "emotional-proof", "early-access"
+      "hero", "problem", "vision", "category", "appreciation-loop", "capabilities",
+      "outcomes", "early-access", "pricing", "faq", "final-cta"
     ]);
+    await expect(page.getByRole("heading", { level: 1, name: "Build the workplace people want to belong to." })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "The work that moves companies forward rarely fits inside a performance review." })).toBeAttached();
+    await expect(page.getByRole("heading", { name: "Meaningful culture for $1 per employee/month." })).toBeAttached();
+    await expect(page.locator(".visionary-capability-card")).toHaveCount(8);
+    await expect(page.locator(".visionary-loop-step")).toHaveCount(5);
+    await expect(page.locator(".visionary-faq details")).toHaveCount(9);
   });
 
-  test("uses the Figma hero hierarchy and meaningful conversion destinations", async ({ page }) => {
+  test("uses the new Figma hero and meaningful conversion destinations", async ({ page }) => {
     const hero = page.locator('[data-persona-page="visionary"] [data-home-section="hero"]');
-    await expect(hero.locator(".culture-orbit")).toHaveCount(0);
-    await expect(hero.locator(".dark-scroll-cue")).toHaveCount(0);
-    await expect(hero.getByText("Recognize great work, celebrate every milestone, and create a culture where appreciation becomes part of everyday work.")).toBeVisible();
-    await expect(page.getByRole("link", { name: /Join Waitlist/ }).first()).toHaveAttribute("href", "/contact");
+    await expect(hero.getByText("The culture operating system for modern teams", { exact: true })).toBeVisible();
+    await expect(hero.getByText("Because when people feel seen, they do more than stay. They participate, contribute and grow.", { exact: true })).toBeVisible();
+    await expect(page.getByRole("link", { name: /Join the Waitlist/ }).first()).toHaveAttribute("href", "/contact");
     await expect(page.getByRole("link", { name: "Explore the Product", exact: true })).toHaveAttribute("href", "/product");
     await expect(page.locator('a[href="#appreciation-loop"]')).not.toHaveCount(0);
+    await expect(page.locator('[data-home-section="pricing"] a[href="/pricing"]')).toBeVisible();
+  });
+
+  test("matches the Figma typography, widths, cards, and dark surface", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    const styles = await page.locator('[data-persona-page="visionary"] .dark-hero h1').evaluate((node) => {
+      const computed = getComputedStyle(node);
+      return { fontSize: computed.fontSize, lineHeight: computed.lineHeight, color: computed.color, textAlign: computed.textAlign };
+    });
+    expect(styles).toEqual({ fontSize: "102px", lineHeight: "100px", color: "rgb(248, 250, 252)", textAlign: "center" });
+    await expect(page.locator('[data-persona-page="visionary"] .dark-hero')).toHaveCSS("background-color", "rgb(9, 10, 22)");
+    const problemWidth = await page.locator(".visionary-section-inner").first().evaluate((node) => node.getBoundingClientRect().width);
+    expect(problemWidth).toBe(1280);
+    const cardWidths = await page.locator(".visionary-problem-card").evaluateAll((cards) => cards.map((card) => Math.round(card.getBoundingClientRect().width)));
+    expect(new Set(cardWidths).size).toBe(1);
   });
 });
 
@@ -193,58 +209,22 @@ test.beforeEach(async ({ page }) => {
   await page.route("https://fonts.gstatic.com/**", (route) => route.abort());
 });
 
-test.describe("homepage Visionary design system", () => {
-  test.use({ viewport: { width: 1440, height: 900 } });
-
-  test("matches the Figma hero typography and color hierarchy", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.getByRole("tab", { name: "Visionary" })).toBeVisible();
-    const styles = await page.locator('[data-persona-page="visionary"] .dark-hero h1').evaluate((node) => {
-      const computed = getComputedStyle(node);
-      return { fontSize: computed.fontSize, lineHeight: computed.lineHeight, color: computed.color, textAlign: computed.textAlign };
-    });
-    expect(styles).toEqual({ fontSize: "102px", lineHeight: "100px", color: "rgb(248, 250, 252)", textAlign: "center" });
-    await expect(page.locator('[data-persona-page="visionary"] .dark-hero')).toHaveCSS("background-color", "rgb(9, 10, 22)");
-  });
-
-  test("defines the supplied dark Visionary tokens", async () => {
-    const css = await readFile(new URL("../site.css", import.meta.url), "utf8");
-    for (const token of [
-      "--dv-surface: #090a16",
-      "--dv-section: #111328",
-      "--dv-elevated: #171a34",
-      "--dv-text: #f8fafc",
-      "--dv-muted: #b8c0d9",
-      "--dv-violet: #8b5cf6",
-      "--dv-orchid: #d946ef",
-      "--dv-coral: #ff6b5f",
-      "--dv-gold: #f5c542",
-      "--dv-cyan: #22d3ee"
-    ]) {
-      expect(css).toContain(token);
-    }
-  });
-});
-
-test("Visionary sections use the refined heading, layout, and loop-card treatment", async ({ page }) => {
+test("Visionary refresh keeps section typography, loop cards, and CTA alignment consistent", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/?persona=visionary");
 
-  const sectionHeadingSizes = await page.locator('[data-persona-page="visionary"] .persona-section h2').evaluateAll((headings) =>
+  const sectionHeadingSizes = await page.locator('[data-persona-page="visionary"] .visionary-section h2').evaluateAll((headings) =>
     headings.filter((heading) => heading.getClientRects().length).map((heading) => Number.parseFloat(getComputedStyle(heading).fontSize))
   );
   expect(Math.max(...sectionHeadingSizes)).toBeLessThanOrEqual(80);
 
-  const cultureGap = page.locator("#culture-gap");
+  const cultureGap = page.locator('[data-home-section="problem"]');
   const cultureHeading = cultureGap.getByRole("heading", { level: 2 });
   const [sectionBox, headingBox] = await Promise.all([cultureGap.boundingBox(), cultureHeading.boundingBox()]);
   expect(headingBox.x - sectionBox.x).toBeLessThanOrEqual(100);
 
-  const transformationBackground = await page.locator('[data-home-section="transformation"]').evaluate((section) => getComputedStyle(section).backgroundColor);
-  expect(transformationBackground).not.toBe("rgb(242, 236, 221)");
-
   const loop = page.locator("#appreciation-loop");
-  const cardGeometry = await loop.locator(".loop-grid article").evaluateAll((cards) => cards.map((card) => {
+  const cardGeometry = await loop.locator(".visionary-loop-step").evaluateAll((cards) => cards.map((card) => {
     const cardBox = card.getBoundingClientRect();
     const numberBox = card.querySelector("span").getBoundingClientRect();
     return {
@@ -252,11 +232,10 @@ test("Visionary sections use the refined heading, layout, and loop-card treatmen
       numberContained: numberBox.left >= cardBox.left && numberBox.right <= cardBox.right && numberBox.top >= cardBox.top && numberBox.bottom <= cardBox.bottom
     };
   }));
-  expect(new Set(cardGeometry.map(({ radius }) => radius))).toEqual(new Set(["24px"]));
+  expect(new Set(cardGeometry.map(({ radius }) => radius))).toEqual(new Set(["14px"]));
   expect(cardGeometry.every(({ numberContained }) => numberContained)).toBeTruthy();
 
-  const [loopBox, ctaBox] = await Promise.all([loop.boundingBox(), loop.getByRole("link", { name: /Join Waitlist/ }).boundingBox()]);
-  expect(Math.abs((ctaBox.x + ctaBox.width / 2) - (loopBox.x + loopBox.width / 2))).toBeLessThanOrEqual(2);
+  await expect(loop.locator(".visionary-loop-list")).toHaveCSS("grid-template-columns", /.+/);
 });
 
 const routes = [

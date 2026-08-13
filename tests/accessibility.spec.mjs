@@ -40,8 +40,7 @@ test("personality tabs implement roving keyboard navigation", async ({ page }) =
 
 test("visual data and workspace containers use supported semantics", async ({ page }) => {
   await page.goto("/?persona=visionary");
-  await expect(page.locator(".culture-orbit")).toHaveCount(0);
-  await expect(page.locator(".loop-grid")).toHaveAttribute("role", "list");
+  await expect(page.locator(".visionary-loop-list")).toHaveAttribute("role", "list");
 
   await page.getByRole("tab", { name: "Strategist" }).click();
   await expect(page.locator(".strategist-dashboard")).not.toHaveAttribute("aria-label");
@@ -49,6 +48,14 @@ test("visual data and workspace containers use supported semantics", async ({ pa
 
   await page.getByRole("tab", { name: "Operator" }).click();
   await expect(page.locator(".operator-workspace")).toHaveAttribute("aria-labelledby", "operator-workspace-title");
+});
+
+test("Visionary FAQ uses native keyboard-accessible disclosures", async ({ page }) => {
+  await page.goto("/?persona=visionary");
+  const firstQuestion = page.locator(".visionary-faq summary").first();
+  await firstQuestion.focus();
+  await page.keyboard.press("Enter");
+  await expect(firstQuestion.locator("..")).toHaveAttribute("open", "");
 });
 
 test("contact validation works for keyboard submission and describes errors", async ({ page }) => {
