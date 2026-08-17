@@ -202,6 +202,86 @@ test.describe("refreshed Visionary homepage", () => {
     const cardWidths = await page.locator(".visionary-problem-card").evaluateAll((cards) => cards.map((card) => Math.round(card.getBoundingClientRect().width)));
     expect(new Set(cardWidths).size).toBe(1);
   });
+
+  test("uses the approved Visionary text hierarchy and desktop reading rhythm", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/?persona=visionary");
+
+    for (const selector of [
+      ".visionary-hero h1",
+      ".visionary-section h2",
+      ".visionary-problem-card h3",
+      ".visionary-faq-list summary"
+    ]) {
+      await expect(page.locator(selector).first()).toHaveCSS("color", "rgb(248, 250, 252)");
+    }
+
+    for (const selector of [
+      ".visionary-hero-support",
+      ".visionary-body",
+      ".visionary-eyebrow",
+      ".visionary-problem-card p",
+      ".dark-hero__note",
+      ".visionary-faq-list details p",
+      ".site-footer > div > p"
+    ]) {
+      await expect(page.locator(selector).first()).toHaveCSS("color", "rgb(184, 192, 217)");
+    }
+
+    const heroRhythm = await page.locator(".visionary-hero").evaluate((hero) => {
+      const support = hero.querySelector(".visionary-hero-support");
+      const secondParagraph = support.querySelector("p + p");
+      const actions = hero.querySelector(".dark-actions");
+      const note = hero.querySelector(".dark-hero__note");
+      const outcome = hero.querySelector(".visionary-outcome-line");
+      return {
+        supportLineHeight: getComputedStyle(support).lineHeight,
+        paragraphGap: getComputedStyle(secondParagraph).marginTop,
+        actionsMargin: getComputedStyle(actions).marginTop,
+        actionsGap: getComputedStyle(actions).gap,
+        noteMargin: getComputedStyle(note).marginTop,
+        outcomeMargin: getComputedStyle(outcome).marginTop
+      };
+    });
+    expect(heroRhythm).toEqual({
+      supportLineHeight: "30px",
+      paragraphGap: "12px",
+      actionsMargin: "32px",
+      actionsGap: "24px",
+      noteMargin: "24px",
+      outcomeMargin: "24px"
+    });
+
+    await expect(page.locator(".visionary-problem-card p").first()).toHaveCSS("font-size", "16px");
+    await expect(page.locator(".visionary-problem-card p").first()).toHaveCSS("line-height", "24px");
+    await expect(page.locator(".visionary-index span").first()).toHaveCSS("color", "rgb(179, 156, 254)");
+    await expect(page.locator(".visionary-hero .dark-button--secondary")).toHaveCSS("color", "rgb(9, 10, 22)");
+  });
+
+  test("uses the approved mobile hero rhythm", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/?persona=visionary");
+    const rhythm = await page.locator(".visionary-hero").evaluate((hero) => {
+      const support = hero.querySelector(".visionary-hero-support");
+      const actions = hero.querySelector(".dark-actions");
+      return {
+        supportSize: getComputedStyle(support).fontSize,
+        supportLineHeight: getComputedStyle(support).lineHeight,
+        actionsMargin: getComputedStyle(actions).marginTop,
+        actionsGap: getComputedStyle(actions).gap,
+        noteMargin: getComputedStyle(hero.querySelector(".dark-hero__note")).marginTop,
+        outcomeMargin: getComputedStyle(hero.querySelector(".visionary-outcome-line")).marginTop
+      };
+    });
+    expect(rhythm).toEqual({
+      supportSize: "16px",
+      supportLineHeight: "26px",
+      actionsMargin: "28px",
+      actionsGap: "16px",
+      noteMargin: "24px",
+      outcomeMargin: "24px"
+    });
+  });
 });
 
 test.beforeEach(async ({ page }) => {

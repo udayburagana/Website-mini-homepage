@@ -1780,6 +1780,92 @@ header {
   }
 }
 
+/* Visionary text hierarchy and vertical rhythm remediation. */
+.dark-visionary .visionary-refresh {
+  --visionary-text-primary: #f8fafc;
+  --visionary-text-secondary: #b8c0d9;
+}
+
+.dark-visionary .visionary-refresh h1,
+.dark-visionary .visionary-refresh h2,
+.dark-visionary .visionary-refresh h3,
+.dark-visionary .visionary-refresh blockquote,
+.dark-visionary .visionary-refresh .visionary-faq-list summary,
+.dark-visionary .visionary-refresh .visionary-price-summary p strong {
+  color: var(--visionary-text-primary);
+}
+
+.dark-visionary .visionary-refresh .dark-kicker,
+.dark-visionary .visionary-refresh .visionary-hero-support,
+.dark-visionary .visionary-refresh .dark-hero__note,
+.dark-visionary .visionary-refresh .visionary-index,
+.dark-visionary .visionary-refresh .visionary-eyebrow,
+.dark-visionary .visionary-refresh .visionary-body,
+.dark-visionary .visionary-refresh .visionary-section p,
+.dark-visionary .visionary-refresh .visionary-section li,
+.dark-visionary .visionary-refresh .visionary-section small,
+.dark-visionary .visionary-refresh .visionary-faq-list details p,
+.dark-visionary .visionary-refresh .visionary-final-cta p {
+  color: var(--visionary-text-secondary) !important;
+}
+
+.dark-visionary .visionary-refresh .visionary-index span,
+.dark-visionary .visionary-refresh .visionary-pillar-grid article > span,
+.dark-visionary .visionary-refresh .visionary-loop-step > span,
+.dark-visionary .visionary-refresh .visionary-capability-card small,
+.dark-visionary .visionary-refresh .visionary-outcome-grid small,
+.dark-visionary .visionary-refresh .visionary-outcome-line,
+.dark-visionary .visionary-refresh .visionary-final-cta strong {
+  color: var(--vr-accent) !important;
+}
+
+.dark-visionary .visionary-refresh .visionary-hero-support {
+  font-size: 18px;
+  line-height: 30px;
+}
+.dark-visionary .visionary-refresh .visionary-hero-support p + p { margin-top: 12px; }
+.dark-visionary .visionary-refresh .dark-actions { margin-top: 32px; gap: 24px; }
+.dark-visionary .visionary-refresh .dark-hero__copy > .dark-hero__note { margin-top: 24px; }
+.dark-visionary .visionary-refresh .visionary-outcome-line { margin-top: 24px; }
+
+.dark-visionary .visionary-refresh .visionary-body { line-height: 28px; }
+.dark-visionary .visionary-refresh .visionary-problem-card p,
+.dark-visionary .visionary-refresh .visionary-pillar-grid p,
+.dark-visionary .visionary-refresh .visionary-outcome-grid p,
+.dark-visionary .visionary-refresh .visionary-loop-step p,
+.dark-visionary .visionary-refresh .visionary-capability-card p {
+  font-size: 16px;
+  line-height: 24px;
+}
+.dark-visionary .visionary-refresh .visionary-index,
+.dark-visionary .visionary-refresh .visionary-capability-card small,
+.dark-visionary .visionary-refresh .visionary-outcome-grid small,
+.dark-visionary .visionary-refresh .visionary-price-summary > small {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.dark-visionary .persona-tab:not([aria-selected="true"]),
+.dark-visionary .primary-navigation > a:not(.button),
+.dark-visionary .site-footer p,
+.dark-visionary .site-footer nav a,
+.dark-visionary .site-footer .footer-legal,
+.dark-visionary .site-footer > small {
+  color: #b8c0d9;
+}
+.dark-visionary .site-footer .brand,
+.dark-visionary .site-footer .brand span { color: #f8fafc; }
+
+@media (max-width: 767px) {
+  .dark-visionary .visionary-refresh .visionary-hero-support {
+    font-size: 16px;
+    line-height: 26px;
+  }
+  .dark-visionary .visionary-refresh .dark-actions { margin-top: 28px; gap: 16px; }
+  .dark-visionary .visionary-refresh .dark-hero__copy > .dark-hero__note { margin-top: 24px; }
+  .dark-visionary .visionary-refresh .visionary-outcome-line { margin-top: 24px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html,
   html:focus-within { scroll-behavior: auto !important; }
