@@ -8,7 +8,8 @@ const routes = new Map([
   ["/product", "/Product.dc.html"],
   ["/pricing", "/Pricing.dc.html"],
   ["/about", "/About.dc.html"],
-  ["/contact", "/Contact.dc.html"]
+  ["/contact", "/Contact.dc.html"],
+  ["/onboarding", "/Onboarding.dc.html"]
 ]);
 const contentTypes = {
   ".css": "text/css; charset=utf-8",

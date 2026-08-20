@@ -343,6 +343,11 @@ const routes = [
     path: "/contact",
     title: "Contact EzRewards | Early Access",
     description: /early access/i
+  },
+  {
+    path: "/onboarding",
+    title: "Start your EzRewards setup | EzRewards",
+    description: /guided steps/i
   }
 ];
 

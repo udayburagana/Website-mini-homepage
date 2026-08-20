@@ -1,48 +1,49 @@
-# Operator Capability Grid Design QA
+# EzRewards Onboarding Flow Design QA
 
 ## Evidence
 
-- Source visual truth: `C:\Users\Uday\AppData\Local\Temp\codex-clipboard-d3077983-f625-4313-9309-dfdd38e49ab6.png`
-- Desktop implementation: `C:\Users\Uday\Downloads\Website-mini-homepage-main\docs\qa\operator-capability-grid\operator-capabilities-implementation.png`
-- Mobile implementation: `C:\Users\Uday\Downloads\Website-mini-homepage-main\docs\qa\operator-capability-grid\operator-capabilities-mobile.png`
-- Side-by-side comparison: `C:\Users\Uday\Downloads\Website-mini-homepage-main\docs\qa\operator-capability-grid\operator-capabilities-comparison.png`
-- Desktop comparison viewport: 1880 × 956 CSS px, device scale factor 1
-- Source pixels: 1880 × 956
-- Desktop implementation pixels: 1880 × 956
-- Mobile implementation viewport and pixels: 390 × 844, device scale factor 1
-- State: Operator personality selected; “Built for day-to-day use” capability section
+- Source visual truth: `docs/qa/onboarding/visionary-desktop.png` — current Visionary homepage at 1440 × 900.
+- Desktop implementation: `docs/qa/onboarding/onboarding-desktop.png`, `organization-desktop.png`, `review-desktop.png`, and `complete-desktop.png`.
+- Mobile implementation: `docs/qa/onboarding/onboarding-mobile.png`, `organization-mobile.png`, `review-mobile.png`, and `complete-mobile.png`.
+- Desktop source and implementation pixels: 1440 × 900 viewport, device scale factor 1. Full-page onboarding captures extend vertically where the state requires it.
+- Mobile implementation viewport: 390 × 844 CSS px, device scale factor 1. Full-page captures preserve the complete form and review content.
+- States: sign-in, organization details, populated review, and completion.
+- Browser-rendered evidence: Chromium through the repository Playwright runtime.
+- Primary interactions tested: authentication bypass, password visibility, current-step validation, Back/Continue, value retention, Review Edit actions, final confirmation, and return-home link.
+- Browser console errors: none.
 
-The source and desktop implementation were normalized to identical pixel dimensions and placed side by side in one comparison image. A focused card-grid region was used because typography, icon treatment, and internal spacing are legible there; a separate mobile capture validates the responsive card stack.
+The Visionary source and onboarding sign-in implementation were opened in the same comparison pass at the same desktop viewport. Focused state captures were also inspected together because form labels, spacing, review density, and completion hierarchy are not legible from a single full-flow overview.
 
 ## Findings
 
-No actionable P0, P1, or P2 differences remain.
+No actionable P0, P1, or P2 findings remain.
 
-- **Fonts and typography:** The implementation preserves the existing EzRewards Space Grotesk/Inter hierarchy rather than copying the reference brand typeface. Card eyebrows, headings, and supporting copy remain clear at the denser four-column width with no clipping or truncation.
-- **Spacing and layout rhythm:** Desktop uses four equal columns and a consistent visual-stage height, producing the requested four-card row. Equal card padding and aligned illustration stages give the grid the technical rhythm of the reference. Tablet and mobile reflow to two and one columns.
-- **Colors and visual tokens:** The reference’s neon green technical emphasis is intentionally translated to EzRewards cyan and teal. Dark navy surfaces, cool borders, and the cyan highlighted AI card remain consistent with the Operator personality and maintain contrast.
-- **Image quality and asset fidelity:** All eight illustrations use crisp local Phosphor SVG assets with no external runtime dependency. They are semantically matched to the card subject and remain sharp at desktop and mobile sizes.
-- **Copy and content:** The eight existing card titles and paragraphs are unchanged. The section introduction is also unchanged.
-- **Accessibility and interaction:** Illustrations are decorative and hidden from assistive technology. The card content does not depend on hover. Reduced-motion mode disables card movement.
+- **Fonts and typography:** Headings use Space Grotesk and body copy, labels, controls, and helper text use Inter. The onboarding hierarchy translates the Visionary homepage’s large, low-weight display treatment into a more practical application scale. Labels and controls remain readable without truncation at 390px.
+- **Spacing and layout rhythm:** Desktop uses a stable guidance/form split with generous panel padding and consistent action placement. Tablet collapses before the two-column minimum becomes cramped. Mobile uses a single content panel, stacked fields, and full-width actions without horizontal overflow.
+- **Colors and visual tokens:** Navy surfaces, violet actions, orchid progress, cool borders, and muted blue-gray copy map directly to the Visionary brand. Error and success treatments use coral and green rather than overloading purple. Automated axe checks found no WCAG A/AA violations in desktop or mobile states.
+- **Image quality and asset fidelity:** The target relies on typography, surfaces, and atmosphere rather than raster imagery. No source image asset was omitted or replaced. The existing brand mark remains crisp and the background treatment uses the same subtle grid/radial language as the Visionary homepage.
+- **Copy and content:** Every step explains purpose, expected effort, required information, and next action. Prototype limitations are stated clearly. Review copy mirrors entered values, and the completion state explains the next real-product action.
+- **Interaction states:** Persistent labels, password reveal, field-level errors, a focusable error summary, progress updates, Back retention, review editing, completion, focus movement, and reduced-motion behavior are implemented and tested.
+- **Accessibility:** Semantic headings, fieldsets, legends, autocomplete attributes, required-field messages, `aria-invalid`, described errors, progress semantics, 44px controls, keyboard focus, reduced motion, and 320–1440px overflow checks pass.
 
 ## Comparison History
 
-### Initial pass
+### Initial capture
 
-- Source evidence: supplied Oxide technical card reference.
-- Implementation evidence: `operator-capabilities-implementation.png` and the normalized side-by-side comparison.
-- Findings: no P0/P1/P2 issues. The implementation intentionally retains the EzRewards section-scale heading and simplified product iconography rather than copying Oxide-specific interface data.
-- Fixes required: none.
+- Evidence: first desktop/mobile sign-in and organization captures.
+- Finding: capture occurred during the 350ms entry animation, making active content appear artificially low contrast; full-page capture also exposed the off-canvas skip link after focus-driven scrolling.
+- Classification: capture normalization issue, not a product defect.
+- Fix: recaptured with reduced motion, a stable wait, scroll normalization, and focus blur before full-page evidence.
+- Post-fix evidence: current files listed above show full-opacity content and no skip-link artifact.
 
-## Primary Interactions and Console
+### Final pass
 
-- Personality selector retained and Operator remains selected.
-- Existing navigation and Join Waitlist controls remain visible.
-- Responsive card layout checked at desktop, tablet, and mobile widths.
-- Browser console warnings/errors: none.
+- Evidence: normalized sign-in, organization, review, and completion captures at desktop and mobile.
+- Result: typography, palette, spacing, responsive behavior, form density, state feedback, and copy remain coherent with the Visionary source. No P0/P1/P2 fixes required.
 
 ## Follow-up Polish
 
-- P3: Future product screenshots could replace the icon panels when production UI is finalized, adding more data density without changing the grid.
+- P3: Replace the text-glyph brand sparkle with the final production logo asset when that asset is formally supplied.
+- P3: When a backend is introduced, add loading, server-error, expired-session, and resumable-draft states without changing the current visual structure.
 
 final result: passed

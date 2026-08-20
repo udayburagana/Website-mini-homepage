@@ -12,7 +12,9 @@ const auditTargets = [
   ["Product", "/product", 1440, 900],
   ["Pricing", "/pricing", 1440, 900],
   ["About", "/about", 1440, 900],
-  ["Contact", "/contact", 1440, 900]
+  ["Contact", "/contact", 1440, 900],
+  ["Onboarding desktop", "/onboarding", 1440, 900],
+  ["Onboarding mobile", "/onboarding", 390, 844]
 ];
 
 for (const [name, url, width, height] of auditTargets) {
@@ -72,7 +74,7 @@ test("contact validation works for keyboard submission and describes errors", as
 test("reduced motion disables animations and smooth scrolling on every route", async ({ browser }) => {
   const context = await browser.newContext({ reducedMotion: "reduce" });
   const page = await context.newPage();
-  for (const url of ["/?persona=visionary", "/?persona=strategist", "/?persona=operator", "/product", "/pricing", "/about", "/contact"]) {
+  for (const url of ["/?persona=visionary", "/?persona=strategist", "/?persona=operator", "/product", "/pricing", "/about", "/contact", "/onboarding"]) {
     await page.goto(`http://127.0.0.1:4174${url}`);
     expect(await page.locator("html").evaluate((element) => getComputedStyle(element).scrollBehavior)).toBe("auto");
     const animated = page.locator('[style*="animation"], .strategist-bars i').first();
@@ -81,4 +83,17 @@ test("reduced motion disables animations and smooth scrolling on every route", a
     }
   }
   await context.close();
+});
+
+test("onboarding reports validation errors and step changes to keyboard users", async ({ page }) => {
+  await page.goto("/onboarding");
+  await page.getByRole("button", { name: "Sign in and continue" }).click();
+  await expect(page.locator("[data-error-summary]")).toBeFocused();
+  await expect(page.locator("#email")).toHaveAttribute("aria-invalid", "true");
+  await expect(page.locator("#email")).toHaveAttribute("aria-describedby", /email-error/);
+
+  await page.locator("#email").fill("admin@example.com");
+  await page.locator("#password").fill("prototype");
+  await page.getByRole("button", { name: "Sign in and continue" }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "Let’s set up your workplace" })).toBeFocused();
 });

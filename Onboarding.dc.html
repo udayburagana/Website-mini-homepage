@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Start your EzRewards setup | EzRewards</title>
+  <meta name="description" content="Set up your EzRewards workplace and recognition program in a few guided steps.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#090a16">
+  <meta property="og:title" content="Start your EzRewards setup | EzRewards">
+  <meta property="og:description" content="A guided setup for your EzRewards workplace.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EzRewards">
+  <meta property="og:url" content="https://website-mini-homepage.vercel.app/onboarding">
+  <link rel="canonical" href="https://website-mini-homepage.vercel.app/onboarding">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/tokens/fonts.css">
+  <link rel="stylesheet" href="/onboarding.css">
+  <script src="/onboarding.js" defer></script>
+</head>
+<body class="onboarding-page">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="onboarding-header">
+    <a class="onboarding-brand" href="/" aria-label="EzRewards home">
+      <span class="onboarding-brand__mark" aria-hidden="true">✦</span>
+      <span>EzRewards</span>
+    </a>
+    <a class="text-link" href="/">Return to website</a>
+  </header>
+
+  <main id="main-content" class="onboarding-main">
+    <section class="onboarding-shell" aria-labelledby="step-title">
+      <aside class="onboarding-aside" aria-label="Setup guidance">
+        <div>
+          <p class="eyebrow">EzRewards early access</p>
+          <h2>Make appreciation part of how work happens.</h2>
+          <p data-context-copy>Sign in to begin a guided setup for your workplace.</p>
+        </div>
+        <div class="setup-promise">
+          <span aria-hidden="true">✦</span>
+          <p><strong>Your information stays here.</strong><br>This prototype does not send or save your details.</p>
+        </div>
+      </aside>
+
+      <div class="onboarding-panel">
+        <div class="progress-meta">
+          <p data-step-label>Step 1 of 7</p>
+          <p data-step-name>Sign in</p>
+        </div>
+        <div class="step-progress" role="progressbar" aria-label="Onboarding progress" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1" data-step-progress>
+          <span></span>
+        </div>
+
+        <form data-onboarding-form novalidate>
+          <div class="error-summary" data-error-summary tabindex="-1" role="alert" hidden>
+            <h2>Check the details below</h2>
+            <p>We found a few things that need your attention.</p>
+            <ul></ul>
+          </div>
+
+          <section class="onboarding-step is-active" data-step="1" data-step-name="Sign in" aria-labelledby="step-title">
+            <p class="eyebrow">Welcome to EzRewards</p>
+            <h1 id="step-title" tabindex="-1">Welcome back</h1>
+            <p class="step-intro">Use any work email and password to explore this onboarding prototype. No account is required.</p>
+            <div class="field">
+              <label for="email">Work email <span>Required</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@company.com">
+              <p class="field-hint" id="email-hint">We’ll use this address for your administrator profile.</p>
+              <p class="field-error" id="email-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="password">Password <span>Required</span></label>
+              <div class="password-field">
+                <input id="password" name="password" type="password" autocomplete="current-password" required>
+                <button type="button" class="password-toggle" data-password-toggle aria-label="Show password">Show</button>
+              </div>
+              <p class="field-hint" id="password-hint">For this prototype, any non-empty password works.</p>
+              <p class="field-error" id="password-error" hidden></p>
+            </div>
+            <div class="onboarding-actions onboarding-actions--single">
+              <button class="primary-button" type="submit" data-next>Sign in and continue <span aria-hidden="true">→</span></button>
+            </div>
+          </section>
+
+          <section class="onboarding-step" data-step="2" data-step-name="Welcome" aria-labelledby="welcome-title" hidden>
+            <p class="eyebrow">About four minutes</p>
+            <h1 id="welcome-title" tabindex="-1">Let’s set up your workplace</h1>
+            <p class="step-intro">We’ll ask about your organization, your administrator profile, and how you want recognition to begin.</p>
+            <ol class="setup-overview">
+              <li><span>01</span><div><strong>Organization</strong><p>Basic details that shape your workspace.</p></div></li>
+              <li><span>02</span><div><strong>Administrator</strong><p>The person responsible for the initial launch.</p></div></li>
+              <li><span>03</span><div><strong>Preferences</strong><p>Your first recognition goal and launch plan.</p></div></li>
+            </ol>
+            <div class="onboarding-actions">
+              <a class="secondary-button" href="/">Save and exit</a>
+              <button class="primary-button" type="button" data-next>Start setup <span aria-hidden="true">→</span></button>
+            </div>
+          </section>
+
+          <section class="onboarding-step" data-step="3" data-step-name="Organization" aria-labelledby="organization-title" hidden>
+            <p class="eyebrow">Your workplace</p>
+            <h1 id="organization-title" tabindex="-1">Tell us about your organization</h1>
+            <p class="step-intro">These details help us prepare the right workspace defaults. You can change them later.</p>
+            <fieldset>
+              <legend>Organization details</legend>
+              <div class="form-grid">
+                <div class="field field--wide">
+                  <label for="organizationName">Organization name <span>Required</span></label>
+                  <input id="organizationName" name="organizationName" autocomplete="organization" required>
+                  <p class="field-error" id="organizationName-error" hidden></p>
+                </div>
+                <div class="field">
+                  <label for="companySize">Company size <span>Required</span></label>
+                  <select id="companySize" name="companySize" required>
+                    <option value="">Select a range</option><option value="1-30">1–30 employees</option><option value="31-50">31–50 employees</option><option value="51-100">51–100 employees</option><option value="101-250">101–250 employees</option><option value="251+">251+ employees</option>
+                  </select>
+                  <p class="field-error" id="companySize-error" hidden></p>
+                </div>
+                <div class="field">
+                  <label for="website">Company website</label>
+                  <input id="website" name="website" type="url" autocomplete="url" placeholder="https://company.com">
+                  <p class="field-error" id="website-error" hidden></p>
+                </div>
+                <div class="field">
+                  <label for="country">Country <span>Required</span></label>
+                  <select id="country" name="country" autocomplete="country-name" required>
+                    <option value="">Select country</option><option>India</option><option>United States</option><option>United Kingdom</option><option>Australia</option><option>Singapore</option><option>Other</option>
+                  </select>
+                  <p class="field-error" id="country-error" hidden></p>
+                </div>
+                <div class="field">
+                  <label for="timezone">Timezone <span>Required</span></label>
+                  <select id="timezone" name="timezone" required>
+                    <option value="">Select timezone</option><option value="Asia/Kolkata">India Standard Time (UTC+5:30)</option><option value="Europe/London">London</option><option value="America/New_York">New York</option><option value="America/Los_Angeles">Los Angeles</option><option value="Asia/Singapore">Singapore</option><option value="Australia/Sydney">Sydney</option>
+                  </select>
+                  <p class="field-error" id="timezone-error" hidden></p>
+                </div>
+              </div>
+            </fieldset>
+            <div class="onboarding-actions"><button class="secondary-button" type="button" data-back>Back</button><button class="primary-button" type="button" data-next>Continue <span aria-hidden="true">→</span></button></div>
+          </section>
+
+          <section class="onboarding-step" data-step="4" data-step-name="Administrator" aria-labelledby="administrator-title" hidden>
+            <p class="eyebrow">Workspace owner</p>
+            <h1 id="administrator-title" tabindex="-1">Create your administrator profile</h1>
+            <p class="step-intro">This person will manage workplace settings and lead the first EzRewards launch.</p>
+            <fieldset><legend>Administrator details</legend><div class="form-grid">
+              <div class="field"><label for="adminName">Full name <span>Required</span></label><input id="adminName" name="adminName" autocomplete="name" required><p class="field-error" id="adminName-error" hidden></p></div>
+              <div class="field"><label for="adminRole">Job title <span>Required</span></label><input id="adminRole" name="adminRole" autocomplete="organization-title" required><p class="field-error" id="adminRole-error" hidden></p></div>
+              <div class="field"><label for="adminEmail">Administrator email <span>Required</span></label><input id="adminEmail" name="adminEmail" type="email" autocomplete="email" required><p class="field-hint">Pre-filled from your sign-in email.</p><p class="field-error" id="adminEmail-error" hidden></p></div>
+              <div class="field"><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+91 98765 43210"><p class="field-hint">Optional. Include your country code.</p><p class="field-error" id="phone-error" hidden></p></div>
+            </div></fieldset>
+            <div class="onboarding-actions"><button class="secondary-button" type="button" data-back>Back</button><button class="primary-button" type="button" data-next>Continue <span aria-hidden="true">→</span></button></div>
+          </section>
+
+          <section class="onboarding-step" data-step="5" data-step-name="Preferences" aria-labelledby="preferences-title" hidden>
+            <p class="eyebrow">Your first launch</p>
+            <h1 id="preferences-title" tabindex="-1">Shape your recognition program</h1>
+            <p class="step-intro">Choose the options closest to your current plan. Nothing here is permanent.</p>
+            <fieldset class="choice-group"><legend>What is your primary goal? <span>Required</span></legend>
+              <label class="choice-card"><input type="radio" name="programGoal" value="Build a habit of everyday recognition" required><span><strong>Build a habit of everyday recognition</strong><small>Make timely appreciation a natural part of work.</small></span></label>
+              <label class="choice-card"><input type="radio" name="programGoal" value="Make company values more visible"><span><strong>Make company values more visible</strong><small>Connect recognition to the behaviors your company values.</small></span></label>
+              <label class="choice-card"><input type="radio" name="programGoal" value="Improve engagement and belonging"><span><strong>Improve engagement and belonging</strong><small>Help people feel seen by teammates and leaders.</small></span></label>
+              <p class="field-error" id="programGoal-error" hidden></p>
+            </fieldset>
+            <fieldset class="choice-group choice-group--compact"><legend>When would you like to launch? <span>Required</span></legend>
+              <label class="choice-card"><input type="radio" name="launchTiming" value="Within the next month" required><span><strong>Within the next month</strong></span></label>
+              <label class="choice-card"><input type="radio" name="launchTiming" value="In one to three months"><span><strong>In one to three months</strong></span></label>
+              <label class="choice-card"><input type="radio" name="launchTiming" value="Still exploring"><span><strong>Still exploring</strong></span></label>
+              <p class="field-error" id="launchTiming-error" hidden></p>
+            </fieldset>
+            <fieldset class="choice-group choice-group--compact"><legend>How should rewards begin? <span>Required</span></legend>
+              <label class="choice-card"><input type="radio" name="rewardApproach" value="Start with recognition, add rewards later" required><span><strong>Start with recognition, add rewards later</strong></span></label>
+              <label class="choice-card"><input type="radio" name="rewardApproach" value="Launch recognition and rewards together"><span><strong>Launch recognition and rewards together</strong></span></label>
+              <p class="field-error" id="rewardApproach-error" hidden></p>
+            </fieldset>
+            <div class="onboarding-actions"><button class="secondary-button" type="button" data-back>Back</button><button class="primary-button" type="button" data-next>Review setup <span aria-hidden="true">→</span></button></div>
+          </section>
+
+          <section class="onboarding-step" data-step="6" data-step-name="Review" data-review aria-labelledby="review-title" hidden>
+            <p class="eyebrow">One last check</p><h1 id="review-title" tabindex="-1">Review your setup</h1><p class="step-intro">Confirm the details below. You can return to any section before finishing.</p>
+            <div class="review-stack">
+              <article><header><div><p>Organization</p><h2 data-review-organization>—</h2></div><button type="button" class="text-button" data-edit-step="3">Edit organization</button></header><dl data-review-organization-list></dl></article>
+              <article><header><div><p>Administrator</p><h2 data-review-admin>—</h2></div><button type="button" class="text-button" data-edit-step="4">Edit administrator</button></header><dl data-review-admin-list></dl></article>
+              <article><header><div><p>Recognition plan</p><h2 data-review-goal>—</h2></div><button type="button" class="text-button" data-edit-step="5">Edit preferences</button></header><dl data-review-preferences-list></dl></article>
+            </div>
+            <div class="privacy-note"><span aria-hidden="true">✓</span><p><strong>Nothing has been submitted.</strong> This prototype keeps the information only in this browser tab.</p></div>
+            <div class="onboarding-actions"><button class="secondary-button" type="button" data-back>Back</button><button class="primary-button" type="button" data-next>Finish setup <span aria-hidden="true">→</span></button></div>
+          </section>
+
+          <section class="onboarding-step completion-step" data-step="7" data-step-name="Complete" data-complete aria-labelledby="complete-title" hidden>
+            <div class="success-mark" aria-hidden="true"><span>✓</span></div>
+            <p class="eyebrow">Setup complete</p><h1 id="complete-title" tabindex="-1">Your workspace is ready for what comes next</h1>
+            <p class="step-intro">You’ve created a clear starting point for recognition at <strong data-complete-organization>your organization</strong>.</p>
+            <div class="next-step-card"><span>01</span><div><strong>Next: invite your founding team</strong><p>When the product connects to a live workspace, you’ll be able to invite employees and launch your first recognition moment.</p></div></div>
+            <a class="primary-button" href="/">Return to the Visionary homepage <span aria-hidden="true">→</span></a>
+          </section>
+        </form>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

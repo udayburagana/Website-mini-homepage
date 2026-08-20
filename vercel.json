@@ -5,7 +5,8 @@
     { "source": "/product", "destination": "/Product.dc.html" },
     { "source": "/pricing", "destination": "/Pricing.dc.html" },
     { "source": "/about", "destination": "/About.dc.html" },
-    { "source": "/contact", "destination": "/Contact.dc.html" }
+    { "source": "/contact", "destination": "/Contact.dc.html" },
+    { "source": "/onboarding", "destination": "/Onboarding.dc.html" }
   ],
   "headers": [
     {
