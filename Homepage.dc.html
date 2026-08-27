@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-persona="visionary">
+<html lang="en" data-persona="default">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,26 +19,38 @@
   <link rel="stylesheet" href="/site.css">
   <script src="/site-ui.js" defer></script>
 </head>
-<body class="visionary-site persona-home dark-visionary">
+<body class="visionary-site persona-home default-active">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header dark-header persona-header">
     <a class="dark-brand" href="/" aria-label="EzRewards home"><span class="dark-brand__mark" aria-hidden="true">✦</span><span>EzRewards</span></a>
     <button class="mobile-menu-toggle" type="button" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation">Menu</button>
     <nav id="primary-navigation" class="primary-navigation" aria-label="Primary">
-      <a href="/product">Product</a><a href="#appreciation-loop">How It Works</a><a href="/pricing">Pricing</a><a href="/about">About</a>
+      <a href="/product">Product</a><a href="#appreciation-loop">How It Works</a><a href="/pricing">Pricing</a><a href="/about">About</a><button class="change-experience" type="button" data-change-experience>Change experience</button>
       <a class="dark-button dark-button--primary dark-button--small" href="/contact">Join Waitlist</a>
     </nav>
   </header>
 
-  <div class="persona-switcher-shell">
-    <div class="persona-switcher" role="tablist" aria-label="See EzRewards through your priorities">
-      <span class="persona-switcher__label">See EzRewards through your priorities</span>
-      <button class="persona-tab" id="persona-visionary" type="button" role="tab" aria-selected="true" data-personality="visionary">Visionary</button>
-      <button class="persona-tab" id="persona-strategist" type="button" role="tab" aria-selected="false" data-personality="strategist">Strategist</button>
-      <button class="persona-tab" id="persona-operator" type="button" role="tab" aria-selected="false" data-personality="operator">Operator</button>
-    </div>
+  <div class="persona-introduction" data-persona-intro>
+    <span>One platform. Five ways to see what matters.</span>
+    <button type="button" data-change-experience>Choose your experience</button>
   </div>
+
+  <dialog class="persona-dialog" aria-labelledby="persona-dialog-title" data-persona-selector>
+    <div class="persona-dialog__panel">
+      <button class="persona-dialog__close" type="button" data-persona-close aria-label="Close experience selector">Close</button>
+      <p class="persona-dialog__eyebrow">Choose your perspective</p>
+      <h2 id="persona-dialog-title">Choose your EzRewards experience</h2>
+      <p>What kind of appreciation experience are you building?</p>
+      <div class="persona-dialog__grid">
+        <button type="button" data-persona-option="visionary"><strong>Visionary</strong><span>I want to build a company people remember.</span></button>
+        <button type="button" data-persona-option="strategist"><strong>Strategist</strong><span>I want to prove culture impact with clarity.</span></button>
+        <button type="button" data-persona-option="operator"><strong>Operator</strong><span>I want to launch and run rewards without friction.</span></button>
+        <button type="button" data-persona-option="creative-culture-builder"><strong>Creative Culture Builder</strong><span>I want recognition to feel fun, social and alive.</span></button>
+      </div>
+      <button class="persona-dialog__default" type="button" data-persona-option="default">Continue with the default EzRewards experience</button>
+    </div>
+  </dialog>
 
   <template id="legacy-visionary-template">
     <section class="dark-hero value-hero" data-home-section="hero">
@@ -155,14 +167,44 @@
     </section>
   </template>
 
-  <main id="main-content" class="persona-main visionary-refresh" data-persona-page="visionary">
+  <main id="main-content" class="shared-persona default-home" data-persona-page="default">
+    <section class="shared-hero" data-persona-section="hero" data-persona-intro-sentinel>
+      <div class="shared-wrap shared-hero__grid"><div><p class="shared-eyebrow">Premium employee appreciation, connected</p><h1>Recognition, rewards and culture visibility in one platform.</h1><p>Make meaningful work visible, connect appreciation to rewards and understand how recognition moves across your company.</p><div class="shared-actions"><a class="shared-button shared-button--primary" href="/contact" data-persona-primary-cta>Join Waitlist</a><a class="shared-button shared-button--secondary" href="#default-loop">See How It Works</a></div><small>Built for growing teams. Starting at $1 per employee/month.</small></div><div class="shared-product-preview" role="img" aria-label="EzRewards recognition, reward and reporting overview"><div><small>Recognition feed</small><strong>Maya recognized Daniel</strong><p>For turning a difficult launch into a team win.</p></div><div class="shared-preview-metrics"><span><b>78%</b> participation</span><span><b>86%</b> reward use</span><span><b>8.4</b> engagement</span></div></div></div>
+    </section>
+    <section class="shared-section" data-persona-section="problem" data-layout="sticky-stack"><div class="shared-wrap shared-layout"><div data-sticky-summary><p class="shared-eyebrow">01 / The problem</p><h2>Great work disappears when appreciation is scattered.</h2><p>Important contributions get trapped in chats, spreadsheets and memory.</p></div><div class="shared-stack"><article data-stack-item data-item-id="visibility"><span>01</span><h3>Contributions become invisible</h3><p>Meaningful work is completed without becoming part of the company story.</p></article><article data-stack-item data-item-id="consistency"><span>02</span><h3>Recognition becomes inconsistent</h3><p>Participation depends on individual managers rather than a shared habit.</p></article><article data-stack-item data-item-id="rewards"><span>03</span><h3>Rewards lose their meaning</h3><p>Incentives are separated from the contribution that earned them.</p></article><article data-stack-item data-item-id="insight"><span>04</span><h3>Leaders lack a clear signal</h3><p>Culture decisions are made without connected recognition data.</p></article></div></div></section>
+    <section class="shared-section shared-section--alt" data-persona-section="vision"><div class="shared-wrap shared-split"><div><p class="shared-eyebrow">02 / The vision</p><h2>One operating system for everyday appreciation.</h2></div><div><p>EzRewards makes recognition easy to share, rewards meaningful to receive and culture activity easier to understand.</p><blockquote>Great work should be seen while it is still shaping the company.</blockquote></div></div></section>
+    <section class="shared-section" data-persona-section="category"><div class="shared-wrap"><p class="shared-eyebrow">03 / Meet EzRewards</p><h2>Three connected foundations for a stronger appreciation culture.</h2><div class="shared-three"><article><h3>Visible recognition</h3><p>Celebrate contributions publicly and make their meaning clear.</p></article><article><h3>Meaningful rewards</h3><p>Connect flexible rewards to the work and behavior being valued.</p></article><article><h3>Useful culture insight</h3><p>Understand participation, patterns and opportunities from one system.</p></article></div></div></section>
+    <section class="shared-section shared-section--dark" id="default-loop" data-persona-section="loop"><div class="shared-wrap"><p class="shared-eyebrow">04 / How EzRewards works</p><h2>One contribution can move through a complete appreciation loop.</h2><ol class="shared-step-list" data-stepper><li><span>01</span><h3>Notice</h3><p>Someone sees work worth appreciating.</p></li><li><span>02</span><h3>Recognize</h3><p>They explain what happened and why it mattered.</p></li><li><span>03</span><h3>Celebrate</h3><p>The contribution becomes visible to the company.</p></li><li><span>04</span><h3>Reward</h3><p>A meaningful reward can reinforce the moment.</p></li><li><span>05</span><h3>Understand</h3><p>Leaders see the patterns behind participation.</p></li></ol></div></section>
+    <section class="shared-section" data-persona-section="capabilities" data-layout="sticky-stack"><div class="shared-wrap shared-layout"><div data-sticky-summary><p class="shared-eyebrow">05 / The platform</p><h2>Everything appreciation needs, without fragmented tools.</h2><p>Explore the connected product capabilities.</p></div><div class="shared-stack"><article data-stack-item><span>Recognition</span><h3>Peer recognition and AI-assisted messages</h3><p>Help employees create specific, thoughtful appreciation.</p></article><article data-stack-item><span>Participation</span><h3>Company feed, reactions and comments</h3><p>Keep meaningful contributions visible and social.</p></article><article data-stack-item><span>Rewards</span><h3>Catalogue, assignment and wallet controls</h3><p>Give employees choice while administrators retain control.</p></article><article data-stack-item><span>Intelligence</span><h3>Reports and AI Report Assistant</h3><p>Ask clear questions and understand participation patterns.</p></article></div></div></section>
+    <section class="shared-section shared-section--alt" data-persona-section="outcomes" data-layout="sticky-stack"><div class="shared-wrap shared-layout"><div data-sticky-summary><p class="shared-eyebrow">06 / Outcomes</p><h2>Appreciation becomes easier to feel and easier to understand.</h2><p>See the outcome for each part of the company.</p></div><div class="shared-stack"><article data-stack-item><span>Employees</span><h3>People know their work matters</h3><p>Recognition is timely, specific and visible.</p></article><article data-stack-item><span>Teams</span><h3>Great work becomes contagious</h3><p>People see the behaviors worth repeating.</p></article><article data-stack-item><span>Leaders</span><h3>Culture becomes measurable</h3><p>Participation patterns become clear enough to act on.</p></article><article data-stack-item><span>Company</span><h3>Values become everyday behavior</h3><p>Shared appreciation reinforces the organization’s identity.</p></article></div></div></section>
+    <section class="shared-section shared-section--violet" data-persona-section="early-access"><div class="shared-wrap shared-split"><div><p class="shared-eyebrow">07 / Early access</p><h2>Help shape a better appreciation operating system.</h2><p>Join selected growing teams experiencing EzRewards before wider launch.</p><a class="shared-button shared-button--light" href="/contact">Join Waitlist</a></div><ul><li>Priority product access</li><li>Guided company onboarding</li><li>Input into product workflows</li><li>Founding customer status</li></ul></div></section>
+    <section class="shared-section" data-persona-section="pricing"><div class="shared-wrap"><p class="shared-eyebrow">08 / Simple pricing</p><div class="shared-price"><div><h2>Everything included for $1 per active employee/month.</h2><p>Pay annually and receive two months free. Reward budgets remain separate and controlled by your company.</p><a class="shared-button shared-button--primary" href="/contact">Join Waitlist</a></div><ul><li>Recognition and company feed</li><li>Rewards, wallet and assignment</li><li>Onboarding and administration</li><li>Reports and AI assistance</li></ul></div></div></section>
+    <section class="shared-section shared-section--alt" data-persona-section="faq"><div class="shared-wrap shared-faq"><div><p class="shared-eyebrow">09 / FAQ</p><h2>Clear answers before you join early access.</h2></div><div><details><summary>What is EzRewards?</summary><p>An employee recognition and rewards platform connecting appreciation, rewards and culture reporting.</p></details><details><summary>Does every recognition include a reward?</summary><p>No. Recognition can be completely non-monetary. Rewards can be assigned separately.</p></details><details><summary>How does pricing work?</summary><p>EzRewards costs $1 per active employee each month.</p></details><details><summary>Is EzRewards available now?</summary><p>EzRewards is accepting applications for early access.</p></details></div></div></section>
+    <section class="shared-final" data-persona-section="final-cta"><div class="shared-wrap"><h2>Make meaningful work visible.</h2><p>Bring recognition, rewards and culture insight into one connected experience.</p><a class="shared-button shared-button--primary" href="/contact">Join Waitlist</a></div></section>
+  </main>
+
+  <main class="shared-persona creative-home" data-persona-page="creative-culture-builder" hidden inert>
+    <section class="creative-hero" data-persona-section="hero"><div class="shared-wrap creative-hero__grid"><div><p class="creative-label">Recognition should feel alive</p><h1>Make everyday wins impossible to miss.</h1><p>Turn great work into visible appreciation, shared celebration and rewards people remember.</p><div class="shared-actions"><a class="creative-button" href="/contact" data-persona-primary-cta>Make Work Feel Celebrated</a><a class="creative-button creative-button--white" href="#creative-loop">See Recognition in Action</a></div></div><div class="creative-feed" aria-label="Illustrative recognition feed"><span>Live appreciation</span><article><b>MC</b><div><strong>Maya recognized Daniel</strong><p>For turning a difficult launch into a team win.</p><small>♥ 12 reactions · 3 comments</small></div></article><div class="creative-badges"><span>Ownership</span><span>Team win</span><span>+100 points</span></div></div></div></section>
+    <section class="creative-section" data-persona-section="problem" data-layout="sticky-stack"><div class="shared-wrap shared-layout"><div data-sticky-summary><p class="creative-label">01 / The culture gap</p><h2>Great work loses energy when it stays private.</h2><p>Appreciation needs somewhere visible to travel.</p></div><div class="creative-stack"><article data-stack-item><span>01</span><h3>Wins disappear in chat</h3><p>A private thank-you cannot energize the wider team.</p></article><article data-stack-item><span>02</span><h3>Recognition feels formal</h3><p>People wait for scheduled programs instead of celebrating now.</p></article><article data-stack-item><span>03</span><h3>Rewards lose the story</h3><p>The moment and the reward arrive in different places.</p></article><article data-stack-item><span>04</span><h3>Participation loses momentum</h3><p>Employees stop joining when appreciation feels like administration.</p></article></div></div></section>
+    <section class="creative-section creative-section--purple" data-persona-section="vision"><div class="shared-wrap shared-split"><div><p class="creative-label">02 / The vision</p><h2>Recognition should feel social, visible and alive.</h2></div><div><p>Every meaningful contribution can become a shared moment that helps people feel seen and gives the company new energy.</p><blockquote>Celebrate the win before it disappears.</blockquote></div></div></section>
+    <section class="creative-section" data-persona-section="category"><div class="shared-wrap"><p class="creative-label">03 / Meet EzRewards</p><h2>Turn appreciation into shared energy.</h2><div class="creative-three"><article><span>✦</span><h3>Shout it out</h3><p>Make great work visible across the company.</p></article><article><span>♥</span><h3>Celebrate together</h3><p>React, comment and reinforce what matters.</p></article><article><span>★</span><h3>Reward the moment</h3><p>Connect flexible rewards to meaningful work.</p></article></div></div></section>
+    <section class="creative-section creative-section--yellow" id="creative-loop" data-persona-section="loop"><div class="shared-wrap"><p class="creative-label">04 / How it works</p><h2>Notice it. Share it. Celebrate it. Keep it moving.</h2><ol class="creative-step-list" data-stepper><li><span>01</span><h3>Notice</h3><p>See something worth celebrating.</p></li><li><span>02</span><h3>Share</h3><p>Turn it into a thoughtful recognition post.</p></li><li><span>03</span><h3>Celebrate</h3><p>Let the team react and add their voice.</p></li><li><span>04</span><h3>Reward</h3><p>Add points or a meaningful reward.</p></li><li><span>05</span><h3>Learn</h3><p>See what appreciation is doing across the company.</p></li></ol></div></section>
+    <section class="creative-section" data-persona-section="capabilities" data-layout="sticky-stack"><div class="shared-wrap shared-layout"><div data-sticky-summary><p class="creative-label">05 / Built for participation</p><h2>A recognition experience people want to join.</h2><p>Simple social moments meet practical product controls.</p></div><div class="creative-stack"><article data-stack-item><span>Recognition</span><h3>Posts and AI-assisted messages</h3><p>Start with genuine appreciation and make it easier to express.</p></article><article data-stack-item><span>Social energy</span><h3>Feed, comments, reactions and badges</h3><p>Give every contribution somewhere visible to travel.</p></article><article data-stack-item><span>Rewards</span><h3>Catalogue, points and flexible redemption</h3><p>Let rewards carry the story behind the moment.</p></article><article data-stack-item><span>Insight</span><h3>Reports and AI answers</h3><p>Understand who participates and where energy is growing.</p></article></div></div></section>
+    <section class="creative-section creative-section--coral" data-persona-section="outcomes" data-layout="sticky-stack"><div class="shared-wrap shared-layout"><div data-sticky-summary><p class="creative-label">06 / Shared momentum</p><h2>When appreciation spreads, the whole team feels it.</h2><p>Select a perspective to see the effect.</p></div><div class="creative-stack"><article data-stack-item><span>Employees</span><h3>“My work was noticed.”</h3><p>People receive appreciation while the contribution still feels real.</p></article><article data-stack-item><span>Teams</span><h3>“We celebrate each other here.”</h3><p>Recognition becomes a shared habit instead of a formal event.</p></article><article data-stack-item><span>Leaders</span><h3>“I can see what energizes people.”</h3><p>Participation patterns reveal where culture is moving.</p></article><article data-stack-item><span>Company</span><h3>“This feels like us.”</h3><p>Values become visible through real stories and reactions.</p></article></div></div></section>
+    <section class="creative-section creative-section--lime" data-persona-section="early-access"><div class="shared-wrap shared-split"><div><p class="creative-label">07 / Join early</p><h2>Help build the culture people talk about.</h2><p>Bring your team’s appreciation style into the product conversation.</p><a class="creative-button creative-button--dark" href="/contact">Join Waitlist</a></div><ul><li>Priority EzRewards access</li><li>Guided onboarding</li><li>Influence upcoming experiences</li><li>Founding customer status</li></ul></div></section>
+    <section class="creative-section" data-persona-section="pricing"><div class="shared-wrap"><p class="creative-label">08 / Simple pricing</p><div class="creative-price"><div><h2>Make appreciation visible for $1 per active employee/month.</h2><p>Pay annually and receive two months free.</p><a class="creative-button" href="/contact">Join Waitlist</a></div><ul><li>Recognition feed and reactions</li><li>Rewards and wallet controls</li><li>Onboarding and administration</li><li>Reports and AI assistance</li></ul></div></div></section>
+    <section class="creative-section creative-section--paper" data-persona-section="faq"><div class="shared-wrap shared-faq"><div><p class="creative-label">09 / FAQ</p><h2>Good questions deserve clear answers.</h2></div><div><details><summary>Is EzRewards only a gift-card platform?</summary><p>No. It connects recognition, social appreciation, rewards and culture reporting.</p></details><details><summary>Does every recognition include money?</summary><p>No. Recognition can be completely non-monetary.</p></details><details><summary>How does pricing work?</summary><p>EzRewards costs $1 per active employee each month.</p></details><details><summary>Is EzRewards available now?</summary><p>EzRewards is accepting early-access applications.</p></details></div></div></section>
+    <section class="creative-final" data-persona-section="final-cta"><div class="shared-wrap"><p class="creative-label">Your culture, turned up</p><h2>Make work feel celebrated.</h2><p>Give every meaningful contribution a moment people can see and share.</p><a class="creative-button" href="/contact">Make Work Feel Celebrated</a></div></section>
+  </main>
+
+  <main class="persona-main visionary-refresh" data-persona-page="visionary" hidden inert>
     <section class="dark-hero visionary-hero" data-home-section="hero">
       <div class="dark-hero__aurora" aria-hidden="true"></div>
       <div class="dark-hero__copy is-visible" data-dark-reveal>
         <p class="dark-kicker" data-persona-copy="eyebrow">The culture operating system for modern teams</p>
         <h1 data-persona-copy="headline">Build the workplace people want to belong to.</h1>
         <div class="visionary-hero-support"><p>EzRewards turns everyday contribution into visible recognition, meaningful rewards and a culture everyone can experience.</p><p>Because when people feel seen, they do more than stay. They participate, contribute and grow.</p></div>
-        <div class="dark-actions"><a class="dark-button dark-button--primary" href="/contact">Join the Waitlist</a><a class="dark-button dark-button--secondary" href="/product">Explore the Product</a></div>
+        <div class="dark-actions"><a class="dark-button dark-button--primary" href="/contact" data-persona-primary-cta>Build Your Culture</a><a class="dark-button dark-button--secondary" href="#appreciation-loop">See How It Works</a></div>
         <p class="dark-hero__note"><span aria-hidden="true">✓</span> Built for growing teams. Starting at $1 per employee/month.</p>
         <strong class="visionary-outcome-line">Seen. Valued. Rewarded.</strong>
       </div>
@@ -202,7 +244,7 @@
           <h1>Make appreciation a visible, structured part of how your company operates.</h1>
           <p class="strategist-lead">EzRewards gives growing companies one connected system to recognize meaningful work, manage employee rewards and understand how appreciation moves across the organization.</p>
           <p>Create a recognition program employees can participate in—and leaders can understand.</p>
-          <div class="strategist-actions"><a class="strategist-button strategist-button--primary" href="/contact">Join the Waitlist</a><a class="strategist-button strategist-button--secondary" href="/product">Explore the Product</a></div>
+          <div class="strategist-actions"><a class="strategist-button strategist-button--primary" href="/contact" data-persona-primary-cta>Book a Demo</a><a class="strategist-button strategist-button--secondary" href="#strategist-outcomes">See Measurable Outcomes</a></div>
           <p class="strategist-note">Built for growing teams. Starting at <strong>$1 per employee/month.</strong></p>
         </div>
         <div class="strategist-dashboard strategist-card is-visible" data-strategist-reveal>
@@ -340,7 +382,7 @@
           <h1>Run recognition and rewards without creating more work for your team.</h1>
           <p class="operator-lead">EzRewards gives employees a simple way to recognize great work and gives administrators one place to manage users, rewards, reporting and billing.</p>
           <p>Set it up. Bring your team in. Keep everything moving from one platform.</p>
-          <div class="operator-actions"><a class="operator-button operator-button--primary" href="/contact">Join the Waitlist</a><a class="operator-button operator-button--secondary" href="#operator-workflow">See How It Works</a></div>
+          <div class="operator-actions"><a class="operator-button operator-button--primary" href="/contact" data-persona-primary-cta>Get Started</a><a class="operator-button operator-button--secondary" href="#operator-workflow">View Setup Flow</a></div>
           <p class="operator-note">Built for growing teams. Starting at <strong>$1 per employee/month.</strong></p>
         </div>
         <section class="operator-workspace operator-card is-visible" aria-labelledby="operator-workspace-title" data-operator-reveal>
@@ -449,7 +491,7 @@
 
   <footer class="site-footer dark-footer persona-footer">
     <div><a class="dark-brand" href="/" aria-label="EzRewards home"><span class="dark-brand__mark" aria-hidden="true">✦</span><span>EzRewards</span></a><p>Making meaningful work visible.</p></div>
-    <nav aria-label="Footer"><a href="/">Home</a><a href="/product">Product</a><a href="/pricing">Pricing</a><a href="/about">About</a><a href="/contact">Join Waitlist</a></nav>
+    <nav aria-label="Footer"><a href="/">Home</a><a href="/product">Product</a><a href="/pricing">Pricing</a><a href="/about">About</a><button type="button" data-change-experience>Change experience</button><a href="/contact">Join Waitlist</a></nav>
     <div class="footer-legal"><span>Privacy</span><span>Terms</span><a href="/contact">Contact</a><span>LinkedIn</span></div>
     <small>© 2026 EzRewards. All rights reserved.</small>
   </footer>

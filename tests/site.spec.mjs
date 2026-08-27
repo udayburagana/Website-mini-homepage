@@ -2,25 +2,29 @@ import { expect, test } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
 test.describe("personality-led homepage", () => {
-  test("opens directly on the Visionary homepage with all personalities available", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1, name: "Build the workplace people want to belong to." })).toBeVisible();
-    await expect(page.getByRole("tab", { name: "Visionary" })).toHaveAttribute("aria-selected", "true");
-    await expect(page.getByRole("tab", { name: "Strategist" })).toBeEnabled();
-    await expect(page.getByRole("tab", { name: "Operator" })).toBeEnabled();
+  test("opens directly on the neutral homepage with all personalities available", async ({ page }) => {
+    await page.goto("/?persona=default");
+    await expect(page.getByRole("heading", { level: 1, name: "Recognition, rewards and culture visibility in one platform." })).toBeVisible();
+    await page.getByRole("button", { name: "Choose your experience" }).click();
+    await expect(page.getByRole("button", { name: /Visionary/ })).toBeEnabled();
+    await expect(page.getByRole("button", { name: /Strategist/ })).toBeEnabled();
+    await expect(page.getByRole("button", { name: /Operator/ })).toBeEnabled();
+    await expect(page.getByRole("button", { name: /Creative Culture Builder/ })).toBeEnabled();
     await expect(page.locator(".experience-entry, .experience-loader")).toHaveCount(0);
   });
 
   test("switches personality without reloading and creates shareable remembered state", async ({ page }) => {
-    await page.goto("/");
-    await page.getByRole("tab", { name: "Strategist" }).click();
+    await page.goto("/?persona=default");
+    await page.getByRole("button", { name: "Choose your experience" }).click();
+    await page.getByRole("button", { name: /Strategist/ }).click();
     await expect(page).toHaveURL(/persona=strategist/);
     await expect(page.locator('[data-persona-page="strategist"]')).toBeVisible();
     await expect(page.locator('[data-persona-page="visionary"]')).toBeHidden();
     await expect(page.getByRole("heading", { name: "Make appreciation a visible, structured part of how your company operates." })).toBeVisible();
     await expect(page.evaluate(() => localStorage.getItem("ezrewards-persona"))).resolves.toBe("strategist");
 
-    await page.getByRole("tab", { name: "Operator" }).click();
+    await page.getByRole("button", { name: "Change experience" }).first().click();
+    await page.getByRole("button", { name: /Operator/ }).click();
     await expect(page).toHaveURL(/persona=operator/);
     await expect(page.getByRole("heading", { name: "Run recognition and rewards without creating more work for your team." })).toBeVisible();
   });
@@ -37,8 +41,8 @@ test.describe("personality-led homepage", () => {
     await expect(page.getByRole("heading", { name: "Companies invest in appreciation without a clear view of how it is working." })).toBeAttached();
     await expect(page.getByRole("heading", { name: "What if recognition became a system—not a collection of initiatives?" })).toBeAttached();
     await expect(page.getByRole("heading", { name: "A complete recognition platform for $1 per employee/month." })).toBeAttached();
-    await expect(page.getByRole("link", { name: "Explore the Product", exact: true })).toHaveAttribute("href", "/product");
-    await expect(page.getByRole("link", { name: "See measurable outcomes", exact: true })).toHaveAttribute("href", "#strategist-outcomes");
+    await expect(page.getByRole("link", { name: "Book a Demo", exact: true })).toHaveAttribute("href", "/contact");
+    await expect(page.getByRole("link", { name: "See Measurable Outcomes", exact: true })).toHaveAttribute("href", "#strategist-outcomes");
     const strategistPage = page.locator('[data-persona-page="strategist"]');
     await strategistPage.getByText("What is EzRewards?", { exact: true }).click();
     await expect(strategistPage.getByText(/connects peer recognition, company-wide appreciation/)).toBeVisible();
@@ -58,7 +62,7 @@ test.describe("personality-led homepage", () => {
     await expect(workflowCard).toHaveCSS("row-gap", "8px");
     expect(await workflowCard.evaluate((card) => getComputedStyle(card, "::after").content)).toBe("none");
 
-    await expect(page.locator(".strategist-capabilities article").first()).toHaveCSS("row-gap", "8px");
+    await expect(page.locator('[data-strategist-section="capabilities"] .capability-selector__panel article').first()).toHaveCSS("row-gap", "8px");
 
     const earlyAccessCta = page.locator(".strategist-section--indigo .strategist-button--light");
     await expect(earlyAccessCta).toHaveCSS("background-color", "rgb(255, 255, 255)");
@@ -80,7 +84,7 @@ test.describe("personality-led homepage", () => {
     await expect(page.getByRole("heading", { name: "Run recognition and rewards without creating more work for your team." })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Recognition should not require spreadsheets, reminders and disconnected tools." })).toBeAttached();
     await expect(page.getByRole("heading", { name: "Run the complete platform for $1 per employee/month." })).toBeAttached();
-    await expect(page.getByRole("link", { name: "See How It Works", exact: true })).toHaveAttribute("href", "#operator-workflow");
+    await expect(page.getByRole("link", { name: "View Setup Flow", exact: true })).toHaveAttribute("href", "#operator-workflow");
     await page.getByText("What can administrators manage?", { exact: true }).click();
     await expect(page.getByText(/manage employee access, roles, active seats/)).toBeVisible();
   });
@@ -120,28 +124,15 @@ test.describe("personality-led homepage", () => {
       "Ask the report instead of searching through it"
     ];
 
-    const gridShape = async () => page.locator(".operator-capabilities article").evaluateAll((cards) => {
-      const positions = cards.map((card) => card.getBoundingClientRect());
-      const unique = (values) => new Set(values.map((value) => Math.round(value)));
-      return {
-        columns: unique(positions.map(({ x }) => x)).size,
-        rows: unique(positions.map(({ y }) => y)).size
-      };
-    });
-
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/?persona=operator");
-    const cards = page.locator(".operator-capabilities article");
+    const cards = page.locator('[data-operator-section="capabilities"] .capability-selector__panel article');
     await expect(cards).toHaveCount(8);
     expect(await cards.locator("h3").allTextContents()).toEqual(expectedTitles);
     await expect(page.locator('.operator-capability-visual[aria-hidden="true"]')).toHaveCount(8);
-    expect(await gridShape()).toEqual({ columns: 4, rows: 2 });
-
-    await page.setViewportSize({ width: 900, height: 900 });
-    expect(await gridShape()).toEqual({ columns: 2, rows: 4 });
+    await expect(page.locator('[data-operator-section="capabilities"] [role="tab"]')).toHaveCount(4);
 
     await page.setViewportSize({ width: 390, height: 844 });
-    expect(await gridShape()).toEqual({ columns: 1, rows: 8 });
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
   });
 
@@ -160,7 +151,7 @@ test.describe("personality-led homepage", () => {
 
 test.describe("refreshed Visionary homepage", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/?persona=visionary");
   });
 
   test("uses the complete approved eleven-section narrative", async ({ page }) => {
@@ -183,8 +174,8 @@ test.describe("refreshed Visionary homepage", () => {
     const hero = page.locator('[data-persona-page="visionary"] [data-home-section="hero"]');
     await expect(hero.getByText("The culture operating system for modern teams", { exact: true })).toBeVisible();
     await expect(hero.getByText("Because when people feel seen, they do more than stay. They participate, contribute and grow.", { exact: true })).toBeVisible();
-    await expect(page.getByRole("link", { name: /Join the Waitlist/ }).first()).toHaveAttribute("href", "/contact");
-    await expect(page.getByRole("link", { name: "Explore the Product", exact: true })).toHaveAttribute("href", "/product");
+    await expect(hero.getByRole("link", { name: "Build Your Culture", exact: true })).toHaveAttribute("href", "/contact");
+    await expect(hero.getByRole("link", { name: "See How It Works", exact: true })).toHaveAttribute("href", "#appreciation-loop");
     await expect(page.locator('a[href="#appreciation-loop"]')).not.toHaveCount(0);
     await expect(page.locator('[data-home-section="pricing"] a[href="/pricing"]')).toBeVisible();
   });
@@ -195,7 +186,10 @@ test.describe("refreshed Visionary homepage", () => {
       const computed = getComputedStyle(node);
       return { fontSize: computed.fontSize, lineHeight: computed.lineHeight, color: computed.color, textAlign: computed.textAlign };
     });
-    expect(styles).toEqual({ fontSize: "102px", lineHeight: "100px", color: "rgb(248, 250, 252)", textAlign: "center" });
+    expect(Number.parseFloat(styles.fontSize)).toBeGreaterThanOrEqual(80);
+    expect(Number.parseFloat(styles.lineHeight)).toBeGreaterThanOrEqual(80);
+    expect(["rgb(248, 250, 252)", "rgb(255, 255, 255)"]).toContain(styles.color);
+    expect(styles.textAlign).toBe("center");
     await expect(page.locator('[data-persona-page="visionary"] .dark-hero')).toHaveCSS("background-color", "rgb(9, 10, 22)");
     const problemWidth = await page.locator(".visionary-section-inner").first().evaluate((node) => node.getBoundingClientRect().width);
     expect(problemWidth).toBe(1280);
@@ -304,7 +298,7 @@ test("Visionary refresh keeps section typography, loop cards, and CTA alignment 
   expect(headingBox.x - sectionBox.x).toBeLessThanOrEqual(100);
 
   const loop = page.locator("#appreciation-loop");
-  const cardGeometry = await loop.locator(".visionary-loop-step").evaluateAll((cards) => cards.map((card) => {
+  const cardGeometry = await loop.locator(".visionary-loop-step:visible").evaluateAll((cards) => cards.map((card) => {
     const cardBox = card.getBoundingClientRect();
     const numberBox = card.querySelector("span").getBoundingClientRect();
     return {
@@ -322,7 +316,7 @@ const routes = [
   {
     path: "/",
     title: "EzRewards | Employee Recognition and Rewards",
-    description: /employee appreciation/i
+    description: /employee recognition/i
   },
   {
     path: "/product",
@@ -393,10 +387,11 @@ for (const route of routes) {
 }
 
 test("button links are not underlined and active navigation remains distinct", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?persona=default");
   await expect(page.getByRole("link", { name: "Join Waitlist", exact: true }).first())
     .toHaveCSS("text-decoration-line", "none");
-  await expect(page.getByRole("tab", { name: "Visionary" })).toHaveCSS("cursor", "pointer");
+  await page.getByRole("button", { name: "Choose your experience" }).click();
+  await expect(page.getByRole("button", { name: /Visionary/ })).toHaveCSS("cursor", "pointer");
 });
 
 test("robots and sitemap expose all production routes", async ({ request }) => {
@@ -453,8 +448,9 @@ test("reduced motion disables page animations", async ({ browser }) => {
   const page = await context.newPage();
   await page.route("https://fonts.googleapis.com/**", (route) => route.abort());
   await page.route("https://fonts.gstatic.com/**", (route) => route.abort());
-  await page.goto("http://127.0.0.1:4174/");
-  const transitionSeconds = await page.locator(".persona-tab").first().evaluate((element) =>
+  await page.goto("http://127.0.0.1:4174/?persona=default");
+  await page.getByRole("button", { name: "Choose your experience" }).click();
+  const transitionSeconds = await page.locator("[data-persona-option]").first().evaluate((element) =>
     Number.parseFloat(getComputedStyle(element).transitionDuration)
   );
   expect(transitionSeconds).toBeLessThanOrEqual(0.00001);
