@@ -371,6 +371,41 @@
     return false;
   }
 
+  function initCinematicHero() {
+    const hero = document.querySelector(".cinematic-hero");
+    if (!hero) return;
+    if (reducedMotion) {
+      hero.style.setProperty("--hero-scroll", "0");
+      return;
+    }
+
+    let scrollFrame = 0;
+    const updateScrollDepth = () => {
+      scrollFrame = 0;
+      const bounds = hero.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, -bounds.top / Math.max(bounds.height, 1)));
+      hero.style.setProperty("--hero-scroll", progress.toFixed(3));
+    };
+    const requestScrollDepth = () => {
+      if (!scrollFrame) scrollFrame = requestAnimationFrame(updateScrollDepth);
+    };
+
+    hero.addEventListener("pointermove", (event) => {
+      const bounds = hero.getBoundingClientRect();
+      const pointerX = (event.clientX - bounds.left) / bounds.width - .5;
+      const pointerY = (event.clientY - bounds.top) / bounds.height - .5;
+      hero.style.setProperty("--hero-pointer-x", pointerX.toFixed(3));
+      hero.style.setProperty("--hero-pointer-y", pointerY.toFixed(3));
+    });
+    hero.addEventListener("pointerleave", () => {
+      hero.style.setProperty("--hero-pointer-x", "0");
+      hero.style.setProperty("--hero-pointer-y", "0");
+    });
+    addEventListener("scroll", requestScrollDepth, { passive: true });
+    addEventListener("resize", requestScrollDepth);
+    updateScrollDepth();
+  }
+
   document.addEventListener("click", (event) => {
     const change = event.target.closest("[data-change-experience]");
     if (change) { openPersonaSelector(change); return; }
@@ -425,4 +460,5 @@
   });
   window.EzRewardsPersona = { PERSONAS, initPersonaExperience, setPersona, openPersonaSelector, closePersonaSelector, initStickyStacks, initSteppers, initSelectablePanels, emitMarketingEvent };
   initPersonaExperience();
+  initCinematicHero();
 })();
