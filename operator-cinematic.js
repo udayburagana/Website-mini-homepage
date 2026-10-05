@@ -679,38 +679,6 @@ function initOperatorCinematic() {
   }
 
   /* ---------- 11 Final CTA: a signal pulse resolves into one horizon line ---------- */
-  function createFinal() {
-    const section = sectionNamed("final-cta");
-    let canvas = null;
-    let trigger = null;
-    return {
-      setup(nextMode) {
-        if (nextMode === "static") return;
-        trigger = ScrollTrigger.create({
-          trigger: section,
-          start: "top bottom",
-          end: "center center",
-          onUpdate: (self) => section.style.setProperty("--oc-final-progress", self.progress.toFixed(4)),
-        });
-        canvas = createSceneCanvas(section, "operator-scene-canvas--final", (context, width, height, time) => {
-          const centerX = width / 2;
-          const centerY = height * .52;
-          for (let ring = 0; ring < 4; ring += 1) {
-            const phase = ((time * .00018) + ring / 4) % 1;
-            context.strokeStyle = `rgba(56, 189, 248, ${(1 - phase) * .2})`;
-            context.lineWidth = 1;
-            context.beginPath(); context.ellipse(centerX, centerY, phase * width * .48, phase * height * .32, 0, 0, Math.PI * 2); context.stroke();
-          }
-        });
-      },
-      teardown() {
-        trigger?.kill(); trigger = null;
-        canvas?.destroy(); canvas = null;
-        section.style.removeProperty("--oc-final-progress");
-      },
-    };
-  }
-
   /* ---------- Chapter rail: eleven text-free ticks tracking the current section ---------- */
   function createChapterRail() {
     const rail = generated("div", "operator-chapters", { "aria-hidden": "true" });
@@ -748,7 +716,6 @@ function initOperatorCinematic() {
     createEarlyAccess(),
     createPricing(),
     createFaq(),
-    createFinal(),
     createChapterRail(),
   ];
 
