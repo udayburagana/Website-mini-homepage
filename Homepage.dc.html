@@ -16,8 +16,14 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/tokens/fonts.css">
   <link rel="stylesheet" href="/_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/tokens/colors.css">
-  <link rel="stylesheet" href="/site.css?v=cinematic-depth">
-  <script src="/site-ui.js?v=cinematic-depth" defer></script>
+  <link rel="stylesheet" href="/site.css?v=signal-journey">
+  <link rel="stylesheet" href="/strategist-cinematic.css?v=elva-rebuild">
+  <link rel="stylesheet" href="/operator-cinematic.css?v=console-cinematic">
+  <script src="/site-ui.js?v=signal-journey" defer></script>
+  <script type="importmap">{"imports":{"@ezrewards/visionary-cinematic":"/vendor/visionary-cinematic.bundle.js"}}</script>
+  <script type="module">import "@ezrewards/visionary-cinematic";</script>
+  <script type="module" src="/vendor/strategist-cinematic.bundle.js"></script>
+  <script type="module" src="/vendor/operator-cinematic.bundle.js"></script>
 </head>
 <body class="visionary-site persona-home default-active">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -199,7 +205,11 @@
 
   <main class="persona-main visionary-refresh" data-persona-page="visionary" hidden inert>
     <section class="dark-hero visionary-hero cinematic-hero" data-home-section="hero">
-      <div class="cinematic-hero__backdrop" data-cinematic-depth="background" aria-hidden="true"></div>
+      <picture class="cinematic-hero__backdrop" data-cinematic-depth="background" aria-hidden="true">
+        <source type="image/avif" srcset="/assets/generated/recognition-garden-hero-768.avif 768w, /assets/generated/recognition-garden-hero-1280.avif 1280w, /assets/generated/recognition-garden-hero-1672.avif 1672w" sizes="100vw">
+        <source type="image/webp" srcset="/assets/generated/recognition-garden-hero-768.webp 768w, /assets/generated/recognition-garden-hero-1280.webp 1280w, /assets/generated/recognition-garden-hero-1672.webp 1672w" sizes="100vw">
+        <img src="/assets/generated/recognition-garden-hero.png" alt="" width="1672" height="941" decoding="async" fetchpriority="high">
+      </picture>
       <div class="cinematic-hero__atmosphere" aria-hidden="true"></div>
       <div class="cinematic-hero__glow cinematic-hero__glow--one" aria-hidden="true"></div>
       <div class="cinematic-hero__glow cinematic-hero__glow--two" aria-hidden="true"></div>
@@ -236,34 +246,399 @@
       <div class="cinematic-hero__scroll" aria-hidden="true"><span></span><small>Scroll to enter the story</small></div>
     </section>
 
-    <section class="visionary-section visionary-problem" id="problem" data-home-section="problem"><div class="visionary-section-inner">
-      <div class="visionary-section-heading"><div><p class="visionary-index"><span>01</span> The Problem</p><p class="visionary-eyebrow">Important work is becoming invisible</p><h2>The work that moves companies forward rarely fits inside a performance review.</h2></div><div class="visionary-body"><p>It happens when someone stays back to help a teammate.<br>When an employee solves a customer problem before it escalates.<br>When a new hire asks the question everyone else was avoiding.</p><p>When a manager quietly keeps the team moving through a difficult week.<br>These contributions shape culture—but most disappear inside meetings, messages and memory.</p></div></div>
-      <div class="visionary-problem-grid"><article class="visionary-problem-card"><i aria-hidden="true">⌗</i><h3>Recognition arrives too late</h3><p>Meaningful contributions are remembered during annual reviews, if they are remembered at all.</p></article><article class="visionary-problem-card"><i aria-hidden="true">⌗</i><h3>Appreciation stays private</h3><p>A “thank you” inside a chat feels good for a moment, but it does not become part of the company’s shared culture.</p></article><article class="visionary-problem-card"><i aria-hidden="true">⌗</i><h3>Rewards feel disconnected</h3><p>Gift cards and incentives are distributed, but the contribution behind them is often forgotten.</p></article><article class="visionary-problem-card"><i aria-hidden="true">⌗</i><h3>Culture remains difficult to see</h3><p>Leaders know culture matters, but have little visibility into how appreciation actually moves through the company.</p></article></div>
-    </div></section>
+    <section class="visionary-section visionary-problem cinematic-problem" id="problem" data-home-section="problem">
+      <div class="cinematic-problem__sticky">
+        <picture class="cinematic-problem__backdrop" aria-hidden="true">
+          <source type="image/avif" srcset="/assets/generated/invisible-work-cinematic-bg-768.avif 768w, /assets/generated/invisible-work-cinematic-bg-1280.avif 1280w, /assets/generated/invisible-work-cinematic-bg-1672.avif 1672w" sizes="100vw">
+          <source type="image/webp" srcset="/assets/generated/invisible-work-cinematic-bg-768.webp 768w, /assets/generated/invisible-work-cinematic-bg-1280.webp 1280w, /assets/generated/invisible-work-cinematic-bg-1672.webp 1672w" sizes="100vw">
+          <img src="/assets/generated/invisible-work-cinematic-bg.png" alt="" width="1672" height="941" loading="lazy" decoding="async">
+        </picture>
+        <div class="cinematic-problem__atmosphere" aria-hidden="true"></div>
+        <div class="visionary-section-inner cinematic-problem__inner">
+          <div class="cinematic-problem__intro">
+            <p class="visionary-index cinematic-problem__index"><span>01</span> The Problem</p>
+            <p class="visionary-eyebrow">Important work is becoming invisible</p>
+            <h2>The work that moves companies forward rarely fits inside a performance review.</h2>
+            <div class="visionary-body cinematic-problem__body"><p>It happens when someone stays back to help a teammate. When an employee solves a customer problem before it escalates. When a new hire asks the question everyone else was avoiding.</p><p>When a manager quietly keeps the team moving through a difficult week. These contributions shape culture—but most disappear inside meetings, messages and memory.</p></div>
+          </div>
+          <div class="visionary-problem-grid cinematic-problem__cards">
+            <article class="visionary-problem-card cinematic-problem__card" style="--card-index: 0; --card-angle: 5deg; --card-accent: #82efc8;">
+              <span class="cinematic-problem__number">01</span>
+              <svg class="cinematic-problem__icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="15"></circle><circle cx="24" cy="24" r="7"></circle><path d="M24 4v5M24 39v5M4 24h5M39 24h5"></path><circle cx="24" cy="24" r="2" class="is-filled"></circle></svg>
+              <h3>Recognition arrives too late</h3><p>Meaningful contributions are remembered during annual reviews, if they are remembered at all.</p>
+            </article>
+            <article class="visionary-problem-card cinematic-problem__card" style="--card-index: 1; --card-angle: -5deg; --card-accent: #ffc978;">
+              <span class="cinematic-problem__number">02</span>
+              <svg class="cinematic-problem__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 36h6V22H8zM21 36h6V12h-6zM34 36h6V27h-6z"></path><path d="M7 41h34"></path></svg>
+              <h3>Appreciation stays private</h3><p>A “thank you” inside a chat feels good for a moment, but it does not become part of the company’s shared culture.</p>
+            </article>
+            <article class="visionary-problem-card cinematic-problem__card" style="--card-index: 2; --card-angle: 5deg; --card-accent: #c5a6ff;">
+              <span class="cinematic-problem__number">03</span>
+              <svg class="cinematic-problem__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 20h32v22H8zM6 14h36v8H6zM24 14v28"></path><path d="M24 14c-8 0-10-9-4-9 4 0 4 5 4 9Zm0 0c8 0 10-9 4-9-4 0-4 5-4 9Z"></path></svg>
+              <h3>Rewards feel disconnected</h3><p>Gift cards and incentives are distributed, but the contribution behind them is often forgotten.</p>
+            </article>
+            <article class="visionary-problem-card cinematic-problem__card" style="--card-index: 3; --card-angle: -5deg; --card-accent: #82efc8;">
+              <span class="cinematic-problem__number">04</span>
+              <svg class="cinematic-problem__icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="9" r="4"></circle><circle cx="10" cy="36" r="4"></circle><circle cx="38" cy="36" r="4"></circle><path d="M22 13 12 32M26 13l10 19M14 36h20"></path></svg>
+              <h3>Culture remains difficult to see</h3><p>Leaders know culture matters, but have little visibility into how appreciation actually moves through the company.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <section class="visionary-section visionary-vision" id="vision" data-home-section="vision"><div class="visionary-section-inner"><div class="visionary-section-heading"><div><p class="visionary-index"><span>02</span> The Vision</p><p class="visionary-eyebrow">A different possibility</p><h2>What if appreciation became part of how work happens?</h2></div><div class="visionary-body"><p>Not another HR campaign.<br>Not another annual event.<br>A continuous appreciation loop where people notice meaningful work, recognize it in the moment and make contribution visible across the company.</p><p>EzRewards helps transform recognition from an occasional activity into a shared workplace behaviour.</p></div></div><blockquote>Culture should not live inside a presentation.<br>It should be visible in the way people treat each other every day.</blockquote></div></section>
+    <section class="cinematic-vision" id="vision" data-home-section="vision" data-vision-mode="static" aria-labelledby="vision-title">
+      <div class="cinematic-vision__sticky">
+        <picture class="cinematic-vision__backdrop" aria-hidden="true">
+          <source type="image/avif" srcset="/assets/generated/vision-gift-landscape-bg-768.avif 768w, /assets/generated/vision-gift-landscape-bg-1280.avif 1280w, /assets/generated/vision-gift-landscape-bg-1672.avif 1672w" sizes="100vw">
+          <source type="image/webp" srcset="/assets/generated/vision-gift-landscape-bg-768.webp 768w, /assets/generated/vision-gift-landscape-bg-1280.webp 1280w, /assets/generated/vision-gift-landscape-bg-1672.webp 1672w" sizes="100vw">
+          <img src="/assets/generated/vision-gift-landscape-bg.png" alt="" width="1672" height="941" loading="lazy" decoding="async">
+        </picture>
+        <div class="cinematic-vision__atmosphere" aria-hidden="true"></div>
+        <div class="cinematic-vision__content">
+          <header class="cinematic-vision__intro" data-vision-step="intro">
+            <p class="cinematic-vision__label"><span>02</span> The Vision</p>
+            <div class="cinematic-vision__heading">
+              <p class="cinematic-vision__eyebrow">A different possibility</p>
+              <h2 class="cinematic-vision__title" id="vision-title">What if appreciation became part of how work happens?</h2>
+            </div>
+          </header>
+          <figure class="cinematic-vision__statement" data-vision-step="center">
+            <span class="cinematic-vision__mark" aria-hidden="true">&ldquo;</span>
+            <blockquote class="cinematic-vision__quote">Culture should not live inside a presentation. It should be visible in the way people treat each other every day.</blockquote>
+            <span class="cinematic-vision__mark cinematic-vision__mark--close" aria-hidden="true">&rdquo;</span>
+          </figure>
+          <div class="cinematic-vision__explanation">
+            <p class="cinematic-vision__point cinematic-vision__point--detail" data-vision-step="left">Not another HR campaign. Not another annual event. A continuous appreciation loop where people notice meaningful work, recognize it in the moment and make contribution visible across the company.</p>
+            <p class="cinematic-vision__point cinematic-vision__point--outcome" data-vision-step="right">EzRewards helps transform recognition from an occasional activity into a shared workplace behaviour.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <section class="visionary-section visionary-category" data-home-section="category"><div class="visionary-section-inner"><p class="visionary-index"><span>03</span> Meet EzRewards</p><div class="visionary-centered-intro"><h2>Not another gift-card portal. An operating system for appreciation.</h2><p>EzRewards brings recognition, rewards and culture insights into one connected experience—so appreciation is easier to give, more meaningful to receive and simpler to manage.</p></div><div class="visionary-pillar-grid"><article><span>01</span><h3>Recognition that feels human</h3><p>Help employees celebrate contributions in the moment through thoughtful, visible recognition.</p></article><article><span>02</span><h3>Rewards with meaning</h3><p>Connect rewards to real contributions instead of distributing incentives without context.</p></article><article><span>03</span><h3>Culture leaders can understand</h3><p>See how recognition is happening across teams, departments and the wider company.</p></article></div></div></section>
+    <section class="visionary-section visionary-category cinematic-meet" id="meet-ezrewards" data-home-section="category" data-meet-ezrewards data-active-pillar="recognition" data-render-state="idle">
+      <svg class="cinematic-meet__symbols" aria-hidden="true">
+        <symbol id="meet-recognition" viewBox="0 0 320 320"><circle cx="160" cy="160" r="108"/><circle cx="160" cy="160" r="79"/><circle cx="160" cy="130" r="24"/><path d="M111 211c9-36 29-54 49-54s40 18 49 54"/><path d="M160 34v24M160 262v24M34 160h24M262 160h24"/><path d="m247 68 5 12 12 5-12 5-5 12-5-12-12-5 12-5Z"/></symbol>
+        <symbol id="meet-rewards" viewBox="0 0 320 320"><rect x="68" y="120" width="184" height="140" rx="16"/><path d="M52 100h216v56H52zM142 100v160M178 100v160"/><path d="M160 99c-31-49-83-52-76-12 4 23 41 15 76 12Zm0 0c31-49 83-52 76-12-4 23-41 15-76 12Z"/></symbol>
+        <symbol id="meet-insight" viewBox="0 0 320 320"><path d="M52 241 112 181l48 24 58-78 50-46"/><path d="M52 241c59 4 100-15 123-57 22-40 51-67 93-103"/><circle cx="52" cy="241" r="15"/><circle cx="112" cy="181" r="15"/><circle cx="160" cy="205" r="15"/><circle cx="218" cy="127" r="15"/><circle cx="268" cy="81" r="15"/><path d="M69 86h68M69 110h104M69 134h73"/></symbol>
+      </svg>
+      <div class="cinematic-meet__pin">
+        <div class="visionary-section-inner cinematic-meet__inner">
+          <p class="visionary-index cinematic-meet__index"><span>03</span> Meet EzRewards</p>
+          <div class="visionary-centered-intro cinematic-meet__intro">
+            <h2>Not another gift-card portal. An operating system for appreciation.</h2>
+            <p>EzRewards brings recognition, rewards and culture insights into one connected experience—so appreciation is easier to give, more meaningful to receive and simpler to manage.</p>
+          </div>
+          <div class="cinematic-meet__story">
+            <div class="cinematic-meet__rail" role="tablist" aria-label="EzRewards foundations">
+              <button id="meet-tab-recognition" type="button" role="tab" aria-selected="true" aria-controls="meet-panel-recognition" data-meet-pillar="recognition"><span>01</span><strong>Recognition that feels human</strong></button>
+              <button id="meet-tab-rewards" type="button" role="tab" aria-selected="false" aria-controls="meet-panel-rewards" data-meet-pillar="rewards" tabindex="-1"><span>02</span><strong>Rewards with meaning</strong></button>
+              <button id="meet-tab-insight" type="button" role="tab" aria-selected="false" aria-controls="meet-panel-insight" data-meet-pillar="insight" tabindex="-1"><span>03</span><strong>Culture leaders can understand</strong></button>
+            </div>
+            <div class="cinematic-meet__visual" aria-hidden="true">
+              <canvas data-meet-canvas></canvas>
+              <div class="cinematic-meet__fallback">
+                <svg data-meet-fallback="recognition" viewBox="0 0 320 320"><use href="#meet-recognition"/></svg>
+                <svg data-meet-fallback="rewards" viewBox="0 0 320 320"><use href="#meet-rewards"/></svg>
+                <svg data-meet-fallback="insight" viewBox="0 0 320 320"><use href="#meet-insight"/></svg>
+              </div>
+            </div>
+            <div class="cinematic-meet__panels">
+              <article id="meet-panel-recognition" role="tabpanel" aria-labelledby="meet-tab-recognition" data-meet-panel="recognition"><h3>Recognition that feels human</h3><svg aria-hidden="true" viewBox="0 0 320 320"><use href="#meet-recognition"/></svg><p>Help employees celebrate contributions in the moment through thoughtful, visible recognition.</p></article>
+              <article id="meet-panel-rewards" role="tabpanel" aria-labelledby="meet-tab-rewards" data-meet-panel="rewards" aria-hidden="true" inert><h3>Rewards with meaning</h3><svg aria-hidden="true" viewBox="0 0 320 320"><use href="#meet-rewards"/></svg><p>Connect rewards to real contributions instead of distributing incentives without context.</p></article>
+              <article id="meet-panel-insight" role="tabpanel" aria-labelledby="meet-tab-insight" data-meet-panel="insight" aria-hidden="true" inert><h3>Culture leaders can understand</h3><svg aria-hidden="true" viewBox="0 0 320 320"><use href="#meet-insight"/></svg><p>See how recognition is happening across teams, departments and the wider company.</p></article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <section class="visionary-section visionary-loop" id="appreciation-loop" data-home-section="appreciation-loop"><div class="visionary-section-inner"><p class="visionary-index"><span>04</span> How EzRewards works</p><div class="visionary-centered-intro"><h2>One contribution can inspire an entire culture.</h2></div><ol class="visionary-loop-list" role="list"><li class="visionary-loop-step"><span>01</span><h3>Notice</h3><p>An employee, manager or leader notices work that deserves appreciation.</p></li><li class="visionary-loop-step"><span>02</span><h3>Recognize</h3><p>They create a thoughtful recognition message—with optional AI assistance when they need help finding the right words.</p></li><li class="visionary-loop-step"><span>03</span><h3>Celebrate</h3><p>The recognition appears in the company feed, where colleagues can react, comment and celebrate together.</p></li><li class="visionary-loop-step"><span>04</span><h3>Reward</h3><p>Recognition can be connected to meaningful rewards from the company’s reward catalogue.</p></li><li class="visionary-loop-step"><span>05</span><h3>Learn</h3><p>Leaders gain visibility into participation, recognition patterns and the contributions shaping their culture.</p></li></ol><p class="visionary-closing-line">Contribution becomes recognition. Recognition becomes belonging. Belonging becomes culture.</p></div></section>
+    <section class="visionary-section cinematic-how" id="appreciation-loop" data-home-section="appreciation-loop" data-how-it-works data-active-stage="notice" data-render-state="idle">
+      <svg class="cinematic-how__symbols" aria-hidden="true">
+        <symbol id="how-notice" viewBox="0 0 320 240"><circle cx="140" cy="125" r="28"/><path d="M198 125a58 58 0 1 1-17-41"/><path d="M228 125a88 88 0 1 1-44-76"/><path d="M140 125 181 84"/><path d="M140 27v10M140 213v10M42 125h10"/><path d="m206 50 6 14 14 6-14 6-6 14-6-14-14-6 14-6Z"/><path d="M230 56a30 30 0 0 1 8 24M242 40a50 50 0 0 1 14 40"/></symbol>
+        <symbol id="how-recognize" viewBox="0 0 320 240"><rect x="44" y="60" width="200" height="130" rx="14"/><circle cx="76" cy="94" r="14"/><path d="M102 90h86M102 108h112M64 134h150"/><path d="M66 164c14-18 22 14 36-2s22-16 34 0 22 14 36-4 18-10 28 0"/><circle cx="252" cy="60" r="28"/><path d="m252 44 5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2Z"/></symbol>
+        <symbol id="how-celebrate" viewBox="0 0 320 240"><ellipse cx="160" cy="124" rx="140" ry="58" transform="rotate(-10 160 124)"/><rect x="100" y="74" width="120" height="100" rx="12"/><circle cx="124" cy="98" r="10"/><path d="M142 96h56M116 122h88M116 138h60"/><circle cx="122" cy="158" r="5"/><circle cx="140" cy="158" r="5"/><circle cx="158" cy="158" r="5"/><path d="M270 92c-12-8-18-14-18-21a8 8 0 0 1 18-5 8 8 0 0 1 18 5c0 7-6 13-18 21Z"/><circle cx="36" cy="150" r="11"/><circle cx="92" cy="190" r="9"/><circle cx="244" cy="176" r="10"/></symbol>
+        <symbol id="how-reward" viewBox="0 0 320 240"><rect x="92" y="116" width="130" height="96" rx="8"/><rect x="80" y="90" width="154" height="28" rx="6"/><path d="M151 90v122M163 90v122"/><path d="M157 90c-18-30-52-30-46-8 4 12 26 10 46 8Zm0 0c18-30 52-30 46-8-4 12-26 10-46 8Z"/><circle cx="258" cy="58" r="26"/><circle cx="258" cy="58" r="15"/><path d="M224 104c12-10 18-18 22-26" stroke-dasharray="4 8"/></symbol>
+        <symbol id="how-learn" viewBox="0 0 320 240"><path d="M40 212h250M40 212V40"/><path d="M58 190 104 166 146 174 190 128 230 108 272 58"/><circle cx="104" cy="166" r="5"/><circle cx="146" cy="174" r="5"/><circle cx="190" cy="128" r="5"/><circle cx="230" cy="108" r="5"/><circle cx="272" cy="58" r="12"/><path d="M72 70 106 50 132 82 98 100ZM106 50l52-4M132 82l26-36"/><circle cx="72" cy="70" r="6"/><circle cx="106" cy="50" r="6"/><circle cx="132" cy="82" r="6"/><circle cx="98" cy="100" r="6"/><circle cx="158" cy="46" r="6"/></symbol>
+      </svg>
+      <div class="cinematic-how__pin">
+        <div class="visionary-section-inner cinematic-how__inner">
+          <div class="cinematic-how__header">
+            <p class="visionary-index cinematic-how__index"><span>04</span> How EzRewards works</p>
+            <div class="visionary-centered-intro cinematic-how__intro"><h2>One contribution can inspire an entire culture.</h2></div>
+          </div>
+          <div class="cinematic-how__story">
+            <div class="cinematic-how__rail" role="tablist" aria-label="How EzRewards works stages" aria-orientation="vertical">
+              <span class="cinematic-how__rail-track" aria-hidden="true"><i></i></span>
+              <button id="how-tab-notice" type="button" role="tab" aria-selected="true" aria-controls="how-panel-notice" data-how-stage="notice" data-state="active" style="--stage-accent: #82efc8;"><span>01</span><strong>Notice</strong></button>
+              <button id="how-tab-recognize" type="button" role="tab" aria-selected="false" aria-controls="how-panel-recognize" data-how-stage="recognize" data-state="upcoming" tabindex="-1" style="--stage-accent: #c5a6ff;"><span>02</span><strong>Recognize</strong></button>
+              <button id="how-tab-celebrate" type="button" role="tab" aria-selected="false" aria-controls="how-panel-celebrate" data-how-stage="celebrate" data-state="upcoming" tabindex="-1" style="--stage-accent: #ffc978;"><span>03</span><strong>Celebrate</strong></button>
+              <button id="how-tab-reward" type="button" role="tab" aria-selected="false" aria-controls="how-panel-reward" data-how-stage="reward" data-state="upcoming" tabindex="-1" style="--stage-accent: #ffb86b;"><span>04</span><strong>Reward</strong></button>
+              <button id="how-tab-learn" type="button" role="tab" aria-selected="false" aria-controls="how-panel-learn" data-how-stage="learn" data-state="upcoming" tabindex="-1" style="--stage-accent: #6fd8e6;"><span>05</span><strong>Learn</strong></button>
+            </div>
+            <div class="cinematic-how__visual" aria-hidden="true">
+              <canvas data-how-canvas></canvas>
+              <div class="cinematic-how__fallback">
+                <svg data-how-fallback="notice" viewBox="0 0 320 240" style="--stage-accent: #82efc8;"><use href="#how-notice"/></svg>
+                <svg data-how-fallback="recognize" viewBox="0 0 320 240" style="--stage-accent: #c5a6ff;"><use href="#how-recognize"/></svg>
+                <svg data-how-fallback="celebrate" viewBox="0 0 320 240" style="--stage-accent: #ffc978;"><use href="#how-celebrate"/></svg>
+                <svg data-how-fallback="reward" viewBox="0 0 320 240" style="--stage-accent: #ffb86b;"><use href="#how-reward"/></svg>
+                <svg data-how-fallback="learn" viewBox="0 0 320 240" style="--stage-accent: #6fd8e6;"><use href="#how-learn"/></svg>
+              </div>
+            </div>
+            <div class="cinematic-how__panels" role="list">
+              <div class="cinematic-how__stage" id="how-panel-notice" role="listitem" data-how-panel="notice" style="--stage-accent: #82efc8;">
+                <svg class="cinematic-how__symbol" aria-hidden="true" viewBox="0 0 320 240"><use href="#how-notice"/></svg>
+                <div class="cinematic-how__copy"><span class="cinematic-how__number">01</span><h3>Notice</h3><p>An employee, manager or leader notices work that deserves appreciation.</p></div>
+                <div class="how-preview how-preview--notice" role="group" aria-label="Notice product preview">
+                  <div class="how-preview__bar"><span class="how-preview__live"><i aria-hidden="true"></i>Contribution signal</span><small>Just now</small></div>
+                  <strong class="how-preview__title">A contribution worth noticing.</strong>
+                  <div class="how-preview__person"><span class="how-preview__avatar" aria-hidden="true">PR</span><span><b>Priya Raman</b><small>Covered launch support for the platform team</small></span></div>
+                  <div class="how-preview__meter"><span>Signal strength</span><span class="how-preview__track" aria-hidden="true"><i style="--value: .82;"></i></span></div>
+                </div>
+              </div>
+              <div class="cinematic-how__stage" id="how-panel-recognize" role="listitem" data-how-panel="recognize" style="--stage-accent: #c5a6ff;">
+                <svg class="cinematic-how__symbol" aria-hidden="true" viewBox="0 0 320 240"><use href="#how-recognize"/></svg>
+                <div class="cinematic-how__copy"><span class="cinematic-how__number">02</span><h3>Recognize</h3><p>They create a thoughtful recognition message—with optional AI assistance when they need help finding the right words.</p></div>
+                <div class="how-preview how-preview--recognize" role="group" aria-label="Recognize product preview">
+                  <div class="how-preview__bar"><span>New recognition</span><small>To: Priya Raman</small></div>
+                  <div class="how-preview__composer">Thank Priya for stepping in when the launch needed it.<i class="how-preview__caret" aria-hidden="true"></i></div>
+                  <div class="how-preview__chips"><span class="how-preview__chip how-preview__chip--ai"><i aria-hidden="true">✦</i> Help me find the words</span><span class="how-preview__chip">#Ownership</span></div>
+                  <div class="how-preview__actions"><span class="how-preview__button">Send recognition</span></div>
+                </div>
+              </div>
+              <div class="cinematic-how__stage" id="how-panel-celebrate" role="listitem" data-how-panel="celebrate" style="--stage-accent: #ffc978;">
+                <svg class="cinematic-how__symbol" aria-hidden="true" viewBox="0 0 320 240"><use href="#how-celebrate"/></svg>
+                <div class="cinematic-how__copy"><span class="cinematic-how__number">03</span><h3>Celebrate</h3><p>The recognition appears in the company feed, where colleagues can react, comment and celebrate together.</p></div>
+                <div class="how-preview how-preview--celebrate" role="group" aria-label="Celebrate product preview">
+                  <div class="how-preview__bar"><span>Company feed</span><small>2 min ago</small></div>
+                  <div class="how-preview__person"><span class="how-preview__avatar" aria-hidden="true">AK</span><span><b>Aisha recognized Priya</b><small>Stepped in when the launch needed it.</small></span></div>
+                  <div class="how-preview__reactions"><span><i aria-hidden="true">♥</i> 32</span><span><i aria-hidden="true">✦</i> 18</span><span><i aria-hidden="true">★</i> 12</span><span class="how-preview__comments">9 comments</span></div>
+                </div>
+              </div>
+              <div class="cinematic-how__stage" id="how-panel-reward" role="listitem" data-how-panel="reward" style="--stage-accent: #ffb86b;">
+                <svg class="cinematic-how__symbol" aria-hidden="true" viewBox="0 0 320 240"><use href="#how-reward"/></svg>
+                <div class="cinematic-how__copy"><span class="cinematic-how__number">04</span><h3>Reward</h3><p>Recognition can be connected to meaningful rewards from the company’s reward catalogue.</p></div>
+                <div class="how-preview how-preview--reward" role="group" aria-label="Reward product preview">
+                  <div class="how-preview__bar"><span>Reward catalogue</span><small>Connected</small></div>
+                  <strong class="how-preview__title">Recognition connected · 500 points</strong>
+                  <div class="how-preview__catalogue"><span><b>Team dinner</b><small>400 pts</small></span><span><b>Learning credit</b><small>500 pts</small></span></div>
+                </div>
+              </div>
+              <div class="cinematic-how__stage" id="how-panel-learn" role="listitem" data-how-panel="learn" style="--stage-accent: #6fd8e6;">
+                <svg class="cinematic-how__symbol" aria-hidden="true" viewBox="0 0 320 240"><use href="#how-learn"/></svg>
+                <div class="cinematic-how__copy"><span class="cinematic-how__number">05</span><h3>Learn</h3><p>Leaders gain visibility into participation, recognition patterns and the contributions shaping their culture.</p></div>
+                <div class="how-preview how-preview--learn" role="group" aria-label="Learn product preview">
+                  <div class="how-preview__bar"><span>Culture insights</span><small>Last 30 days</small></div>
+                  <div class="how-preview__stats"><span><small>Participation</small> <b>78%</b></span><span><small>Recognition trend</small> <b>+12%</b></span></div>
+                  <svg class="how-preview__spark" viewBox="0 0 240 56" aria-hidden="true"><path d="M2 48 34 40 66 44 98 30 130 32 162 20 194 18 238 4"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="visionary-closing-line cinematic-how__closing">Contribution becomes recognition. Recognition becomes belonging. Belonging becomes culture.</p>
+        </div>
+      </div>
+    </section>
 
-    <section class="visionary-section visionary-capabilities" data-home-section="capabilities"><div class="visionary-section-inner"><p class="visionary-index"><span>05</span> Built for participation</p><div class="visionary-centered-intro"><h2>A culture platform people will actually want to use.</h2><p>EzRewards is designed to make appreciation natural for employees and manageable for administrators.</p></div><div class="visionary-capability-grid">
-      <article class="visionary-capability-card"><small>Peer-to-peer recognition</small><h3>Make appreciation everyone’s responsibility</h3><p>Employees can recognize anyone across the company—not only the people on their immediate team. Recognition can be shared publicly, celebrated through reactions and strengthened through meaningful comments.</p></article><article class="visionary-capability-card"><small>AI-assisted messages</small><h3>Never let “I don’t know what to write” stop a meaningful moment</h3><p>EzRewards helps employees turn genuine appreciation into thoughtful recognition messages while keeping their voice and intent intact.</p></article><article class="visionary-capability-card"><small>Company recognition feed</small><h3>Create a living record of the work that matters</h3><p>Bring meaningful contributions out of private conversations and into a shared company experience.</p></article><article class="visionary-capability-card"><small>Rewards catalogue</small><h3>Give employees rewards they will value</h3><p>Create a company reward catalogue, fund the reward wallet and allow employees to redeem rewards that are relevant to them.</p></article><article class="visionary-capability-card"><small>Direct reward assignment</small><h3>Celebrate individuals or entire groups</h3><p>Administrators can assign rewards to one employee or recognize multiple employees through a simple bulk-assignment experience.</p></article><article class="visionary-capability-card"><small>Simple employee onboarding</small><h3>Bring your team in without operational friction</h3><p>Onboard employees through Microsoft SSO or structured CSV upload, with role-based access and employee information management.</p></article><article class="visionary-capability-card"><small>Culture reporting</small><h3>Understand how appreciation moves through your company</h3><p>View recognition and reward activity through structured reports designed to help leaders identify participation patterns and opportunities.</p></article><article class="visionary-capability-card"><small>AI Report Assistant</small><h3>Ask questions. Find answers inside your culture data.</h3><p>Administrators can ask natural-language questions across company reports and receive answers based on structured EzRewards data.</p></article>
-    </div></div></section>
+    <section class="visionary-section visionary-capabilities cinematic-participation" id="built-for-participation" data-home-section="capabilities" data-built-participation data-active-capability="recognition" data-animation-state="idle">
+      <div class="cinematic-participation__light" aria-hidden="true"></div>
+      <div class="cinematic-participation__pin">
+        <div class="visionary-section-inner cinematic-participation__inner">
+          <div class="cinematic-participation__header">
+            <p class="visionary-index"><span>05</span> Built for participation</p>
+            <div class="visionary-centered-intro"><h2>A culture platform people will actually want to use.</h2><p>EzRewards is designed to make appreciation natural for employees and manageable for administrators.</p></div>
+          </div>
+          <div class="cinematic-participation__experience">
+            <div class="visionary-capability-grid cinematic-participation__cards">
+              <article class="visionary-capability-card" id="capability-panel-recognition" data-capability-feature="recognition" style="--capability-accent:#82efc8;--card-rotation:-4deg;"><small>Peer-to-peer recognition</small><h3>Make appreciation everyone’s responsibility</h3><p>Employees can recognize anyone across the company—not only the people on their immediate team. Recognition can be shared publicly, celebrated through reactions and strengthened through meaningful comments.</p><div class="participation-mini participation-mini--recognition" aria-hidden="true"><span class="participation-avatar">AM</span><i></i><b>Recognize a colleague</b></div></article>
+              <article class="visionary-capability-card" id="capability-panel-ai-message" data-capability-feature="ai-message" style="--capability-accent:#c5a6ff;--card-rotation:4deg;"><small>AI-assisted messages</small><h3>Never let “I don’t know what to write” stop a meaningful moment</h3><p>EzRewards helps employees turn genuine appreciation into thoughtful recognition messages while keeping their voice and intent intact.</p><div class="participation-mini participation-mini--ai" aria-hidden="true"><span>✦</span><i></i><i></i><i></i></div></article>
+              <article class="visionary-capability-card" id="capability-panel-feed" data-capability-feature="feed" style="--capability-accent:#ffc978;--card-rotation:-4deg;"><small>Company recognition feed</small><h3>Create a living record of the work that matters</h3><p>Bring meaningful contributions out of private conversations and into a shared company experience.</p><div class="participation-mini participation-mini--feed" aria-hidden="true"><span>♥ 24</span><span>✦ 12</span><span>8 comments</span></div></article>
+              <article class="visionary-capability-card" id="capability-panel-catalogue" data-capability-feature="catalogue" style="--capability-accent:#ffb86b;--card-rotation:4deg;"><small>Rewards catalogue</small><h3>Give employees rewards they will value</h3><p>Create a company reward catalogue, fund the reward wallet and allow employees to redeem rewards that are relevant to them.</p><div class="participation-mini participation-mini--gift" aria-hidden="true"><span>🎁</span><b>500 pts</b></div></article>
+              <article class="visionary-capability-card" id="capability-panel-assignment" data-capability-feature="assignment" style="--capability-accent:#73d9ff;--card-rotation:-4deg;"><small>Direct reward assignment</small><h3>Celebrate individuals or entire groups</h3><p>Administrators can assign rewards to one employee or recognize multiple employees through a simple bulk-assignment experience.</p><div class="participation-mini participation-mini--people" aria-hidden="true"><span>AM</span><span>SK</span><span>+6</span><b>8 selected</b></div></article>
+              <article class="visionary-capability-card" id="capability-panel-onboarding" data-capability-feature="onboarding" style="--capability-accent:#a7e86f;--card-rotation:4deg;"><small>Simple employee onboarding</small><h3>Bring your team in without operational friction</h3><p>Onboard employees through Microsoft SSO or structured CSV upload, with role-based access and employee information management.</p><div class="participation-mini participation-mini--upload" aria-hidden="true"><b>employees.csv</b><span><i></i></span><small>Complete</small></div></article>
+              <article class="visionary-capability-card" id="capability-panel-reporting" data-capability-feature="reporting" style="--capability-accent:#6fd8e6;--card-rotation:-4deg;"><small>Culture reporting</small><h3>Understand how appreciation moves through your company</h3><p>View recognition and reward activity through structured reports designed to help leaders identify participation patterns and opportunities.</p><div class="participation-mini participation-mini--chart" aria-hidden="true"><i style="--bar:.4"></i><i style="--bar:.65"></i><i style="--bar:.52"></i><i style="--bar:.86"></i></div></article>
+              <article class="visionary-capability-card" id="capability-panel-assistant" data-capability-feature="assistant" style="--capability-accent:#df9cff;--card-rotation:4deg;"><small>AI Report Assistant</small><h3>Ask questions. Find answers inside your culture data.</h3><p>Administrators can ask natural-language questions across company reports and receive answers based on structured EzRewards data.</p><div class="participation-mini participation-mini--assistant" aria-hidden="true"><span>Ask EzRewards</span><i></i><i></i></div></article>
+            </div>
 
-    <section class="visionary-section visionary-outcomes" data-home-section="outcomes"><div class="visionary-section-inner"><p class="visionary-index"><span>06</span> A culture everyone can see</p><div class="visionary-centered-intro"><h2>When appreciation becomes visible, its impact travels further.</h2></div><div class="visionary-outcome-grid"><article><small>Employee outcome</small><h3>People know their work matters</h3><p>Employees receive timely, specific appreciation—not only generic praise during formal review cycles.</p></article><article><small>Team outcome</small><h3>Great work becomes contagious</h3><p>Teams can see the behaviours and contributions being celebrated across the company.</p></article><article><small>Leadership outcome</small><h3>Culture becomes more tangible</h3><p>Leaders gain a clearer view of participation, recognition and the people strengthening the organization.</p></article><article><small>Company outcome</small><h3>Values become behaviours</h3><p>Company values move beyond posters and presentations when people can see how they appear in everyday work.</p></article></div></div></section>
+            <div class="participation-product" aria-hidden="true">
+              <div class="participation-product__chrome"><span class="participation-product__brand">✦ EzRewards</span><span>Culture workspace</span><i></i><i></i><span class="participation-product__user">UD</span></div>
+              <div class="participation-product__body">
+                <aside><b>Overview</b><span>Recognition</span><span>Rewards</span><span>People</span><span>Reports</span></aside>
+                <div class="participation-product__screens">
+                  <section data-capability-screen="recognition"><div class="product-screen__heading"><div><small>Recognition</small><h3>Recognize great work</h3></div><span class="product-status">Draft</span></div><div class="product-field"><small>Recognize</small><span class="product-person"><i>AM</i>Aarav Mehta</span></div><div class="product-field product-field--message"><small>Your message</small><p>Thank you for stepping in and helping the team move the launch forward.</p></div><div class="product-badges"><span>Teamwork</span><span>Ownership</span><span>Customer first</span></div><button type="button" tabindex="-1">Send recognition</button></section>
+                  <section data-capability-screen="ai-message"><div class="product-screen__heading"><div><small>AI message assistant</small><h3>Keep the meaning. Find the words.</h3></div><span class="product-spark">✦</span></div><div class="product-field product-field--message"><small>Your draft</small><p>Thanks for helping with the launch<span class="product-cursor"></span></p></div><div class="product-suggestion"><b>Suggested message</b><p>Thank you for stepping in when the launch needed it most. Your calm ownership helped everyone move forward.</p><div><span>Refine</span><span>Use suggestion</span></div></div></section>
+                  <section data-capability-screen="feed"><div class="product-screen__heading"><div><small>Company feed</small><h3>Today at EzRewards</h3></div><span class="product-status">Live</span></div><article class="product-feed-card"><div><i>AM</i><p><b>Aarav recognized Priya</b><small>for Ownership · 2m ago</small></p></div><blockquote>“Your calm thinking turned a difficult launch into a shared win.”</blockquote><div class="product-reactions"><span>♥ 24</span><span>✦ 12</span><span>👏 9</span><small>8 comments</small></div><div class="product-float-reactions"><i>♥</i><i>✦</i><i>👏</i></div></article></section>
+                  <section data-capability-screen="catalogue"><div class="product-screen__heading"><div><small>Reward catalogue</small><h3>Choose something meaningful</h3></div><span class="product-points">1,250 pts</span></div><div class="product-reward-grid"><article><span>☕</span><b>Coffee moment</b><small>250 points</small></article><article class="is-featured"><span class="product-gift-lid">🎁</span><b>Choice voucher</b><small>500 points</small></article><article><span>🌱</span><b>Plant a tree</b><small>350 points</small></article></div></section>
+                  <section data-capability-screen="assignment"><div class="product-screen__heading"><div><small>Reward assignment</small><h3>Celebrate one person or many</h3></div><span class="product-status">8 selected</span></div><div class="product-people"><span class="is-selected"><i>AM</i><b>Aarav Mehta</b><em>✓</em></span><span class="is-selected"><i>SK</i><b>Sarah Kim</b><em>✓</em></span><span><i>JL</i><b>Jamie Lee</b><em></em></span></div><div class="product-selection"><span>AM</span><span>SK</span><span>+6</span><b>Assign reward</b></div></section>
+                  <section data-capability-screen="onboarding"><div class="product-screen__heading"><div><small>Employee onboarding</small><h3>Bring everyone in with less friction</h3></div><span class="product-status">Step 2 of 3</span></div><div class="product-onboarding-options"><article><span>⊞</span><div><b>Microsoft SSO</b><small>Connect your organization</small></div></article><article class="is-uploading"><span>CSV</span><div><b>employees.csv</b><small>142 employees found</small><i><em></em></i></div><strong>Complete</strong></article></div></section>
+                  <section data-capability-screen="reporting"><div class="product-screen__heading"><div><small>Culture reporting</small><h3>Recognition participation</h3></div><span class="product-status">Last 30 days</span></div><div class="product-kpis"><article><small>Participation</small><b>78%</b><em>+12%</em></article><article><small>Recognition moments</small><b>284</b><em>+36</em></article></div><div class="product-report-chart"><i style="--h:42%"></i><i style="--h:55%"></i><i style="--h:48%"></i><i style="--h:68%"></i><i style="--h:76%"></i><i style="--h:88%"></i><svg viewBox="0 0 300 90"><path d="M2 78 58 68 112 72 166 48 220 40 298 12"/></svg></div></section>
+                  <section data-capability-screen="assistant"><div class="product-screen__heading"><div><small>AI Report Assistant</small><h3>Ask your culture data</h3></div><span class="product-spark">✦</span></div><div class="product-query">Which teams increased recognition this month?<span>↗</span></div><div class="product-answer"><b>Three teams increased participation.</b><p>Customer Success led the change with a 21% increase, followed by Product and Operations.</p><div><span>Customer Success <em>+21%</em></span><span>Product <em>+14%</em></span><span>Operations <em>+9%</em></span></div></div></section>
+                </div>
+              </div>
+            </div>
 
-    <section class="visionary-section visionary-early-access" data-home-section="early-access"><div class="visionary-section-inner visionary-split"><div><p class="visionary-index"><span>07</span> Help shape what comes next</p><h2>The best workplace cultures are built intentionally.</h2><p>We are inviting a limited group of growing companies to join EzRewards early.</p><p>Early-access companies will experience the product before the wider launch and help us understand how recognition should work inside modern teams.</p><a class="dark-button dark-button--primary" href="/contact">Join the Waitlist</a><small>Designed for companies with 30 or more employees.</small></div><ul><li>Early access to the EzRewards platform</li><li>Direct input into upcoming product capabilities</li><li>Guided onboarding for your company</li><li>Early visibility into new recognition and reward experiences</li><li>Founding customer status within the EzRewards community</li></ul></div></section>
+            <div class="cinematic-participation__progress" role="tablist" aria-label="EzRewards capabilities">
+              <button id="capability-tab-recognition" type="button" role="tab" aria-selected="true" aria-controls="capability-panel-recognition" data-capability-progress="recognition"><span>01</span><b>Recognition</b></button>
+              <button id="capability-tab-ai-message" type="button" role="tab" aria-selected="false" aria-controls="capability-panel-ai-message" data-capability-progress="ai-message" tabindex="-1"><span>02</span><b>AI messages</b></button>
+              <button id="capability-tab-feed" type="button" role="tab" aria-selected="false" aria-controls="capability-panel-feed" data-capability-progress="feed" tabindex="-1"><span>03</span><b>Feed</b></button>
+              <button id="capability-tab-catalogue" type="button" role="tab" aria-selected="false" aria-controls="capability-panel-catalogue" data-capability-progress="catalogue" tabindex="-1"><span>04</span><b>Catalogue</b></button>
+              <button id="capability-tab-assignment" type="button" role="tab" aria-selected="false" aria-controls="capability-panel-assignment" data-capability-progress="assignment" tabindex="-1"><span>05</span><b>Assignment</b></button>
+              <button id="capability-tab-onboarding" type="button" role="tab" aria-selected="false" aria-controls="capability-panel-onboarding" data-capability-progress="onboarding" tabindex="-1"><span>06</span><b>Onboarding</b></button>
+              <button id="capability-tab-reporting" type="button" role="tab" aria-selected="false" aria-controls="capability-panel-reporting" data-capability-progress="reporting" tabindex="-1"><span>07</span><b>Reporting</b></button>
+              <button id="capability-tab-assistant" type="button" role="tab" aria-selected="false" aria-controls="capability-panel-assistant" data-capability-progress="assistant" tabindex="-1"><span>08</span><b>AI assistant</b></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <section class="visionary-section visionary-pricing" data-home-section="pricing"><div class="visionary-section-inner"><p class="visionary-index"><span>08</span> Simple, accessible pricing</p><div class="visionary-centered-intro"><h2>Meaningful culture for $1 per employee/month.</h2><p>Recognition should not become a luxury reserved for large enterprises. EzRewards gives growing companies one connected platform for recognition, rewards and culture insights—without complex pricing tiers.</p></div><div class="visionary-price-card"><div class="visionary-price-summary"><small>EzRewards Early Access</small><p><strong>$1</strong> per active employee/month</p><a class="dark-button dark-button--primary" href="/contact">Join the Waitlist</a><a href="/pricing">View full pricing details</a></div><div><h3>Included</h3><ul><li>Peer-to-peer recognition</li><li>Company recognition feed</li><li>AI-assisted recognition messages</li><li>Reactions and comments</li><li>Reward catalogue</li><li>Individual and bulk reward assignment</li><li>Microsoft SSO and CSV onboarding</li><li>Role-based administration</li><li>Recognition and reward reports</li><li>AI-powered report assistance</li></ul></div></div><div class="visionary-pricing-notes"><p>Only active employees count toward your subscription.<br>Reward and voucher budgets are funded separately and remain under your company’s control.</p><p><strong>Pay annually and receive two months free.</strong><br>$10 per active employee/year</p></div></div></section>
+    <section class="visionary-section visionary-outcomes cinematic-culture" id="culture-everyone-can-see" data-home-section="outcomes" data-culture-sphere data-active-outcome="employee" data-render-state="idle">
+      <svg class="cinematic-culture__symbols" aria-hidden="true">
+        <symbol id="culture-employee" viewBox="0 0 360 360"><g fill="currentColor"><circle cx="54" cy="82" r="4"/><circle cx="101" cy="54" r="3"/><circle cx="157" cy="73" r="5"/><circle cx="226" cy="55" r="3"/><circle cx="291" cy="92" r="5"/><circle cx="322" cy="155" r="3"/><circle cx="297" cy="228" r="4"/><circle cx="259" cy="299" r="3"/><circle cx="184" cy="317" r="5"/><circle cx="112" cy="292" r="3"/><circle cx="57" cy="245" r="5"/><circle cx="35" cy="171" r="3"/><circle cx="119" cy="142" r="4"/><circle cx="221" cy="166" r="4"/><circle cx="172" cy="232" r="3"/></g><circle cx="180" cy="180" r="122"/><circle cx="180" cy="180" r="84" stroke-dasharray="3 13"/></symbol>
+        <symbol id="culture-team" viewBox="0 0 360 360"><circle cx="180" cy="180" r="126"/><circle cx="180" cy="180" r="91"/><circle cx="180" cy="180" r="57"/><path d="M54 180h252M180 54v252"/><g fill="currentColor"><circle cx="180" cy="54" r="6"/><circle cx="287" cy="114" r="5"/><circle cx="284" cy="244" r="6"/><circle cx="180" cy="306" r="5"/><circle cx="75" cy="242" r="6"/><circle cx="73" cy="116" r="5"/></g></symbol>
+        <symbol id="culture-leadership" viewBox="0 0 360 360"><circle cx="180" cy="180" r="126"/><path d="m74 116 72-41 78 19 62 64-22 84-82 52-83-43-25-135Zm72-41 36 219M224 94 99 251M74 116l212 42M99 251l165-9"/><g fill="currentColor"><circle cx="74" cy="116" r="8"/><circle cx="146" cy="75" r="7"/><circle cx="224" cy="94" r="9"/><circle cx="286" cy="158" r="7"/><circle cx="264" cy="242" r="9"/><circle cx="182" cy="294" r="7"/><circle cx="99" cy="251" r="9"/></g></symbol>
+        <symbol id="culture-company" viewBox="0 0 360 360"><circle cx="180" cy="180" r="128"/><ellipse cx="180" cy="180" rx="128" ry="53"/><ellipse cx="180" cy="180" rx="57" ry="128"/><path d="M79 102c62 45 140 45 202 0M79 258c62-45 140-45 202 0"/><path class="culture-star-path" d="m180 119 13 38 38 13-38 13-13 38-13-38-38-13 38-13Z"/></symbol>
+      </svg>
+      <div class="cinematic-culture__pin">
+        <div class="visionary-section-inner cinematic-culture__inner">
+          <div class="cinematic-culture__copy">
+            <p class="visionary-index"><span>06</span> A culture everyone can see</p>
+            <div class="visionary-centered-intro"><h2>When appreciation becomes visible, its impact travels further.</h2></div>
+            <div class="visionary-outcome-grid cinematic-culture__outcomes">
+              <article id="outcome-panel-employee" data-outcome-stage="employee" style="--outcome-accent:#82efc8;"><small>Employee outcome</small><h3>People know their work matters</h3><p>Employees receive timely, specific appreciation—not only generic praise during formal review cycles.</p><svg class="culture-stage-symbol" aria-hidden="true" viewBox="0 0 360 360"><use href="#culture-employee"/></svg></article>
+              <article id="outcome-panel-team" data-outcome-stage="team" style="--outcome-accent:#6fd8e6;"><small>Team outcome</small><h3>Great work becomes contagious</h3><p>Teams can see the behaviours and contributions being celebrated across the company.</p><svg class="culture-stage-symbol" aria-hidden="true" viewBox="0 0 360 360"><use href="#culture-team"/></svg></article>
+              <article id="outcome-panel-leadership" data-outcome-stage="leadership" style="--outcome-accent:#c5a6ff;"><small>Leadership outcome</small><h3>Culture becomes more tangible</h3><p>Leaders gain a clearer view of participation, recognition and the people strengthening the organization.</p><svg class="culture-stage-symbol" aria-hidden="true" viewBox="0 0 360 360"><use href="#culture-leadership"/></svg></article>
+              <article id="outcome-panel-company" data-outcome-stage="company" style="--outcome-accent:#ffc978;"><small>Company outcome</small><h3>Values become behaviours</h3><p>Company values move beyond posters and presentations when people can see how they appear in everyday work.</p><svg class="culture-stage-symbol" aria-hidden="true" viewBox="0 0 360 360"><use href="#culture-company"/></svg></article>
+            </div>
+          </div>
+          <div class="cinematic-culture__visual" aria-hidden="true">
+            <canvas data-culture-canvas></canvas>
+            <div class="cinematic-culture__fallback">
+              <svg data-culture-fallback="employee" viewBox="0 0 360 360"><use href="#culture-employee"/></svg>
+              <svg data-culture-fallback="team" viewBox="0 0 360 360"><use href="#culture-team"/></svg>
+              <svg data-culture-fallback="leadership" viewBox="0 0 360 360"><use href="#culture-leadership"/></svg>
+              <svg data-culture-fallback="company" viewBox="0 0 360 360"><use href="#culture-company"/></svg>
+            </div>
+          </div>
+          <div class="cinematic-culture__progress" role="tablist" aria-label="Culture outcomes">
+            <button id="outcome-tab-employee" type="button" role="tab" aria-selected="true" aria-controls="outcome-panel-employee" data-outcome-progress="employee"><span>01</span><b>Participation</b></button>
+            <button id="outcome-tab-team" type="button" role="tab" aria-selected="false" aria-controls="outcome-panel-team" data-outcome-progress="team" tabindex="-1"><span>02</span><b>Recognition</b></button>
+            <button id="outcome-tab-leadership" type="button" role="tab" aria-selected="false" aria-controls="outcome-panel-leadership" data-outcome-progress="leadership" tabindex="-1"><span>03</span><b>Belonging</b></button>
+            <button id="outcome-tab-company" type="button" role="tab" aria-selected="false" aria-controls="outcome-panel-company" data-outcome-progress="company" tabindex="-1"><span>04</span><b>Culture insight</b></button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <section class="visionary-section visionary-faq" data-home-section="faq"><div class="visionary-section-inner"><p class="visionary-index"><span>09</span> Frequently Asked Questions</p><div class="visionary-faq-layout"><h2>Everything you need to know before joining early access.</h2><div class="visionary-faq-list"><details><summary>What is EzRewards?</summary><p>EzRewards is an employee recognition and rewards platform that helps companies make everyday contributions visible, celebrate meaningful work and manage rewards through one connected experience.</p></details><details><summary>Is EzRewards only a gift-card platform?</summary><p>No. Rewards are one part of the experience. EzRewards connects recognition, public appreciation, rewards and culture reporting so companies can build a continuous appreciation system—not simply distribute vouchers.</p></details><details><summary>Who is EzRewards designed for?</summary><p>EzRewards is designed primarily for growing companies with 30 or more employees that want to build a more visible and participative workplace culture.</p></details><details><summary>Can any employee recognize another employee?</summary><p>Yes. EzRewards is built around company-wide, peer-to-peer recognition. Employees can appreciate colleagues across teams and departments.</p></details><details><summary>Does every recognition include a monetary reward?</summary><p>No. Recognition can be completely non-monetary. Employees can appreciate colleagues through meaningful messages and recognition badges. Rewards can be assigned separately when appropriate.</p></details><details><summary>How does pricing work?</summary><p>EzRewards costs $1 per active employee each month. Pending invitations do not consume seats. When an additional employee activates their account, the subscription quantity increases automatically and the additional seat is billed proportionately for the remaining billing period.</p></details><details><summary>Is the reward budget included in the subscription?</summary><p>No. Platform subscription fees and reward funding are separate. Your company decides how much to add to its reward wallet and how those funds are distributed.</p></details><details><summary>How do employees join?</summary><p>Companies can onboard employees using Microsoft SSO or structured CSV upload. Invited employees can then activate their accounts and complete their profiles.</p></details><details><summary>Is EzRewards available now?</summary><p>EzRewards is currently accepting applications for early access. Join the waitlist and we will contact you as onboarding slots become available.</p></details></div></div></div></section>
+    <section class="visionary-section visionary-early-access cinematic-early" data-home-section="early-access" data-early-access data-video-state="idle">
+      <div class="cinematic-early__pin">
+        <div class="cinematic-early__media" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 767px)" type="image/avif" srcset="assets/generated/early-access/early-access-gateway-mobile-poster.avif">
+            <source media="(max-width: 767px)" type="image/webp" srcset="assets/generated/early-access/early-access-gateway-mobile-poster.webp">
+            <source type="image/avif" srcset="assets/generated/early-access/early-access-gateway-desktop-poster.avif">
+            <source type="image/webp" srcset="assets/generated/early-access/early-access-gateway-desktop-poster.webp">
+            <img src="assets/generated/early-access/early-access-gateway-desktop-poster.webp" alt="" loading="lazy" decoding="async">
+          </picture>
+          <video data-early-video muted loop playsinline preload="none"
+            data-desktop-webm="assets/generated/early-access/early-access-gateway-desktop.webm"
+            data-desktop-mp4="assets/generated/early-access/early-access-gateway-desktop.mp4"
+            data-mobile-webm="assets/generated/early-access/early-access-gateway-mobile.webm"
+            data-mobile-mp4="assets/generated/early-access/early-access-gateway-mobile.mp4"></video>
+          <div class="cinematic-early__spill" data-early-spill></div>
+          <div class="cinematic-early__beam" data-early-beam></div>
+          <div class="cinematic-early__light"></div>
+          <div class="cinematic-early__grain"></div>
+        </div>
+        <div class="visionary-section-inner cinematic-early__inner">
+          <div class="cinematic-early__copy">
+            <p class="visionary-index"><span>07</span> Help shape what comes next</p>
+            <h2>The best workplace cultures are built intentionally.</h2>
+            <div class="cinematic-early__body">
+              <p>We are inviting a limited group of growing companies to join EzRewards early.</p>
+              <p>Early-access companies will experience the product before the wider launch and help us understand how recognition should work inside modern teams.</p>
+            </div>
+            <div class="cinematic-early__action">
+              <a class="dark-button dark-button--primary" href="/contact">Join the Waitlist</a>
+              <small>Designed for companies with 30 or more employees.</small>
+            </div>
+          </div>
+          <ol class="cinematic-early__benefits">
+            <li data-early-benefit style="--benefit-x:53%;--benefit-y:28%;--benefit-accent:#82efc8;"><span>01</span><p>Early access to the EzRewards platform</p></li>
+            <li data-early-benefit style="--benefit-x:79%;--benefit-y:38%;--benefit-accent:#c5a6ff;"><span>02</span><p>Direct input into upcoming product capabilities</p></li>
+            <li data-early-benefit style="--benefit-x:50%;--benefit-y:51%;--benefit-accent:#ffc978;"><span>03</span><p>Guided onboarding for your company</p></li>
+            <li data-early-benefit style="--benefit-x:80%;--benefit-y:64%;--benefit-accent:#6fd8e6;"><span>04</span><p>Early visibility into new recognition and reward experiences</p></li>
+            <li data-early-benefit style="--benefit-x:56%;--benefit-y:77%;--benefit-accent:#82efc8;"><span>05</span><p>Founding customer status within the EzRewards community</p></li>
+          </ol>
+        </div>
+      </div>
+    </section>
 
-    <section class="visionary-final-cta" data-home-section="final-cta"><div><h2>Build the workplace people want to belong to.</h2><p>Make meaningful work visible. Help people feel valued. Create a culture that grows stronger with every contribution.</p><a class="dark-button dark-button--primary" href="/contact">Join the Waitlist</a><strong>EzRewards — Seen. Valued. Rewarded.</strong></div></section>
+    <section class="visionary-section visionary-pricing cinematic-pricing" data-home-section="pricing" data-pricing-reveal data-pricing-state="complete">
+      <div class="visionary-section-inner cinematic-pricing__inner">
+        <div class="cinematic-pricing__intro" data-pricing-intro>
+          <p class="visionary-index"><span>08</span> Simple, accessible pricing</p>
+          <div class="visionary-centered-intro">
+            <h2>Meaningful culture for $1 per employee/month.</h2>
+            <p>Recognition should not become a luxury reserved for large enterprises. EzRewards gives growing companies one connected platform for recognition, rewards and culture insights—without complex pricing tiers.</p>
+          </div>
+        </div>
+        <div class="visionary-price-card cinematic-pricing__card" data-pricing-card>
+          <span class="cinematic-pricing__border" aria-hidden="true"></span>
+          <div class="visionary-price-summary cinematic-pricing__summary">
+            <small>EzRewards Early Access</small>
+            <p><strong data-price-value>$1</strong><span data-price-period>per active employee/month</span></p>
+            <div class="cinematic-pricing__actions" data-pricing-actions>
+              <a class="dark-button dark-button--primary" href="/contact">Join the Waitlist</a>
+              <a href="/pricing">View full pricing details</a>
+            </div>
+          </div>
+          <div class="cinematic-pricing__included">
+            <h3>Included</h3>
+            <ul>
+              <li data-price-feature><span aria-hidden="true">✓</span>Peer-to-peer recognition</li>
+              <li data-price-feature><span aria-hidden="true">✓</span>Company recognition feed</li>
+              <li data-price-feature><span aria-hidden="true">✓</span>AI-assisted recognition messages</li>
+              <li data-price-feature><span aria-hidden="true">✓</span>Reactions and comments</li>
+              <li data-price-feature><span aria-hidden="true">✓</span>Reward catalogue</li>
+              <li data-price-feature><span aria-hidden="true">✓</span>Individual and bulk reward assignment</li>
+              <li data-price-feature><span aria-hidden="true">✓</span>Microsoft SSO and CSV onboarding</li>
+              <li data-price-feature><span aria-hidden="true">✓</span>Role-based administration</li>
+              <li data-price-feature><span aria-hidden="true">✓</span>Recognition and reward reports</li>
+              <li data-price-feature><span aria-hidden="true">✓</span>AI-powered report assistance</li>
+            </ul>
+          </div>
+        </div>
+        <div class="visionary-pricing-notes cinematic-pricing__notes">
+          <p data-pricing-note>Only active employees count toward your subscription.<br>Reward and voucher budgets are funded separately and remain under your company’s control.</p>
+          <p data-pricing-note><strong>Pay annually and receive two months free.</strong><br>$10 per active employee/year</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="visionary-section visionary-faq" data-home-section="faq" data-faq-motion><div class="visionary-section-inner"><p class="visionary-index"><span>09</span> Frequently Asked Questions</p><div class="visionary-faq-layout"><h2>Everything you need to know before joining early access.</h2><div class="visionary-faq-list"><details data-faq-item data-faq-state="closed"><summary>What is EzRewards?</summary><p data-faq-answer>EzRewards is an employee recognition and rewards platform that helps companies make everyday contributions visible, celebrate meaningful work and manage rewards through one connected experience.</p></details><details data-faq-item data-faq-state="closed"><summary>Is EzRewards only a gift-card platform?</summary><p data-faq-answer>No. Rewards are one part of the experience. EzRewards connects recognition, public appreciation, rewards and culture reporting so companies can build a continuous appreciation system—not simply distribute vouchers.</p></details><details data-faq-item data-faq-state="closed"><summary>Who is EzRewards designed for?</summary><p data-faq-answer>EzRewards is designed primarily for growing companies with 30 or more employees that want to build a more visible and participative workplace culture.</p></details><details data-faq-item data-faq-state="closed"><summary>Can any employee recognize another employee?</summary><p data-faq-answer>Yes. EzRewards is built around company-wide, peer-to-peer recognition. Employees can appreciate colleagues across teams and departments.</p></details><details data-faq-item data-faq-state="closed"><summary>Does every recognition include a monetary reward?</summary><p data-faq-answer>No. Recognition can be completely non-monetary. Employees can appreciate colleagues through meaningful messages and recognition badges. Rewards can be assigned separately when appropriate.</p></details><details data-faq-item data-faq-state="closed"><summary>How does pricing work?</summary><p data-faq-answer>EzRewards costs $1 per active employee each month. Pending invitations do not consume seats. When an additional employee activates their account, the subscription quantity increases automatically and the additional seat is billed proportionately for the remaining billing period.</p></details><details data-faq-item data-faq-state="closed"><summary>Is the reward budget included in the subscription?</summary><p data-faq-answer>No. Platform subscription fees and reward funding are separate. Your company decides how much to add to its reward wallet and how those funds are distributed.</p></details><details data-faq-item data-faq-state="closed"><summary>How do employees join?</summary><p data-faq-answer>Companies can onboard employees using Microsoft SSO or structured CSV upload. Invited employees can then activate their accounts and complete their profiles.</p></details><details data-faq-item data-faq-state="closed"><summary>Is EzRewards available now?</summary><p data-faq-answer>EzRewards is currently accepting applications for early access. Join the waitlist and we will contact you as onboarding slots become available.</p></details></div></div></div></section>
+
+    <section class="visionary-final-cta cinematic-final" data-home-section="final-cta" data-final-cta data-final-cta-mode="static" data-final-cta-progress="1" data-render-state="fallback">
+      <div class="cinematic-final__sticky">
+        <div class="cinematic-final__atmosphere" aria-hidden="true"></div>
+        <div class="cinematic-final__visual" aria-hidden="true">
+          <canvas></canvas>
+          <svg class="cinematic-final__fallback" viewBox="0 0 240 240" focusable="false">
+            <path d="M120 18C126 82 158 114 222 120C158 126 126 158 120 222C114 158 82 126 18 120C82 114 114 82 120 18Z" />
+          </svg>
+        </div>
+        <div class="cinematic-final__copy"><h2>Build the workplace people want to belong to.</h2><p>Make meaningful work visible. Help people feel valued. Create a culture that grows stronger with every contribution.</p><a class="dark-button dark-button--primary" href="/contact">Join the Waitlist</a><strong>EzRewards — Seen. Valued. Rewarded.</strong></div>
+      </div>
+    </section>
   </main>
 
-  <main class="strategist-home" data-persona-page="strategist" hidden inert>
+  <main class="strategist-home" data-persona-page="strategist" data-strategist-cinematic data-strategist-mode="static" hidden inert>
     <section class="strategist-hero strategist-section" data-strategist-section="hero">
+      <picture class="strategist-scene-media" aria-hidden="true">
+        <img src="/assets/home/strategist-orbit.svg" alt="" width="1920" height="1200" decoding="async" fetchpriority="high">
+      </picture>
+      <div class="strategist-scene-grid" aria-hidden="true"></div>
       <div class="strategist-wrap strategist-hero__grid">
         <div class="strategist-hero__copy is-visible" data-strategist-reveal>
           <p class="strategist-eyebrow">Recognition, rewards and culture visibility in one platform</p>
@@ -273,12 +648,28 @@
           <div class="strategist-actions"><a class="strategist-button strategist-button--primary" href="/contact" data-persona-primary-cta>Book a Demo</a><a class="strategist-button strategist-button--secondary" href="#strategist-outcomes">See Measurable Outcomes</a></div>
           <p class="strategist-note">Built for growing teams. Starting at <strong>$1 per employee/month.</strong></p>
         </div>
-        <div class="strategist-dashboard strategist-card is-visible" data-strategist-reveal>
+      </div>
+      <div class="strategist-dashboard-stage">
+        <p class="strategist-dashboard-caption"><span>From appreciation to intelligence</span> Your culture. A clearer picture.</p>
+        <div class="strategist-dashboard strategist-card">
+          <aside class="strategist-app-sidebar" aria-label="Dashboard preview navigation">
+            <div class="strategist-app-brand"><span aria-hidden="true">✦</span> EzRewards</div>
+            <div class="strategist-app-company"><span>AC</span><div>Acme Company<small>Company workspace</small></div></div>
+            <p class="strategist-app-nav-label">WORKSPACE</p>
+            <ul class="strategist-app-nav"><li class="is-current"><span aria-hidden="true">◈</span> Overview</li><li><span aria-hidden="true">♡</span> Recognition</li><li><span aria-hidden="true">◇</span> Rewards</li><li><span aria-hidden="true">▥</span> Culture reports</li><li><span aria-hidden="true">✧</span> AI assistant</li></ul>
+            <div class="strategist-app-profile"><span>JD</span><div>Jordan Davis<small>Workspace admin</small></div></div>
+          </aside>
+          <div class="strategist-app-screen">
+            <div class="strategist-app-toolbar"><span>Workspace / <strong>Overview</strong></span><span class="strategist-preview-label">Product preview</span></div>
+            <div class="strategist-app-content">
           <div class="strategist-dashboard__top"><div><small>Culture intelligence</small><h2>Leadership overview</h2></div><span>Updated today</span></div>
           <div class="strategist-metrics"><article><small>Recognition participation</small><strong>78%</strong><span>↑ 12% vs last quarter</span></article><article><small>Engagement index</small><strong>8.4</strong><span>↑ 0.8 points</span></article><article><small>Reward utilization</small><strong>86%</strong><span>Within policy target</span></article></div>
           <div class="strategist-dashboard__lower">
             <div class="strategist-chart"><div class="strategist-chart__label"><strong>Recognition trend</strong><small>6 months</small></div><div class="strategist-bars" role="img" aria-label="Recognition participation increased steadily over six months"><i style="--bar:48%"></i><i style="--bar:60%"></i><i style="--bar:68%"></i><i style="--bar:76%"></i><i style="--bar:82%"></i><i style="--bar:91%"></i></div><div class="strategist-chart__axis"><small>Feb</small><small>Jul</small></div></div>
             <aside class="strategist-insight"><span>AI insight</span><h3>Manager adoption is accelerating.</h3><p>Participation increased across 7 of 8 departments. Operations is the next enablement opportunity.</p><a href="#strategist-outcomes">View insight →</a></aside>
+          </div>
+          <div class="strategist-team-activity"><div><h3>Participation by team</h3><span>This quarter</span></div><table><thead><tr><th scope="col">Team</th><th scope="col">Participation</th><th scope="col">Trend</th></tr></thead><tbody><tr><th scope="row">Engineering</th><td><span class="strategist-team-meter" style="--participation:92%"></span>92%</td><td>+14%</td></tr><tr><th scope="row">People &amp; Culture</th><td><span class="strategist-team-meter" style="--participation:88%"></span>88%</td><td>+11%</td></tr><tr><th scope="row">Operations</th><td><span class="strategist-team-meter" style="--participation:64%"></span>64%</td><td>+8%</td></tr></tbody></table></div>
+          </div>
           </div>
         </div>
       </div>
@@ -298,12 +689,22 @@
       </div>
     </section>
 
-    <section class="strategist-section strategist-vision" data-strategist-section="vision">
-      <div class="strategist-wrap strategist-vision__grid">
-        <div><p class="strategist-eyebrow">A more intentional approach</p><h2>What if recognition became a system—not a collection of initiatives?</h2></div>
-        <div><p>A system where employees can appreciate meaningful work in the moment.</p><p>Where recognition is visible across the company, rewards remain connected to contribution and leaders can understand participation through structured data.</p><p>EzRewards brings these elements together so recognition can become a consistent organizational practice rather than an occasional HR activity.</p></div>
+    <section class="strategist-section strategist-vision" data-strategist-section="vision" aria-labelledby="strategist-vision-title">
+      <div class="strategist-vision__media" aria-hidden="true">
+        <video class="strategist-vision__video" autoplay muted loop playsinline preload="metadata" poster="/assets/generated/strategist/strategist-signal-system-1536.webp" tabindex="-1">
+          <source src="/assets/generated/strategist/strategist-vision-background.mp4" type="video/mp4">
+        </video>
       </div>
-      <blockquote data-strategist-reveal><span>What a company recognizes tells people what it values.</span><strong>EzRewards helps make that signal clearer.</strong></blockquote>
+      <div class="strategist-wrap strategist-vision__wrap">
+        <div class="strategist-vision__header"><p class="strategist-vision__label"><span>01</span> The vision</p><p class="strategist-vision__themes">Recognition &middot; Rewards &middot; Intelligence</p></div>
+        <div class="strategist-vision__story">
+          <div class="strategist-vision__opening"><p class="strategist-eyebrow">A more intentional approach</p><h2 id="strategist-vision-title">What if recognition became a system&mdash;not a collection of initiatives?</h2></div>
+          <div class="strategist-vision__panel" data-strategist-reveal>
+            <blockquote><span>What a company recognizes tells people what it values.</span><strong>EzRewards helps make that signal clearer.</strong></blockquote>
+            <div class="strategist-vision__explanation"><div><p>A system where employees can appreciate meaningful work in the moment.</p><p>Where recognition is visible across the company, rewards remain connected to contribution and leaders can understand participation through structured data.</p></div><p>EzRewards brings these elements together so recognition can become a consistent organizational practice rather than an occasional HR activity.</p></div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="strategist-section strategist-section--alt" data-strategist-section="category">
@@ -319,31 +720,46 @@
     </section>
 
     <section class="strategist-section strategist-loop" data-strategist-section="loop">
-      <div class="strategist-wrap">
-        <p class="strategist-eyebrow">How EzRewards works</p><div class="strategist-heading-row"><h2>Turn individual moments of appreciation into organizational visibility.</h2><p>One connected workflow carries recognition from a meaningful contribution to a pattern leaders can understand.</p></div>
-        <ol class="strategist-steps">
-          <li class="strategist-card" data-strategist-reveal><span>01</span><h3>Notice</h3><p>An employee, manager or leader identifies a contribution worth recognizing.</p></li>
-          <li class="strategist-card" data-strategist-reveal><span>02</span><h3>Recognize</h3><p>They share a specific recognition message, with optional AI assistance to help express it clearly.</p></li>
-          <li class="strategist-card" data-strategist-reveal><span>03</span><h3>Reinforce</h3><p>The recognition appears in the company feed, where colleagues can react and comment.</p></li>
-          <li class="strategist-card" data-strategist-reveal><span>04</span><h3>Reward</h3><p>The company can connect recognition to a meaningful reward from its configured catalogue.</p></li>
-          <li class="strategist-card" data-strategist-reveal><span>05</span><h3>Understand</h3><p>Administrators examine participation, activity and recognition patterns through structured insights.</p></li>
+      <div class="strategist-wrap strategist-workflow">
+        <div class="strategist-workflow__intro"><p class="strategist-eyebrow">How EzRewards works</p><h2>Turn individual moments of appreciation into organizational visibility.</h2></div>
+        <ol class="strategist-workflow__stack" aria-label="The recognition workflow">
+          <li class="strategist-card strategist-workflow__card"><span class="strategist-workflow__number">01 / 04</span><h3>Notice</h3><p>Spot the contribution worth celebrating. An employee, manager or leader brings meaningful work into view.</p><svg viewBox="0 0 320 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="160" cy="100" r="62"/><circle cx="160" cy="100" r="38"/><path d="M160 20v30m0 100v30M80 100h30m100 0h30m-60 0 8 8 18-22"/></svg></li>
+          <li class="strategist-card strategist-workflow__card"><span class="strategist-workflow__number">02 / 04</span><h3>Recognize</h3><p>Share a specific message of appreciation, with optional AI assistance. Let colleagues react, comment and reinforce the behaviour.</p><svg viewBox="0 0 320 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="68" y="38" width="166" height="100" rx="18"/><path d="m102 138-12 30 44-30M98 70h88m-88 24h62m72 32 8 17 19 3-14 13 3 19-16-9-17 9 3-19-14-13 20-3Z"/></svg></li>
+          <li class="strategist-card strategist-workflow__card"><span class="strategist-workflow__number">03 / 04</span><h3>Reward</h3><p>Connect recognition to a meaningful reward from your company?s configured catalogue. Make appreciation tangible.</p><svg viewBox="0 0 320 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="88" y="78" width="144" height="86" rx="8"/><rect x="78" y="58" width="164" height="30" rx="6"/><path d="M160 58v106m0-106c-70 0-54-62-24-30l24 30c70 0 54-62 24-30Z"/></svg></li>
+          <li class="strategist-card strategist-workflow__card"><span class="strategist-workflow__number">04 / 04</span><h3>Understand</h3><p>Turn recognition into a clearer signal. Explore participation, activity and patterns through structured insights.</p><svg viewBox="0 0 320 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M72 34v132h184"/><rect x="98" y="108" width="26" height="42" rx="4"/><rect x="146" y="78" width="26" height="72" rx="4"/><rect x="194" y="46" width="26" height="104" rx="4"/><path d="m98 80 48-30 48-24 34 4"/></svg></li>
         </ol>
-        <p class="strategist-closer">Recognize the contribution. <span>Reinforce the behaviour.</span> Understand the pattern.</p>
+        <div class="strategist-workflow__body"><p>One connected workflow carries recognition from a meaningful contribution to a pattern leaders can understand.</p><span class="strategist-workflow__hint">Scroll to follow the signal <span aria-hidden="true">&#8595;</span></span></div>
       </div>
     </section>
 
-    <section class="strategist-section strategist-section--alt" data-strategist-section="capabilities">
+    <section class="strategist-section strategist-section--alt strategist-features" data-strategist-section="capabilities">
       <div class="strategist-wrap">
-        <p class="strategist-eyebrow">Designed for participation and oversight</p><div class="strategist-heading-row"><h2>Give employees simplicity without giving up administrative control.</h2><p>EzRewards combines an accessible employee experience with the structure HR, People Operations and leadership teams need to manage recognition responsibly.</p></div>
-        <div class="strategist-capabilities">
-          <article class="strategist-card" data-strategist-reveal><small>Recognition</small><h3>Create a consistent recognition practice across the company</h3><p>Employees can recognize colleagues across teams and departments. Recognition is public by default, making meaningful contributions visible.</p></article>
-          <article class="strategist-card" data-strategist-reveal><small>AI-assisted messages</small><h3>Improve recognition quality without prescribing what people say</h3><p>Optional AI assistance helps employees turn genuine appreciation into more specific, thoughtful messages.</p></article>
-          <article class="strategist-card" data-strategist-reveal><small>Company feed</small><h3>Build a shared view of the work being valued</h3><p>The company feed brings recognition into one place and lets colleagues reinforce it through reactions and comments.</p></article>
-          <article class="strategist-card" data-strategist-reveal><small>Rewards catalogue</small><h3>Offer relevant rewards within a controlled structure</h3><p>Administrators configure the catalogue and fund the reward wallet. Employees redeem available rewards in the experience.</p></article>
-          <article class="strategist-card" data-strategist-reveal><small>Direct assignment</small><h3>Support individual and group-level reward decisions</h3><p>Administrators can assign rewards to one employee or select multiple employees for a bulk reward action.</p></article>
-          <article class="strategist-card" data-strategist-reveal><small>Onboarding</small><h3>Establish a reliable employee base from the beginning</h3><p>Onboard through Microsoft SSO or CSV upload, then manage employee details and role-based access.</p></article>
-          <article class="strategist-card" data-strategist-reveal><small>Culture reporting</small><h3>Move from anecdotal feedback to structured visibility</h3><p>Review recognition and reward activity across reports designed to surface participation and distribution patterns.</p></article>
-          <article class="strategist-card strategist-card--accent" data-strategist-reveal><small>AI Report Assistant</small><h3>Explore culture data through direct questions</h3><p>Ask natural-language questions across structured EzRewards reports and receive answers grounded in available company data.</p></article>
+        <p class="strategist-eyebrow">Designed for participation and oversight</p>
+        <div class="strategist-heading-row"><h2>Give employees simplicity without giving up administrative control.</h2><p>One accessible employee experience. The structure your people teams need to manage recognition responsibly.</p></div>
+        <div class="sc-features" data-capability-features>
+          <div class="sc-features__tabs" role="tablist" aria-label="Participation and oversight">
+            <button type="button" role="tab" id="sc-feature-tab-0" aria-controls="sc-feature-panel-0" aria-selected="true" tabindex="0"><span>Recognition</span><i aria-hidden="true"></i></button>
+            <button type="button" role="tab" id="sc-feature-tab-1" aria-controls="sc-feature-panel-1" aria-selected="false" tabindex="-1"><span>Participation</span><i aria-hidden="true"></i></button>
+            <button type="button" role="tab" id="sc-feature-tab-2" aria-controls="sc-feature-panel-2" aria-selected="false" tabindex="-1"><span>Rewards</span><i aria-hidden="true"></i></button>
+            <button type="button" role="tab" id="sc-feature-tab-3" aria-controls="sc-feature-panel-3" aria-selected="false" tabindex="-1"><span>Onboarding & insights</span><i aria-hidden="true"></i></button>
+          </div>
+          <div class="sc-features__controls"><span>Explore the experience</span><button type="button" data-feature-pause aria-label="Pause automatic tabs">Pause <span aria-hidden="true">&#8545;</span></button></div>
+          <div class="sc-features__panel" id="sc-feature-panel-0" role="tabpanel" aria-labelledby="sc-feature-tab-0" tabindex="0" >
+            <div class="sc-features__copy"><span class="sc-features__label">Recognition</span><h3>Make appreciation specific.</h3><p>Recognize meaningful work across teams, with optional AI assistance to help find the right words.</p></div>
+            <div class="sc-features__visual"><div class="sc-demo"><div class="sc-demo__bar"><span>New recognition</span><span>Company-wide</span></div><div class="sc-demo__person"><i>AK</i><div><strong>Alex Kim</strong><span>Product &amp; design</span></div><span class="sc-demo__tag">Collaboration</span></div><div class="sc-demo__message">Thank you for bringing the team together and making our launch feel effortless.</div><div class="sc-demo__foot"><span class="sc-demo__assist">&#10023; Refine with AI</span><span class="sc-demo__action">Share recognition &#8599;</span></div></div></div>
+          </div>
+          <div class="sc-features__panel" id="sc-feature-panel-1" role="tabpanel" aria-labelledby="sc-feature-tab-1" tabindex="0" hidden>
+            <div class="sc-features__copy"><span class="sc-features__label">Participation</span><h3>Bring the whole team into the moment.</h3><p>A shared company feed makes valued work visible and gives colleagues a simple way to react and join in.</p></div>
+            <div class="sc-features__visual"><div class="sc-demo"><div class="sc-demo__bar"><span>Company feed</span><span class="sc-demo__tag">Recognition</span></div><div class="sc-demo__person"><i>JL</i><div><strong>Jordan Lee recognized Alex Kim</strong><span>For bringing people together</span></div></div><div class="sc-demo__message">A thoughtful handover. A stronger team.<br><span>Great work deserves to be seen.</span></div><div class="sc-demo__reactions"><span>&#9825; Celebrate</span><span>Leave a comment</span><span>&#10023; Teamwork</span></div></div></div>
+          </div>
+          <div class="sc-features__panel" id="sc-feature-panel-2" role="tabpanel" aria-labelledby="sc-feature-tab-2" tabindex="0" hidden>
+            <div class="sc-features__copy"><span class="sc-features__label">Rewards</span><h3>Give recognition a meaningful next step.</h3><p>Offer a configured catalogue and funded wallet, with individual or bulk assignment when administrators need it.</p></div>
+            <div class="sc-features__visual"><div class="sc-demo"><div class="sc-demo__bar"><span>Rewards wallet</span><span class="sc-demo__tag">Company configured</span></div><div class="sc-demo__reward"><svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="14" y="30" width="52" height="36" rx="4"/><rect x="10" y="22" width="60" height="12" rx="3"/><path d="M40 22v44m0-44c-28 0-22-24-10-12l10 12c28 0 22-24 10-12Z"/></svg><div><strong>A little thank you.<br>A choice that matters.</strong><span>Choose from available rewards</span></div></div><div class="sc-demo__foot"><span>Assign to one or many</span><span class="sc-demo__action">Explore catalogue &#8599;</span></div></div></div>
+          </div>
+          <div class="sc-features__panel" id="sc-feature-panel-3" role="tabpanel" aria-labelledby="sc-feature-tab-3" tabindex="0" hidden>
+            <div class="sc-features__copy"><span class="sc-features__label">Onboarding & insights</span><h3>Start connected. See the bigger picture.</h3><p>Bring employees in through SSO or CSV, manage role-based access, and explore culture reports with the AI Report Assistant.</p></div>
+            <div class="sc-features__visual"><div class="sc-demo"><div class="sc-demo__bar"><span>Culture insights</span><span class="sc-demo__tag">Illustrative preview</span></div><div class="sc-demo__chart" aria-hidden="true"><i style="--bar:38%"></i><i style="--bar:58%"></i><i style="--bar:45%"></i><i style="--bar:78%"></i><i style="--bar:66%"></i><i style="--bar:88%"></i><i style="--bar:72%"></i></div><div class="sc-demo__question"><span>&#10023;</span><div><strong>Where is recognition growing?</strong><span>Ask your AI Report Assistant</span></div></div><div class="sc-demo__foot"><span>Participation &middot; Activity &middot; Distribution</span></div></div></div>
+          </div>
         </div>
       </div>
     </section>
@@ -361,6 +777,11 @@
     </section>
 
     <section class="strategist-section strategist-section--indigo" data-strategist-section="early-access">
+      <div class="strategist-access__media" aria-hidden="true">
+        <video class="strategist-access__video" autoplay muted loop playsinline preload="metadata" poster="/assets/generated/strategist/strategist-observatory-1672.webp" tabindex="-1">
+          <source src="/assets/generated/strategist/strategist-access-background.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="strategist-wrap strategist-access-grid">
         <div><p class="strategist-eyebrow">Build with practical influence</p><h2>Help shape a recognition system grounded in real organizational needs.</h2><p>We are inviting a limited group of growing companies to join EzRewards early. Early-access companies will help us refine the workflows, controls and insights that matter to modern People teams.</p><a class="strategist-button strategist-button--light" href="/contact">Join the Waitlist</a><small>Designed for companies with 30 or more employees.</small></div>
         <ul><li>Priority access to the EzRewards platform</li><li>Direct input into product workflows and reporting</li><li>Guided company onboarding</li><li>Early visibility into upcoming capabilities</li><li>Founding customer status within the EzRewards community</li></ul>
@@ -396,12 +817,43 @@
     </section>
 
     <section class="strategist-section strategist-final" data-strategist-section="final-cta">
-      <div class="strategist-wrap"><h2>Build a recognition program people can use—and leaders can understand.</h2><p>Connect everyday appreciation, meaningful rewards and structured visibility through one platform.</p><a class="strategist-button strategist-button--primary" href="/contact">Join the Waitlist</a><small>EzRewards — Recognition with purpose. Visibility with context.</small></div>
+      <div class="strategist-wrap strategist-close">
+        <div class="strategist-close__intro">
+          <p class="strategist-close__tagline">Recognition with purpose. Visibility with context.</p>
+          <h2>Build a recognition program people can use&mdash;and leaders can understand.</h2>
+          <p class="strategist-close__body">Connect everyday appreciation, meaningful rewards and structured visibility through one platform.</p>
+          <a class="strategist-button strategist-button--primary" href="/contact">Join the Waitlist <span aria-hidden="true">&#8599;</span></a>
+        </div>
+        <div class="strategist-close__scene" aria-hidden="true">
+          <div class="strategist-close__glow"></div>
+          <div class="strategist-close__phone">
+            <div class="strategist-close__screen">
+              <div class="strategist-close__status"><span>9:41</span><span>&#9679; &#9679; &#9646;</span></div>
+              <div class="strategist-close__island"></div>
+              <div class="strategist-close__app"><span class="strategist-close__logo">&#10022;</span><strong>EzRewards</strong><span>Today</span></div>
+              <div class="strategist-close__greeting">Good work.<br><span>Seen by your team.</span></div>
+              <div class="strategist-close__notification">
+                <div class="strategist-close__notification-head"><span>&#10022; NEW RECOGNITION</span><span>Just now</span></div>
+                <div class="strategist-close__person"><i>MR</i><div><strong>Maya, your team lead</strong><span>recognized your contribution</span></div></div>
+                <p>&ldquo;Thank you for stepping up and bringing the team together. You made a real difference.&rdquo;</p>
+                <span class="strategist-close__pill">&#10023; Collaboration</span>
+              </div>
+              <div class="strategist-close__phone-feed"><span>YOUR TEAM IS CELEBRATING</span><div><i>JL</i><i>AK</i><i>SN</i><strong>+ your colleagues</strong></div></div>
+            </div>
+          </div>
+          <div class="strategist-close__float strategist-close__float--thanks"><span class="strategist-close__float-icon">&#9825;</span><div><strong>A moment that matters</strong><span>Your work made someone&#8217;s day.</span></div></div>
+          <div class="strategist-close__float strategist-close__float--team"><div class="strategist-close__avatars"><i>JL</i><i>AK</i><i>SN</i></div><strong>Celebrated by your team</strong><span>Recognition travels further.</span></div>
+          <div class="strategist-close__float strategist-close__float--reward"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="10" y="20" width="28" height="22" rx="3"/><rect x="7" y="14" width="34" height="8" rx="2"/><path d="M24 14v28m0-28c-22 0-18-18-8-10l8 10c22 0 18-18 8-10Z"/></svg><div><strong>Appreciation, made tangible</strong><span>Meaningful rewards. Real impact.</span></div></div>
+          <svg class="strategist-close__spark strategist-close__spark--left" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M40 6c0 25-9 34-34 34 25 0 34 9 34 34 0-25 9-34 34-34C49 40 40 31 40 6Z"/><path d="M12 8v12M6 14h12"/></svg>
+          <svg class="strategist-close__spark strategist-close__spark--right" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M28 20h44v28c0 22-44 22-44 0Z M28 28H14v14c0 12 14 16 18 16m40-30h14v14c0 12-14 16-18 16M50 65v16M35 84h30"/><path d="m80 8 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1Z"/></svg>
+        </div>
+      </div>
     </section>
   </main>
 
-  <main class="operator-home" data-persona-page="operator" hidden inert>
+  <main class="operator-home" data-persona-page="operator" data-operator-cinematic hidden inert>
     <section class="operator-section operator-hero" id="operator-overview" data-operator-section="hero">
+      <div class="operator-hero__light" aria-hidden="true"></div>
       <div class="operator-wrap operator-hero__grid">
         <div class="operator-hero__copy is-visible" data-operator-reveal>
           <p class="operator-eyebrow">Employee recognition without the operational overhead</p>
@@ -436,11 +888,13 @@
     </section>
 
     <section class="operator-section" data-operator-section="vision">
+      <div class="operator-scene-pin">
       <div class="operator-wrap operator-vision-grid"><div><p class="operator-eyebrow">A simpler way to run it</p><h2>What if the complete recognition workflow lived in one place?</h2></div><div><p>Employees join through a clear onboarding flow.</p><p>They recognize colleagues in a few steps. Administrators manage users, rewards and reports from one system. Active seats update as the company grows.</p><p>EzRewards is designed to remove the operational friction between setting up a recognition program and keeping it active every day.</p></div></div>
       <blockquote data-operator-reveal><span>Recognition should feel effortless to employees.</span><strong>Running it should feel just as straightforward.</strong></blockquote>
+      </div>
     </section>
 
-    <section class="operator-section operator-section--raised" data-operator-section="category">
+    <section class="operator-section operator-section--raised" data-operator-section="category" data-operator-stage>
       <div class="operator-wrap"><p class="operator-eyebrow">Meet EzRewards</p><div class="operator-heading-row"><h2>Everything you need to run recognition and rewards—connected.</h2><p>EzRewards combines employee recognition, reward management, onboarding, user administration and reporting in one practical workflow.</p></div><div class="operator-grid operator-grid--three">
         <article class="operator-card operator-pillar" data-operator-reveal><span>01</span><h3>Easy for employees</h3><p>Recognize colleagues, respond to appreciation and redeem rewards through a clear, accessible experience.</p></article>
         <article class="operator-card operator-pillar" data-operator-reveal><span>02</span><h3>Controlled by administrators</h3><p>Manage employees, roles, catalogues, assignments and reward funding from one place.</p></article>
@@ -448,20 +902,20 @@
       </div></div>
     </section>
 
-    <section class="operator-section operator-workflow" id="operator-workflow" data-operator-section="loop">
+    <section class="operator-section operator-workflow" id="operator-workflow" data-operator-section="loop" data-operator-stack>
       <div class="operator-wrap"><p class="operator-eyebrow">How EzRewards works</p><div class="operator-heading-row"><h2>From employee setup to useful reporting in one continuous workflow.</h2><p>Less manual work. More visible appreciation. Each common task stays short, explicit and traceable.</p></div>
         <ol class="operator-steps">
-          <li class="operator-card" data-operator-reveal><div><small>Onboard</small><span>01</span></div><h3>Add your team</h3><p>Bring employees into EzRewards through Microsoft SSO or structured CSV upload.</p><dl><dt>Import method</dt><dd>Microsoft SSO</dd><dt>Access</dt><dd>Role-based</dd></dl><strong>Employee base ready</strong></li>
-          <li class="operator-card" data-operator-reveal><div><small>Recognize</small><span>02</span></div><h3>Share appreciation</h3><p>Employees recognize meaningful work using a simple message flow with optional AI assistance.</p><dl><dt>Recipient</dt><dd>Maya Chen · Product</dd><dt>Company value</dt><dd>Ownership</dd></dl><strong>Average completion: 48 sec</strong></li>
-          <li class="operator-card" data-operator-reveal><div><small>Engage</small><span>03</span></div><h3>Keep it visible</h3><p>Recognition appears in the company feed, where colleagues react and comment.</p><dl><dt>Reactions</dt><dd>12</dd><dt>Comments</dt><dd>3</dd></dl><strong>Visible company-wide</strong></li>
-          <li class="operator-card" data-operator-reveal><div><small>Reward</small><span>04</span></div><h3>Assign or redeem</h3><p>Employees redeem rewards, or administrators assign them to individuals or groups.</p><dl><dt>Available balance</dt><dd>$180.00</dd><dt>Delivery</dt><dd>Instant</dd></dl><strong>Policy checked automatically</strong></li>
-          <li class="operator-card" data-operator-reveal><div><small>Review</small><span>05</span></div><h3>Understand activity</h3><p>Administrators open reports and ask questions through the AI Report Assistant.</p><dl><dt>Participation</dt><dd>78%</dd><dt>Reports</dt><dd>Updated today</dd></dl><strong>Every action logged</strong></li>
+          <li class="operator-card" data-operator-reveal><div><small>Onboard</small><span>01</span></div><div class="operator-step-visual operator-step-visual--onboard" aria-hidden="true"><img src="assets/icons/operator/upload-simple.svg" alt=""><span><i></i><i></i><i></i><i></i></span><b></b></div><h3>Add your team</h3><p>Bring employees into EzRewards through Microsoft SSO or structured CSV upload.</p><dl><dt>Import method</dt><dd>Microsoft SSO</dd><dt>Access</dt><dd>Role-based</dd></dl><strong>Employee base ready</strong></li>
+          <li class="operator-card" data-operator-reveal><div><small>Recognize</small><span>02</span></div><div class="operator-step-visual operator-step-visual--recognize" aria-hidden="true"><img src="assets/icons/operator/chat-centered-dots.svg" alt=""><span><i></i><i></i><i></i></span><b></b></div><h3>Share appreciation</h3><p>Employees recognize meaningful work using a simple message flow with optional AI assistance.</p><dl><dt>Recipient</dt><dd>Maya Chen · Product</dd><dt>Company value</dt><dd>Ownership</dd></dl><strong>Average completion: 48 sec</strong></li>
+          <li class="operator-card" data-operator-reveal><div><small>Engage</small><span>03</span></div><div class="operator-step-visual operator-step-visual--engage" aria-hidden="true"><img src="assets/icons/operator/users-three.svg" alt=""><span><i></i><i></i><i></i></span><em><i></i><i></i><i></i></em></div><h3>Keep it visible</h3><p>Recognition appears in the company feed, where colleagues react and comment.</p><dl><dt>Reactions</dt><dd>12</dd><dt>Comments</dt><dd>3</dd></dl><strong>Visible company-wide</strong></li>
+          <li class="operator-card" data-operator-reveal><div><small>Reward</small><span>04</span></div><div class="operator-step-visual operator-step-visual--reward" aria-hidden="true"><img src="assets/icons/operator/gift.svg" alt=""><span><i></i><i></i><i></i></span><b></b></div><h3>Assign or redeem</h3><p>Employees redeem rewards, or administrators assign them to individuals or groups.</p><dl><dt>Available balance</dt><dd>$180.00</dd><dt>Delivery</dt><dd>Instant</dd></dl><strong>Policy checked automatically</strong></li>
+          <li class="operator-card" data-operator-reveal><div><small>Review</small><span>05</span></div><div class="operator-step-visual operator-step-visual--review" aria-hidden="true"><img src="assets/icons/operator/chart-bar.svg" alt=""><span><i></i><i></i><i></i><i></i><i></i></span><svg viewBox="0 0 100 40" preserveAspectRatio="none"><polyline points="4,32 26,24 48,27 70,13 96,6"/></svg></div><h3>Understand activity</h3><p>Administrators open reports and ask questions through the AI Report Assistant.</p><dl><dt>Participation</dt><dd>78%</dd><dt>Reports</dt><dd>Updated today</dd></dl><strong>Every action logged</strong></li>
         </ol>
         <p class="operator-closer">One setup. <span>One workflow.</span> One clear place to manage it.</p>
       </div>
     </section>
 
-    <section class="operator-section operator-section--raised" data-operator-section="capabilities">
+    <section class="operator-section operator-section--raised" data-operator-section="capabilities" data-operator-console>
       <div class="operator-wrap"><p class="operator-eyebrow">Built for day-to-day use</p><div class="operator-heading-row"><h2>Simple employee actions. Practical administrative controls.</h2><p>EzRewards keeps common tasks clear, reduces repeated coordination and gives administrators control over the parts that require it.</p></div>
         <div class="operator-capabilities">
           <article class="operator-card" data-operator-reveal><div class="operator-capability-visual" aria-hidden="true"><img src="assets/icons/operator/users-three.svg" alt=""></div><small>Peer recognition</small><h3>Let employees recognize great work in a few steps</h3><p>Any employee can recognize a colleague across the company without an admin approval queue.</p></article>
@@ -476,7 +930,7 @@
       </div>
     </section>
 
-    <section class="operator-section" id="operator-outcomes" data-operator-section="outcomes">
+    <section class="operator-section" id="operator-outcomes" data-operator-section="outcomes" data-operator-stage>
       <div class="operator-wrap"><p class="operator-eyebrow">Less friction across the workflow</p><div class="operator-heading-row"><h2>Make recognition easier to participate in and easier to operate.</h2><p>Clear employee actions and connected administrative controls keep the program practical as the company grows.</p></div><div class="operator-grid operator-grid--four">
         <article class="operator-card" data-operator-reveal><small>Employees</small><h3>People can recognize colleagues quickly</h3><p>One clear place to give recognition, respond to colleagues and view reward activity.</p></article>
         <article class="operator-card" data-operator-reveal><small>Teams</small><h3>Appreciation stays visible</h3><p>Teams see and reinforce recognition through the shared company feed.</p></article>
@@ -515,8 +969,19 @@
     <section class="operator-section operator-final" data-operator-section="final-cta"><div class="operator-wrap"><h2>Give employees an easy way to appreciate. Give admins an easier way to run it.</h2><p>Launch recognition, manage rewards and review activity without adding another fragmented process.</p><a class="operator-button operator-button--primary" href="/contact">Join the Waitlist</a><small>EzRewards — Recognition made easier to run.</small></div></section>
   </main>
 
-  <footer class="site-footer dark-footer persona-footer">
-    <div><a class="dark-brand" href="/" aria-label="EzRewards home"><span class="dark-brand__mark" aria-hidden="true">✦</span><span>EzRewards</span></a><p>Making meaningful work visible.</p></div>
+  <footer class="site-footer dark-footer persona-footer" data-cinematic-footer data-footer-state="idle">
+    <picture class="cinematic-footer__media" aria-hidden="true">
+      <source media="(max-width: 767px)" type="image/avif" srcset="/assets/generated/footer/luminous-horizon-768.avif">
+      <source media="(max-width: 767px)" type="image/webp" srcset="/assets/generated/footer/luminous-horizon-768.webp">
+      <source media="(max-width: 1199px)" type="image/avif" srcset="/assets/generated/footer/luminous-horizon-1280.avif">
+      <source media="(max-width: 1199px)" type="image/webp" srcset="/assets/generated/footer/luminous-horizon-1280.webp">
+      <source type="image/avif" srcset="/assets/generated/footer/luminous-horizon-1672.avif">
+      <source type="image/webp" srcset="/assets/generated/footer/luminous-horizon-1672.webp">
+      <img src="/assets/generated/footer/luminous-horizon-1672.png" alt="" width="1672" height="940" loading="lazy" decoding="async">
+    </picture>
+    <div class="cinematic-footer__shade" aria-hidden="true"></div>
+    <div class="cinematic-footer__glow" aria-hidden="true"></div>
+    <div class="cinematic-footer__brand"><a class="dark-brand" href="/" aria-label="EzRewards home"><span class="dark-brand__mark" aria-hidden="true">✦</span><span>EzRewards</span></a><p>Making meaningful work visible.</p></div>
     <nav aria-label="Footer"><a href="/">Home</a><a href="/product">Product</a><a href="/pricing">Pricing</a><a href="/about">About</a><button type="button" data-change-experience>Change experience</button><a href="/contact">Join Waitlist</a></nav>
     <div class="footer-legal"><span>Privacy</span><span>Terms</span><a href="/contact">Contact</a><span>LinkedIn</span></div>
     <small>© 2026 EzRewards. All rights reserved.</small>

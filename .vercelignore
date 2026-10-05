@@ -10,3 +10,9 @@ playwright.config.mjs
 _ds/**/readme.md
 _ds/**/_adherence.oxlintrc.json
 _ds/**/_ds_manifest.json
+docs/
+tmp/
+.codex-tmp-design-report/
+Website-mini-homepage-main/
+scripts/
+*.log

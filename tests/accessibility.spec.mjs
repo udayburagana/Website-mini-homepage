@@ -51,7 +51,7 @@ test("open personality selector has no WCAG A/AA violations", async ({ page }) =
 
 test("visual data and workspace containers use supported semantics", async ({ page }) => {
   await page.goto("/?persona=visionary");
-  await expect(page.locator(".visionary-loop-list")).toHaveAttribute("role", "list");
+  await expect(page.locator(".cinematic-how__panels")).toHaveAttribute("role", "list");
 
   await page.goto("/?persona=strategist");
   await expect(page.locator(".strategist-dashboard")).not.toHaveAttribute("aria-label");

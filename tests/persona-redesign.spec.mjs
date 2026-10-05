@@ -79,9 +79,9 @@ test("shared stepper supports arrow, Home and End navigation", async ({ page }) 
   await expect(first).toHaveAttribute("aria-selected", "true");
 });
 
-test("capabilities use four keyboard-selectable product groups", async ({ page }) => {
-  await page.goto("/?persona=visionary");
-  const section = page.locator('[data-persona-page="visionary"] [data-persona-section="capabilities"]');
+test("generic capabilities retain four keyboard-selectable product groups", async ({ page }) => {
+  await page.goto("/?persona=strategist");
+  const section = page.locator('[data-persona-page="strategist"] [data-persona-section="capabilities"]');
   const tabs = section.getByRole("tab");
   await expect(tabs).toHaveCount(4);
   await tabs.first().focus();
@@ -91,9 +91,10 @@ test("capabilities use four keyboard-selectable product groups", async ({ page }
   await expect(section.getByRole("tabpanel").last()).toBeVisible();
 });
 
+// Operator authors its own scene rails, so the shared sticky-stack enhancer is covered on default.
 test("sticky stacks activate clicked items without moving focus", async ({ page }) => {
-  await page.goto("/?persona=operator");
-  const stack = page.locator('[data-persona-page="operator"] [data-layout="sticky-stack"]').first();
+  await page.goto("/?persona=default");
+  const stack = page.locator('[data-persona-page="default"] [data-layout="sticky-stack"]').first();
   const second = stack.locator("[data-stack-item]").nth(1);
   await second.click();
   await expect(second).toHaveAttribute("data-active", "true");
@@ -124,3 +125,52 @@ for (const width of [320, 390, 768, 1024, 1440]) {
     }
   });
 }
+
+test("strategist cinematic scenes preserve content and choose responsive modes", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/?persona=strategist");
+  const strategist = page.locator("[data-strategist-cinematic]");
+  await expect(strategist).toHaveAttribute("data-strategist-mode", "full");
+  await expect(strategist.locator("[data-strategist-scene]")).toHaveCount(11);
+  await expect(strategist.locator(".strategist-scene-media img")).toHaveAttribute("alt", "");
+  await expect(strategist.locator(".strategist-particle-field")).toHaveCount(1);
+  await expect(strategist).toHaveAttribute("data-strategist-engine", "elva-inspired");
+  await expect(strategist.locator('[data-strategist-scene="problem"] .strategist-scene-nav [role="tab"]')).toHaveCount(4);
+  await expect(strategist.locator('[data-strategist-scene="category"] .strategist-scene-nav [role="tab"]')).toHaveCount(3);
+  await expect(strategist.locator('[data-strategist-scene="loop"] .stepper-tabs [role="tab"]')).toHaveCount(5);
+  await expect(strategist.locator('[data-strategist-scene="outcomes"] .strategist-scene-nav [role="tab"]')).toHaveCount(4);
+  await expect(strategist.getByText("A complete recognition platform for $1 per employee/month.")).toBeVisible();
+  await expect(strategist.locator(".strategist-faq__items details")).toHaveCount(10);
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(strategist).toHaveAttribute("data-strategist-mode", "static");
+  await expect(strategist.locator("[data-strategist-reveal]").first()).toHaveCSS("opacity", "1");
+});
+
+test("strategist staged scenes expose one active panel and keyboard navigation", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/?persona=strategist");
+  const problem = page.locator('[data-strategist-scene="problem"]');
+  const tabs = problem.locator('.strategist-scene-nav [role="tab"]');
+  await tabs.first().focus();
+  await page.keyboard.press("ArrowDown");
+  await expect(tabs.nth(1)).toBeFocused();
+  await expect(tabs.nth(1)).toHaveAttribute("aria-selected", "true");
+  await expect(problem.locator('[data-stage-state="active"]')).toHaveCount(1);
+  await expect(problem.locator('[data-stage-state="active"]')).toContainText("Participation is difficult to understand");
+});
+
+test("operator cinematic scenes preserve content and choose responsive modes", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/?persona=operator");
+  const operator = page.locator("[data-operator-cinematic]");
+  await expect(operator).toHaveAttribute("data-operator-engine", "console-cinematic");
+  await expect(operator).toHaveAttribute("data-operator-mode", "full");
+  await expect(operator.locator("[data-operator-section]")).toHaveCount(11);
+  await expect(operator.locator(".operator-faq details")).toHaveCount(11);
+  await expect(operator.getByRole("heading", { name: "Run the complete platform for $1 per employee/month." })).toBeVisible();
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(operator).toHaveAttribute("data-operator-mode", "static");
+  await expect(operator.locator("[data-operator-reveal]").first()).toHaveCSS("opacity", "1");
+});

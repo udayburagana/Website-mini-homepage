@@ -9,7 +9,8 @@
     "creative-culture-builder": { label: "Creative Culture Builder", queryValue: "creative-culture-builder", theme: "neo-pop-culture", primaryCta: "Make Work Feel Celebrated", primaryHref: "/contact", description: "Make recognition social, expressive and visible with EzRewards appreciation and rewards.", themeColor: "#f2ecdd" }
   };
   const sectionAliases = { "appreciation-loop": "loop" };
-  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reducedMotionQuery = matchMedia("(prefers-reduced-motion: reduce)");
+  const reducedMotion = reducedMotionQuery.matches;
   let selectorTrigger = null;
   let currentPersona = "default";
 
@@ -102,7 +103,8 @@
     const definitions = [
       ["visionary", "[data-home-section]", ".visionary-loop-list", [[".visionary-problem", ".visionary-problem-card"], [".visionary-capabilities", ".visionary-capability-card"], [".visionary-outcomes", ".visionary-outcome-grid article"]]],
       ["strategist", "[data-strategist-section]", ".strategist-steps", [['[data-strategist-section="problem"]', ".strategist-card-grid article"], ['[data-strategist-section="capabilities"]', ".strategist-card-grid article"], ['[data-strategist-section="outcomes"]', ".strategist-card-grid article"]]],
-      ["operator", "[data-operator-section]", ".operator-steps", [['[data-operator-section="problem"]', ".operator-grid article"], ['[data-operator-section="capabilities"]', ".operator-capabilities article"], ['[data-operator-section="outcomes"]', ".operator-grid article"]]]
+      // Operator authors its own scene rails (operator-cinematic.js), so it only takes the section aliases.
+      ["operator", "[data-operator-section]", null, []]
     ];
     definitions.forEach(([persona, sectionSelector, stepSelector, stacks]) => {
       const page = document.querySelector(`[data-persona-page="${persona}"]`);
@@ -111,11 +113,11 @@
         const raw = section.dataset.homeSection || section.dataset.strategistSection || section.dataset.operatorSection;
         section.dataset.personaSection = sectionAliases[raw] || raw;
       });
-      const stepper = page.querySelector(stepSelector);
+      const stepper = stepSelector ? page.querySelector(stepSelector) : null;
       if (stepper) stepper.dataset.stepper = "";
       stacks.forEach(([sectionSelectorValue, itemSelector]) => {
         const section = page.querySelector(sectionSelectorValue);
-        if (!section) return;
+        if (!section || section.matches('.strategist-features, .cinematic-problem, [data-strategist-section="problem"], [data-built-participation], [data-culture-sphere], [data-operator-stage], [data-operator-stack], [data-operator-console]')) return;
         section.dataset.layout = "sticky-stack";
         section.querySelectorAll(itemSelector).forEach((item) => item.dataset.stackItem = "");
       });
@@ -241,6 +243,7 @@
   function initSelectablePanels(root = document) {
     const labels = ["Recognition", "Participation", "Rewards", "Onboarding & insights"];
     root.querySelectorAll('[data-persona-section="capabilities"]').forEach((section, componentIndex) => {
+      if (section.matches("[data-built-participation], [data-operator-console]")) return;
       if (section.dataset.panelsReady === "true") return;
       const container = section.querySelector(".visionary-capability-grid, .strategist-capabilities, .operator-capabilities, .shared-stack, .creative-stack");
       if (!container) return;
@@ -371,39 +374,203 @@
     return false;
   }
 
-  function initCinematicHero() {
+  function initCinematicExperience() {
+    const page = document.querySelector(".visionary-refresh");
     const hero = document.querySelector(".cinematic-hero");
-    if (!hero) return;
-    if (reducedMotion) {
-      hero.style.setProperty("--hero-scroll", "0");
-      return;
-    }
+    const section = document.querySelector(".cinematic-problem");
+    if (!page || !hero || !section) return;
 
+    const cards = [...section.querySelectorAll(".cinematic-problem__card")];
+    const fullMotionQuery = matchMedia("(min-width: 1100px) and (min-height: 800px) and (hover: hover) and (pointer: fine)");
+    const finePointerQuery = matchMedia("(hover: hover) and (pointer: fine)");
+    const clamp = (value) => Math.max(0, Math.min(1, value));
+    const range = (progress, start, duration) => clamp((progress - start) / duration);
+    let cleanupMode = () => {};
+    let activeMode = "";
+    let resizeFrame = 0;
+
+    const showAllCards = () => {
+      section.style.setProperty("--problem-progress", "1");
+      cards.forEach((card) => card.style.setProperty("--card-progress", "1"));
+    };
+
+    const modeForViewport = () => {
+      if (reducedMotionQuery.matches) return "static";
+      return fullMotionQuery.matches ? "full" : "adaptive";
+    };
+
+    const setupMode = (mode) => {
+      cleanupMode();
+      activeMode = mode;
+      page.dataset.cinematicMode = mode;
+      window.dispatchEvent(new CustomEvent("ezrewards:cinematic-mode", { detail: { mode } }));
+      const controller = new AbortController();
+      const observers = [];
+      let motionFrame = 0;
+
+      const updateHero = () => {
+        const bounds = hero.getBoundingClientRect();
+        hero.style.setProperty("--hero-scroll", clamp(-bounds.top / Math.max(bounds.height, 1)).toFixed(3));
+      };
+
+      const updateFullScenes = () => {
+        motionFrame = 0;
+        updateHero();
+        const problemBounds = section.getBoundingClientRect();
+        const problemTravel = Math.max(problemBounds.height - innerHeight, 1);
+        const problemProgress = clamp(-problemBounds.top / problemTravel);
+        section.style.setProperty("--problem-progress", problemProgress.toFixed(4));
+        cards.forEach((card, index) => {
+          const localProgress = range(problemProgress, .1 + index * .18, .14);
+          card.style.setProperty("--card-progress", localProgress.toFixed(4));
+        });
+      };
+
+      const requestFullUpdate = () => {
+        if (!motionFrame) motionFrame = requestAnimationFrame(updateFullScenes);
+      };
+
+      if (mode === "static") {
+        hero.style.setProperty("--hero-scroll", "0");
+        showAllCards();
+      } else if (mode === "full") {
+        addEventListener("scroll", requestFullUpdate, { passive: true, signal: controller.signal });
+        addEventListener("resize", requestFullUpdate, { signal: controller.signal });
+        updateFullScenes();
+      } else {
+        updateHero();
+        addEventListener("scroll", () => {
+          if (!motionFrame) motionFrame = requestAnimationFrame(() => { motionFrame = 0; updateHero(); });
+        }, { passive: true, signal: controller.signal });
+
+        cards.forEach((card) => card.style.setProperty("--card-progress", "0"));
+
+        if (!("IntersectionObserver" in window)) {
+          showAllCards();
+        } else {
+          const reveal = (elements, setter, options = {}) => {
+            const observer = new IntersectionObserver((entries, currentObserver) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                setter(entry.target);
+                currentObserver.unobserve(entry.target);
+              });
+            }, { threshold: options.threshold || .18, rootMargin: options.rootMargin || "0px 0px -8% 0px" });
+            elements.forEach((element) => observer.observe(element));
+            observers.push(observer);
+          };
+          reveal(cards, (card) => card.style.setProperty("--card-progress", "1"), { threshold: .16 });
+        }
+      }
+
+      if (mode !== "static" && finePointerQuery.matches) {
+        hero.addEventListener("pointermove", (event) => {
+          const bounds = hero.getBoundingClientRect();
+          hero.style.setProperty("--hero-pointer-x", (((event.clientX - bounds.left) / bounds.width) - .5).toFixed(3));
+          hero.style.setProperty("--hero-pointer-y", (((event.clientY - bounds.top) / bounds.height) - .5).toFixed(3));
+        }, { signal: controller.signal });
+        hero.addEventListener("pointerleave", () => {
+          hero.style.setProperty("--hero-pointer-x", "0");
+          hero.style.setProperty("--hero-pointer-y", "0");
+        }, { signal: controller.signal });
+      } else {
+        hero.style.setProperty("--hero-pointer-x", "0");
+        hero.style.setProperty("--hero-pointer-y", "0");
+      }
+
+      cleanupMode = () => {
+        controller.abort();
+        observers.forEach((observer) => observer.disconnect());
+        if (motionFrame) cancelAnimationFrame(motionFrame);
+      };
+    };
+
+    const refreshMode = () => {
+      resizeFrame = 0;
+      const nextMode = modeForViewport();
+      if (nextMode !== activeMode) setupMode(nextMode);
+    };
+    const requestModeRefresh = () => {
+      if (!resizeFrame) resizeFrame = requestAnimationFrame(refreshMode);
+    };
+
+    [reducedMotionQuery, fullMotionQuery, finePointerQuery].forEach((query) => query.addEventListener("change", requestModeRefresh));
+    addEventListener("resize", requestModeRefresh, { passive: true });
+    window.visualViewport?.addEventListener("resize", requestModeRefresh, { passive: true });
+    if ("ResizeObserver" in window) new ResizeObserver(requestModeRefresh).observe(document.documentElement);
+    setupMode(modeForViewport());
+  }
+
+  // Vision manifesto: pinned while the image shows alone, then each block rises in from below, top to bottom (same scrub as the problem cards).
+  function initVisionManifesto() {
+    const vision = document.querySelector(".cinematic-vision[data-vision-mode]");
+    if (!vision) return;
+    const sticky = vision.querySelector(".cinematic-vision__sticky");
+    const content = vision.querySelector(".cinematic-vision__content");
+    const steps = [...vision.querySelectorAll("[data-vision-step]")];
+    const timeline = { intro: [.08, .14], center: [.26, .14], left: [.44, .14], right: [.62, .14] };
+    const clamp = (value) => Math.max(0, Math.min(1, value));
+    let mode = "";
     let scrollFrame = 0;
-    const updateScrollDepth = () => {
+    let modeFrame = 0;
+    let observer = null;
+
+    const update = () => {
       scrollFrame = 0;
-      const bounds = hero.getBoundingClientRect();
-      const progress = Math.max(0, Math.min(1, -bounds.top / Math.max(bounds.height, 1)));
-      hero.style.setProperty("--hero-scroll", progress.toFixed(3));
-    };
-    const requestScrollDepth = () => {
-      if (!scrollFrame) scrollFrame = requestAnimationFrame(updateScrollDepth);
+      if (mode !== "pinned") return;
+      const bounds = vision.getBoundingClientRect();
+      const pinTop = parseFloat(getComputedStyle(sticky).top) || 0;
+      const progress = clamp((pinTop - bounds.top) / Math.max(bounds.height - sticky.offsetHeight, 1));
+      steps.forEach((step) => {
+        const [start, length] = timeline[step.dataset.visionStep];
+        step.style.setProperty("--step", clamp((progress - start) / length).toFixed(4));
+      });
     };
 
-    hero.addEventListener("pointermove", (event) => {
-      const bounds = hero.getBoundingClientRect();
-      const pointerX = (event.clientX - bounds.left) / bounds.width - .5;
-      const pointerY = (event.clientY - bounds.top) / bounds.height - .5;
-      hero.style.setProperty("--hero-pointer-x", pointerX.toFixed(3));
-      hero.style.setProperty("--hero-pointer-y", pointerY.toFixed(3));
-    });
-    hero.addEventListener("pointerleave", () => {
-      hero.style.setProperty("--hero-pointer-x", "0");
-      hero.style.setProperty("--hero-pointer-y", "0");
-    });
-    addEventListener("scroll", requestScrollDepth, { passive: true });
-    addEventListener("resize", requestScrollDepth);
-    updateScrollDepth();
+    // Pin only when the whole composition fits under the header; otherwise reveal blocks as they scroll past.
+    const modeForViewport = () => {
+      if (reducedMotionQuery.matches) return "static";
+      const header = parseFloat(getComputedStyle(vision).getPropertyValue("--header-height")) || 0;
+      if (content.offsetHeight <= innerHeight - header) return "pinned";
+      return "IntersectionObserver" in window ? "reveal" : "static";
+    };
+
+    const setMode = (next) => {
+      if (next === mode) return;
+      mode = next;
+      vision.dataset.visionMode = next;
+      observer?.disconnect();
+      observer = null;
+      steps.forEach((step) => {
+        step.style.removeProperty("--step");
+        step.removeAttribute("data-visible");
+      });
+      if (next === "reveal") {
+        observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.setAttribute("data-visible", "");
+          observer.unobserve(entry.target);
+        }), { threshold: .35 });
+        steps.forEach((step) => observer.observe(step));
+      }
+    };
+
+    const refreshMode = () => {
+      modeFrame = 0;
+      setMode(modeForViewport());
+      update();
+    };
+    const requestModeRefresh = () => {
+      if (!modeFrame) modeFrame = requestAnimationFrame(refreshMode);
+    };
+
+    addEventListener("scroll", () => {
+      if (mode === "pinned" && !scrollFrame) scrollFrame = requestAnimationFrame(update);
+    }, { passive: true });
+    addEventListener("resize", requestModeRefresh, { passive: true });
+    reducedMotionQuery.addEventListener("change", requestModeRefresh);
+    if ("ResizeObserver" in window) new ResizeObserver(requestModeRefresh).observe(content);
+    refreshMode();
   }
 
   document.addEventListener("click", (event) => {
@@ -460,5 +627,6 @@
   });
   window.EzRewardsPersona = { PERSONAS, initPersonaExperience, setPersona, openPersonaSelector, closePersonaSelector, initStickyStacks, initSteppers, initSelectablePanels, emitMarketingEvent };
   initPersonaExperience();
-  initCinematicHero();
+  initCinematicExperience();
+  initVisionManifesto();
 })();

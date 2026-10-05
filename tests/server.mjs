@@ -11,6 +11,7 @@ const routes = new Map([
   ["/contact", "/Contact.dc.html"]
 ]);
 const contentTypes = {
+  ".mp4": "video/mp4",
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",

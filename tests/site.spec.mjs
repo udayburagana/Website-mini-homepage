@@ -48,11 +48,12 @@ test.describe("personality-led homepage", () => {
     await expect(strategistPage.getByText(/connects peer recognition, company-wide appreciation/)).toBeVisible();
   });
 
-  test("uses the light analytical Strategist visual system", async ({ page }) => {
+  test("uses the midnight cinematic Strategist visual system", async ({ page }) => {
     await page.goto("/?persona=strategist");
-    await expect(page.locator('[data-persona-page="strategist"]')).toHaveCSS("background-color", "rgb(246, 248, 252)");
-    await expect(page.locator(".strategist-card").first()).toHaveCSS("background-color", "rgb(255, 255, 255)");
-    await expect(page.locator(".strategist-button--primary").first()).toHaveCSS("background-color", "rgb(79, 70, 229)");
+    await expect(page.locator('[data-persona-page="strategist"]')).toHaveAttribute("data-strategist-engine", "elva-inspired");
+    await expect(page.locator('[data-persona-page="strategist"]')).toHaveCSS("background-color", "rgb(3, 7, 19)");
+    await expect(page.locator(".strategist-card").first()).toHaveCSS("background-image", /linear-gradient/);
+    await expect(page.locator(".strategist-button--primary").first()).toHaveCSS("background-image", /linear-gradient/);
   });
 
   test("keeps Strategist workflow cards clean, consistently spaced, and its early-access CTA readable", async ({ page }) => {
@@ -89,10 +90,20 @@ test.describe("personality-led homepage", () => {
     await expect(page.getByText(/manage employee access, roles, active seats/)).toBeVisible();
   });
 
-  test("uses the dark cyan Operator visual system", async ({ page }) => {
+  test("uses the dark cyan Operator console visual system", async ({ page }) => {
+    // Relative luminance of the first rgb()/rgba() colour in a computed value (WCAG formula).
+    const luminance = (value) => {
+      const [r, g, b] = value.match(/rgba?\(([^)]+)\)/)[1].split(",").slice(0, 3).map((channel) => {
+        const c = Number(channel) / 255;
+        return c <= .03928 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4;
+      });
+      return .2126 * r + .7152 * g + .0722 * b;
+    };
     await page.goto("/?persona=operator");
-    await expect(page.locator('[data-persona-page="operator"]')).toHaveCSS("background-color", "rgb(6, 9, 15)");
-    await expect(page.locator(".operator-card").first()).toHaveCSS("background-color", "rgb(23, 29, 42)");
+    const operator = page.locator('[data-persona-page="operator"]');
+    await expect(operator).toHaveAttribute("data-operator-engine", "console-cinematic");
+    expect(luminance(await operator.evaluate((node) => getComputedStyle(node).backgroundColor))).toBeLessThan(.02);
+    expect(luminance(await page.locator(".operator-card").first().evaluate((node) => getComputedStyle(node).backgroundImage))).toBeLessThan(.06);
     await expect(page.locator(".operator-button--primary").first()).toHaveCSS("background-color", "rgb(56, 189, 248)");
   });
 
@@ -126,13 +137,20 @@ test.describe("personality-led homepage", () => {
 
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/?persona=operator");
-    const cards = page.locator('[data-operator-section="capabilities"] .capability-selector__panel article');
+    const capabilities = page.locator('[data-operator-section="capabilities"]');
+    const cards = capabilities.locator(".operator-capabilities > article");
     await expect(cards).toHaveCount(8);
     expect(await cards.locator("h3").allTextContents()).toEqual(expectedTitles);
     await expect(page.locator('.operator-capability-visual[aria-hidden="true"]')).toHaveCount(8);
-    await expect(page.locator('[data-operator-section="capabilities"] [role="tab"]')).toHaveCount(4);
+    await expect(capabilities.locator(".capability-selector")).toHaveCount(0);
+    await expect(capabilities.getByRole("tab")).toHaveCount(8);
 
+    // Phones keep the animated scene: points strip, phone mockup, one card at a time.
     await page.setViewportSize({ width: 390, height: 844 });
+    await expect(page.locator("[data-operator-cinematic]")).toHaveAttribute("data-operator-mode", "compact");
+    await expect(capabilities.getByRole("tab")).toHaveCount(8);
+    await expect(capabilities.locator(".operator-phone")).toBeVisible();
+    expect(await cards.locator("h3").allTextContents()).toEqual(expectedTitles);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
   });
 
@@ -166,7 +184,7 @@ test.describe("refreshed Visionary homepage", () => {
     await expect(page.getByRole("heading", { name: "The work that moves companies forward rarely fits inside a performance review." })).toBeAttached();
     await expect(page.getByRole("heading", { name: "Meaningful culture for $1 per employee/month." })).toBeAttached();
     await expect(page.locator(".visionary-capability-card")).toHaveCount(8);
-    await expect(page.locator(".visionary-loop-step")).toHaveCount(5);
+    await expect(page.locator("[data-how-it-works] [data-how-panel]")).toHaveCount(5);
     await expect(page.locator(".visionary-faq details")).toHaveCount(9);
   });
 
@@ -180,19 +198,19 @@ test.describe("refreshed Visionary homepage", () => {
     await expect(page.locator('[data-home-section="pricing"] a[href="/pricing"]')).toBeVisible();
   });
 
-  test("matches the Figma typography, widths, cards, and dark surface", async ({ page }) => {
+  test("uses the cinematic desktop typography, widths, cards, and dark surface", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     const styles = await page.locator('[data-persona-page="visionary"] .dark-hero h1').evaluate((node) => {
       const computed = getComputedStyle(node);
       return { fontSize: computed.fontSize, lineHeight: computed.lineHeight, color: computed.color, textAlign: computed.textAlign };
     });
-    expect(Number.parseFloat(styles.fontSize)).toBeGreaterThanOrEqual(80);
-    expect(Number.parseFloat(styles.lineHeight)).toBeGreaterThanOrEqual(80);
-    expect(["rgb(248, 250, 252)", "rgb(255, 255, 255)"]).toContain(styles.color);
-    expect(styles.textAlign).toBe("center");
-    await expect(page.locator('[data-persona-page="visionary"] .dark-hero')).toHaveCSS("background-color", "rgb(9, 10, 22)");
+    expect(Number.parseFloat(styles.fontSize)).toBeGreaterThanOrEqual(72);
+    expect(Number.parseFloat(styles.lineHeight)).toBeGreaterThanOrEqual(68);
+    expect(styles.color).toBe("rgb(247, 244, 237)");
+    expect(styles.textAlign).toBe("left");
+    await expect(page.locator('[data-persona-page="visionary"] .dark-hero')).toHaveCSS("background-color", "rgb(5, 8, 7)");
     const problemWidth = await page.locator(".visionary-section-inner").first().evaluate((node) => node.getBoundingClientRect().width);
-    expect(problemWidth).toBe(1280);
+    expect(problemWidth).toBe(1360);
     const cardWidths = await page.locator(".visionary-problem-card").evaluateAll((cards) => cards.map((card) => Math.round(card.getBoundingClientRect().width)));
     expect(new Set(cardWidths).size).toBe(1);
   });
@@ -201,26 +219,12 @@ test.describe("refreshed Visionary homepage", () => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/?persona=visionary");
 
-    for (const selector of [
-      ".visionary-hero h1",
-      ".visionary-section h2",
-      ".visionary-problem-card h3",
-      ".visionary-faq-list summary"
-    ]) {
-      await expect(page.locator(selector).first()).toHaveCSS("color", "rgb(248, 250, 252)");
-    }
-
-    for (const selector of [
-      ".visionary-hero-support",
-      ".visionary-body",
-      ".visionary-eyebrow",
-      ".visionary-problem-card p",
-      ".dark-hero__note",
-      ".visionary-faq-list details p",
-      ".site-footer > div > p"
-    ]) {
-      await expect(page.locator(selector).first()).toHaveCSS("color", "rgb(184, 192, 217)");
-    }
+    await expect(page.locator(".visionary-hero h1").first()).toHaveCSS("color", "rgb(247, 244, 237)");
+    await expect(page.locator(".cinematic-problem h2")).toHaveCSS("color", "rgb(247, 244, 237)");
+    await expect(page.locator(".cinematic-problem__card h3").first()).toHaveCSS("color", "rgb(247, 244, 237)");
+    await expect(page.locator(".visionary-hero-support")).toHaveCSS("color", "rgb(184, 192, 217)");
+    await expect(page.locator(".cinematic-problem__body")).toHaveCSS("color", "rgb(184, 192, 217)");
+    await expect(page.locator(".cinematic-problem__card p").first()).toHaveCSS("color", "rgb(184, 192, 217)");
 
     const heroRhythm = await page.locator(".visionary-hero").evaluate((hero) => {
       const support = hero.querySelector(".visionary-hero-support");
@@ -238,18 +242,18 @@ test.describe("refreshed Visionary homepage", () => {
       };
     });
     expect(heroRhythm).toEqual({
-      supportLineHeight: "30px",
-      paragraphGap: "12px",
+      supportLineHeight: "27px",
+      paragraphGap: "9px",
       actionsMargin: "32px",
       actionsGap: "24px",
       noteMargin: "24px",
-      outcomeMargin: "24px"
+      outcomeMargin: "18px"
     });
 
-    await expect(page.locator(".visionary-problem-card p").first()).toHaveCSS("font-size", "16px");
-    await expect(page.locator(".visionary-problem-card p").first()).toHaveCSS("line-height", "24px");
-    await expect(page.locator(".visionary-index span").first()).toHaveCSS("color", "rgb(179, 156, 254)");
-    await expect(page.locator(".visionary-hero .dark-button--secondary")).toHaveCSS("color", "rgb(9, 10, 22)");
+    await expect(page.locator(".cinematic-problem__card p").first()).toHaveCSS("font-size", "14px");
+    await expect(page.locator(".cinematic-problem__card p").first()).toHaveCSS("line-height", "20px");
+    await expect(page.locator(".cinematic-problem__index span")).toHaveCSS("color", "rgb(130, 239, 200)");
+    await expect(page.locator(".visionary-hero .dark-button--secondary")).toHaveCSS("color", "rgb(238, 245, 239)");
   });
 
   test("uses the approved mobile hero rhythm", async ({ page }) => {
@@ -270,11 +274,179 @@ test.describe("refreshed Visionary homepage", () => {
     expect(rhythm).toEqual({
       supportSize: "16px",
       supportLineHeight: "26px",
-      actionsMargin: "28px",
-      actionsGap: "16px",
-      noteMargin: "24px",
-      outcomeMargin: "24px"
+      actionsMargin: "24px",
+      actionsGap: "14px",
+      noteMargin: "18px",
+      outcomeMargin: "18px"
     });
+  });
+
+  test("runs full sticky choreography only on capable desktop viewports", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/?persona=visionary");
+    const visionary = page.locator(".visionary-refresh");
+    await expect(visionary).toHaveAttribute("data-cinematic-mode", "full");
+    await expect(page.locator(".cinematic-problem__sticky")).toHaveCSS("position", "sticky");
+
+    const problem = page.locator(".cinematic-problem");
+    await problem.evaluate((section) => scrollTo(0, section.offsetTop + (section.offsetHeight - innerHeight) * .82));
+    await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+    const cards = await page.locator(".cinematic-problem__card").evaluateAll((nodes) => nodes.map((node) => {
+      const box = node.getBoundingClientRect();
+      return { left: box.left, right: box.right, opacity: Number.parseFloat(getComputedStyle(node).opacity), angle: node.style.getPropertyValue("--card-angle") };
+    }));
+    expect(cards.map(({ angle }) => angle.trim())).toEqual(["5deg", "-5deg", "5deg", "-5deg"]);
+    expect(cards.every(({ opacity }) => opacity === 1)).toBeTruthy();
+    expect(cards.slice(1).every((card, index) => card.left - cards[index].right >= 24)).toBeTruthy();
+  });
+
+  test("pins the vision scene and raises each block from below in order", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 836 });
+    await page.goto("/?persona=visionary");
+    const vision = page.locator(".cinematic-vision");
+    await expect(vision).toHaveAttribute("data-vision-mode", "pinned");
+    await expect(page.locator(".cinematic-vision__sticky")).toHaveCSS("position", "sticky");
+
+    const stateAt = async (progress) => {
+      await vision.evaluate((section, value) => {
+        const sticky = section.querySelector(".cinematic-vision__sticky");
+        scrollTo(0, section.getBoundingClientRect().top + scrollY - 76 + (section.offsetHeight - sticky.offsetHeight) * value);
+      }, progress);
+      await page.waitForTimeout(250);
+      return vision.evaluate((section) => ({
+        stickyTop: Math.round(section.querySelector(".cinematic-vision__sticky").getBoundingClientRect().top),
+        ...Object.fromEntries([...section.querySelectorAll("[data-vision-step]")].map((node) => [node.dataset.visionStep, Number.parseFloat(getComputedStyle(node).opacity)]))
+      }));
+    };
+
+    expect(await stateAt(0)).toMatchObject({ intro: 0, center: 0, left: 0, right: 0 });
+    expect(await stateAt(.24)).toMatchObject({ intro: 1, center: 0, left: 0, right: 0 });
+    expect(await stateAt(.42)).toMatchObject({ intro: 1, center: 1, left: 0, right: 0 });
+    expect(await stateAt(.6)).toMatchObject({ intro: 1, center: 1, left: 1, right: 0 });
+    const complete = await stateAt(.95);
+    expect(complete).toMatchObject({ stickyTop: 76, intro: 1, left: 1, center: 1, right: 1 });
+  });
+
+  test("uses adaptive flow on tablets and short-height laptops and survives resize", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.goto("/?persona=visionary");
+    const visionary = page.locator(".visionary-refresh");
+    await expect(visionary).toHaveAttribute("data-cinematic-mode", "adaptive");
+    await expect(page.locator(".cinematic-problem__sticky")).toHaveCSS("position", "relative");
+
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await expect(visionary).toHaveAttribute("data-cinematic-mode", "full");
+    await expect(page.locator(".cinematic-problem__sticky")).toHaveCSS("position", "sticky");
+
+    await page.setViewportSize({ width: 1024, height: 768 });
+    await expect(visionary).toHaveAttribute("data-cinematic-mode", "adaptive");
+    await expect(page.locator(".cinematic-problem__sticky")).toHaveCSS("position", "relative");
+  });
+
+  test("uses responsive optimized cinematic imagery", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/?persona=visionary");
+    const heroSource = await page.locator(".cinematic-hero__backdrop img").evaluate((image) => image.currentSrc);
+    expect(heroSource).toMatch(/recognition-garden-hero-768\.(avif|webp)$/);
+    await expect(page.locator(".cinematic-problem__backdrop img")).toHaveAttribute("loading", "lazy");
+    await expect(page.locator(".cinematic-vision__backdrop img")).toHaveAttribute("loading", "lazy");
+  });
+
+  test("keeps the three cinematic sections inside every supported viewport", async ({ page }) => {
+    const viewports = [
+      [320, 568], [390, 844], [667, 375], [768, 1024], [1024, 768],
+      [1100, 700], [1280, 720], [1366, 768], [1440, 900], [1920, 1080]
+    ];
+    for (const [width, height] of viewports) {
+      await page.setViewportSize({ width, height });
+      await page.goto("/?persona=visionary");
+      const geometry = await page.evaluate(() => ({
+        scrollWidth: document.documentElement.scrollWidth,
+        problemCards: [...document.querySelectorAll(".cinematic-problem__card")].map((node) => {
+          const box = node.getBoundingClientRect();
+          return { left: box.left, right: box.right };
+        }),
+        visionCard: (() => {
+          const box = document.querySelector(".cinematic-vision__statement").getBoundingClientRect();
+          return { left: box.left, right: box.right };
+        })()
+      }));
+      expect(geometry.scrollWidth).toBeLessThanOrEqual(width);
+      expect(geometry.problemCards.every(({ left, right }) => left >= 0 && right <= width)).toBeTruthy();
+      expect(geometry.visionCard.left).toBeGreaterThanOrEqual(0);
+      expect(geometry.visionCard.right).toBeLessThanOrEqual(width);
+    }
+  });
+
+  test("uses a static complete layout for reduced motion", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/?persona=visionary");
+    await expect(page.locator(".visionary-refresh")).toHaveAttribute("data-cinematic-mode", "static");
+    await expect(page.locator(".cinematic-problem__sticky")).toHaveCSS("position", "relative");
+    await expect(page.locator(".cinematic-problem__card").first()).toHaveCSS("opacity", "1");
+    await expect(page.locator(".cinematic-vision")).toHaveAttribute("data-vision-mode", "static");
+    await expect(page.locator(".cinematic-vision__sticky")).toHaveCSS("position", "relative");
+    for (const step of await page.locator("[data-vision-step]").all()) await expect(step).toHaveCSS("opacity", "1");
+  });
+
+  test("connects the Meet EzRewards copy to accessible pillar tabs", async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 768 });
+    await page.goto("/?persona=visionary");
+    const section = page.locator("[data-meet-ezrewards]");
+    await expect(section).toHaveAttribute("data-active-pillar", "recognition");
+    await expect(section.getByRole("tab")).toHaveCount(3);
+    await expect(section.getByText("EzRewards brings recognition, rewards and culture insights into one connected experience—so appreciation is easier to give, more meaningful to receive and simpler to manage.", { exact: true })).toBeAttached();
+    const firstTab = section.getByRole("tab", { name: /Recognition that feels human/ });
+    await firstTab.focus();
+    await firstTab.press("End");
+    await expect(section).toHaveAttribute("data-active-pillar", "insight");
+    await expect(section.getByRole("tab", { name: /Culture leaders can understand/ })).toHaveAttribute("aria-selected", "true");
+    await expect(page.locator("#meet-panel-insight")).toHaveAttribute("aria-hidden", "false");
+    await page.locator("[data-meet-pillar='rewards']").click();
+    await expect(section).toHaveAttribute("data-active-pillar", "rewards");
+  });
+
+  test("synchronizes all three desktop stages with the scroll narrative", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/?persona=visionary");
+    const section = page.locator("[data-meet-ezrewards]");
+    await expect(section).toHaveAttribute("data-particle-count", /^(7200|3600)$/);
+    for (const [progress, pillar] of [[.16, "recognition"], [.49, "rewards"], [.78, "insight"]]) {
+      await section.evaluate((node, value) => {
+        const header = document.querySelector(".site-header")?.offsetHeight || 76;
+        scrollTo(0, node.offsetTop - header + innerHeight * 2.4 * value);
+      }, progress);
+      await page.waitForTimeout(120);
+      await expect(section).toHaveAttribute("data-active-pillar", pillar);
+    }
+  });
+
+  test("uses three static SVG stories on phones and for reduced motion", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/?persona=visionary");
+    const section = page.locator("[data-meet-ezrewards]");
+    await expect(section).toHaveAttribute("data-render-state", "fallback");
+    await expect(section.locator("[data-meet-panel]")).toHaveCount(3);
+    await expect(section.locator("[data-meet-panel][aria-hidden]")).toHaveCount(0);
+    await expect(section.locator(".cinematic-meet__visual")).toHaveCSS("display", "none");
+    await expect(section.locator("[data-meet-panel] > svg")).toHaveCount(3);
+  });
+
+  test("falls back to inline SVG when WebGL cannot initialize", async ({ page }) => {
+    await page.addInitScript(() => {
+      const original = HTMLCanvasElement.prototype.getContext;
+      HTMLCanvasElement.prototype.getContext = function patched(type, ...args) {
+        if (String(type).startsWith("webgl")) return null;
+        return original.call(this, type, ...args);
+      };
+    });
+    await page.setViewportSize({ width: 1024, height: 768 });
+    await page.goto("/?persona=visionary");
+    const section = page.locator("[data-meet-ezrewards]");
+    await expect(section).toHaveAttribute("data-render-state", "fallback");
+    await expect(section).toHaveAttribute("data-webgl-fallback", "true");
+    await expect(section.locator("[data-meet-fallback='recognition']")).toHaveCSS("opacity", "1");
   });
 });
 
@@ -295,21 +467,21 @@ test("Visionary refresh keeps section typography, loop cards, and CTA alignment 
   const cultureGap = page.locator('[data-home-section="problem"]');
   const cultureHeading = cultureGap.getByRole("heading", { level: 2 });
   const [sectionBox, headingBox] = await Promise.all([cultureGap.boundingBox(), cultureHeading.boundingBox()]);
-  expect(headingBox.x - sectionBox.x).toBeLessThanOrEqual(100);
+  const sectionCenter = sectionBox.x + sectionBox.width / 2;
+  const headingCenter = headingBox.x + headingBox.width / 2;
+  expect(Math.abs(sectionCenter - headingCenter)).toBeLessThanOrEqual(2);
 
-  const loop = page.locator("#appreciation-loop");
-  const cardGeometry = await loop.locator(".visionary-loop-step:visible").evaluateAll((cards) => cards.map((card) => {
-    const cardBox = card.getBoundingClientRect();
-    const numberBox = card.querySelector("span").getBoundingClientRect();
+  const loop = page.locator('[data-persona-page="visionary"] [data-how-it-works]');
+  const panelGeometry = await loop.locator("[data-how-panel]").evaluateAll((panels) => panels.map((panel) => {
+    const panelBox = panel.getBoundingClientRect();
+    const numberBox = panel.querySelector(".cinematic-how__number").getBoundingClientRect();
     return {
-      radius: getComputedStyle(card).borderRadius,
-      numberContained: numberBox.left >= cardBox.left && numberBox.right <= cardBox.right && numberBox.top >= cardBox.top && numberBox.bottom <= cardBox.bottom
+      radius: getComputedStyle(panel).borderRadius,
+      numberContained: numberBox.left >= panelBox.left && numberBox.right <= panelBox.right && numberBox.top >= panelBox.top && numberBox.bottom <= panelBox.bottom
     };
   }));
-  expect(new Set(cardGeometry.map(({ radius }) => radius))).toEqual(new Set(["14px"]));
-  expect(cardGeometry.every(({ numberContained }) => numberContained)).toBeTruthy();
-
-  await expect(loop.locator(".visionary-loop-list")).toHaveCSS("grid-template-columns", /.+/);
+  expect(panelGeometry).toEqual(Array(5).fill({ radius: "24px", numberContained: true }));
+  await expect(loop.locator('[data-how-panel][aria-hidden="false"]')).toHaveCount(1);
 });
 
 const routes = [
