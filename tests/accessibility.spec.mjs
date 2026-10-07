@@ -1,3 +1,4 @@
+import { dismissInitialChooser } from "./fixtures/persona.mjs";
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -22,7 +23,7 @@ const auditTargets = [
 for (const [name, url, width, height] of auditTargets) {
   test(`${name} has no WCAG A/AA violations`, async ({ page }) => {
     await page.setViewportSize({ width, height });
-    await page.goto(url);
+    await page.goto(url); await dismissInitialChooser(page);
     await page.waitForTimeout(1200);
     const results = await new AxeBuilder({ page }).withTags(axeTags).analyze();
     expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
@@ -30,7 +31,7 @@ for (const [name, url, width, height] of auditTargets) {
 }
 
 test("personality selector traps focus, closes with Escape and restores focus", async ({ page }) => {
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   const trigger = page.getByRole("button", { name: "Change experience" }).first();
   await trigger.focus();
   await trigger.click();
@@ -43,26 +44,26 @@ test("personality selector traps focus, closes with Escape and restores focus", 
 });
 
 test("open personality selector has no WCAG A/AA violations", async ({ page }) => {
-  await page.goto("/?persona=default");
+  await page.goto("/?persona=default"); await dismissInitialChooser(page);
   await page.getByRole("button", { name: "Change experience" }).first().click();
   const results = await new AxeBuilder({ page }).withTags(axeTags).analyze();
   expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
 });
 
 test("visual data and workspace containers use supported semantics", async ({ page }) => {
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   await expect(page.locator(".cinematic-how__panels")).toHaveAttribute("role", "list");
 
-  await page.goto("/?persona=strategist");
+  await page.goto("/?persona=strategist"); await dismissInitialChooser(page);
   await expect(page.locator(".strategist-dashboard")).not.toHaveAttribute("aria-label");
   await expect(page.locator(".strategist-bars")).toHaveAttribute("role", "img");
 
-  await page.goto("/?persona=operator");
+  await page.goto("/?persona=operator"); await dismissInitialChooser(page);
   await expect(page.locator(".operator-workspace")).toHaveAttribute("aria-labelledby", "operator-workspace-title");
 });
 
 test("Visionary FAQ uses native keyboard-accessible disclosures", async ({ page }) => {
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   const firstQuestion = page.locator(".visionary-faq summary").first();
   await firstQuestion.focus();
   await page.keyboard.press("Enter");
@@ -70,7 +71,7 @@ test("Visionary FAQ uses native keyboard-accessible disclosures", async ({ page 
 });
 
 test("contact validation works for keyboard submission and describes errors", async ({ page }) => {
-  await page.goto("/contact");
+  await page.goto("/contact"); await dismissInitialChooser(page);
   const form = page.locator("form[data-demo-form]");
   await form.locator("input[name=email]").focus();
   await page.keyboard.press("Enter");
@@ -84,7 +85,7 @@ test("reduced motion disables animations and smooth scrolling on every route", a
   const context = await browser.newContext({ reducedMotion: "reduce" });
   const page = await context.newPage();
   for (const url of ["/?persona=default", "/?persona=visionary", "/?persona=strategist", "/?persona=operator", "/?persona=creative-culture-builder", "/product", "/pricing", "/about", "/contact"]) {
-    await page.goto(`http://127.0.0.1:4174${url}`);
+    await page.goto(`http://127.0.0.1:4174${url}`); await dismissInitialChooser(page);
     expect(await page.locator("html").evaluate((element) => getComputedStyle(element).scrollBehavior)).toBe("auto");
     const animated = page.locator('[style*="animation"], .strategist-bars i').first();
     if (await animated.count()) {

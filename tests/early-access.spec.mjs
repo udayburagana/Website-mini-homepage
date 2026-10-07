@@ -1,3 +1,4 @@
+import { dismissInitialChooser } from "./fixtures/persona.mjs";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -12,7 +13,7 @@ const section = (page) => page.locator("[data-early-access]");
 
 async function openFull(page) {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   await expect(section(page)).toHaveAttribute("data-early-access-mode", "pinned");
 }
 
@@ -23,7 +24,7 @@ test("preserves all early-access copy and destinations", async ({ page }) => {
   await expect(early.getByRole("heading", { level: 2 })).toHaveText("The best workplace cultures are built intentionally.");
   await expect(early.getByText("We are inviting a limited group of growing companies to join EzRewards early.", { exact: true })).toBeAttached();
   await expect(early.getByText("Early-access companies will experience the product before the wider launch and help us understand how recognition should work inside modern teams.", { exact: true })).toBeAttached();
-  await expect(early.getByRole("link", { name: "Join the Waitlist" })).toHaveAttribute("href", "/contact");
+  await expect(early.getByRole("link", { name: "Join EzRewards" })).toHaveAttribute("href", "/signup.html?persona=visionary");
   await expect(early.getByText("Designed for companies with 30 or more employees.", { exact: true })).toBeAttached();
   for (const benefit of benefits) await expect(early.getByText(benefit, { exact: true })).toBeAttached();
 });
@@ -91,7 +92,7 @@ test("lazy-loads and pauses local video near the scene", async ({ page }) => {
 
 test("uses flow on tablet, portrait video on wide phone and poster on narrow phone", async ({ page }) => {
   await page.setViewportSize({ width: 1024, height: 768 });
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   await expect(section(page)).toHaveAttribute("data-early-access-mode", "flow");
   await expect(section(page).locator(".cinematic-early__media")).toHaveCSS("position", "sticky");
   await page.setViewportSize({ width: 667, height: 375 });
@@ -108,7 +109,7 @@ test("uses flow on tablet, portrait video on wide phone and poster on narrow pho
 test("reduced motion and Save-Data never attach video", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   await expect(section(page)).toHaveAttribute("data-early-access-mode", "static");
   await expect(section(page).locator("video source")).toHaveCount(0);
   await expect(section(page).locator('[data-benefit-state="complete"]')).toHaveCount(5);
@@ -116,16 +117,16 @@ test("reduced motion and Save-Data never attach video", async ({ page }) => {
 
 test("remains readable without the cinematic bundle", async ({ page }) => {
   await page.route("**/vendor/visionary-cinematic.bundle.js", (route) => route.abort());
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   await expect(section(page).getByRole("heading", { level: 2 })).toBeVisible();
   await expect(section(page).locator("[data-early-benefit]:visible")).toHaveCount(5);
-  await expect(section(page).getByRole("link", { name: "Join the Waitlist" })).toBeVisible();
+  await expect(section(page).getByRole("link", { name: "Join EzRewards" })).toBeVisible();
 });
 
 for (const [width, height] of [[320,568],[390,844],[667,375],[768,1024],[1024,768],[1280,720],[1440,900],[1920,1080]]) {
   test(`fits Section 07 at ${width}×${height}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
     const early = section(page);
     await early.scrollIntoViewIfNeeded();
     const geometry = await early.evaluate((node) => {
@@ -144,6 +145,8 @@ for (const [width, height] of [[320,568],[390,844],[667,375],[768,1024],[1024,76
 test("has no serious accessibility violations", async ({ page }) => {
   await openFull(page);
   await section(page).scrollIntoViewIfNeeded();
+  // Audit the settled cards rather than a transient frame of their opacity reveal.
+  await expect.poll(() => section(page).locator('li[data-benefit-state="active"]').evaluateAll(nodes => nodes.length > 0 && nodes.every(node => Number(getComputedStyle(node).opacity) >= .99))).toBe(true);
   const results = await new AxeBuilder({ page }).include("[data-early-access]").analyze();
   expect(results.violations.filter((violation) => ["serious", "critical"].includes(violation.impact))).toEqual([]);
 });

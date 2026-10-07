@@ -8,7 +8,8 @@ const routes = new Map([
   ["/product", "/Product.dc.html"],
   ["/pricing", "/Pricing.dc.html"],
   ["/about", "/About.dc.html"],
-  ["/contact", "/Contact.dc.html"]
+  ["/contact", "/Contact.dc.html"],
+  ...["signup", "signin", "demo"].map(name => ["/" + name, "/" + name + ".html"])
 ]);
 const contentTypes = {
   ".mp4": "video/mp4",

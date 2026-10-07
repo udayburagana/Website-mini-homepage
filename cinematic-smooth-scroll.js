@@ -21,6 +21,7 @@ export function enableSmoothScroll() {
   tick = (time) => lenis?.raf(time * 1000);
   gsap.ticker.add(tick);
   document.documentElement.dataset.smoothScroll = "lenis";
+  if (document.body.classList.contains("dialog-open")) lenis.stop();
   return lenis;
 }
 
@@ -60,3 +61,6 @@ export function claimSmoothScroll(wants, modeEvent) {
   }
   sync();
 }
+
+// Keep modal scrolling native and stop page inertia while the chooser is open.
+addEventListener("ezrewards:dialog-state", ({ detail }) => { if (detail.open) lenis?.stop(); else { lenis?.resize(); lenis?.start(); ScrollTrigger.refresh(); } });

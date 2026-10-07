@@ -1,3 +1,4 @@
+import { dismissInitialChooser } from "./fixtures/persona.mjs";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -11,7 +12,7 @@ const section = (page) => page.locator("[data-culture-sphere]");
 
 async function openFull(page) {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   await expect(section(page)).toHaveAttribute("data-sphere-mode", "pinned");
 }
 
@@ -72,7 +73,7 @@ test("rebuilds from full to flow to static and back", async ({ page }) => {
 test("reduced motion stays static and readable", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   await expect(section(page)).toHaveAttribute("data-sphere-mode", "static");
   await expect(section(page).locator("canvas")).not.toBeVisible();
   await expect(section(page).locator("[data-outcome-stage]:visible")).toHaveCount(4);

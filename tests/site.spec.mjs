@@ -1,11 +1,12 @@
+import { dismissInitialChooser } from "./fixtures/persona.mjs";
 import { expect, test } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
 test.describe("personality-led homepage", () => {
   test("opens directly on the neutral homepage with all personalities available", async ({ page }) => {
-    await page.goto("/?persona=default");
+    await page.goto("/?persona=default"); await dismissInitialChooser(page);
     await expect(page.getByRole("heading", { level: 1, name: "Recognition, rewards and culture visibility in one platform." })).toBeVisible();
-    await page.getByRole("button", { name: "Choose your experience" }).click();
+    await page.getByRole("button", { name: "Change experience" }).first().click();
     await expect(page.getByRole("button", { name: /Visionary/ })).toBeEnabled();
     await expect(page.getByRole("button", { name: /Strategist/ })).toBeEnabled();
     await expect(page.getByRole("button", { name: /Operator/ })).toBeEnabled();
@@ -14,8 +15,8 @@ test.describe("personality-led homepage", () => {
   });
 
   test("switches personality without reloading and creates shareable remembered state", async ({ page }) => {
-    await page.goto("/?persona=default");
-    await page.getByRole("button", { name: "Choose your experience" }).click();
+    await page.goto("/?persona=default"); await dismissInitialChooser(page);
+    await page.getByRole("button", { name: "Change experience" }).first().click();
     await page.getByRole("button", { name: /Strategist/ }).click();
     await expect(page).toHaveURL(/persona=strategist/);
     await expect(page.locator('[data-persona-page="strategist"]')).toBeVisible();
@@ -30,7 +31,7 @@ test.describe("personality-led homepage", () => {
   });
 
   test("renders the complete Strategist narrative and functional destinations", async ({ page }) => {
-    await page.goto("/?persona=strategist");
+    await page.goto("/?persona=strategist"); await dismissInitialChooser(page);
     const sequence = await page.locator("[data-strategist-section]").evaluateAll((sections) =>
       sections.map((section) => section.dataset.strategistSection)
     );
@@ -41,29 +42,29 @@ test.describe("personality-led homepage", () => {
     await expect(page.getByRole("heading", { name: "Companies invest in appreciation without a clear view of how it is working." })).toBeAttached();
     await expect(page.getByRole("heading", { name: "What if recognition became a system—not a collection of initiatives?" })).toBeAttached();
     await expect(page.getByRole("heading", { name: "A complete recognition platform for $1 per employee/month." })).toBeAttached();
-    await expect(page.getByRole("link", { name: "Book a Demo", exact: true })).toHaveAttribute("href", "/contact");
-    await expect(page.getByRole("link", { name: "See Measurable Outcomes", exact: true })).toHaveAttribute("href", "#strategist-outcomes");
+    await expect(page.getByRole("link", { name: "Book a Demo", exact: true })).toHaveAttribute("href", "/demo.html?persona=strategist");
+    await expect(page.getByRole("link", { name: "See measurable outcomes", exact: true })).toHaveAttribute("href", "#strategist-outcomes");
     const strategistPage = page.locator('[data-persona-page="strategist"]');
     await strategistPage.getByText("What is EzRewards?", { exact: true }).click();
     await expect(strategistPage.getByText(/connects peer recognition, company-wide appreciation/)).toBeVisible();
   });
 
   test("uses the midnight cinematic Strategist visual system", async ({ page }) => {
-    await page.goto("/?persona=strategist");
+    await page.goto("/?persona=strategist"); await dismissInitialChooser(page);
     await expect(page.locator('[data-persona-page="strategist"]')).toHaveAttribute("data-strategist-engine", "elva-inspired");
     await expect(page.locator('[data-persona-page="strategist"]')).toHaveCSS("background-color", "rgb(3, 7, 19)");
-    await expect(page.locator(".strategist-card").first()).toHaveCSS("background-image", /linear-gradient/);
-    await expect(page.locator(".strategist-button--primary").first()).toHaveCSS("background-image", /linear-gradient/);
+    await expect(page.locator(".strategist-workflow__card").first()).toHaveCSS("background-image", /linear-gradient/);
+    await expect(page.locator(".strategist-hero .strategist-button--primary").first()).toHaveCSS("background-color", "rgb(137, 233, 255)");
   });
 
-  test("keeps Strategist workflow cards clean, consistently spaced, and its early-access CTA readable", async ({ page }) => {
-    await page.goto("/?persona=strategist");
+  test("keeps the current Strategist workflow hierarchy and its early-access CTA readable", async ({ page }) => {
+    await page.goto("/?persona=strategist"); await dismissInitialChooser(page);
 
-    const workflowCard = page.locator(".strategist-steps li").first();
-    await expect(workflowCard).toHaveCSS("row-gap", "8px");
-    expect(await workflowCard.evaluate((card) => getComputedStyle(card, "::after").content)).toBe("none");
-
-    await expect(page.locator('[data-strategist-section="capabilities"] .capability-selector__panel article').first()).toHaveCSS("row-gap", "8px");
+    const workflowCards = page.locator(".strategist-workflow__card");
+    await expect(workflowCards).toHaveCount(4);
+    await expect(workflowCards.first().locator("h3")).toHaveCSS("font-size", "28px");
+    await expect(page.locator('[data-strategist-section="capabilities"] .sc-features__tabs [role="tab"]')).toHaveCount(4);
+    await expect(page.locator('[data-strategist-section="capabilities"] [role="tabpanel"]')).toHaveCount(4);
 
     const earlyAccessCta = page.locator(".strategist-section--indigo .strategist-button--light");
     await expect(earlyAccessCta).toHaveCSS("background-color", "rgb(255, 255, 255)");
@@ -71,7 +72,7 @@ test.describe("personality-led homepage", () => {
   });
 
   test("renders the complete Operator narrative and functional destinations", async ({ page }) => {
-    await page.goto("/?persona=operator");
+    await page.goto("/?persona=operator"); await dismissInitialChooser(page);
     await expect(page.locator('[data-persona-page="operator"]')).toBeVisible();
     await expect(page.locator('[data-persona-page="visionary"]')).toBeHidden();
     await expect(page.locator('[data-persona-page="strategist"]')).toBeHidden();
@@ -99,7 +100,7 @@ test.describe("personality-led homepage", () => {
       });
       return .2126 * r + .7152 * g + .0722 * b;
     };
-    await page.goto("/?persona=operator");
+    await page.goto("/?persona=operator"); await dismissInitialChooser(page);
     const operator = page.locator('[data-persona-page="operator"]');
     await expect(operator).toHaveAttribute("data-operator-engine", "console-cinematic");
     expect(luminance(await operator.evaluate((node) => getComputedStyle(node).backgroundColor))).toBeLessThan(.02);
@@ -109,7 +110,7 @@ test.describe("personality-led homepage", () => {
 
   test("bottom-aligns the Operator problem copy and keeps its early-access CTA readable", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("/?persona=operator");
+    await page.goto("/?persona=operator"); await dismissInitialChooser(page);
 
     const problemRow = page.locator('[data-operator-section="problem"] .operator-heading-row');
     const [headingBox, copyBox] = await Promise.all([
@@ -136,7 +137,7 @@ test.describe("personality-led homepage", () => {
     ];
 
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("/?persona=operator");
+    await page.goto("/?persona=operator"); await dismissInitialChooser(page);
     const capabilities = page.locator('[data-operator-section="capabilities"]');
     const cards = capabilities.locator(".operator-capabilities > article");
     await expect(cards).toHaveCount(8);
@@ -157,7 +158,7 @@ test.describe("personality-led homepage", () => {
   for (const width of [320, 390, 768, 1024, 1440]) {
     test(`Operator fits ${width}px without horizontal overflow`, async ({ page }) => {
       await page.setViewportSize({ width, height: 844 });
-      await page.goto("/?persona=operator");
+      await page.goto("/?persona=operator"); await dismissInitialChooser(page);
       const widths = await page.evaluate(() => ({
         client: document.documentElement.clientWidth,
         scroll: document.documentElement.scrollWidth
@@ -169,7 +170,7 @@ test.describe("personality-led homepage", () => {
 
 test.describe("refreshed Visionary homepage", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   });
 
   test("uses the complete approved eleven-section narrative", async ({ page }) => {
@@ -192,7 +193,7 @@ test.describe("refreshed Visionary homepage", () => {
     const hero = page.locator('[data-persona-page="visionary"] [data-home-section="hero"]');
     await expect(hero.getByText("The culture operating system for modern teams", { exact: true })).toBeVisible();
     await expect(hero.getByText("Because when people feel seen, they do more than stay. They participate, contribute and grow.", { exact: true })).toBeVisible();
-    await expect(hero.getByRole("link", { name: "Build Your Culture", exact: true })).toHaveAttribute("href", "/contact");
+    await expect(hero.getByRole("link", { name: "Create your account", exact: true })).toHaveAttribute("href", "/signup.html?persona=visionary");
     await expect(hero.getByRole("link", { name: "See How It Works", exact: true })).toHaveAttribute("href", "#appreciation-loop");
     await expect(page.locator('a[href="#appreciation-loop"]')).not.toHaveCount(0);
     await expect(page.locator('[data-home-section="pricing"] a[href="/pricing"]')).toBeVisible();
@@ -217,7 +218,7 @@ test.describe("refreshed Visionary homepage", () => {
 
   test("uses the approved Visionary text hierarchy and desktop reading rhythm", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
 
     await expect(page.locator(".visionary-hero h1").first()).toHaveCSS("color", "rgb(247, 244, 237)");
     await expect(page.locator(".cinematic-problem h2")).toHaveCSS("color", "rgb(247, 244, 237)");
@@ -258,7 +259,7 @@ test.describe("refreshed Visionary homepage", () => {
 
   test("uses the approved mobile hero rhythm", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
     const rhythm = await page.locator(".visionary-hero").evaluate((hero) => {
       const support = hero.querySelector(".visionary-hero-support");
       const actions = hero.querySelector(".dark-actions");
@@ -283,7 +284,7 @@ test.describe("refreshed Visionary homepage", () => {
 
   test("runs full sticky choreography only on capable desktop viewports", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
     const visionary = page.locator(".visionary-refresh");
     await expect(visionary).toHaveAttribute("data-cinematic-mode", "full");
     await expect(page.locator(".cinematic-problem__sticky")).toHaveCSS("position", "sticky");
@@ -302,7 +303,7 @@ test.describe("refreshed Visionary homepage", () => {
 
   test("pins the vision scene and raises each block from below in order", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 836 });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
     const vision = page.locator(".cinematic-vision");
     await expect(vision).toHaveAttribute("data-vision-mode", "pinned");
     await expect(page.locator(".cinematic-vision__sticky")).toHaveCSS("position", "sticky");
@@ -329,7 +330,7 @@ test.describe("refreshed Visionary homepage", () => {
 
   test("uses adaptive flow on tablets and short-height laptops and survives resize", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
     const visionary = page.locator(".visionary-refresh");
     await expect(visionary).toHaveAttribute("data-cinematic-mode", "adaptive");
     await expect(page.locator(".cinematic-problem__sticky")).toHaveCSS("position", "relative");
@@ -345,7 +346,7 @@ test.describe("refreshed Visionary homepage", () => {
 
   test("uses responsive optimized cinematic imagery", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
     const heroSource = await page.locator(".cinematic-hero__backdrop img").evaluate((image) => image.currentSrc);
     expect(heroSource).toMatch(/recognition-garden-hero-768\.(avif|webp)$/);
     await expect(page.locator(".cinematic-problem__backdrop img")).toHaveAttribute("loading", "lazy");
@@ -359,7 +360,7 @@ test.describe("refreshed Visionary homepage", () => {
     ];
     for (const [width, height] of viewports) {
       await page.setViewportSize({ width, height });
-      await page.goto("/?persona=visionary");
+      await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
       const geometry = await page.evaluate(() => ({
         scrollWidth: document.documentElement.scrollWidth,
         problemCards: [...document.querySelectorAll(".cinematic-problem__card")].map((node) => {
@@ -381,7 +382,7 @@ test.describe("refreshed Visionary homepage", () => {
   test("uses a static complete layout for reduced motion", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
     await expect(page.locator(".visionary-refresh")).toHaveAttribute("data-cinematic-mode", "static");
     await expect(page.locator(".cinematic-problem__sticky")).toHaveCSS("position", "relative");
     await expect(page.locator(".cinematic-problem__card").first()).toHaveCSS("opacity", "1");
@@ -392,7 +393,7 @@ test.describe("refreshed Visionary homepage", () => {
 
   test("connects the Meet EzRewards copy to accessible pillar tabs", async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 768 });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
     const section = page.locator("[data-meet-ezrewards]");
     await expect(section).toHaveAttribute("data-active-pillar", "recognition");
     await expect(section.getByRole("tab")).toHaveCount(3);
@@ -409,7 +410,7 @@ test.describe("refreshed Visionary homepage", () => {
 
   test("synchronizes all three desktop stages with the scroll narrative", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
     const section = page.locator("[data-meet-ezrewards]");
     await expect(section).toHaveAttribute("data-particle-count", /^(7200|3600)$/);
     for (const [progress, pillar] of [[.16, "recognition"], [.49, "rewards"], [.78, "insight"]]) {
@@ -424,7 +425,7 @@ test.describe("refreshed Visionary homepage", () => {
 
   test("uses three static SVG stories on phones and for reduced motion", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
     const section = page.locator("[data-meet-ezrewards]");
     await expect(section).toHaveAttribute("data-render-state", "fallback");
     await expect(section.locator("[data-meet-panel]")).toHaveCount(3);
@@ -442,7 +443,7 @@ test.describe("refreshed Visionary homepage", () => {
       };
     });
     await page.setViewportSize({ width: 1024, height: 768 });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
     const section = page.locator("[data-meet-ezrewards]");
     await expect(section).toHaveAttribute("data-render-state", "fallback");
     await expect(section).toHaveAttribute("data-webgl-fallback", "true");
@@ -457,7 +458,7 @@ test.beforeEach(async ({ page }) => {
 
 test("Visionary refresh keeps section typography, loop cards, and CTA alignment consistent", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
 
   const sectionHeadingSizes = await page.locator('[data-persona-page="visionary"] .visionary-section h2').evaluateAll((headings) =>
     headings.filter((heading) => heading.getClientRects().length).map((heading) => Number.parseFloat(getComputedStyle(heading).fontSize))
@@ -524,7 +525,7 @@ const viewports = [
 
 for (const route of routes) {
   test(`${route.path} has complete document metadata and landmarks`, async ({ page }) => {
-    await page.goto(route.path);
+    await page.goto(route.path); await dismissInitialChooser(page);
 
     await expect(page).toHaveTitle(route.title);
     await expect(page.locator('meta[name="description"]')).toHaveAttribute(
@@ -548,7 +549,7 @@ for (const route of routes) {
   for (const viewport of viewports) {
     test(`${route.path} fits ${viewport.width}x${viewport.height}`, async ({ page }) => {
       await page.setViewportSize(viewport);
-      await page.goto(route.path);
+      await page.goto(route.path); await dismissInitialChooser(page);
       const widths = await page.evaluate(() => ({
         client: document.documentElement.clientWidth,
         scroll: document.documentElement.scrollWidth
@@ -559,10 +560,10 @@ for (const route of routes) {
 }
 
 test("button links are not underlined and active navigation remains distinct", async ({ page }) => {
-  await page.goto("/?persona=default");
-  await expect(page.getByRole("link", { name: "Join Waitlist", exact: true }).first())
+  await page.goto("/?persona=default"); await dismissInitialChooser(page);
+  await expect(page.getByRole("link", { name: "Create Account", exact: true }).first())
     .toHaveCSS("text-decoration-line", "none");
-  await page.getByRole("button", { name: "Choose your experience" }).click();
+  await page.getByRole("button", { name: "Change experience" }).first().click();
   await expect(page.getByRole("button", { name: /Visionary/ })).toHaveCSS("cursor", "pointer");
 });
 
@@ -581,7 +582,7 @@ test("robots and sitemap expose all production routes", async ({ request }) => {
 
 test("mobile navigation exposes and updates its expanded state", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+  await page.goto("/"); await dismissInitialChooser(page);
 
   const toggle = page.locator("[data-menu-toggle]");
   await expect(toggle).toHaveAccessibleName("Open navigation");
@@ -594,7 +595,7 @@ test("mobile navigation exposes and updates its expanded state", async ({ page }
 });
 
 test("demo form controls have accessible names and validate required fields", async ({ page }) => {
-  await page.goto("/contact");
+  await page.goto("/contact"); await dismissInitialChooser(page);
 
   const form = page.locator("form[data-demo-form]");
   await expect(form).toHaveCount(1);
@@ -609,7 +610,7 @@ test("demo form controls have accessible names and validate required fields", as
 });
 
 test("placeholder legal and social labels are not interactive", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/"); await dismissInitialChooser(page);
   for (const label of ["Privacy", "Terms", "LinkedIn"]) {
     await expect(page.getByText(label, { exact: true })).not.toHaveAttribute("href");
   }
@@ -620,8 +621,8 @@ test("reduced motion disables page animations", async ({ browser }) => {
   const page = await context.newPage();
   await page.route("https://fonts.googleapis.com/**", (route) => route.abort());
   await page.route("https://fonts.gstatic.com/**", (route) => route.abort());
-  await page.goto("http://127.0.0.1:4174/?persona=default");
-  await page.getByRole("button", { name: "Choose your experience" }).click();
+  await page.goto("http://127.0.0.1:4174/?persona=default"); await dismissInitialChooser(page);
+  await page.getByRole("button", { name: "Change experience" }).first().click();
   const transitionSeconds = await page.locator("[data-persona-option]").first().evaluate((element) =>
     Number.parseFloat(getComputedStyle(element).transitionDuration)
   );
@@ -632,14 +633,14 @@ test("reduced motion disables page animations", async ({ browser }) => {
 test("pages render when outbound network access is unavailable", async ({ page }) => {
   await page.route(/^https?:\/\/(?!127\.0\.0\.1:4174)/, (route) => route.abort());
   for (const route of routes) {
-    await page.goto(route.path);
+    await page.goto(route.path); await dismissInitialChooser(page);
     await expect(page.locator("h1").first()).toBeAttached();
   }
 });
 
 test("internal links and section anchors resolve", async ({ page, request }) => {
   for (const route of routes) {
-    await page.goto(route.path);
+    await page.goto(route.path); await dismissInitialChooser(page);
     const hrefs = await page.locator('a[href^="/"], a[href^="#"]').evaluateAll((links) =>
       [...new Set(links.map((link) => link.getAttribute("href")))]
     );

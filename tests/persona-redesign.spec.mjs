@@ -1,3 +1,4 @@
+import { dismissInitialChooser } from "./fixtures/persona.mjs";
 import { expect, test } from "@playwright/test";
 
 const personas = ["default", "visionary", "strategist", "operator", "creative-culture-builder"];
@@ -15,7 +16,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("first-time visitors receive the neutral default experience", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/"); await dismissInitialChooser(page);
   await expect(page.locator("html")).toHaveAttribute("data-persona", "default");
   await expect(page.locator('[data-persona-page="default"]')).toBeVisible();
   await expect(page.getByRole("heading", { level: 1, name: "Recognition, rewards and culture visibility in one platform." })).toBeVisible();
@@ -23,7 +24,7 @@ test("first-time visitors receive the neutral default experience", async ({ page
 
 test("all five personality URLs render eleven semantic sections", async ({ page }) => {
   for (const persona of personas) {
-    await page.goto(`/?persona=${persona}`);
+    await page.goto(`/?persona=${persona}`); await dismissInitialChooser(page);
     const active = page.locator(`[data-persona-page="${persona}"]`);
     await expect(active).toBeVisible();
     await expect(active.locator("h1")).toHaveCount(1);
@@ -35,13 +36,13 @@ test("all five personality URLs render eleven semantic sections", async ({ page 
 });
 
 test("invalid personality query values fall back to default", async ({ page }) => {
-  await page.goto("/?persona=unknown");
+  await page.goto("/?persona=unknown"); await dismissInitialChooser(page);
   await expect(page.locator("html")).toHaveAttribute("data-persona", "default");
   await expect(page).toHaveURL(/persona=default/);
 });
 
 test("change experience opens one accessible selector dialog", async ({ page }) => {
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   await page.getByRole("button", { name: "Change experience" }).first().click();
   const dialog = page.getByRole("dialog", { name: "Choose your EzRewards experience" });
   await expect(dialog).toBeVisible();
@@ -54,7 +55,7 @@ test("change experience opens one accessible selector dialog", async ({ page }) 
 });
 
 test("selector updates URL, storage, metadata and analytics without a reload", async ({ page }) => {
-  await page.goto("/?persona=default");
+  await page.goto("/?persona=default"); await dismissInitialChooser(page);
   await page.getByRole("button", { name: "Change experience" }).first().click();
   await page.getByRole("dialog").getByRole("button", { name: /prove culture impact with clarity/i }).click();
   await expect(page).toHaveURL(/persona=strategist/);
@@ -66,7 +67,7 @@ test("selector updates URL, storage, metadata and analytics without a reload", a
 });
 
 test("shared stepper supports arrow, Home and End navigation", async ({ page }) => {
-  await page.goto("/?persona=creative-culture-builder");
+  await page.goto("/?persona=creative-culture-builder"); await dismissInitialChooser(page);
   const stepper = page.locator('[data-persona-page="creative-culture-builder"] [data-stepper]');
   const first = stepper.getByRole("tab").first();
   await first.focus();
@@ -80,7 +81,7 @@ test("shared stepper supports arrow, Home and End navigation", async ({ page }) 
 });
 
 test("generic capabilities retain four keyboard-selectable product groups", async ({ page }) => {
-  await page.goto("/?persona=strategist");
+  await page.goto("/?persona=strategist"); await dismissInitialChooser(page);
   const section = page.locator('[data-persona-page="strategist"] [data-persona-section="capabilities"]');
   const tabs = section.getByRole("tab");
   await expect(tabs).toHaveCount(4);
@@ -93,7 +94,7 @@ test("generic capabilities retain four keyboard-selectable product groups", asyn
 
 // Operator authors its own scene rails, so the shared sticky-stack enhancer is covered on default.
 test("sticky stacks activate clicked items without moving focus", async ({ page }) => {
-  await page.goto("/?persona=default");
+  await page.goto("/?persona=default"); await dismissInitialChooser(page);
   const stack = page.locator('[data-persona-page="default"] [data-layout="sticky-stack"]').first();
   const second = stack.locator("[data-stack-item]").nth(1);
   await second.click();
@@ -105,13 +106,13 @@ test("sticky stacks activate clicked items without moving focus", async ({ page 
 test("personality-specific hero CTA copy follows the registry", async ({ page }) => {
   const labels = {
     default: "Join Waitlist",
-    visionary: "Build Your Culture",
-    strategist: "Book a Demo",
-    operator: "Get Started",
+    visionary: "Create your account",
+    strategist: "Create your account",
+    operator: "Create your account",
     "creative-culture-builder": "Make Work Feel Celebrated"
   };
   for (const [persona, label] of Object.entries(labels)) {
-    await page.goto(`/?persona=${persona}`);
+    await page.goto(`/?persona=${persona}`); await dismissInitialChooser(page);
     await expect(page.locator(`[data-persona-page="${persona}"] [data-persona-section="hero"]`).getByRole("link", { name: label, exact: true })).toBeVisible();
   }
 });
@@ -120,7 +121,7 @@ for (const width of [320, 390, 768, 1024, 1440]) {
   test(`all five experiences fit ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 844 });
     for (const persona of personas) {
-      await page.goto(`/?persona=${persona}`);
+      await page.goto(`/?persona=${persona}`); await dismissInitialChooser(page);
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
     }
   });
@@ -128,7 +129,7 @@ for (const width of [320, 390, 768, 1024, 1440]) {
 
 test("strategist cinematic scenes preserve content and choose responsive modes", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=strategist");
+  await page.goto("/?persona=strategist"); await dismissInitialChooser(page);
   const strategist = page.locator("[data-strategist-cinematic]");
   await expect(strategist).toHaveAttribute("data-strategist-mode", "full");
   await expect(strategist.locator("[data-strategist-scene]")).toHaveCount(11);
@@ -137,7 +138,7 @@ test("strategist cinematic scenes preserve content and choose responsive modes",
   await expect(strategist).toHaveAttribute("data-strategist-engine", "elva-inspired");
   await expect(strategist.locator('[data-strategist-scene="problem"] .strategist-scene-nav [role="tab"]')).toHaveCount(4);
   await expect(strategist.locator('[data-strategist-scene="category"] .strategist-scene-nav [role="tab"]')).toHaveCount(3);
-  await expect(strategist.locator('[data-strategist-scene="loop"] .stepper-tabs [role="tab"]')).toHaveCount(5);
+  await expect(strategist.locator('[data-strategist-scene="loop"] .strategist-workflow__card')).toHaveCount(4);
   await expect(strategist.locator('[data-strategist-scene="outcomes"] .strategist-scene-nav [role="tab"]')).toHaveCount(4);
   await expect(strategist.getByText("A complete recognition platform for $1 per employee/month.")).toBeVisible();
   await expect(strategist.locator(".strategist-faq__items details")).toHaveCount(10);
@@ -149,7 +150,7 @@ test("strategist cinematic scenes preserve content and choose responsive modes",
 
 test("strategist staged scenes expose one active panel and keyboard navigation", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=strategist");
+  await page.goto("/?persona=strategist"); await dismissInitialChooser(page);
   const problem = page.locator('[data-strategist-scene="problem"]');
   const tabs = problem.locator('.strategist-scene-nav [role="tab"]');
   await tabs.first().focus();
@@ -162,7 +163,7 @@ test("strategist staged scenes expose one active panel and keyboard navigation",
 
 test("operator cinematic scenes preserve content and choose responsive modes", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=operator");
+  await page.goto("/?persona=operator"); await dismissInitialChooser(page);
   const operator = page.locator("[data-operator-cinematic]");
   await expect(operator).toHaveAttribute("data-operator-engine", "console-cinematic");
   await expect(operator).toHaveAttribute("data-operator-mode", "full");

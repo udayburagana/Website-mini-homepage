@@ -1,0 +1,20 @@
+:root {
+  --ez-font-heading: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ez-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ez-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ez-space-1: 4px;
+  --ez-space-2: 8px;
+  --ez-space-3: 12px;
+  --ez-space-4: 16px;
+  --ez-space-5: 24px;
+  --ez-space-6: 32px;
+  --ez-space-7: 48px;
+  --ez-space-8: 64px;
+  --ez-radius-sm: 6px;
+  --ez-radius-md: 8px;
+  --ez-radius-lg: 14px;
+  --ez-radius-pill: 999px;
+  --ez-duration-fast: 120ms;
+  --ez-duration-normal: 200ms;
+  --ez-ease-standard: cubic-bezier(.22, 1, .36, 1);
+}

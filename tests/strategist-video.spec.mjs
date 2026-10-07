@@ -1,8 +1,9 @@
+import { dismissInitialChooser } from "./fixtures/persona.mjs";
 import {test,expect} from '@playwright/test';
 for(const [sectionName,selector] of [['vision','.strategist-vision'],['access','[data-strategist-section="early-access"]']])
 for(const [name,width,height] of [['desktop',1440,900],['mobile',390,844]]){
  test(`${sectionName} video ${name}`,async({page})=>{
-  test.setTimeout(60000);await page.setViewportSize({width,height});await page.goto('/?persona=strategist');const section=page.locator(selector);await section.scrollIntoViewIfNeeded();const video=section.locator('video');
+  test.setTimeout(60000);await page.setViewportSize({width,height});await page.goto('/?persona=strategist'); await dismissInitialChooser(page);const section=page.locator(selector);await section.scrollIntoViewIfNeeded();const video=section.locator('video');
   await expect.poll(()=>video.evaluate(el=>el.readyState)).toBeGreaterThanOrEqual(2);
   await expect.poll(()=>video.evaluate(el=>el.paused)).toBe(false);expect(await video.evaluate(el=>el.muted&&el.loop&&el.playsInline)).toBe(true);
   const start=await video.evaluate(el=>el.currentTime);await page.waitForTimeout(700);expect(await video.evaluate(el=>el.currentTime)).toBeGreaterThan(start);

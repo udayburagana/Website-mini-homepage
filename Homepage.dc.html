@@ -19,7 +19,10 @@
   <link rel="stylesheet" href="/site.css?v=signal-journey">
   <link rel="stylesheet" href="/strategist-cinematic.css?v=elva-rebuild">
   <link rel="stylesheet" href="/operator-cinematic.css?v=console-cinematic">
-  <script src="/site-ui.js?v=signal-journey" defer></script>
+  <script>document.documentElement.dataset.personaPending = "true";</script>
+  <noscript><style>html[data-persona-pending] body > :not(dialog) { visibility: visible; }</style></noscript>
+  <script src="/conversion-config.js?v=direct-account-pages" defer></script>
+  <script src="/site-ui.js?v=account-preview" defer></script>
   <script type="importmap">{"imports":{"@ezrewards/visionary-cinematic":"/vendor/visionary-cinematic.bundle.js"}}</script>
   <script type="module">import "@ezrewards/visionary-cinematic";</script>
   <script type="module" src="/vendor/strategist-cinematic.bundle.js"></script>
@@ -33,16 +36,12 @@
     <button class="mobile-menu-toggle" type="button" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation">Menu</button>
     <nav id="primary-navigation" class="primary-navigation" aria-label="Primary">
       <a href="/product">Product</a><a href="#appreciation-loop">How It Works</a><a href="/pricing">Pricing</a><a href="/about">About</a><button class="change-experience" type="button" data-change-experience>Change experience</button>
-      <a class="dark-button dark-button--primary dark-button--small" href="/contact">Join Waitlist</a>
+      <a class="dark-button dark-button--primary dark-button--small" href="/signup.html?persona=visionary" data-conversion="signup" data-cta-copy="navSignup">Create Account</a>
+      <a class="dark-button dark-button--secondary dark-button--small" href="/signin.html?persona=visionary" data-conversion="signin" data-cta-copy="signin">Sign in</a>
     </nav>
   </header>
 
-  <div class="persona-introduction" data-persona-intro>
-    <span>One platform. Five ways to see what matters.</span>
-    <button type="button" data-change-experience>Choose your experience</button>
-  </div>
-
-  <dialog class="persona-dialog" aria-labelledby="persona-dialog-title" data-persona-selector>
+  <dialog class="persona-dialog" aria-labelledby="persona-dialog-title" data-persona-selector data-lenis-prevent>
     <div class="persona-dialog__panel">
       <button class="persona-dialog__close" type="button" data-persona-close aria-label="Close experience selector">Close</button>
       <p class="persona-dialog__eyebrow">Choose your perspective</p>
@@ -174,7 +173,7 @@
   </template>
 
   <main id="main-content" class="shared-persona default-home" data-persona-page="default">
-    <section class="shared-hero" data-persona-section="hero" data-persona-intro-sentinel>
+    <section class="shared-hero" data-persona-section="hero">
       <div class="shared-wrap shared-hero__grid"><div><p class="shared-eyebrow">Premium employee appreciation, connected</p><h1>Recognition, rewards and culture visibility in one platform.</h1><p>Make meaningful work visible, connect appreciation to rewards and understand how recognition moves across your company.</p><div class="shared-actions"><a class="shared-button shared-button--primary" href="/contact" data-persona-primary-cta>Join Waitlist</a><a class="shared-button shared-button--secondary" href="#default-loop">See How It Works</a></div><small>Built for growing teams. Starting at $1 per employee/month.</small></div><div class="shared-product-preview" role="img" aria-label="EzRewards recognition, reward and reporting overview"><div><small>Recognition feed</small><strong>Maya recognized Daniel</strong><p>For turning a difficult launch into a team win.</p></div><div class="shared-preview-metrics"><span><b>78%</b> participation</span><span><b>86%</b> reward use</span><span><b>8.4</b> engagement</span></div></div></div>
     </section>
     <section class="shared-section" data-persona-section="problem" data-layout="sticky-stack"><div class="shared-wrap shared-layout"><div data-sticky-summary><p class="shared-eyebrow">01 / The problem</p><h2>Great work disappears when appreciation is scattered.</h2><p>Important contributions get trapped in chats, spreadsheets and memory.</p></div><div class="shared-stack"><article data-stack-item data-item-id="visibility"><span>01</span><h3>Contributions become invisible</h3><p>Meaningful work is completed without becoming part of the company story.</p></article><article data-stack-item data-item-id="consistency"><span>02</span><h3>Recognition becomes inconsistent</h3><p>Participation depends on individual managers rather than a shared habit.</p></article><article data-stack-item data-item-id="rewards"><span>03</span><h3>Rewards lose their meaning</h3><p>Incentives are separated from the contribution that earned them.</p></article><article data-stack-item data-item-id="insight"><span>04</span><h3>Leaders lack a clear signal</h3><p>Culture decisions are made without connected recognition data.</p></article></div></div></section>
@@ -219,7 +218,7 @@
           <p class="dark-kicker" data-persona-copy="eyebrow"><span aria-hidden="true"></span>The culture operating system for modern teams</p>
           <h1 data-persona-copy="headline"><span class="cinematic-line">Build the workplace</span><span class="cinematic-line">people want to</span><span class="cinematic-line cinematic-line--accent">belong to.</span></h1>
           <div class="visionary-hero-support"><p>EzRewards turns everyday contribution into visible recognition, meaningful rewards and a culture everyone can experience.</p><p>Because when people feel seen, they do more than stay. They participate, contribute and grow.</p></div>
-          <div class="dark-actions"><a class="dark-button dark-button--primary" href="/contact" data-persona-primary-cta>Build Your Culture</a><a class="dark-button dark-button--secondary" href="#appreciation-loop">See How It Works</a></div>
+          <div class="dark-actions"><a class="dark-button dark-button--primary" href="/signup.html?persona=visionary" data-persona-primary-cta data-conversion="signup" data-cta-copy="signup"><span data-cta-label>Create your account</span></a><a class="dark-button dark-button--secondary" href="#appreciation-loop">See How It Works</a></div>
           <p class="dark-hero__note"><span aria-hidden="true">✓</span> Built for growing teams. Starting at $1 per employee/month.</p>
           <strong class="visionary-outcome-line">Seen. Valued. Rewarded.</strong>
         </div>
@@ -560,7 +559,7 @@
               <p>Early-access companies will experience the product before the wider launch and help us understand how recognition should work inside modern teams.</p>
             </div>
             <div class="cinematic-early__action">
-              <a class="dark-button dark-button--primary" href="/contact">Join the Waitlist</a>
+              <a class="dark-button dark-button--primary" href="/signup.html?persona=visionary" data-conversion="signup" data-cta-copy="join"><span data-cta-label>Join EzRewards</span></a>
               <small>Designed for companies with 30 or more employees.</small>
             </div>
           </div>
@@ -590,7 +589,7 @@
             <small>EzRewards Early Access</small>
             <p><strong data-price-value>$1</strong><span data-price-period>per active employee/month</span></p>
             <div class="cinematic-pricing__actions" data-pricing-actions>
-              <a class="dark-button dark-button--primary" href="/contact">Join the Waitlist</a>
+              <a class="dark-button dark-button--primary" href="/signup.html?persona=visionary" data-conversion="signup" data-cta-copy="join"><span data-cta-label>Join EzRewards</span></a>
               <a href="/pricing">View full pricing details</a>
             </div>
           </div>
@@ -617,7 +616,7 @@
       </div>
     </section>
 
-    <section class="visionary-section visionary-faq" data-home-section="faq" data-faq-motion><div class="visionary-section-inner"><p class="visionary-index"><span>09</span> Frequently Asked Questions</p><div class="visionary-faq-layout"><h2>Everything you need to know before joining early access.</h2><div class="visionary-faq-list"><details data-faq-item data-faq-state="closed"><summary>What is EzRewards?</summary><p data-faq-answer>EzRewards is an employee recognition and rewards platform that helps companies make everyday contributions visible, celebrate meaningful work and manage rewards through one connected experience.</p></details><details data-faq-item data-faq-state="closed"><summary>Is EzRewards only a gift-card platform?</summary><p data-faq-answer>No. Rewards are one part of the experience. EzRewards connects recognition, public appreciation, rewards and culture reporting so companies can build a continuous appreciation system—not simply distribute vouchers.</p></details><details data-faq-item data-faq-state="closed"><summary>Who is EzRewards designed for?</summary><p data-faq-answer>EzRewards is designed primarily for growing companies with 30 or more employees that want to build a more visible and participative workplace culture.</p></details><details data-faq-item data-faq-state="closed"><summary>Can any employee recognize another employee?</summary><p data-faq-answer>Yes. EzRewards is built around company-wide, peer-to-peer recognition. Employees can appreciate colleagues across teams and departments.</p></details><details data-faq-item data-faq-state="closed"><summary>Does every recognition include a monetary reward?</summary><p data-faq-answer>No. Recognition can be completely non-monetary. Employees can appreciate colleagues through meaningful messages and recognition badges. Rewards can be assigned separately when appropriate.</p></details><details data-faq-item data-faq-state="closed"><summary>How does pricing work?</summary><p data-faq-answer>EzRewards costs $1 per active employee each month. Pending invitations do not consume seats. When an additional employee activates their account, the subscription quantity increases automatically and the additional seat is billed proportionately for the remaining billing period.</p></details><details data-faq-item data-faq-state="closed"><summary>Is the reward budget included in the subscription?</summary><p data-faq-answer>No. Platform subscription fees and reward funding are separate. Your company decides how much to add to its reward wallet and how those funds are distributed.</p></details><details data-faq-item data-faq-state="closed"><summary>How do employees join?</summary><p data-faq-answer>Companies can onboard employees using Microsoft SSO or structured CSV upload. Invited employees can then activate their accounts and complete their profiles.</p></details><details data-faq-item data-faq-state="closed"><summary>Is EzRewards available now?</summary><p data-faq-answer>EzRewards is currently accepting applications for early access. Join the waitlist and we will contact you as onboarding slots become available.</p></details></div></div></div></section>
+    <section class="visionary-section visionary-faq" data-home-section="faq" data-faq-motion><div class="visionary-section-inner"><p class="visionary-index"><span>09</span> Frequently Asked Questions</p><div class="visionary-faq-layout"><h2>Everything you need to know before joining early access.</h2><div class="visionary-faq-list"><details data-faq-item data-faq-state="closed"><summary>What is EzRewards?</summary><p data-faq-answer>EzRewards is an employee recognition and rewards platform that helps companies make everyday contributions visible, celebrate meaningful work and manage rewards through one connected experience.</p></details><details data-faq-item data-faq-state="closed"><summary>Is EzRewards only a gift-card platform?</summary><p data-faq-answer>No. Rewards are one part of the experience. EzRewards connects recognition, public appreciation, rewards and culture reporting so companies can build a continuous appreciation system—not simply distribute vouchers.</p></details><details data-faq-item data-faq-state="closed"><summary>Who is EzRewards designed for?</summary><p data-faq-answer>EzRewards is designed primarily for growing companies with 30 or more employees that want to build a more visible and participative workplace culture.</p></details><details data-faq-item data-faq-state="closed"><summary>Can any employee recognize another employee?</summary><p data-faq-answer>Yes. EzRewards is built around company-wide, peer-to-peer recognition. Employees can appreciate colleagues across teams and departments.</p></details><details data-faq-item data-faq-state="closed"><summary>Does every recognition include a monetary reward?</summary><p data-faq-answer>No. Recognition can be completely non-monetary. Employees can appreciate colleagues through meaningful messages and recognition badges. Rewards can be assigned separately when appropriate.</p></details><details data-faq-item data-faq-state="closed"><summary>How does pricing work?</summary><p data-faq-answer>EzRewards costs $1 per active employee each month. Pending invitations do not consume seats. When an additional employee activates their account, the subscription quantity increases automatically and the additional seat is billed proportionately for the remaining billing period.</p></details><details data-faq-item data-faq-state="closed"><summary>Is the reward budget included in the subscription?</summary><p data-faq-answer>No. Platform subscription fees and reward funding are separate. Your company decides how much to add to its reward wallet and how those funds are distributed.</p></details><details data-faq-item data-faq-state="closed"><summary>How do employees join?</summary><p data-faq-answer>Companies can onboard employees using Microsoft SSO or structured CSV upload. Invited employees can then activate their accounts and complete their profiles.</p></details><details data-faq-item data-faq-state="closed"><summary>Is EzRewards available now?</summary><p data-faq-answer>EzRewards is currently accepting applications for early access. Company onboarding is offered in stages as early-access slots become available. Creating an account does not guarantee immediate product access.</p></details></div></div></div></section>
 
     <section class="visionary-final-cta cinematic-final" data-home-section="final-cta" data-final-cta data-final-cta-mode="static" data-final-cta-progress="1" data-render-state="fallback">
       <div class="cinematic-final__sticky">
@@ -628,7 +627,7 @@
             <path d="M120 18C126 82 158 114 222 120C158 126 126 158 120 222C114 158 82 126 18 120C82 114 114 82 120 18Z" />
           </svg>
         </div>
-        <div class="cinematic-final__copy"><h2>Build the workplace people want to belong to.</h2><p>Make meaningful work visible. Help people feel valued. Create a culture that grows stronger with every contribution.</p><a class="dark-button dark-button--primary" href="/contact">Join the Waitlist</a><strong>EzRewards — Seen. Valued. Rewarded.</strong></div>
+        <div class="cinematic-final__copy"><h2>Build the workplace people want to belong to.</h2><p>Make meaningful work visible. Help people feel valued. Create a culture that grows stronger with every contribution.</p><a class="dark-button dark-button--primary" href="/signup.html?persona=visionary" data-conversion="signup" data-cta-copy="signup"><span data-cta-label>Create your account</span></a><strong>EzRewards — Seen. Valued. Rewarded.</strong></div>
       </div>
     </section>
   </main>
@@ -645,7 +644,7 @@
           <h1>Make appreciation a visible, structured part of how your company operates.</h1>
           <p class="strategist-lead">EzRewards gives growing companies one connected system to recognize meaningful work, manage employee rewards and understand how appreciation moves across the organization.</p>
           <p>Create a recognition program employees can participate in—and leaders can understand.</p>
-          <div class="strategist-actions"><a class="strategist-button strategist-button--primary" href="/contact" data-persona-primary-cta>Book a Demo</a><a class="strategist-button strategist-button--secondary" href="#strategist-outcomes">See Measurable Outcomes</a></div>
+          <div class="strategist-actions"><a class="strategist-button strategist-button--primary" href="/signup.html?persona=strategist" data-persona-primary-cta data-conversion="signup" data-cta-copy="signup"><span data-cta-label>Create your account</span></a><a class="strategist-button strategist-button--secondary" href="/demo.html?persona=strategist" data-conversion="demo" data-cta-copy="demo">Book a Demo</a></div>
           <p class="strategist-note">Built for growing teams. Starting at <strong>$1 per employee/month.</strong></p>
         </div>
       </div>
@@ -783,7 +782,7 @@
         </video>
       </div>
       <div class="strategist-wrap strategist-access-grid">
-        <div><p class="strategist-eyebrow">Build with practical influence</p><h2>Help shape a recognition system grounded in real organizational needs.</h2><p>We are inviting a limited group of growing companies to join EzRewards early. Early-access companies will help us refine the workflows, controls and insights that matter to modern People teams.</p><a class="strategist-button strategist-button--light" href="/contact">Join the Waitlist</a><small>Designed for companies with 30 or more employees.</small></div>
+        <div><p class="strategist-eyebrow">Build with practical influence</p><h2>Help shape a recognition system grounded in real organizational needs.</h2><p>We are inviting a limited group of growing companies to join EzRewards early. Early-access companies will help us refine the workflows, controls and insights that matter to modern People teams.</p><a class="strategist-button strategist-button--light" href="/signup.html?persona=strategist" data-conversion="signup" data-cta-copy="join"><span data-cta-label>Join EzRewards</span></a><small>Designed for companies with 30 or more employees.</small></div>
         <ul><li>Priority access to the EzRewards platform</li><li>Direct input into product workflows and reporting</li><li>Guided company onboarding</li><li>Early visibility into upcoming capabilities</li><li>Founding customer status within the EzRewards community</li></ul>
       </div>
     </section>
@@ -792,7 +791,7 @@
       <div class="strategist-wrap">
         <p class="strategist-eyebrow">Predictable platform pricing</p><div class="strategist-heading-row"><h2>A complete recognition platform for $1 per employee/month.</h2><p>EzRewards uses a straightforward active-seat model so growing companies can plan adoption without navigating multiple feature tiers. The platform subscription and company reward budget remain separate.</p></div>
         <div class="strategist-pricing strategist-card" data-strategist-reveal>
-          <div class="strategist-pricing__price"><small>EzRewards Early Access</small><div><strong>$1</strong><span>per active<br>employee/month</span></div><a class="strategist-button strategist-button--primary" href="/contact">Join the Waitlist</a><p>Pay annually and receive two months free.<br><strong>$10 per active employee/year</strong></p></div>
+          <div class="strategist-pricing__price"><small>EzRewards Early Access</small><div><strong>$1</strong><span>per active<br>employee/month</span></div><a class="strategist-button strategist-button--primary" href="/signup.html?persona=strategist" data-conversion="signup" data-cta-copy="join"><span data-cta-label>Join EzRewards</span></a><p>Pay annually and receive two months free.<br><strong>$10 per active employee/year</strong></p></div>
           <div class="strategist-pricing__included"><h3>Everything included</h3><ul><li>Peer-to-peer recognition</li><li>Company recognition feed</li><li>AI-assisted recognition messages</li><li>Reactions and comments</li><li>Reward catalogue</li><li>Individual and bulk reward assignment</li><li>Microsoft SSO and CSV onboarding</li><li>Role-based administration</li><li>Recognition and reward reports</li><li>AI-powered report assistance</li></ul><p>Only active employees count toward your subscription. Reward and voucher budgets are funded separately and remain under your company’s control.</p></div>
         </div>
       </div>
@@ -811,7 +810,7 @@
           <details><summary>Is the reward budget included in the subscription?</summary><p>No. Platform subscription and reward funding are separate. Your company controls its reward wallet and distribution.</p></details>
           <details><summary>What reporting is available?</summary><p>Structured recognition and reward reports are available to administrators. The AI Report Assistant answers questions using the data within those reports.</p></details>
           <details><summary>How do employees join?</summary><p>Companies onboard employees using Microsoft SSO or structured CSV upload. Invited employees activate their accounts and complete their profiles.</p></details>
-          <details><summary>Is EzRewards available now?</summary><p>EzRewards is accepting applications for early access. Join the waitlist and we will contact you as onboarding slots become available.</p></details>
+          <details><summary>Is EzRewards available now?</summary><p>EzRewards is accepting applications for early access. Company onboarding is offered in stages as early-access slots become available. Creating an account does not guarantee immediate product access.</p></details>
         </div>
       </div>
     </section>
@@ -822,7 +821,7 @@
           <p class="strategist-close__tagline">Recognition with purpose. Visibility with context.</p>
           <h2>Build a recognition program people can use&mdash;and leaders can understand.</h2>
           <p class="strategist-close__body">Connect everyday appreciation, meaningful rewards and structured visibility through one platform.</p>
-          <a class="strategist-button strategist-button--primary" href="/contact">Join the Waitlist <span aria-hidden="true">&#8599;</span></a>
+          <a class="strategist-button strategist-button--primary" href="/signup.html?persona=strategist" data-conversion="signup" data-cta-copy="signup"><span data-cta-label>Create your account</span><span aria-hidden="true">&#8599;</span></a>
         </div>
         <div class="strategist-close__scene" aria-hidden="true">
           <div class="strategist-close__glow"></div>
@@ -860,7 +859,7 @@
           <h1>Run recognition and rewards without creating more work for your team.</h1>
           <p class="operator-lead">EzRewards gives employees a simple way to recognize great work and gives administrators one place to manage users, rewards, reporting and billing.</p>
           <p>Set it up. Bring your team in. Keep everything moving from one platform.</p>
-          <div class="operator-actions"><a class="operator-button operator-button--primary" href="/contact" data-persona-primary-cta>Get Started</a><a class="operator-button operator-button--secondary" href="#operator-workflow">View Setup Flow</a></div>
+          <div class="operator-actions"><a class="operator-button operator-button--primary" href="/signup.html?persona=operator" data-persona-primary-cta data-conversion="signup" data-cta-copy="signup"><span data-cta-label>Create your account</span></a><a class="operator-button operator-button--secondary" href="#operator-workflow">View Setup Flow</a></div>
           <p class="operator-note">Built for growing teams. Starting at <strong>$1 per employee/month.</strong></p>
         </div>
         <section class="operator-workspace operator-card is-visible" aria-labelledby="operator-workspace-title" data-operator-reveal>
@@ -940,12 +939,12 @@
     </section>
 
     <section class="operator-section operator-section--cyan" data-operator-section="early-access">
-      <div class="operator-wrap operator-access"><div><p class="operator-eyebrow">Set up early. Help improve the workflow.</p><h2>Bring your real recognition process into the product conversation.</h2><p>We are inviting a limited group of growing companies to join EzRewards early. Early-access companies get guided onboarding and help us refine the workflows administrators and employees rely on.</p><a class="operator-button operator-button--dark" href="/contact">Join the Waitlist</a><small>Designed for companies with 30 or more employees.</small></div><ul><li>Priority access to EzRewards</li><li>Guided setup and company onboarding</li><li>Direct input into administrative and employee workflows</li><li>Early visibility into upcoming capabilities</li><li>Founding customer status</li></ul></div>
+      <div class="operator-wrap operator-access"><div><p class="operator-eyebrow">Set up early. Help improve the workflow.</p><h2>Bring your real recognition process into the product conversation.</h2><p>We are inviting a limited group of growing companies to join EzRewards early. Early-access companies get guided onboarding and help us refine the workflows administrators and employees rely on.</p><a class="operator-button operator-button--dark" href="/signup.html?persona=operator" data-conversion="signup" data-cta-copy="join"><span data-cta-label>Join EzRewards</span></a><small>Designed for companies with 30 or more employees.</small></div><ul><li>Priority access to EzRewards</li><li>Guided setup and company onboarding</li><li>Direct input into administrative and employee workflows</li><li>Early visibility into upcoming capabilities</li><li>Founding customer status</li></ul></div>
     </section>
 
     <section class="operator-section operator-section--raised" id="operator-pricing" data-operator-section="pricing">
       <div class="operator-wrap"><p class="operator-eyebrow">Straightforward active-seat pricing</p><div class="operator-heading-row"><h2>Run the complete platform for $1 per employee/month.</h2><p>No feature tiers to compare. No charge for invitations that have not been activated. Pay for active employees while keeping reward budgets separate and controlled.</p></div><div class="operator-pricing operator-card" data-operator-reveal>
-        <div><small>EzRewards Early Access</small><div class="operator-price"><strong>$1</strong><span>per active<br>employee/month</span></div><a class="operator-button operator-button--primary" href="/contact">Join the Waitlist</a><p>Pay annually and receive two months free.<br><strong>$10 per active employee/year</strong></p></div>
+        <div><small>EzRewards Early Access</small><div class="operator-price"><strong>$1</strong><span>per active<br>employee/month</span></div><a class="operator-button operator-button--primary" href="/signup.html?persona=operator" data-conversion="signup" data-cta-copy="join"><span data-cta-label>Join EzRewards</span></a><p>Pay annually and receive two months free.<br><strong>$10 per active employee/year</strong></p></div>
         <div><h3>Everything included</h3><ul><li>Peer-to-peer recognition</li><li>Company recognition feed</li><li>AI-assisted recognition messages</li><li>Reactions and comments</li><li>Reward catalogue</li><li>Individual and bulk reward assignment</li><li>Microsoft SSO and CSV onboarding</li><li>Role-based administration</li><li>Recognition and reward reports</li><li>AI-powered report assistance</li></ul><p>Only active employees count. Reward and voucher budgets are funded separately and remain under your company’s control.</p></div>
       </div></div>
     </section>
@@ -968,7 +967,7 @@
 
     <section class="operator-section operator-final" data-operator-section="final-cta">
       <div class="operator-wrap oc-close">
-        <div class="oc-close__copy"><h2>Give employees an easy way to appreciate. Give admins an easier way to run it.</h2><p>Launch recognition, manage rewards and review activity without adding another fragmented process.</p><a class="operator-button operator-button--primary" href="/contact">Join the Waitlist <span aria-hidden="true" data-operator-generated>&#8599;</span></a><small>EzRewards &mdash; Recognition made easier to run.</small></div>
+        <div class="oc-close__copy"><h2>Give employees an easy way to appreciate. Give admins an easier way to run it.</h2><p>Launch recognition, manage rewards and review activity without adding another fragmented process.</p><a class="operator-button operator-button--primary" href="/signup.html?persona=operator" data-conversion="signup" data-cta-copy="signup"><span data-cta-label>Create your account</span><span aria-hidden="true" data-operator-generated>&#8599;</span></a><small>EzRewards &mdash; Recognition made easier to run.</small></div>
         <div class="oc-close__devices" aria-hidden="true" data-operator-generated>
           <div class="oc-close__glow"></div>
           <div class="oc-close__phone oc-close__phone--employee"><div class="oc-close__screen">
@@ -1006,7 +1005,7 @@
     <div class="cinematic-footer__shade" aria-hidden="true"></div>
     <div class="cinematic-footer__glow" aria-hidden="true"></div>
     <div class="cinematic-footer__brand"><a class="dark-brand" href="/" aria-label="EzRewards home"><span class="dark-brand__mark" aria-hidden="true">✦</span><span>EzRewards</span></a><p>Making meaningful work visible.</p></div>
-    <nav aria-label="Footer"><a href="/">Home</a><a href="/product">Product</a><a href="/pricing">Pricing</a><a href="/about">About</a><button type="button" data-change-experience>Change experience</button><a href="/contact">Join Waitlist</a></nav>
+    <nav aria-label="Footer"><a href="/">Home</a><a href="/product">Product</a><a href="/pricing">Pricing</a><a href="/about">About</a><button type="button" data-change-experience>Change experience</button><a href="/signup.html?persona=default" data-conversion="signup" data-cta-copy="navSignup">Create Account</a></nav>
     <div class="footer-legal"><span>Privacy</span><span>Terms</span><a href="/contact">Contact</a><span>LinkedIn</span></div>
     <small>© 2026 EzRewards. All rights reserved.</small>
   </footer>

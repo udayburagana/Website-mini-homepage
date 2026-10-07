@@ -1,3 +1,4 @@
+import { dismissInitialChooser } from "./fixtures/persona.mjs";
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -33,7 +34,7 @@ const currentProgress = (page) => page.evaluate(() => {
 
 async function openFull(page) {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   await expect(section(page)).toHaveAttribute("data-how-mode", "pinned");
 }
 
@@ -43,7 +44,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("keeps the section heading, five stage titles, descriptions and closing statement unchanged", async ({ page }) => {
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   const how = section(page);
   await expect(how.locator(".visionary-index")).toHaveText("04 How EzRewards works");
   await expect(how.getByRole("heading", { level: 2 })).toHaveText(HEADING);
@@ -117,7 +118,7 @@ test("rail supports click, Arrow, Home and End navigation and scrolls to the cho
 test("Lenis exists only in full Visionary mode and is destroyed on persona, breakpoint and motion changes", async ({ page }) => {
   const lenisActive = () => page.evaluate(() => document.documentElement.classList.contains("lenis") && document.documentElement.dataset.smoothScroll === "lenis");
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=default");
+  await page.goto("/?persona=default"); await dismissInitialChooser(page);
   await page.waitForTimeout(300);
   expect(await lenisActive()).toBe(false);
 
@@ -205,7 +206,7 @@ test("replaces WebGL with five inline SVGs while keeping tabs and scroll stages"
 test("stays complete and readable before the cinematic bundle loads", async ({ page }) => {
   await page.route("**/vendor/visionary-cinematic.bundle.js", (route) => route.abort());
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   const how = section(page);
   await expect(how).not.toHaveAttribute("data-how-mode", /.*/);
   await expect(how.locator(".cinematic-how__rail")).toHaveCSS("display", "none");
@@ -230,7 +231,7 @@ test("makes no outbound runtime requests", async ({ page }) => {
 test("reduced motion shows all five stages statically", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   const how = section(page);
   await expect(how).toHaveAttribute("data-how-mode", "static");
   await expect(how).toHaveAttribute("data-render-state", "fallback");
@@ -244,7 +245,7 @@ const VIEWPORTS = [[320, 568], [390, 844], [667, 375], [768, 1024], [1024, 768],
 for (const [width, height] of VIEWPORTS) {
   test(`fits and stays reachable at ${width}×${height}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
     const how = section(page);
     const mode = await how.getAttribute("data-how-mode");
     expect(mode).toBe(width >= 1100 && height >= 800 ? "pinned" : width >= 768 ? "flow" : "static");
@@ -339,7 +340,7 @@ test("tints the whole scene with the active stage color", async ({ page }) => {
 for (const [width, height, mode] of [[768, 1024, "flow"], [390, 844, "static"]]) {
   test(`fills the left progress line through the cards at ${width}×${height}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
     const how = section(page);
     await expect(how).toHaveAttribute("data-how-mode", mode);
     const list = how.locator(".cinematic-how__panels");

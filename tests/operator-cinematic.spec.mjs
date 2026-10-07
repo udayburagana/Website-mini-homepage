@@ -1,3 +1,4 @@
+import { dismissInitialChooser } from "./fixtures/persona.mjs";
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { readFile } from "node:fs/promises";
@@ -28,7 +29,7 @@ const pageCopy = (page) => operator(page).evaluate((root) => {
 
 async function openFull(page) {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=operator");
+  await page.goto("/?persona=operator"); await dismissInitialChooser(page);
   await expect(operator(page)).toHaveAttribute("data-operator-mode", "full");
 }
 
@@ -92,7 +93,7 @@ test("anchor maps are exact, ordered and clamped", () => {
 
 test("approved copy is unchanged with and without the engine", async ({ page }) => {
   await page.route("**/vendor/operator-cinematic.bundle.js", (route) => route.abort());
-  await page.goto("/?persona=operator");
+  await page.goto("/?persona=operator"); await dismissInitialChooser(page);
   await expect(operator(page)).not.toHaveAttribute("data-operator-engine", /.*/);
   expect(await pageCopy(page)).toBe(COPY);
 
@@ -104,7 +105,7 @@ test("approved copy is unchanged with and without the engine", async ({ page }) 
 test("remains complete before the Operator bundle loads", async ({ page }) => {
   await page.route("**/vendor/operator-cinematic.bundle.js", (route) => route.abort());
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=operator");
+  await page.goto("/?persona=operator"); await dismissInitialChooser(page);
   await expect(operator(page)).not.toHaveAttribute("data-operator-mode", /.*/);
   await expect(page.locator(".operator-rail")).toHaveCount(0);
   await expect(page.locator(".operator-steps > li")).toHaveCount(5);
@@ -119,7 +120,7 @@ test("chooses full, flow and static modes from the viewport and motion preferenc
   // the same matchMedia string the engine evaluates and are covered by operatorMode() above.
   for (const [width, height, mode] of [[1440, 900, "full"], [1280, 800, "full"], [1440, 700, "compact"], [1024, 768, "compact"], [768, 1024, "compact"], [390, 844, "compact"], [667, 375, "flow"]]) {
     await page.setViewportSize({ width, height });
-    await page.goto("/?persona=operator");
+    await page.goto("/?persona=operator"); await dismissInitialChooser(page);
     await expect(operator(page), `${width}×${height}`).toHaveAttribute("data-operator-mode", mode);
   }
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -246,7 +247,7 @@ test("the capability phone morphs a particle illustration for each point", async
 test("compact scenes pin on phones and tablets with points above the phone and content below", async ({ page }) => {
   for (const [width, height] of [[390, 844], [768, 1024]]) {
     await page.setViewportSize({ width, height });
-    await page.goto("/?persona=operator");
+    await page.goto("/?persona=operator"); await dismissInitialChooser(page);
     await expect(operator(page)).toHaveAttribute("data-operator-mode", "compact");
     const headerBottom = async () => (await page.locator(".site-header").boundingBox()).y + (await page.locator(".site-header").boundingBox()).height;
 
@@ -346,7 +347,7 @@ test("pinned scenes stick beneath the header while their scroll range plays", as
 test("reduced motion yields a complete, motionless layout", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=operator");
+  await page.goto("/?persona=operator"); await dismissInitialChooser(page);
   await expect(operator(page)).toHaveAttribute("data-operator-mode", "static");
   await expect(page.locator(".operator-rail:visible")).toHaveCount(0);
   await expect(operator(page).locator("[data-stage-item][aria-hidden], [data-stage-item][inert]")).toHaveCount(0);
@@ -397,7 +398,7 @@ test("FAQ keeps native disclosure semantics while animating", async ({ page }) =
 test("text keeps WCAG AA contrast over the gradient surfaces axe cannot measure", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/?persona=operator");
+  await page.goto("/?persona=operator"); await dismissInitialChooser(page);
   const results = await page.evaluate(() => {
     // Computed colours arrive as rgb(0-255) or, from color-mix(), as color(srgb 0-1).
     const parse = (value) => {
@@ -467,7 +468,7 @@ for (const [width, height] of VIEWPORTS) {
     // Twenty-plus scroll positions, each waiting for its card to settle.
     test.setTimeout(120_000);
     await page.setViewportSize({ width, height });
-    await page.goto("/?persona=operator");
+    await page.goto("/?persona=operator"); await dismissInitialChooser(page);
     const mode = await operator(page).getAttribute("data-operator-mode");
     const overflow = () => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(await overflow()).toBeLessThanOrEqual(0);

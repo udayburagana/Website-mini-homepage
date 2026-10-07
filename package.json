@@ -7,7 +7,8 @@
     "dev": "node server.mjs",
     "pretest": "node scripts/build-cinematic.mjs",
     "test": "playwright test",
-    "test:update": "playwright test --update-snapshots"
+    "test:update": "playwright test --update-snapshots",
+    "test:themes": "node --test packages/ezrewards-themes/test/*.test.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

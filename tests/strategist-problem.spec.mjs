@@ -1,3 +1,4 @@
+import { dismissInitialChooser } from "./fixtures/persona.mjs";
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
@@ -14,7 +15,7 @@ async function scrollStage(page, progress) {
 test('problem cards align with points and follow a reversible clockwise scroll path', async ({page}) => {
   test.setTimeout(60000);
   await page.setViewportSize({width:1440, height:900});
-  await page.goto('/?persona=strategist');
+  await page.goto('/?persona=strategist'); await dismissInitialChooser(page);
   const section = page.locator(sectionSelector);
   await expect(section).toHaveAttribute('data-problem-motion', 'orbit');
   const cards = section.locator('.strategist-card-grid > article');
@@ -52,7 +53,7 @@ test('problem cards align with points and follow a reversible clockwise scroll p
 
 test('problem stage fits a shorter desktop viewport', async ({page}) => {
   await page.setViewportSize({width:1440,height:768});
-  await page.goto('/?persona=strategist');
+  await page.goto('/?persona=strategist'); await dismissInitialChooser(page);
   const section = page.locator(sectionSelector);
   await expect(section).toHaveAttribute('data-problem-motion','orbit');
   await scrollStage(page,0);
@@ -69,7 +70,7 @@ for (const [name, width, height, reduced] of [['tablet',834,1112,false], ['mobil
     test.setTimeout(60000);
     await page.setViewportSize({width,height});
     if (reduced) await page.emulateMedia({reducedMotion:'reduce'});
-    await page.goto('/?persona=strategist');
+    await page.goto('/?persona=strategist'); await dismissInitialChooser(page);
     const section = page.locator(sectionSelector);
     await expect(section).toHaveAttribute('data-problem-motion', 'flow');
     await section.locator('h2').scrollIntoViewIfNeeded();

@@ -1,9 +1,10 @@
+import { dismissInitialChooser } from "./fixtures/persona.mjs";
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 for(const [name,width,height] of [['desktop',1440,1000],['tablet',834,1112],['mobile',390,844]]){
  test(`capability showcase ${name}`,async({page})=>{
   test.setTimeout(90000);
-  await page.setViewportSize({width,height});await page.goto('/?persona=strategist');
+  await page.setViewportSize({width,height});await page.goto('/?persona=strategist'); await dismissInitialChooser(page);
   const section=page.locator('.strategist-features');
   await section.scrollIntoViewIfNeeded();
   const tabs=section.getByRole('tab');await expect(tabs).toHaveCount(4);
@@ -25,7 +26,7 @@ for(const [name,width,height] of [['desktop',1440,1000],['tablet',834,1112],['mo
  });
 }
 test('capability timer fills, advances after five seconds and resets on click',async({page})=>{
- test.setTimeout(90000);await page.setViewportSize({width:1440,height:1000});await page.goto('/?persona=strategist');
+ test.setTimeout(90000);await page.setViewportSize({width:1440,height:1000});await page.goto('/?persona=strategist'); await dismissInitialChooser(page);
  const feature=page.locator('[data-capability-features]');await feature.scrollIntoViewIfNeeded();
  const tabs=feature.getByRole('tab');await tabs.nth(0).click();
  await page.waitForTimeout(2200);
@@ -35,5 +36,5 @@ test('capability timer fills, advances after five seconds and resets on click',a
  await feature.locator('[data-feature-pause]').click();await page.waitForTimeout(5200);await expect(tabs.nth(2)).toHaveAttribute('aria-selected','true');
 });
 test('reduced motion starts with autoplay paused',async({page})=>{
- await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/?persona=strategist');await expect(page.locator('[data-capability-features]')).toHaveAttribute('data-autoplay','paused');
+ await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/?persona=strategist'); await dismissInitialChooser(page);await expect(page.locator('[data-capability-features]')).toHaveAttribute('data-autoplay','paused');
 });

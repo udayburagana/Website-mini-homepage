@@ -1,3 +1,4 @@
+import { dismissInitialChooser } from "./fixtures/persona.mjs";
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
@@ -5,7 +6,7 @@ for (const [name,width,height] of [['desktop',1440,900],['tablet',834,1112],['mo
   test(`strategist vision ${name}: image, editorial layout and readable content`, async ({page}) => {
     test.setTimeout(60000);
     await page.setViewportSize({width,height});
-    await page.goto('/?persona=strategist');
+    await page.goto('/?persona=strategist'); await dismissInitialChooser(page);
     const section=page.locator('.strategist-vision');
     await expect(page.locator('[data-strategist-cinematic]')).toHaveAttribute('data-strategist-engine','elva-inspired');
     await section.scrollIntoViewIfNeeded();
@@ -30,7 +31,7 @@ for (const [name,width,height] of [['desktop',1440,900],['tablet',834,1112],['mo
 
 test('strategist vision reduced motion keeps the manifesto visible',async({page})=>{
   await page.emulateMedia({reducedMotion:'reduce'});
-  await page.goto('/?persona=strategist');
+  await page.goto('/?persona=strategist'); await dismissInitialChooser(page);
   const panel=page.locator('.strategist-vision__panel');
   await panel.scrollIntoViewIfNeeded();
   await expect(panel).toHaveCSS('opacity','1');

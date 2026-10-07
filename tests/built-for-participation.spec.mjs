@@ -1,3 +1,4 @@
+import { dismissInitialChooser } from "./fixtures/persona.mjs";
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -16,7 +17,7 @@ const section = (page) => page.locator("[data-built-participation]");
 
 async function openFull(page) {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   await expect(section(page)).toHaveAttribute("data-participation-mode", "pinned");
 }
 
@@ -44,7 +45,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("preserves all eight capability labels, headings and descriptions", async ({ page }) => {
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   const built = section(page);
   await expect(built.locator(".visionary-index")).toHaveText("05 Built for participation");
   await expect(built.getByRole("heading", { level: 2 })).toHaveText("A culture platform people will actually want to use.");
@@ -94,7 +95,7 @@ test("progress rail supports click, arrows, Home and End with Lenis stage naviga
 
 test("uses normal flow on adaptive screens and static flow on phones and reduced motion", async ({ page }) => {
   await page.setViewportSize({ width: 1024, height: 768 });
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   const built = section(page);
   await expect(built).toHaveAttribute("data-participation-mode", "flow");
   await expect(built.locator("[data-capability-feature][aria-hidden]")).toHaveCount(0);
@@ -128,14 +129,14 @@ test("rebuilds on resize and pauses when the persona changes", async ({ page }) 
 
 test("remains complete before the cinematic bundle loads and generic personas retain their selector", async ({ page }) => {
   await page.route("**/vendor/visionary-cinematic.bundle.js", (route) => route.abort());
-  await page.goto("/?persona=visionary");
+  await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
   const built = section(page);
   await expect(built).not.toHaveAttribute("data-participation-mode", /.*/);
   await expect(built.locator("[data-capability-feature]:visible")).toHaveCount(8);
   await expect(built.locator(".participation-product")).toHaveCSS("display", "none");
 
   await page.unroute("**/vendor/visionary-cinematic.bundle.js");
-  await page.goto("/?persona=strategist");
+  await page.goto("/?persona=strategist"); await dismissInitialChooser(page);
   const strategist = page.locator('[data-persona-page="strategist"] [data-persona-section="capabilities"]');
   await expect(strategist.getByRole("tab")).toHaveCount(4);
 });
@@ -144,7 +145,7 @@ const VIEWPORTS = [[320, 568], [390, 844], [667, 375], [768, 1024], [1024, 768],
 for (const [width, height] of VIEWPORTS) {
   test(`fits section 05 at ${width}×${height}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
-    await page.goto("/?persona=visionary");
+    await page.goto("/?persona=visionary"); await dismissInitialChooser(page);
     const built = section(page);
     const expected = width >= 1100 && height >= 800 ? "pinned" : width >= 768 ? "flow" : "static";
     await expect(built).toHaveAttribute("data-participation-mode", expected);

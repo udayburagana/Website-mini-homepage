@@ -1,9 +1,10 @@
+import { dismissInitialChooser } from "./fixtures/persona.mjs";
 import { test, expect } from '@playwright/test';
 for (const [name,width,height] of [['desktop',1440,900],['tablet',834,1112],['mobile',390,844],['short',1440,650]]) {
  test(`workflow ${name}: stack, reversible exits and viewport fit`,async({page})=>{
   test.setTimeout(90000);
   await page.setViewportSize({width,height});
-  await page.goto('/?persona=strategist');
+  await page.goto('/?persona=strategist'); await dismissInitialChooser(page);
   await expect(page.locator('.strategist-loop')).toHaveAttribute('data-workflow-motion','stack');
   const scene=page.locator('.strategist-loop');
   const start=await scene.evaluate(el=>el.getBoundingClientRect().top+scrollY);
@@ -33,7 +34,7 @@ for (const [name,width,height] of [['desktop',1440,900],['tablet',834,1112],['mo
  });
 }
 test('workflow reduced motion exposes all four cards',async({page})=>{
- await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/?persona=strategist');
+ await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/?persona=strategist'); await dismissInitialChooser(page);
  await expect(page.locator('.strategist-loop')).toHaveAttribute('data-workflow-motion','flow');
  for(const card of await page.locator('.strategist-workflow__card').all()){await expect(card).toBeVisible();await expect(card).toHaveCSS('transform','none');}
 });

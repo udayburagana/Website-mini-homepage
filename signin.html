@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" data-persona="visionary" data-account-mode="signin">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#08140e">
+  <title>EzRewards | Account preview</title><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/_ds/ezrewards-design-system-e8bdfd2d-102a-4f2d-adc8-44a2ded32363/tokens/fonts.css">
+  <link rel="stylesheet" href="/account-preview.css?v=split-auth">
+  <script src="/conversion-config.js?v=direct-account-pages"></script>
+  <script>document.documentElement.dataset.persona = EzRewardsConversion.resolvePersona();</script>
+  <script src="/account-preview.js?v=split-auth" defer></script>
+</head>
+<body>
+  <a class="auth-skip" href="#account-main">Skip to form</a>
+  <main class="auth-layout" id="account-main">
+    <aside class="auth-visual" aria-label="Your EzRewards experience">
+      <a class="auth-brand" href="/?persona=visionary" data-conversion="home" aria-label="EzRewards home"><span class="brand-symbol" aria-hidden="true">✦</span> EzRewards</a>
+      <div class="auth-art"><img id="theme-art" src="/assets/generated/recognition-garden-hero-1280.webp" alt="" fetchpriority="high"><div class="auth-art-shade"></div>
+        <div class="workspace-illustration" aria-hidden="true"><div class="workspace-square workspace-square--gold"></div><div class="workspace-square workspace-square--mint"></div><div class="workspace-circle"></div><div class="workspace-shield" id="workspace-shield"></div></div>
+        <div class="signin-illustration" aria-hidden="true"><div class="recognition-card"><span class="recognition-spark">✦</span><div><strong>Great work, recognized.</strong><span>Appreciation brings us together.</span></div><span class="recognition-heart">♡</span></div><div class="recognition-people"><span>AK</span><span>JM</span><span>RS</span></div></div>
+        <div class="workspace-copy"><h2>Create Your Workspace</h2><p>Set up your organisation and start rewarding your<br class="desktop-break"> team in minutes.</p></div>
+      </div>
+      <nav class="auth-legal" aria-label="Information"><button type="button" data-info="privacy">Privacy Policy</button><button type="button" data-info="terms">Terms of Service</button><a href="/Contact.dc.html">Contact</a></nav>
+    </aside>
+    <section class="auth-form-side" aria-labelledby="form-title"><div class="auth-form-wrap">
+      <div class="auth-heading"><div class="auth-emblem" id="auth-emblem" aria-hidden="true"></div><h1 id="form-title">Create Admin Account</h1><p id="form-description">Set up your workspace and start managing rewards</p></div>
+      <p class="auth-preview-note" id="preview-notice">Preview only. No account will be created.</p>
+      <form id="preview-form" novalidate aria-describedby="preview-notice"><div id="preview-fields"></div><div id="auth-extras"></div><p id="form-status" role="status" aria-live="polite"></p><button class="auth-primary" type="submit" id="preview-submit">Create Account <span aria-hidden="true">→</span></button></form>
+      <div id="social-signin"><div class="auth-divider"><span id="social-caption">or sign up with</span></div><div class="auth-social"><button type="button" data-provider="Google"><span class="google-icon" aria-hidden="true">G</span> Google</button><button type="button" data-provider="Microsoft"><span class="microsoft-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span> Microsoft</button></div></div>
+      <p class="auth-switch" id="account-switch"></p>
+      <section id="preview-confirmation" hidden tabindex="-1" aria-labelledby="confirmation-title"><div class="confirmation-mark" aria-hidden="true">✓</div><h2 id="confirmation-title">Preview complete</h2><p id="confirmation-description"></p><a class="auth-primary" href="/?persona=visionary" data-conversion="home">Back to home</a></section>
+    </div></section>
+  </main>
+  <dialog class="auth-dialog" id="auth-dialog" aria-labelledby="auth-dialog-title"><button type="button" class="dialog-close" aria-label="Close dialog">×</button><h2 id="auth-dialog-title"></h2><p id="auth-dialog-description"></p><form id="reset-form" hidden novalidate><label for="reset-email">Work email address</label><input id="reset-email" type="email" autocomplete="email" required><p id="reset-status" role="status"></p><button type="submit" class="auth-primary">Reset password</button></form></dialog>
+  <noscript><p>Enable JavaScript to use this account preview. No data will be sent.</p></noscript>
+</body>
+</html>

@@ -1,11 +1,11 @@
 (() => {
   const PERSONA_KEY = "ezrewards-persona";
-  const SELECTOR_SESSION_KEY = "ezrewards-persona-selector-seen";
+  const conversion = window.EzRewardsConversion;
   const PERSONAS = {
     default: { label: "Default EzRewards", queryValue: "default", theme: "base-premium", primaryCta: "Join Waitlist", primaryHref: "/contact", description: "Connect employee recognition, meaningful rewards and culture visibility in one EzRewards platform.", themeColor: "#f7f3ea" },
-    visionary: { label: "Visionary", queryValue: "visionary", theme: "cinematic-premium", primaryCta: "Build Your Culture", primaryHref: "/contact", description: "Build a workplace people remember with visible recognition, meaningful rewards and culture insight.", themeColor: "#090a16" },
-    strategist: { label: "Strategist", queryValue: "strategist", theme: "enterprise-intelligence", primaryCta: "Book a Demo", primaryHref: "/contact", description: "Turn recognition into measurable culture signals that give leadership clarity and confidence.", themeColor: "#f8fafc" },
-    operator: { label: "Operator", queryValue: "operator", theme: "dark-product-workflow", primaryCta: "Get Started", primaryHref: "/contact", description: "Run recognition, rewards, onboarding and reporting without operational friction.", themeColor: "#080a0f" },
+    visionary: { label: "Visionary", queryValue: "visionary", theme: "cinematic-premium", primaryCta: conversion.labels.signup, primaryHref: conversion.routes.signup, description: "Build a workplace people remember with visible recognition, meaningful rewards and culture insight.", themeColor: "#090a16" },
+    strategist: { label: "Strategist", queryValue: "strategist", theme: "enterprise-intelligence", primaryCta: conversion.labels.signup, primaryHref: conversion.routes.signup, description: "Turn recognition into measurable culture signals that give leadership clarity and confidence.", themeColor: "#f8fafc" },
+    operator: { label: "Operator", queryValue: "operator", theme: "dark-product-workflow", primaryCta: conversion.labels.signup, primaryHref: conversion.routes.signup, description: "Run recognition, rewards, onboarding and reporting without operational friction.", themeColor: "#080a0f" },
     "creative-culture-builder": { label: "Creative Culture Builder", queryValue: "creative-culture-builder", theme: "neo-pop-culture", primaryCta: "Make Work Feel Celebrated", primaryHref: "/contact", description: "Make recognition social, expressive and visible with EzRewards appreciation and rewards.", themeColor: "#f2ecdd" }
   };
   const sectionAliases = { "appreciation-loop": "loop" };
@@ -22,7 +22,7 @@
 
   function explicitPersona() {
     const value = new URLSearchParams(location.search).get("persona");
-    return value && PERSONAS[value] ? value : null;
+    return conversion.validPersona(value) ? value : null;
   }
 
   function requestedPersona() {
@@ -30,7 +30,7 @@
     if (explicit) return explicit;
     try {
       const saved = localStorage.getItem(PERSONA_KEY);
-      if (saved && PERSONAS[saved]) return saved;
+      if (conversion.validPersona(saved)) return saved;
     } catch {}
     return "default";
   }
@@ -45,11 +45,12 @@
   }
 
   function setPersona(name, { updateUrl = true, preserveSection = false, emit = false } = {}) {
-    const resolvedName = PERSONAS[name] ? name : "default";
+    const resolvedName = conversion.validPersona(name) ? name : "default";
     const previous = currentPersona;
     const logicalSection = preserveSection ? activeLogicalSection() : null;
     currentPersona = resolvedName;
     const persona = PERSONAS[resolvedName];
+    conversion.updateLinks(resolvedName);
     document.documentElement.dataset.persona = resolvedName;
     document.documentElement.dataset.theme = persona.theme;
     document.querySelectorAll("[data-persona-page]").forEach((page) => {
@@ -87,7 +88,12 @@
     selectorTrigger = trigger instanceof HTMLElement ? trigger : null;
     dialog.showModal();
     document.body.classList.add("dialog-open");
-    dialog.querySelector(`[data-persona-option="${currentPersona}"]`)?.focus();
+    dispatchEvent(new CustomEvent("ezrewards:dialog-state", { detail: { open: true } }));
+    delete document.documentElement.dataset.personaPending;
+    const selectedOption = dialog.querySelector(`[data-persona-option="${currentPersona}"]`);
+    selectedOption?.focus({ preventScroll: true });
+    dialog.scrollTop = 0;
+    if (selectedOption && selectedOption.getBoundingClientRect().bottom > dialog.getBoundingClientRect().bottom) dialog.querySelector("[data-persona-close]")?.focus({ preventScroll: true });
     emitMarketingEvent("persona_selector_opened", { persona: currentPersona });
   }
 
@@ -96,7 +102,11 @@
     if (!dialog?.open) return;
     dialog.close();
     document.body.classList.remove("dialog-open");
-    if (restoreFocus) selectorTrigger?.focus();
+    dispatchEvent(new CustomEvent("ezrewards:dialog-state", { detail: { open: false } }));
+    if (restoreFocus) {
+      const visibleTrigger = selectorTrigger?.getClientRects().length ? selectorTrigger : document.querySelector("[data-menu-toggle]");
+      visibleTrigger?.focus();
+    }
   }
 
   function normalizeExistingSections() {
@@ -332,20 +342,10 @@
     normalizeExistingSections();
     document.querySelectorAll("[data-persona-page]").forEach((page) => { initSelectablePanels(page); initStickyStacks(page); initSteppers(page); });
     const rawQuery = new URLSearchParams(location.search).get("persona");
-    const resolved = rawQuery && !PERSONAS[rawQuery] ? "default" : requestedPersona();
-    setPersona(resolved, { updateUrl: Boolean(rawQuery && !PERSONAS[rawQuery]) });
-    const sentinel = document.querySelector("[data-persona-intro-sentinel]");
-    let seen = false;
-    try { seen = sessionStorage.getItem(SELECTOR_SESSION_KEY) === "true"; } catch {}
-    if (!explicitPersona() && !seen && sentinel && "IntersectionObserver" in window) {
-      const observer = new IntersectionObserver((entries, currentObserver) => {
-        if (!entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.55)) return;
-        try { sessionStorage.setItem(SELECTOR_SESSION_KEY, "true"); } catch {}
-        openPersonaSelector(document.querySelector("[data-persona-intro] [data-change-experience]"));
-        currentObserver.disconnect();
-      }, { threshold: [0.55] });
-      observer.observe(sentinel);
-    }
+    const invalidQuery = rawQuery !== null && !conversion.validPersona(rawQuery);
+    const resolved = invalidQuery ? "default" : requestedPersona();
+    setPersona(resolved, { updateUrl: invalidQuery });
+    openPersonaSelector(document.querySelector(".persona-header [data-change-experience]"));
     return resolved;
   }
 
@@ -595,8 +595,8 @@
       const openToggle = document.querySelector('[data-menu-toggle][aria-expanded="true"]');
       if (openToggle) setMenu(openToggle, false);
     }
-    const cta = event.target.closest('a[href="/contact"]');
-    if (cta) emitMarketingEvent("cta_clicked", { persona: currentPersona, label: cta.textContent.trim() });
+    const cta = event.target.closest("a[data-conversion], a[href='/contact']");
+    if (cta) emitMarketingEvent("cta_clicked", { persona: currentPersona, action: cta.dataset.conversion || "contact", label: cta.textContent.trim(), section: cta.closest("[data-persona-section]")?.dataset.personaSection || (cta.closest("header") ? "navbar" : cta.closest("footer") ? "footer" : "page") });
     const submitButton = event.target.closest("form[data-demo-form] button");
     if (submitButton && !validateDemoForm(submitButton.closest("form"))) { event.preventDefault(); event.stopImmediatePropagation(); }
   }, true);
@@ -609,6 +609,17 @@
   }, true);
 
   document.addEventListener("keydown", (event) => {
+    const openDialog = document.querySelector("[data-persona-selector][open]");
+    if (openDialog && event.key === "Tab") {
+      const controls = [...openDialog.querySelectorAll("button:not([disabled]), a[href], [tabindex='0']")];
+      const first = controls[0];
+      const last = controls.at(-1);
+      if ((event.shiftKey && document.activeElement === first) || (!event.shiftKey && document.activeElement === last)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first)?.focus();
+      }
+      return;
+    }
     const demoForm = event.target.closest?.("form[data-demo-form]");
     if (demoForm && event.key === "Enter" && event.target.tagName !== "TEXTAREA") { event.preventDefault(); demoForm.querySelector("button")?.click(); return; }
     if (event.key !== "Escape") return;
@@ -617,6 +628,15 @@
     const toggle = document.querySelector('[data-menu-toggle][aria-expanded="true"]');
     if (toggle) { setMenu(toggle, false); toggle.focus(); }
   });
+
+  const personaDialog = document.querySelector("[data-persona-selector]");
+  personaDialog?.addEventListener("cancel", (event) => { event.preventDefault(); closePersonaSelector(); });
+  personaDialog?.addEventListener("close", () => {
+    if (personaDialog.open || !document.body.classList.contains("dialog-open")) return;
+    document.body.classList.remove("dialog-open");
+    dispatchEvent(new CustomEvent("ezrewards:dialog-state", { detail: { open: false } }));
+  });
+  addEventListener("pageshow", (event) => { if (event.persisted && document.querySelector("[data-persona-page]")) openPersonaSelector(document.querySelector(".persona-header [data-change-experience]")); });
 
   addEventListener("popstate", () => setPersona(requestedPersona(), { updateUrl: false }));
   addEventListener("resize", () => {

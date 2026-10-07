@@ -1,0 +1,25 @@
+{
+  "name": "@udayburagana/ezrewards-themes",
+  "version": "1.0.0",
+  "description": "Semantic Visionary, Strategist, and Operator themes for EzRewards products.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "sideEffects": ["**/*.css"],
+  "files": ["src", "README.md"],
+  "exports": {
+    ".": { "types": "./src/index.ts", "import": "./src/index.js", "default": "./src/index.js" },
+    "./tokens.css": "./src/tokens.css",
+    "./themes.css": "./src/themes.css",
+    "./components.css": "./src/components.css",
+    "./themes": { "types": "./src/themes.ts", "import": "./src/themes.js", "default": "./src/themes.js" }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/udayburagana/Website-mini-homepage.git",
+    "directory": "packages/ezrewards-themes"
+  }
+}
